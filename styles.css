@@ -1,0 +1,254 @@
+/* css styles */
+#hero-banner {
+    position: relative;
+    background-color: black; /* Black background element */
+    padding: 50px 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.45; /* Adjust opacity to create dark overlay */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    width: 50%;
+    margin: auto;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    font-size: 25px
+}
+
+
+
+  /* Set datatable column widths */
+
+
+/* Set datatable header color */
+
+ .dataTable th {
+    background-color: #455B64;
+    color: white;
+    /* font-size: 14px; */
+  }
+
+  .dataTable {
+    font-size: 14px; 
+  }
+
+  /* Set datatable filter text */
+
+.dataTables_filter input[type='search']::placeholder {
+    font-size: 14px;
+
+  }
+
+  .form-control {
+    font-size: 14px;
+
+  }
+
+  /* Add icon to DataTables Copy button */
+.buttons-copy::before {
+    content: "\f0c5"; /* Font Awesome 'copy' icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px; /* Space between icon and text */
+}
+
+.buttons-csv::before,
+.buttons-excel::before {
+    content: "\f019"; /* Font Awesome download icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+.buttons-print::before {
+    content: "\f02f"; /* Font Awesome print icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 5px;
+}
+
+
+  .dataTables_info {
+    font-weight: bold;
+} 
+
+  /* Align DataTable buttons to the right */
+div.dt-buttons {
+    margin-top: 10px;
+    /* background-color: #455B64;
+    color: white;  */
+
+}
+
+
+
+table.dataTable thead tr > .dtfc-fixed-left, 
+table.dataTable thead tr > .dtfc-fixed-right {
+  background-color: #FFBA00;
+}
+
+    /* Set datatable hover cell  */
+
+  .dataTable th:hover {
+    background-color: #FFBA00;
+    color: white;
+    /* font-size: 14px; */
+  }
+
+    /* Set filter text */
+
+
+.dataTable {
+    
+    /* font-size: 14px; */
+  }
+  /* Custom Navbar */
+
+/* Custom navbar */
+  .navbar {
+    background-color: #455B64;
+    color:  white;
+}
+
+.tabulator-col-content {
+    background-color: #455B64;
+    color:  white;
+}
+
+.tabulator-footer-contents {
+    background-color: #455B64;
+    color:  white;
+}
+
+.tabulator-page {
+    background:  white !important;
+    background-color:  white !important;
+
+}
+
+.tabulator-col-content:hover {
+    background-color: #FFBA00;
+    color:  white;
+}
+
+/* .navbar {
+    background-color: white;
+
+} */
+
+.navbar {
+    .navbar-brand,
+    .navbar-nav .nav-link,
+    .menu-text,
+    .aa-DetachedSearchButton,
+    .aa-DetachedSearchButtonPlaceholder,
+    .aa-DetachedSearchButtonQuery,
+    .navbar-title {
+        color: white !important;
+
+        &:hover {
+            color:  #e6a800  !important;
+        }
+    }
+}
+
+
+/* .navbar .navbar-brand,
+.navbar .navbar-nav .nav-link,
+.navbar .menu-text,
+.navbar .aa-DetachedSearchButton,
+.navbar .aa-DetachedSearchButtonPlaceholder,
+.navbar .aa-DetachedSearchButtonQuery,
+.navbar .navbar-title {
+    color: black !important;
+}
+
+.navbar .navbar-title:hover .navbar-nav .nav-link:hover,
+.navbar .menu-text:hover {
+    color: #e6a800 !important; 
+} */
+
+.quarto-title-banner {
+    background-color: #455B64;
+    color:  white;
+}
+
+.quarto-title-banner h1 {
+    background-color: #455B64;
+    color:  white !important;
+}
+
+.dataTables_filter {
+    padding-bottom: 25px;
+}
+
+ /* Add border to the entire table */
+table.dataTable {
+    border-left: 1px solid #727272;
+    /* border-top: 5px solid #000000; */
+    border-collapse: collapse;
+  }
+ 
+
+
+  a:hover {
+    color: #e6a800 !important; 
+
+  }
+
+ /* Style for the active link inside the TOC navigation */
+#TOC .nav-link.active {
+    background-color: #455B64;  /* Set background color for active link */
+    color: #fff !important;                /* Set text color to white */
+    font-weight: bold;          /* Make the text bold */
+    padding: 8px 12px;          /* Adjust padding for a button-like appearance */
+    border-radius: 4px;         /* Add rounded corners */
+    text-decoration: none;      /* Remove underline */
+  }
+  
+  
+/* Style for inactive links inside TOC */
+#TOC .nav-link {
+    color: black;               /* Set default color for inactive links */
+    text-decoration: none;        /* Remove underline for consistency */
+  }
+  
+  /* Hover effect for inactive links */
+  #TOC .nav-link:hover {
+    color: #e6a800 !important;               /* Darken color on hover */
+  }
+
+ 
+/* Apply sticky positioning to pagination */
+/* Keep pagination controls visible and aligned to the bottom right */
+/* Make pagination controls fixed */
+/* Ensure the table wrapper has relative positioning */
+
+/* Set opacity to 100% for all sorting icons in DataTables */
+
+
+/* table.dataTable thead>tr>th.sorting_asc:after,
+table.dataTable thead>tr>th.sorting_desc:after,
+table.dataTable thead>tr>td.sorting_asc:after,
+table.dataTable thead>tr>td.sorting_desc:after {
+  opacity: .70;  /* Set full opacity */
+/* } */ 
+
