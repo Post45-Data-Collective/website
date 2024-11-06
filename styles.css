@@ -1,38 +1,58 @@
 /* css styles */
 #hero-banner {
-    position: relative;
-    background-color: black; /* Black background element */
-    padding: 50px 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  position: relative;
+  background-color: black;
+  padding: 50px 0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
 }
 
 .hero-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.45; /* Adjust opacity to create dark overlay */
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  z-index: 1;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 20px;
-    width: 50%;
-    margin: auto;
-    border-radius: 10px;
-    color: white;
-    text-align: center;
-    font-size: 25px
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  width: 50%;
+  margin: auto;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  font-size: 25px;
 }
 
+.hero-content h1 {
+  font-size: 90px; /* Responsive font size based on viewport width */
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+      width: 80%; /* Make content narrower on mobile */
+      font-size: 18px; /* Adjust font size for mobile */
+      padding: 15px; /* Adjust padding for mobile */
+  }
+
+  #hero-banner h1 {
+      font-size: 50px; /* Smaller font size for heading */
+  }
+
+  .hero-content h1 {
+    font-size: 60px; /* Responsive font size based on viewport width */
+  }
+}
 
 
   /* Set datatable column widths */
