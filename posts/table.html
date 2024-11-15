@@ -199,20 +199,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb1" data-startfrom="19" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 18;"><span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>viewof dataSet <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(dataSets<span class="op">,</span> {</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="fu">html</span><span class="vs">`&lt;b&gt;dataset&lt;/b&gt;`</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>viewof dataUrl <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">text</span>({</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="fu">html</span><span class="vs">`&lt;b&gt;dataUrl&lt;/b&gt;`</span><span class="op">,</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">placeholder</span><span class="op">:</span> <span class="st">'type data url and click fetch'</span><span class="op">,</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>dataUrlParam <span class="op">?</span> dataUrlParam <span class="op">:</span> <span class="st">'https://raw.githubusercontent.com/vega/vega-datasets/master/data/'</span> <span class="op">+</span> dataSet<span class="sc">}</span><span class="vs">`</span><span class="op">,</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">submit</span><span class="op">:</span> <span class="st">'fetchData'</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>shareLink <span class="op">=</span> <span class="fu">md</span> <span class="vs">`*share a link to your [data](https://observablehq.com/@randomfractals/tabular-data-viewer?dataUrl=</span><span class="sc">${</span>dataUrl<span class="sc">}</span><span class="vs">)*`</span></span>
+<div class="sourceCode cell-code" id="cb1" data-startfrom="30" data-source-offset="-362"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 29;"><span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>dataPath <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/hathitrust_fiction/hathitrust_post45fiction_metadata.csv"</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>viewof dataSummaryView <span class="op">=</span> <span class="fu">SummaryTable</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">fetchData</span>(dataPath)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>defaultDisplayedColumns <span class="op">=</span> [</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"shorttitle"</span><span class="op">,</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"inferreddate"</span><span class="op">,</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"author"</span><span class="op">,</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"recordid"</span><span class="op">,</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hathi_rights"</span><span class="op">,</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"genres"</span><span class="op">,</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"id"</span><span class="op">,</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"docid"</span><span class="op">,</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"juvenileprob"</span><span class="op">,</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nonficprob"</span><span class="op">,</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"author_authorized_heading"</span><span class="op">,</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"author_lccn"</span><span class="op">,</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"author_viaf"</span><span class="op">,</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"author_wikidata_qid"</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>categoryColumns <span class="op">=</span> [<span class="st">"hathi_rights"</span><span class="op">,</span>  <span class="st">"genres"</span><span class="op">,</span><span class="st">"geographics"</span>]<span class="op">;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co">// Reorder the available columns to match defaultDisplayedColumns, appending any extra columns at the end</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>orderedColumns <span class="op">=</span> [</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span>defaultDisplayedColumns<span class="op">,</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span><span class="bu">Object</span><span class="op">.</span><span class="fu">keys</span>(data[<span class="dv">0</span>] <span class="op">||</span> {})<span class="op">.</span><span class="fu">filter</span>(col <span class="kw">=&gt;</span> <span class="op">!</span>defaultDisplayedColumns<span class="op">.</span><span class="fu">includes</span>(col))</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -242,50 +256,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
 </div>
-<section id="tabular-data-view" class="level2">
-<h2 class="anchored" data-anchor-id="tabular-data-view">Tabular Data View</h2>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+View Summary of Columns
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
+<details class="code-fold hidden">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb2" data-startfrom="38" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 37;"><span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>viewof tableOptions <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">form</span>([</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  Inputs<span class="op">.</span><span class="fu">button</span>(<span class="st">'Download'</span><span class="op">,</span> {<span class="dt">reduce</span><span class="op">:</span> () <span class="kw">=&gt;</span> table<span class="op">.</span><span class="fu">download</span>(<span class="st">'csv'</span><span class="op">,</span> <span class="st">'data.csv'</span>)})<span class="op">,</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>tableContainer <span class="op">=</span> <span class="fu">html</span> <span class="vs">`&lt;div id="table-container" style="height: 600px"&gt;</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;`</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> <span class="kw">new</span> <span class="fu">Tabulator</span>(<span class="st">'#table-container'</span><span class="op">,</span> {</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">645</span><span class="op">,</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="dt">autoColumns</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="dt">columnDefaults</span><span class="op">:</span> {</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="dt">headerMenu</span><span class="op">:</span> columnHeaderMenu</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  <span class="dt">clipboard</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="co">// eanble clipboard copy and paste</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="dt">clipboardPasteAction</span><span class="op">:</span> <span class="st">'replace'</span><span class="op">,</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="dt">layout</span><span class="op">:</span> tableLayout<span class="op">,</span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="dt">layoutColumnsOnNewData</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="dt">movableColumns</span><span class="op">:</span> movableColumns<span class="op">,</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="dt">movableRows</span><span class="op">:</span> movableRows<span class="op">,</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="dt">selectable</span><span class="op">:</span> selectableRows<span class="op">,</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  <span class="dt">rowContextMenu</span><span class="op">:</span> rowContextMenu<span class="op">,</span></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="dt">pagination</span><span class="op">:</span> pagination<span class="op">,</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  <span class="dt">paginationSize</span><span class="op">:</span> paginationSize<span class="op">,</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  <span class="dt">paginationSizeSelector</span><span class="op">:</span> pageSizes<span class="op">,</span></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="dt">renderVerticalBuffer</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span> <span class="co">// set virtual DOM buffer to 300px</span></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="dt">debugInvalidOptions</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="co">// tabulator warnings</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="dt">debugEventsExternal</span><span class="op">:</span> [<span class="st">'tableBuilding'</span><span class="op">,</span> <span class="st">'dataLoaded'</span><span class="op">,</span> <span class="st">'tableBuilt'</span>]<span class="op">,</span> <span class="co">// log specified tabulator events</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="dt">data</span><span class="op">:</span> data<span class="op">,</span></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="dt">persistenceMode</span><span class="op">:</span> <span class="st">'local'</span><span class="op">,</span></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  <span class="dt">persistenceID</span><span class="op">:</span> dataUrl<span class="op">,</span></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  <span class="dt">persistentLayout</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="dt">persistence</span><span class="op">:</span> {</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sort</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>    <span class="dt">filter</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="dt">group</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columns</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="68" data-source-offset="-100"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 67;"><span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>summary_data <span class="op">=</span> {</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> selected <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>(selectedColumns)<span class="op">;</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">.</span><span class="fu">map</span>(row <span class="kw">=&gt;</span> {</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> newRow <span class="op">=</span> {}<span class="op">;</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (<span class="kw">let</span> key <span class="kw">in</span> row) {</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (selected<span class="op">.</span><span class="fu">has</span>(key)) {</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>        newRow[key] <span class="op">=</span> row[key]<span class="op">;</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> newRow<span class="op">;</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>viewof dataSummaryView <span class="op">=</span> <span class="fu">SummaryTable</span>(summary_data)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -301,11 +308,258 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<section id="select-columns" class="level2">
+<h2 class="anchored" data-anchor-id="select-columns">Select Columns</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>code</summary>
+<div class="sourceCode cell-code" id="cb3" data-startfrom="87" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 86;"><span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>viewof selectedColumns <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">checkbox</span>(orderedColumns<span class="op">,</span> {</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Select Columns"</span><span class="op">,</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> defaultDisplayedColumns<span class="op">,</span> <span class="co">// Default selected columns</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-2-3" data-nodetype="declaration">
+<div id="ojs-cell-3" data-nodetype="declaration">
 
 </div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>code</summary>
+<div class="sourceCode cell-code" id="cb4" data-startfrom="95" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 94;"><span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">generateTabulatorTableForObservable</span>(</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>  containerId<span class="op">,</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>  data<span class="op">,</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>    displayedColumns <span class="op">=</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>    columnWidths <span class="op">=</span> {}<span class="op">,</span></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>    currencyColumns <span class="op">=</span> []<span class="op">,</span></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>    categoryColumns <span class="op">=</span> []<span class="op">,</span></span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>    numericColumns <span class="op">=</span> []<span class="op">,</span></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>    rangeValues <span class="op">=</span> {}<span class="op">,</span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>    sortColumns <span class="op">=</span> []<span class="op">,</span></span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>    sortOrders <span class="op">=</span> []<span class="op">,</span></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>    columnPopups <span class="op">=</span> []<span class="op">,</span></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> <span class="dv">645</span><span class="op">,</span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>    paginationSize <span class="op">=</span> <span class="dv">1000</span><span class="op">,</span></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>  } <span class="op">=</span> {}</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>) {</span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>data <span class="op">||</span> data<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"No data provided to generate the table."</span>)<span class="op">;</span></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>displayedColumns) {</span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>    displayedColumns <span class="op">=</span> <span class="bu">Object</span><span class="op">.</span><span class="fu">keys</span>(data[<span class="dv">0</span>])<span class="op">;</span></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> tabulatorColumns <span class="op">=</span> displayedColumns<span class="op">.</span><span class="fu">map</span>((column) <span class="kw">=&gt;</span> ({</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>    <span class="dt">title</span><span class="op">:</span> column<span class="op">,</span></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>    <span class="dt">field</span><span class="op">:</span> column<span class="op">,</span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>    <span class="dt">maxInitialWidth</span><span class="op">:</span> <span class="dv">150</span><span class="op">,</span></span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>    <span class="dt">resizable</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>    <span class="dt">headerFilter</span><span class="op">:</span> numericColumns<span class="op">.</span><span class="fu">includes</span>(column)</span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>      <span class="op">?</span> <span class="st">"input"</span></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> categoryColumns<span class="op">.</span><span class="fu">includes</span>(column)</span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>      <span class="op">?</span> <span class="st">"list"</span></span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> <span class="st">"input"</span><span class="op">,</span></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>    <span class="dt">headerFilterParams</span><span class="op">:</span> categoryColumns<span class="op">.</span><span class="fu">includes</span>(column)</span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>      <span class="op">?</span> { <span class="dt">valuesLookup</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">clearable</span><span class="op">:</span> <span class="kw">true</span> }</span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> {}<span class="op">,</span></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a>    <span class="dt">formatter</span><span class="op">:</span> currencyColumns<span class="op">.</span><span class="fu">includes</span>(column) <span class="op">?</span> <span class="st">"money"</span> <span class="op">:</span> <span class="kw">undefined</span><span class="op">,</span></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>    <span class="dt">formatterParams</span><span class="op">:</span> currencyColumns<span class="op">.</span><span class="fu">includes</span>(column)</span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>      <span class="op">?</span> { <span class="dt">symbol</span><span class="op">:</span> <span class="st">"$"</span><span class="op">,</span> <span class="dt">precision</span><span class="op">:</span> <span class="dv">0</span> }</span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> <span class="kw">undefined</span><span class="op">,</span></span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> table <span class="op">=</span> <span class="kw">new</span> <span class="fu">Tabulator</span>(containerId<span class="op">,</span> {</span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>    <span class="dt">height</span><span class="op">:</span> height<span class="op">,</span></span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a>    <span class="dt">data</span><span class="op">:</span> data<span class="op">,</span></span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columns</span><span class="op">:</span> tabulatorColumns<span class="op">,</span></span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a>     <span class="dt">columnDefaults</span><span class="op">:</span> {</span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a>    <span class="dt">headerMenu</span><span class="op">:</span> columnHeaderMenu</span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="co">//    movableColumns: true,</span></span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a>    <span class="dt">layout</span><span class="op">:</span> <span class="st">"fitDataStretch"</span><span class="op">,</span></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a>    <span class="dt">pagination</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a>    <span class="dt">paginationSize</span><span class="op">:</span> paginationSize<span class="op">,</span></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>    <span class="dt">paginationSizeSelector</span><span class="op">:</span> [<span class="dv">10</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">1000</span><span class="op">,</span> <span class="dv">10000</span>]<span class="op">,</span></span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>    <span class="dt">paginationCounter</span><span class="op">:</span> <span class="st">"rows"</span><span class="op">,</span></span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>    <span class="dt">persistenceMode</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>    <span class="dt">initialSort</span><span class="op">:</span> sortColumns<span class="op">.</span><span class="fu">map</span>((col<span class="op">,</span> idx) <span class="kw">=&gt;</span> ({</span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>      <span class="dt">column</span><span class="op">:</span> col<span class="op">,</span></span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>      <span class="dt">dir</span><span class="op">:</span> sortOrders[idx] <span class="op">||</span> <span class="st">"asc"</span><span class="op">,</span></span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>    }))<span class="op">,</span></span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> table<span class="op">;</span></span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="quarto-ojs-syntax-error">
+<div class="sourceCode" id="cb5" data-startfrom="165" data-syntax-error-position="1356" data-source-offset="9"><pre class="sourceCode numberSource numberLines java code-with-copy"><code class="sourceCode java" style="counter-reset: source-line 164;"><span id="cb5-165"><a href="#cb5-165"></a>```<span class="op">{</span>ojs<span class="op">}</span></span>
+<span id="cb5-166"><a href="#cb5-166"></a><span class="co">// Add fullscreen event listener</span></span>
+<span id="cb5-167"><a href="#cb5-167"></a>      document<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"fullscreenchange"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-168"><a href="#cb5-168"></a>        <span class="cf">if</span> <span class="op">(</span>document<span class="op">.</span><span class="fu">fullscreenElement</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-169"><a href="#cb5-169"></a>          <span class="co">// Fullscreen mode: adjust table height</span></span>
+<span id="cb5-170"><a href="#cb5-170"></a>          table<span class="op">.</span><span class="fu">setHeight</span><span class="op">(</span>window<span class="op">.</span><span class="fu">innerHeight</span> <span class="op">-</span> <span class="dv">50</span><span class="op">);</span> <span class="co">// Adjust for padding/margins</span></span>
+<span id="cb5-171"><a href="#cb5-171"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-172"><a href="#cb5-172"></a>          <span class="co">// Exit fullscreen: reset table height</span></span>
+<span id="cb5-173"><a href="#cb5-173"></a>          table<span class="op">.</span><span class="fu">setHeight</span><span class="op">(</span><span class="dv">645</span><span class="op">);</span></span>
+<span id="cb5-174"><a href="#cb5-174"></a>        <span class="op">}</span></span>
+<span id="cb5-175"><a href="#cb5-175"></a>      <span class="op">});</span></span>
+<span id="cb5-176"><a href="#cb5-176"></a></span>
+<span id="cb5-177"><a href="#cb5-177"></a>      <span class="co">// Add download buttons</span></span>
+<span id="cb5-178"><a href="#cb5-178"></a>      document</span>
+<span id="cb5-179"><a href="#cb5-179"></a>        <span class="op">.</span><span class="fu">querySelectorAll</span><span class="op">(</span><span class="st">"#button-container button"</span><span class="op">)</span></span>
+<span id="cb5-180"><a href="#cb5-180"></a>        <span class="op">.</span><span class="fu">forEach</span><span class="op">((</span>button<span class="op">)</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-181"><a href="#cb5-181"></a>          button<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"click"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-182"><a href="#cb5-182"></a>            <span class="dt">const</span> type <span class="op">=</span> button<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">"id"</span><span class="op">).</span><span class="fu">replace</span><span class="op">(</span><span class="st">"download-"</span><span class="op">,</span> <span class="st">""</span><span class="op">);</span></span>
+<span id="cb5-183"><a href="#cb5-183"></a>            <span class="dt">const</span> downloadFilename <span class="op">=</span> `$<span class="op">{</span>filename<span class="op">}.</span>$<span class="op">{</span>type<span class="op">}</span>`<span class="op">;</span></span>
+<span id="cb5-184"><a href="#cb5-184"></a></span>
+<span id="cb5-185"><a href="#cb5-185"></a>            <span class="cf">if</span> <span class="op">(</span>type <span class="op">===</span> <span class="st">"xlsx"</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-186"><a href="#cb5-186"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span><span class="st">"xlsx"</span><span class="op">,</span> downloadFilename<span class="op">,</span> <span class="op">{</span> sheetName<span class="op">:</span> <span class="st">"Sheet1"</span> <span class="op">});</span></span>
+<span id="cb5-187"><a href="#cb5-187"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>type <span class="op">===</span> <span class="st">"pdf"</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-188"><a href="#cb5-188"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span><span class="st">"pdf"</span><span class="op">,</span> downloadFilename<span class="op">,</span> <span class="op">{</span></span>
+<span id="cb5-189"><a href="#cb5-189"></a>                orientation<span class="op">:</span> <span class="st">"portrait"</span><span class="op">,</span></span>
+<span id="cb5-190"><a href="#cb5-190"></a>                title<span class="op">:</span> <span class="st">"Table Data"</span></span>
+<span id="cb5-191"><a href="#cb5-191"></a>              <span class="op">});</span></span>
+<span id="cb5-192"><a href="#cb5-192"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>type <span class="op">===</span> <span class="st">"html"</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-193"><a href="#cb5-193"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span><span class="st">"html"</span><span class="op">,</span> downloadFilename<span class="op">,</span> <span class="op">{</span> style<span class="op">:</span> <span class="kw">true</span> <span class="op">});</span></span>
+<span id="cb5-194"><a href="#cb5-194"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-195"><a href="#cb5-195"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span>type<span class="op">,</span> downloadFilename<span class="op">);</span></span>
+<span id="cb5-196"><a href="#cb5-196"></a>            <span class="op">}</span></span>
+<span id="cb5-197"><a href="#cb5-197"></a>          <span class="op">});</span></span>
+<span id="cb5-198"><a href="#cb5-198"></a>        <span class="op">});</span></span>
+<span id="cb5-199"><a href="#cb5-199"></a></span>
+<span id="cb5-200"><a href="#cb5-200"></a>      <span class="co">// Update raw data download button dynamically</span></span>
+<span id="cb5-201"><a href="#cb5-201"></a>      <span class="co">// Raw data download using `download` function</span></span>
+<span id="cb5-202"><a href="#cb5-202"></a>      <span class="dt">const</span> rawDownloadButton <span class="op">=</span> document<span class="op">.</span><span class="fu">getElementById</span><span class="op">(</span><span class="st">"download-raw"</span><span class="op">);</span></span>
+<span id="cb5-203"><a href="#cb5-203"></a>      rawDownloadButton<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"click"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-204"><a href="#cb5-204"></a>        <span class="fu">download</span><span class="op">(</span>dataPath<span class="op">,</span> `$<span class="op">{</span>filename<span class="op">}.</span><span class="fu">csv</span>`<span class="op">);</span></span>
+<span id="cb5-205"><a href="#cb5-205"></a>      <span class="op">});</span></span>
+<span id="cb5-206"><a href="#cb5-206"></a></span>
+<span id="cb5-207"><a href="#cb5-207"></a>      <span class="co">// Copy URL button</span></span>
+<span id="cb5-208"><a href="#cb5-208"></a>      document<span class="op">.</span><span class="fu">getElementById</span><span class="op">(</span><span class="st">"copy-url"</span><span class="op">).</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"click"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-209"><a href="#cb5-209"></a>        <span class="dt">const</span> tempInput <span class="op">=</span> document<span class="op">.</span><span class="fu">createElement</span><span class="op">(</span><span class="st">"input"</span><span class="op">);</span></span>
+<span id="cb5-210"><a href="#cb5-210"></a>        tempInput<span class="op">.</span><span class="fu">value</span> <span class="op">=</span> dataPath<span class="op">;</span></span>
+<span id="cb5-211"><a href="#cb5-211"></a>        document<span class="op">.</span><span class="fu">body</span><span class="op">.</span><span class="fu">appendChild</span><span class="op">(</span>tempInput<span class="op">);</span></span>
+<span id="cb5-212"><a href="#cb5-212"></a>        tempInput<span class="op">.</span><span class="fu">select</span><span class="op">();</span></span>
+<span id="cb5-213"><a href="#cb5-213"></a>        document<span class="op">.</span><span class="fu">execCommand</span><span class="op">(</span><span class="st">"copy"</span><span class="op">);</span></span>
+<span id="cb5-214"><a href="#cb5-214"></a>        document<span class="op">.</span><span class="fu">body</span><span class="op">.</span><span class="fu">removeChild</span><span class="op">(</span>tempInput<span class="op">);</span></span>
+<span id="cb5-215"><a href="#cb5-215"></a>        <span class="fu">alert</span><span class="op">(</span><span class="st">"URL copied to clipboard: "</span> <span class="op">+</span> dataPath<span class="op">);</span></span>
+<span id="cb5-216"><a href="#cb5-216"></a>      <span class="op">});</span></span>
+<span id="cb5-217"><a href="#cb5-217"></a>```</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+OJS Syntax Error (line 202, column 7)Unexpected token
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>code</summary>
+<div class="sourceCode cell-code" id="cb6" data-startfrom="222" data-source-offset="-47"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 221;"><span id="cb6-222"><a href="#cb6-222" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;div id="table-container" style="height: 600px"&gt;&lt;/div&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-1" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<details class="code-fold">
+<summary>code</summary>
+<div class="sourceCode cell-code" id="cb7" data-startfrom="224" data-source-offset="-109"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 223;"><span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a><span class="fu">generateTabulatorTableForObservable</span>(<span class="st">"#table-container"</span><span class="op">,</span> data<span class="op">,</span> {</span>
+<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a>  <span class="dt">displayedColumns</span><span class="op">:</span> selectedColumns<span class="op">,</span></span>
+<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnPopups</span><span class="op">:</span> [</span>
+<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Shortened title of the work"</span><span class="op">,</span>  <span class="co">// shorttitle</span></span>
+<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Inferred date of the work"</span><span class="op">,</span>    <span class="co">// inferreddate</span></span>
+<span id="cb7-230"><a href="#cb7-230" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Author of the work"</span><span class="op">,</span>           <span class="co">// author</span></span>
+<span id="cb7-231"><a href="#cb7-231" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unique record ID"</span><span class="op">,</span>             <span class="co">// recordid</span></span>
+<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Rights code from HathiTrust"</span><span class="op">,</span>  <span class="co">// hathi_rights</span></span>
+<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Genres associated with the work"</span><span class="op">,</span>  <span class="co">// genres</span></span>
+<span id="cb7-234"><a href="#cb7-234" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unique identifier for the title in the titles dataset (may contain duplicates for reprinted works)"</span><span class="op">,</span> <span class="co">// id</span></span>
+<span id="cb7-235"><a href="#cb7-235" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Unique volume ID from HathiTrust"</span><span class="op">,</span> <span class="co">// docid (htid)</span></span>
+<span id="cb7-236"><a href="#cb7-236" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Probability that the work is for a juvenile audience"</span><span class="op">,</span> <span class="co">// juvenileprob</span></span>
+<span id="cb7-237"><a href="#cb7-237" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Probability that the work is nonfiction"</span><span class="op">,</span> <span class="co">// nonficprob</span></span>
+<span id="cb7-238"><a href="#cb7-238" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Author’s authorized Name Authority Cooperative (NACO) heading"</span><span class="op">,</span> <span class="co">// author_authorized_heading</span></span>
+<span id="cb7-239"><a href="#cb7-239" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Author’s LCCN from id.loc.gov"</span><span class="op">,</span> <span class="co">// author_lccn</span></span>
+<span id="cb7-240"><a href="#cb7-240" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Author’s viaf.org cluster number"</span><span class="op">,</span> <span class="co">// author_viaf</span></span>
+<span id="cb7-241"><a href="#cb7-241" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Author’s Wikidata Q number"</span>      <span class="co">// author_wikidata_qid</span></span>
+<span id="cb7-242"><a href="#cb7-242" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span></span>
+<span id="cb7-243"><a href="#cb7-243" aria-hidden="true" tabindex="-1"></a>    <span class="co">// columnWidths: { "gender": "50px", "role": "75px", "mfa_degree": "100px", "prize_name": "100px" },</span></span>
+<span id="cb7-244"><a href="#cb7-244" aria-hidden="true" tabindex="-1"></a>    <span class="dt">currencyColumns</span><span class="op">:</span> [<span class="st">"prize_amount"</span>]<span class="op">,</span></span>
+<span id="cb7-245"><a href="#cb7-245" aria-hidden="true" tabindex="-1"></a>    <span class="dt">categoryColumns</span><span class="op">:</span> [<span class="st">"hathi_rights"</span><span class="op">,</span>  <span class="st">"genres"</span><span class="op">,</span><span class="st">"geographics"</span>]<span class="op">,</span></span>
+<span id="cb7-246"><a href="#cb7-246" aria-hidden="true" tabindex="-1"></a>    <span class="co">// sortColumns: ["prize_year"],</span></span>
+<span id="cb7-247"><a href="#cb7-247" aria-hidden="true" tabindex="-1"></a>    <span class="co">// sortOrders: ["desc"]</span></span>
+<span id="cb7-248"><a href="#cb7-248" aria-hidden="true" tabindex="-1"></a>  <span class="dt">paginationSize</span><span class="op">:</span> <span class="dv">1000</span><span class="op">,</span></span>
+<span id="cb7-249"><a href="#cb7-249" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div id="button-container2">
+<p><button id="download-raw"><i class="fas fa-download"></i> Download Full Data</button> <button id="copy-url"><i class="fas fa-copy"></i> Copy Full Data URL</button></p>
+</div>
+<div id="button-container">
+<p><button id="download-csv"><i class="fas fa-download"></i> Download CSV</button> <button id="download-json"><i class="fas fa-download"></i> Download JSON</button> <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button></p>
+</div>
+</section>
+<section id="tabular-data-view" class="level2">
+<h2 class="anchored" data-anchor-id="tabular-data-view">Tabular Data View</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>code</summary>
+<div class="sourceCode cell-code" id="cb8" data-startfrom="265" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 264;"><span id="cb8-265"><a href="#cb8-265" aria-hidden="true" tabindex="-1"></a>columnHeaderMenu <span class="op">=</span> [</span>
+<span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb8-267"><a href="#cb8-267" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Hide Column'</span><span class="op">,</span></span>
+<span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a>    <span class="dt">action</span><span class="op">:</span> <span class="kw">function</span> (e<span class="op">,</span> column) {</span>
+<span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a>      column<span class="op">.</span><span class="fu">hide</span>()<span class="op">;</span></span>
+<span id="cb8-270"><a href="#cb8-270" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-271"><a href="#cb8-271" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb8-272"><a href="#cb8-272" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb8-273"><a href="#cb8-273" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Freeze Column"</span><span class="op">,</span></span>
+<span id="cb8-274"><a href="#cb8-274" aria-hidden="true" tabindex="-1"></a>    <span class="dt">action</span><span class="op">:</span> <span class="kw">function</span> (e<span class="op">,</span> column) {</span>
+<span id="cb8-275"><a href="#cb8-275" aria-hidden="true" tabindex="-1"></a>      column<span class="op">.</span><span class="fu">updateDefinition</span>({ <span class="dt">frozen</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
+<span id="cb8-276"><a href="#cb8-276" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-277"><a href="#cb8-277" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb8-278"><a href="#cb8-278" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb8-279"><a href="#cb8-279" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Delete Column'</span><span class="op">,</span></span>
+<span id="cb8-280"><a href="#cb8-280" aria-hidden="true" tabindex="-1"></a>    <span class="dt">action</span><span class="op">:</span> <span class="kw">function</span> (e<span class="op">,</span> column) {</span>
+<span id="cb8-281"><a href="#cb8-281" aria-hidden="true" tabindex="-1"></a>      column<span class="op">.</span><span class="fu">delete</span>()<span class="op">;</span></span>
+<span id="cb8-282"><a href="#cb8-282" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-283"><a href="#cb8-283" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-284"><a href="#cb8-284" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-7" data-nodetype="declaration">
+
 </div>
 </div>
 </div>
@@ -318,226 +572,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="table-toggles" class="level2">
-<h2 class="anchored" data-anchor-id="table-toggles">Table Toggles</h2>
-<div class="cell">
-<details class="code-fold">
-<summary>code</summary>
-<div class="sourceCode cell-code" id="cb3" data-startfrom="86" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 85;"><span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>viewof tableLayout <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(tableLayouts<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="st">'fitDataStretch'</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">'Table Layout'</span>})</span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>viewof pagination <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">toggle</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">'Pagination'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="kw">true</span>})</span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>viewof paginationSize <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(pageSizes<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="dv">100000</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">'Page Size'</span>})</span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>viewof movableColumns <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">toggle</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">'Movable Columns'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="kw">true</span>})</span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>viewof movableRows <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">toggle</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">'Movable Rows'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="kw">true</span>})</span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>viewof selectableRows <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">toggle</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">'Selectable Rows'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="kw">true</span>})</span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a><span class="co">// from: http://tabulator.info/docs/5.0/layout</span></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>tableLayouts <span class="op">=</span> [</span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>  <span class="st">'fitData'</span><span class="op">,</span></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>  <span class="st">'fitDataFill'</span><span class="op">,</span></span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>  <span class="st">'fitDataStretch'</span><span class="op">,</span></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>  <span class="st">'fitDataTable'</span><span class="op">,</span></span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>  <span class="st">'fitColumns'</span></span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>pageSizes <span class="op">=</span> [<span class="dv">20</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">1000</span><span class="op">,</span> <span class="dv">10000</span><span class="op">,</span> <span class="dv">100000</span><span class="op">,</span> <span class="dv">1000000</span><span class="op">,</span> <span class="dv">10000000</span>]</span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>columnHeaderMenu <span class="op">=</span> [</span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Hide Column'</span><span class="op">,</span></span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>    <span class="dt">action</span><span class="op">:</span> <span class="kw">function</span> (e<span class="op">,</span> column) {</span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>      column<span class="op">.</span><span class="fu">hide</span>()<span class="op">;</span></span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Freeze Column"</span><span class="op">,</span></span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>    <span class="dt">action</span><span class="op">:</span> <span class="kw">function</span> (e<span class="op">,</span> column) {</span>
-<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>      column<span class="op">.</span><span class="fu">updateDefinition</span>({ <span class="dt">frozen</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Delete Column'</span><span class="op">,</span></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>    <span class="dt">action</span><span class="op">:</span> <span class="kw">function</span> (e<span class="op">,</span> column) {</span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>      column<span class="op">.</span><span class="fu">delete</span>()<span class="op">;</span></span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="co">// row context menu. see: http://tabulator.info/docs/5.0/menu</span></span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>rowContextMenu <span class="op">=</span> [</span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"&lt;i class='fas fa-trash'&gt;&lt;/i&gt; Delete Row"</span><span class="op">,</span></span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>    <span class="dt">action</span><span class="op">:</span> <span class="kw">function</span>(e<span class="op">,</span> row) {row<span class="op">.</span><span class="fu">delete</span>()}</span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Freeze Row"</span><span class="op">,</span></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>    <span class="dt">action</span><span class="op">:</span> <span class="kw">function</span> (e<span class="op">,</span> row) { row<span class="op">.</span><span class="fu">freeze</span>()<span class="op">;</span> }</span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-1" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-2" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-3" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-4" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-5" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-6" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-7" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-8" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-9" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-3-10" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-</div>
-</section>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb4" data-startfrom="147" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 146;"><span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">fetchData</span>(dataUrl)</span>
-<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a>dataUrlParam <span class="op">=</span> <span class="kw">new</span> <span class="fu">URLSearchParams</span>(<span class="fu">html</span><span class="vs">`&lt;a href&gt;`</span><span class="op">.</span><span class="at">search</span>)<span class="op">.</span><span class="fu">get</span>(<span class="st">'dataUrl'</span>)</span>
-<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>dataSets <span class="op">=</span> [</span>
-<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>  <span class="st">'airports.csv'</span><span class="op">,</span> <span class="st">'co2-concentration.csv'</span><span class="op">,</span> <span class="st">'disasters.csv'</span><span class="op">,</span> <span class="st">'flights-3m.csv'</span><span class="op">,</span> <span class="st">'flights-airport.csv'</span><span class="op">,</span></span>
-<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>  <span class="st">'gapminder-health-income.csv'</span><span class="op">,</span> <span class="st">'github.csv'</span><span class="op">,</span> <span class="st">'iowa-electricity.csv'</span><span class="op">,</span> <span class="st">'la-riots.csv'</span><span class="op">,</span> <span class="st">'lookup_groups.csv'</span><span class="op">,</span></span>
-<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lookup_people.csv'</span><span class="op">,</span> <span class="st">'population_engineers_hurricanes.csv'</span><span class="op">,</span> <span class="st">'seattle-temps.csv'</span><span class="op">,</span> <span class="st">'seattle-weather.csv'</span><span class="op">,</span></span>
-<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>  <span class="st">'sf-temps.csv'</span><span class="op">,</span> <span class="st">'sp500.csv'</span><span class="op">,</span> <span class="st">'stocks.csv'</span><span class="op">,</span> <span class="st">'us-employment.csv'</span><span class="op">,</span> <span class="st">'weather.csv'</span><span class="op">,</span> <span class="st">'windvectors.csv'</span><span class="op">,</span> <span class="st">'zipcodes.csv'</span><span class="op">,</span></span>
-<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>  <span class="st">'barley.json'</span><span class="op">,</span> <span class="st">'birdstrikes.json'</span><span class="op">,</span> <span class="st">'budget.json'</span><span class="op">,</span> <span class="st">'budgets.json'</span><span class="op">,</span> <span class="st">'burtin.json'</span><span class="op">,</span> <span class="st">'cars.json'</span><span class="op">,</span> <span class="st">'climate.json'</span><span class="op">,</span></span>
-<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>  <span class="st">'countries.json'</span><span class="op">,</span> <span class="st">'crimea.json'</span><span class="op">,</span> <span class="st">'driving.json'</span><span class="op">,</span> <span class="st">'flare-dependencies.json'</span><span class="op">,</span> <span class="st">'flare.json'</span><span class="op">,</span></span>
-<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>  <span class="st">'flights-2k.json'</span><span class="op">,</span> <span class="st">'flights-5k.json'</span><span class="op">,</span> <span class="st">'flights-10k.json'</span><span class="op">,</span> <span class="st">'flights-20k.json'</span><span class="op">,</span></span>
-<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>  <span class="st">'flights-200k.json'</span><span class="op">,</span> <span class="st">'flights-200k.arrow'</span><span class="op">,</span></span>
-<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>  <span class="st">'gapminder.json'</span><span class="op">,</span> <span class="st">'income.json'</span><span class="op">,</span> <span class="st">'iris.json'</span><span class="op">,</span> <span class="st">'jobs.json'</span><span class="op">,</span> <span class="st">'londonCentroids.json'</span><span class="op">,</span></span>
-<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>  <span class="st">'monarchs.json'</span><span class="op">,</span> <span class="st">'movies.json'</span><span class="op">,</span> <span class="st">'normal-2d.json'</span><span class="op">,</span> <span class="st">'points.json'</span><span class="op">,</span></span>
-<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>  <span class="st">'udistrict.json'</span><span class="op">,</span> <span class="st">'unemployment-across-industries.json'</span><span class="op">,</span> <span class="st">'us-state-capitals.json'</span><span class="op">,</span></span>
-<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>  <span class="st">'weball26.json'</span><span class="op">,</span> <span class="st">'wheat.json'</span></span>
-<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">fetchData</span>(dataUrl) {</span>
-<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> data <span class="op">=</span> []<span class="op">;</span></span>
-<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (dataUrl<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">'.csv'</span>)) {</span>
-<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="cf">await</span> d3<span class="op">.</span><span class="fu">csvParse</span>(<span class="cf">await</span> d3<span class="op">.</span><span class="fu">text</span>(dataUrl)<span class="op">,</span> d3<span class="op">.</span><span class="at">autoType</span>)<span class="op">;</span></span>
-<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> (dataUrl<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">'.json'</span>)) {</span>
-<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="cf">await</span> d3<span class="op">.</span><span class="fu">json</span>(dataUrl)<span class="op">;</span></span>
-<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> (dataUrl<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">'.arrow'</span>)) {</span>
-<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="fu">loadArrowData</span>(dataUrl)<span class="op">;</span></span>
-<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">;</span></span>
-<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">loadArrowData</span>(dataUrl){</span>
-<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(dataUrl)<span class="op">;</span></span>
-<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> arrayBuffer <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">arrayBuffer</span>()<span class="op">;</span></span>
-<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> table <span class="op">=</span> arrow<span class="op">.</span><span class="at">Table</span><span class="op">.</span><span class="fu">from</span>(<span class="kw">new</span> <span class="bu">Uint8Array</span>(arrayBuffer))<span class="op">;</span></span>
-<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rows <span class="op">=</span> <span class="bu">Array</span>(table<span class="op">.</span><span class="at">length</span>)<span class="op">;</span></span>
-<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fields <span class="op">=</span> table<span class="op">.</span><span class="at">schema</span><span class="op">.</span><span class="at">fields</span><span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">name</span>)<span class="op">;</span></span>
-<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> i<span class="op">=</span><span class="dv">0</span><span class="op">,</span> n<span class="op">=</span>rows<span class="op">.</span><span class="at">length</span><span class="op">;</span> i<span class="op">&lt;</span>n<span class="op">;</span> <span class="op">++</span>i) {</span>
-<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> proto <span class="op">=</span> {}<span class="op">;</span></span>
-<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a>    fields<span class="op">.</span><span class="fu">forEach</span>((fieldName<span class="op">,</span> index) <span class="kw">=&gt;</span> {</span>
-<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> column <span class="op">=</span> table<span class="op">.</span><span class="fu">getColumnAt</span>(index)<span class="op">;</span></span>
-<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a>      proto[fieldName] <span class="op">=</span> column<span class="op">.</span><span class="fu">get</span>(i)<span class="op">;</span></span>
-<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a>    rows[i] <span class="op">=</span> proto<span class="op">;</span></span>
-<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> rows<span class="op">;</span></span>
-<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9" data-startfrom="301" data-source-offset="-30"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 300;"><span id="cb9-301"><a href="#cb9-301" aria-hidden="true" tabindex="-1"></a>dataUrlParam <span class="op">=</span> <span class="kw">new</span> <span class="fu">URLSearchParams</span>(<span class="fu">html</span><span class="vs">`&lt;a href&gt;`</span><span class="op">.</span><span class="at">search</span>)<span class="op">.</span><span class="fu">get</span>(<span class="st">'dataUrl'</span>)</span>
+<span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-303"><a href="#cb9-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-304"><a href="#cb9-304" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">fetchData</span>(dataUrl) {</span>
+<span id="cb9-305"><a href="#cb9-305" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> data <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb9-306"><a href="#cb9-306" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (dataUrl<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">'.csv'</span>)) {</span>
+<span id="cb9-307"><a href="#cb9-307" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="cf">await</span> d3<span class="op">.</span><span class="fu">csvParse</span>(<span class="cf">await</span> d3<span class="op">.</span><span class="fu">text</span>(dataUrl)<span class="op">,</span> d3<span class="op">.</span><span class="at">autoType</span>)<span class="op">;</span></span>
+<span id="cb9-308"><a href="#cb9-308" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-309"><a href="#cb9-309" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> (dataUrl<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">'.json'</span>)) {</span>
+<span id="cb9-310"><a href="#cb9-310" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="cf">await</span> d3<span class="op">.</span><span class="fu">json</span>(dataUrl)<span class="op">;</span></span>
+<span id="cb9-311"><a href="#cb9-311" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-312"><a href="#cb9-312" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span> (dataUrl<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">'.arrow'</span>)) {</span>
+<span id="cb9-313"><a href="#cb9-313" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="fu">loadArrowData</span>(dataUrl)<span class="op">;</span></span>
+<span id="cb9-314"><a href="#cb9-314" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-315"><a href="#cb9-315" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">;</span></span>
+<span id="cb9-316"><a href="#cb9-316" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-317"><a href="#cb9-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-318"><a href="#cb9-318" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">loadArrowData</span>(dataUrl){</span>
+<span id="cb9-319"><a href="#cb9-319" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(dataUrl)<span class="op">;</span></span>
+<span id="cb9-320"><a href="#cb9-320" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> arrayBuffer <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">arrayBuffer</span>()<span class="op">;</span></span>
+<span id="cb9-321"><a href="#cb9-321" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> table <span class="op">=</span> arrow<span class="op">.</span><span class="at">Table</span><span class="op">.</span><span class="fu">from</span>(<span class="kw">new</span> <span class="bu">Uint8Array</span>(arrayBuffer))<span class="op">;</span></span>
+<span id="cb9-322"><a href="#cb9-322" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rows <span class="op">=</span> <span class="bu">Array</span>(table<span class="op">.</span><span class="at">length</span>)<span class="op">;</span></span>
+<span id="cb9-323"><a href="#cb9-323" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fields <span class="op">=</span> table<span class="op">.</span><span class="at">schema</span><span class="op">.</span><span class="at">fields</span><span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">name</span>)<span class="op">;</span></span>
+<span id="cb9-324"><a href="#cb9-324" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> i<span class="op">=</span><span class="dv">0</span><span class="op">,</span> n<span class="op">=</span>rows<span class="op">.</span><span class="at">length</span><span class="op">;</span> i<span class="op">&lt;</span>n<span class="op">;</span> <span class="op">++</span>i) {</span>
+<span id="cb9-325"><a href="#cb9-325" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> proto <span class="op">=</span> {}<span class="op">;</span></span>
+<span id="cb9-326"><a href="#cb9-326" aria-hidden="true" tabindex="-1"></a>    fields<span class="op">.</span><span class="fu">forEach</span>((fieldName<span class="op">,</span> index) <span class="kw">=&gt;</span> {</span>
+<span id="cb9-327"><a href="#cb9-327" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> column <span class="op">=</span> table<span class="op">.</span><span class="fu">getColumnAt</span>(index)<span class="op">;</span></span>
+<span id="cb9-328"><a href="#cb9-328" aria-hidden="true" tabindex="-1"></a>      proto[fieldName] <span class="op">=</span> column<span class="op">.</span><span class="fu">get</span>(i)<span class="op">;</span></span>
+<span id="cb9-329"><a href="#cb9-329" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb9-330"><a href="#cb9-330" aria-hidden="true" tabindex="-1"></a>    rows[i] <span class="op">=</span> proto<span class="op">;</span></span>
+<span id="cb9-331"><a href="#cb9-331" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-332"><a href="#cb9-332" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> rows<span class="op">;</span></span>
+<span id="cb9-333"><a href="#cb9-333" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-334"><a href="#cb9-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-335"><a href="#cb9-335" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">download</span>(dataurl<span class="op">,</span> fileName) {</span>
+<span id="cb9-336"><a href="#cb9-336" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(dataurl)<span class="op">;</span></span>
+<span id="cb9-337"><a href="#cb9-337" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> blob <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">blob</span>()<span class="op">;</span></span>
+<span id="cb9-338"><a href="#cb9-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-339"><a href="#cb9-339" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> link <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">"a"</span>)<span class="op">;</span></span>
+<span id="cb9-340"><a href="#cb9-340" aria-hidden="true" tabindex="-1"></a>  link<span class="op">.</span><span class="at">href</span> <span class="op">=</span> URL<span class="op">.</span><span class="fu">createObjectURL</span>(blob)<span class="op">;</span></span>
+<span id="cb9-341"><a href="#cb9-341" aria-hidden="true" tabindex="-1"></a>  link<span class="op">.</span><span class="at">download</span> <span class="op">=</span> fileName<span class="op">;</span></span>
+<span id="cb9-342"><a href="#cb9-342" aria-hidden="true" tabindex="-1"></a>  link<span class="op">.</span><span class="fu">click</span>()<span class="op">;</span></span>
+<span id="cb9-343"><a href="#cb9-343" aria-hidden="true" tabindex="-1"></a>  URL<span class="op">.</span><span class="fu">revokeObjectURL</span>(link<span class="op">.</span><span class="at">href</span>)<span class="op">;</span> <span class="co">// Clean up</span></span>
+<span id="cb9-344"><a href="#cb9-344" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-4-1" data-nodetype="declaration">
+<div id="ojs-cell-8-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-4-2" data-nodetype="declaration">
+<div id="ojs-cell-8-2" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-4-3" data-nodetype="declaration">
+<div id="ojs-cell-8-3" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-4-4" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-4-5" data-nodetype="declaration">
+<div id="ojs-cell-8-4" data-nodetype="declaration">
 
 </div>
 </div>
@@ -549,32 +657,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb5" data-startfrom="201" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 200;"><span id="cb5-201"><a href="#cb5-201" aria-hidden="true" tabindex="-1"></a>tableStyles <span class="op">=</span> <span class="fu">html</span> <span class="vs">`</span></span>
-<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;style&gt;</span></span>
-<span id="cb5-203"><a href="#cb5-203" aria-hidden="true" tabindex="-1"></a><span class="vs">/* add space for sort direction symbol */</span></span>
-<span id="cb5-204"><a href="#cb5-204" aria-hidden="true" tabindex="-1"></a><span class="vs">thead th span {</span></span>
-<span id="cb5-205"><a href="#cb5-205" aria-hidden="true" tabindex="-1"></a><span class="vs">  margin-left: 0 !important;</span></span>
-<span id="cb5-206"><a href="#cb5-206" aria-hidden="true" tabindex="-1"></a><span class="vs">  padding-right: 0.4rem;</span></span>
-<span id="cb5-207"><a href="#cb5-207" aria-hidden="true" tabindex="-1"></a><span class="vs">}</span></span>
-<span id="cb5-208"><a href="#cb5-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-209"><a href="#cb5-209" aria-hidden="true" tabindex="-1"></a><span class="vs">.tabulator .tabulator-tableholder{</span></span>
-<span id="cb5-210"><a href="#cb5-210" aria-hidden="true" tabindex="-1"></a><span class="vs">  background-color: aliceblue;</span></span>
-<span id="cb5-211"><a href="#cb5-211" aria-hidden="true" tabindex="-1"></a><span class="vs">}</span></span>
-<span id="cb5-212"><a href="#cb5-212" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/style&gt;`</span></span>
-<span id="cb5-213"><a href="#cb5-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-214"><a href="#cb5-214" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;link href='https://unpkg.com/tabulator-tables@5.3.1/dist/css/tabulator.min.css' rel='stylesheet' /&gt;</span></span>
-<span id="cb5-215"><a href="#cb5-215" aria-hidden="true" tabindex="-1"></a><span class="vs">tabulator.min.css`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-startfrom="350" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 349;"><span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a>tableStyles <span class="op">=</span> <span class="fu">html</span> <span class="vs">`</span></span>
+<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;style&gt;</span></span>
+<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a><span class="vs">/* add space for sort direction symbol */</span></span>
+<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a><span class="vs">thead th span {</span></span>
+<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a><span class="vs">  margin-left: 0 !important;</span></span>
+<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a><span class="vs">  padding-right: 0.4rem;</span></span>
+<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a><span class="vs">}</span></span>
+<span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a><span class="vs">.tabulator .tabulator-tableholder{</span></span>
+<span id="cb10-359"><a href="#cb10-359" aria-hidden="true" tabindex="-1"></a><span class="vs">  background-color: aliceblue;</span></span>
+<span id="cb10-360"><a href="#cb10-360" aria-hidden="true" tabindex="-1"></a><span class="vs">}</span></span>
+<span id="cb10-361"><a href="#cb10-361" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/style&gt;`</span></span>
+<span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;link href='https://unpkg.com/tabulator-tables@5.3.1/dist/css/tabulator.min.css' rel='stylesheet' /&gt;</span></span>
+<span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a><span class="vs">tabulator.min.css`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-5-1" data-nodetype="declaration">
+<div id="ojs-cell-9-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-5-2" data-nodetype="expression">
+<div id="ojs-cell-9-2" data-nodetype="expression">
 
 </div>
 </div>
@@ -586,29 +694,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb6" data-startfrom="221" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 220;"><span id="cb6-221"><a href="#cb6-221" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {SummaryTable} <span class="im">from</span> <span class="st">"@observablehq/summary-table"</span></span>
-<span id="cb6-222"><a href="#cb6-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a>Tabulator <span class="op">=</span> <span class="pp">require</span>(<span class="st">'https://unpkg.com/tabulator-tables@5.3.1'</span>)<span class="op">;</span></span>
-<span id="cb6-224"><a href="#cb6-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-225"><a href="#cb6-225" aria-hidden="true" tabindex="-1"></a>arrow <span class="op">=</span> <span class="pp">require</span>(<span class="st">'apache-arrow@6.0.1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11" data-startfrom="371" data-source-offset="-31"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 370;"><span id="cb11-371"><a href="#cb11-371" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { SummaryTable } <span class="im">from</span> <span class="st">"fcb971390dae8f6d"</span></span>
+<span id="cb11-372"><a href="#cb11-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-373"><a href="#cb11-373" aria-hidden="true" tabindex="-1"></a>Tabulator <span class="op">=</span> <span class="pp">require</span>(<span class="st">'https://unpkg.com/tabulator-tables@5.3.1'</span>)<span class="op">;</span></span>
+<span id="cb11-374"><a href="#cb11-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-375"><a href="#cb11-375" aria-hidden="true" tabindex="-1"></a>arrow <span class="op">=</span> <span class="pp">require</span>(<span class="st">'apache-arrow@6.0.1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-6-1" data-nodetype="declaration">
+<div id="ojs-cell-10-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-6-2" data-nodetype="declaration">
+<div id="ojs-cell-10-2" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-6-3" data-nodetype="declaration">
+<div id="ojs-cell-10-3" data-nodetype="declaration">
 
 </div>
 </div>
@@ -622,7 +730,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBkYXRhU2V0ID0gSW5wdXRzLnNlbGVjdChkYXRhU2V0cywge1xuICBsYWJlbDogaHRtbGA8Yj5kYXRhc2V0PC9iPmBcbn0pXG5cbnZpZXdvZiBkYXRhVXJsID0gSW5wdXRzLnRleHQoe1xuICBsYWJlbDogaHRtbGA8Yj5kYXRhVXJsPC9iPmAsXG4gIHBsYWNlaG9sZGVyOiAndHlwZSBkYXRhIHVybCBhbmQgY2xpY2sgZmV0Y2gnLFxuICB2YWx1ZTogYCR7ZGF0YVVybFBhcmFtID8gZGF0YVVybFBhcmFtIDogJ2h0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS92ZWdhL3ZlZ2EtZGF0YXNldHMvbWFzdGVyL2RhdGEvJyArIGRhdGFTZXR9YCxcbiAgc3VibWl0OiAnZmV0Y2hEYXRhJ1xufSlcblxuc2hhcmVMaW5rID0gbWQgYCpzaGFyZSBhIGxpbmsgdG8geW91ciBbZGF0YV0oaHR0cHM6Ly9vYnNlcnZhYmxlaHEuY29tL0ByYW5kb21mcmFjdGFscy90YWJ1bGFyLWRhdGEtdmlld2VyP2RhdGFVcmw9JHtkYXRhVXJsfSkqYFxuXG52aWV3b2YgZGF0YVN1bW1hcnlWaWV3ID0gU3VtbWFyeVRhYmxlKGRhdGEpXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgdGFibGVPcHRpb25zID0gSW5wdXRzLmZvcm0oW1xuICBJbnB1dHMuYnV0dG9uKCdEb3dubG9hZCcsIHtyZWR1Y2U6ICgpID0+IHRhYmxlLmRvd25sb2FkKCdjc3YnLCAnZGF0YS5jc3YnKX0pLFxuXSlcblxudGFibGVDb250YWluZXIgPSBodG1sIGA8ZGl2IGlkPVwidGFibGUtY29udGFpbmVyXCIgc3R5bGU9XCJoZWlnaHQ6IDYwMHB4XCI+XG48L2Rpdj5gXG5cbnRhYmxlID0gbmV3IFRhYnVsYXRvcignI3RhYmxlLWNvbnRhaW5lcicsIHtcbiAgaGVpZ2h0OiA2NDUsXG4gIGF1dG9Db2x1bW5zOiB0cnVlLFxuICBjb2x1bW5EZWZhdWx0czoge1xuICAgIGhlYWRlck1lbnU6IGNvbHVtbkhlYWRlck1lbnVcbiAgfSxcbiAgY2xpcGJvYXJkOiB0cnVlLCAvLyBlYW5ibGUgY2xpcGJvYXJkIGNvcHkgYW5kIHBhc3RlXG4gIGNsaXBib2FyZFBhc3RlQWN0aW9uOiAncmVwbGFjZScsXG4gIGxheW91dDogdGFibGVMYXlvdXQsXG4gIGxheW91dENvbHVtbnNPbk5ld0RhdGE6IHRydWUsXG4gIG1vdmFibGVDb2x1bW5zOiBtb3ZhYmxlQ29sdW1ucyxcbiAgbW92YWJsZVJvd3M6IG1vdmFibGVSb3dzLFxuICBzZWxlY3RhYmxlOiBzZWxlY3RhYmxlUm93cyxcbiAgcm93Q29udGV4dE1lbnU6IHJvd0NvbnRleHRNZW51LFxuICBwYWdpbmF0aW9uOiBwYWdpbmF0aW9uLFxuICBwYWdpbmF0aW9uU2l6ZTogcGFnaW5hdGlvblNpemUsXG4gIHBhZ2luYXRpb25TaXplU2VsZWN0b3I6IHBhZ2VTaXplcyxcbiAgcmVuZGVyVmVydGljYWxCdWZmZXI6IDMwMCwgLy8gc2V0IHZpcnR1YWwgRE9NIGJ1ZmZlciB0byAzMDBweFxuICBkZWJ1Z0ludmFsaWRPcHRpb25zOiB0cnVlLCAvLyB0YWJ1bGF0b3Igd2FybmluZ3NcbiAgZGVidWdFdmVudHNFeHRlcm5hbDogWyd0YWJsZUJ1aWxkaW5nJywgJ2RhdGFMb2FkZWQnLCAndGFibGVCdWlsdCddLCAvLyBsb2cgc3BlY2lmaWVkIHRhYnVsYXRvciBldmVudHNcbiBcdGRhdGE6IGRhdGEsXG4gIHBlcnNpc3RlbmNlTW9kZTogJ2xvY2FsJyxcbiAgcGVyc2lzdGVuY2VJRDogZGF0YVVybCxcbiAgcGVyc2lzdGVudExheW91dDogdHJ1ZSxcbiAgcGVyc2lzdGVuY2U6IHtcbiAgICBzb3J0OiB0cnVlLFxuICAgIGZpbHRlcjogdHJ1ZSxcbiAgICBncm91cDogdHJ1ZSxcbiAgICBjb2x1bW5zOiB0cnVlLFxuICB9XG59KTtcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiB0YWJsZUxheW91dCA9IElucHV0cy5zZWxlY3QodGFibGVMYXlvdXRzLCB7dmFsdWU6ICdmaXREYXRhU3RyZXRjaCcsIGxhYmVsOiAnVGFibGUgTGF5b3V0J30pXG5cbnZpZXdvZiBwYWdpbmF0aW9uID0gSW5wdXRzLnRvZ2dsZSh7bGFiZWw6ICdQYWdpbmF0aW9uJywgdmFsdWU6IHRydWV9KVxuXG52aWV3b2YgcGFnaW5hdGlvblNpemUgPSBJbnB1dHMuc2VsZWN0KHBhZ2VTaXplcywge3ZhbHVlOiAxMDAwMDAsIGxhYmVsOiAnUGFnZSBTaXplJ30pXG5cbnZpZXdvZiBtb3ZhYmxlQ29sdW1ucyA9IElucHV0cy50b2dnbGUoe2xhYmVsOiAnTW92YWJsZSBDb2x1bW5zJywgdmFsdWU6IHRydWV9KVxuXG52aWV3b2YgbW92YWJsZVJvd3MgPSBJbnB1dHMudG9nZ2xlKHtsYWJlbDogJ01vdmFibGUgUm93cycsIHZhbHVlOiB0cnVlfSlcblxudmlld29mIHNlbGVjdGFibGVSb3dzID0gSW5wdXRzLnRvZ2dsZSh7bGFiZWw6ICdTZWxlY3RhYmxlIFJvd3MnLCB2YWx1ZTogdHJ1ZX0pXG5cbi8vIGZyb206IGh0dHA6Ly90YWJ1bGF0b3IuaW5mby9kb2NzLzUuMC9sYXlvdXRcbnRhYmxlTGF5b3V0cyA9IFtcbiAgJ2ZpdERhdGEnLFxuICAnZml0RGF0YUZpbGwnLFxuICAnZml0RGF0YVN0cmV0Y2gnLFxuICAnZml0RGF0YVRhYmxlJyxcbiAgJ2ZpdENvbHVtbnMnXG5dXG5cbnBhZ2VTaXplcyA9IFsyMCwgMTAwLCAxMDAwLCAxMDAwMCwgMTAwMDAwLCAxMDAwMDAwLCAxMDAwMDAwMF1cblxuY29sdW1uSGVhZGVyTWVudSA9IFtcbiAge1xuICAgIGxhYmVsOiAnSGlkZSBDb2x1bW4nLFxuICAgIGFjdGlvbjogZnVuY3Rpb24gKGUsIGNvbHVtbikge1xuICAgICAgY29sdW1uLmhpZGUoKTtcbiAgICB9XG4gIH0sXG4gIHtcbiAgICBsYWJlbDogXCJGcmVlemUgQ29sdW1uXCIsXG4gICAgYWN0aW9uOiBmdW5jdGlvbiAoZSwgY29sdW1uKSB7XG4gICAgICBjb2x1bW4udXBkYXRlRGVmaW5pdGlvbih7IGZyb3plbjogdHJ1ZSB9KTtcbiAgICB9XG4gIH0sXG4gIHtcbiAgICBsYWJlbDogJ0RlbGV0ZSBDb2x1bW4nLFxuICAgIGFjdGlvbjogZnVuY3Rpb24gKGUsIGNvbHVtbikge1xuICAgICAgY29sdW1uLmRlbGV0ZSgpO1xuICAgIH1cbiAgfVxuXTtcblxuXG4vLyByb3cgY29udGV4dCBtZW51LiBzZWU6IGh0dHA6Ly90YWJ1bGF0b3IuaW5mby9kb2NzLzUuMC9tZW51XG5yb3dDb250ZXh0TWVudSA9IFtcbiAge1xuICAgIGxhYmVsOiBcIjxpIGNsYXNzPSdmYXMgZmEtdHJhc2gnPjwvaT4gRGVsZXRlIFJvd1wiLFxuICAgIGFjdGlvbjogZnVuY3Rpb24oZSwgcm93KSB7cm93LmRlbGV0ZSgpfVxuICB9LFxuICB7XG4gICAgbGFiZWw6IFwiRnJlZXplIFJvd1wiLFxuICAgIGFjdGlvbjogZnVuY3Rpb24gKGUsIHJvdykgeyByb3cuZnJlZXplKCk7IH1cbiAgfVxuXVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC00IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiZGF0YSA9IGZldGNoRGF0YShkYXRhVXJsKVxuXG5kYXRhVXJsUGFyYW0gPSBuZXcgVVJMU2VhcmNoUGFyYW1zKGh0bWxgPGEgaHJlZj5gLnNlYXJjaCkuZ2V0KCdkYXRhVXJsJylcblxuZGF0YVNldHMgPSBbXG4gICdhaXJwb3J0cy5jc3YnLCAnY28yLWNvbmNlbnRyYXRpb24uY3N2JywgJ2Rpc2FzdGVycy5jc3YnLCAnZmxpZ2h0cy0zbS5jc3YnLCAnZmxpZ2h0cy1haXJwb3J0LmNzdicsXG4gICdnYXBtaW5kZXItaGVhbHRoLWluY29tZS5jc3YnLCAnZ2l0aHViLmNzdicsICdpb3dhLWVsZWN0cmljaXR5LmNzdicsICdsYS1yaW90cy5jc3YnLCAnbG9va3VwX2dyb3Vwcy5jc3YnLFxuICAnbG9va3VwX3Blb3BsZS5jc3YnLCAncG9wdWxhdGlvbl9lbmdpbmVlcnNfaHVycmljYW5lcy5jc3YnLCAnc2VhdHRsZS10ZW1wcy5jc3YnLCAnc2VhdHRsZS13ZWF0aGVyLmNzdicsXG4gICdzZi10ZW1wcy5jc3YnLCAnc3A1MDAuY3N2JywgJ3N0b2Nrcy5jc3YnLCAndXMtZW1wbG95bWVudC5jc3YnLCAnd2VhdGhlci5jc3YnLCAnd2luZHZlY3RvcnMuY3N2JywgJ3ppcGNvZGVzLmNzdicsXG4gICdiYXJsZXkuanNvbicsICdiaXJkc3RyaWtlcy5qc29uJywgJ2J1ZGdldC5qc29uJywgJ2J1ZGdldHMuanNvbicsICdidXJ0aW4uanNvbicsICdjYXJzLmpzb24nLCAnY2xpbWF0ZS5qc29uJyxcbiAgJ2NvdW50cmllcy5qc29uJywgJ2NyaW1lYS5qc29uJywgJ2RyaXZpbmcuanNvbicsICdmbGFyZS1kZXBlbmRlbmNpZXMuanNvbicsICdmbGFyZS5qc29uJyxcbiAgJ2ZsaWdodHMtMmsuanNvbicsICdmbGlnaHRzLTVrLmpzb24nLCAnZmxpZ2h0cy0xMGsuanNvbicsICdmbGlnaHRzLTIway5qc29uJyxcbiAgJ2ZsaWdodHMtMjAway5qc29uJywgJ2ZsaWdodHMtMjAway5hcnJvdycsXG4gICdnYXBtaW5kZXIuanNvbicsICdpbmNvbWUuanNvbicsICdpcmlzLmpzb24nLCAnam9icy5qc29uJywgJ2xvbmRvbkNlbnRyb2lkcy5qc29uJyxcbiAgJ21vbmFyY2hzLmpzb24nLCAnbW92aWVzLmpzb24nLCAnbm9ybWFsLTJkLmpzb24nLCAncG9pbnRzLmpzb24nLFxuICAndWRpc3RyaWN0Lmpzb24nLCAndW5lbXBsb3ltZW50LWFjcm9zcy1pbmR1c3RyaWVzLmpzb24nLCAndXMtc3RhdGUtY2FwaXRhbHMuanNvbicsXG4gICd3ZWJhbGwyNi5qc29uJywgJ3doZWF0Lmpzb24nXG5dXG5cbmFzeW5jIGZ1bmN0aW9uIGZldGNoRGF0YShkYXRhVXJsKSB7XG4gIGxldCBkYXRhID0gW107XG4gIGlmIChkYXRhVXJsLmVuZHNXaXRoKCcuY3N2JykpIHtcbiAgICBkYXRhID0gYXdhaXQgZDMuY3N2UGFyc2UoYXdhaXQgZDMudGV4dChkYXRhVXJsKSwgZDMuYXV0b1R5cGUpO1xuICB9XG4gIGVsc2UgaWYgKGRhdGFVcmwuZW5kc1dpdGgoJy5qc29uJykpIHtcbiAgICBkYXRhID0gYXdhaXQgZDMuanNvbihkYXRhVXJsKTtcbiAgfVxuICBlbHNlIGlmIChkYXRhVXJsLmVuZHNXaXRoKCcuYXJyb3cnKSkge1xuICAgIGRhdGEgPSBsb2FkQXJyb3dEYXRhKGRhdGFVcmwpO1xuICB9XG4gIHJldHVybiBkYXRhO1xufVxuXG5hc3luYyBmdW5jdGlvbiBsb2FkQXJyb3dEYXRhKGRhdGFVcmwpe1xuICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKGRhdGFVcmwpO1xuICBjb25zdCBhcnJheUJ1ZmZlciA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG4gIGNvbnN0IHRhYmxlID0gYXJyb3cuVGFibGUuZnJvbShuZXcgVWludDhBcnJheShhcnJheUJ1ZmZlcikpO1xuICBjb25zdCByb3dzID0gQXJyYXkodGFibGUubGVuZ3RoKTtcbiAgY29uc3QgZmllbGRzID0gdGFibGUuc2NoZW1hLmZpZWxkcy5tYXAoZCA9PiBkLm5hbWUpO1xuICBmb3IgKGxldCBpPTAsIG49cm93cy5sZW5ndGg7IGk8bjsgKytpKSB7XG4gICAgY29uc3QgcHJvdG8gPSB7fTtcbiAgICBmaWVsZHMuZm9yRWFjaCgoZmllbGROYW1lLCBpbmRleCkgPT4ge1xuICAgICAgY29uc3QgY29sdW1uID0gdGFibGUuZ2V0Q29sdW1uQXQoaW5kZXgpO1xuICAgICAgcHJvdG9bZmllbGROYW1lXSA9IGNvbHVtbi5nZXQoaSk7XG4gICAgfSk7XG4gICAgcm93c1tpXSA9IHByb3RvO1xuICB9XG4gIHJldHVybiByb3dzO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidGFibGVTdHlsZXMgPSBodG1sIGBcbjxzdHlsZT5cbi8qIGFkZCBzcGFjZSBmb3Igc29ydCBkaXJlY3Rpb24gc3ltYm9sICovXG50aGVhZCB0aCBzcGFuIHtcbiAgbWFyZ2luLWxlZnQ6IDAgIWltcG9ydGFudDtcbiAgcGFkZGluZy1yaWdodDogMC40cmVtO1xufVxuXG4udGFidWxhdG9yIC50YWJ1bGF0b3ItdGFibGVob2xkZXJ7XG4gIGJhY2tncm91bmQtY29sb3I6IGFsaWNlYmx1ZTtcbn1cbjwvc3R5bGU+YFxuXG5odG1sYDxsaW5rIGhyZWY9J2h0dHBzOi8vdW5wa2cuY29tL3RhYnVsYXRvci10YWJsZXNANS4zLjEvZGlzdC9jc3MvdGFidWxhdG9yLm1pbi5jc3MnIHJlbD0nc3R5bGVzaGVldCcgLz5cbnRhYnVsYXRvci5taW4uY3NzYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC02IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiaW1wb3J0IHtTdW1tYXJ5VGFibGV9IGZyb20gXCJAb2JzZXJ2YWJsZWhxL3N1bW1hcnktdGFibGVcIlxuXG5UYWJ1bGF0b3IgPSByZXF1aXJlKCdodHRwczovL3VucGtnLmNvbS90YWJ1bGF0b3ItdGFibGVzQDUuMy4xJyk7XG5cbmFycm93ID0gcmVxdWlyZSgnYXBhY2hlLWFycm93QDYuMC4xJylcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnZGF0YVNldCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdkYXRhVXJsJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2RhdGFTdW1tYXJ5VmlldycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCd0YWJsZU9wdGlvbnMnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgndGFibGVMYXlvdXQnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgncGFnaW5hdGlvbicpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdwYWdpbmF0aW9uU2l6ZScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdtb3ZhYmxlQ29sdW1ucycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdtb3ZhYmxlUm93cycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzZWxlY3RhYmxlUm93cycpIn1dfQ==
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIHZpZXdvZiBkYXRhU2V0ID0gSW5wdXRzLnNlbGVjdChkYXRhU2V0cywge1xuLy8gICBsYWJlbDogaHRtbGA8Yj5kYXRhc2V0PC9iPmBcbi8vIH0pXG5cbi8vIHZpZXdvZiBkYXRhVXJsID0gSW5wdXRzLnRleHQoXG4vLyAgIGxhYmVsOiBodG1sYDxiPmRhdGFVcmw8L2I+YCxcbi8vICAgcGxhY2Vob2xkZXI6ICd0eXBlIGRhdGEgdXJsIGFuZCBjbGljayBmZXRjaCcsXG4vLyAgIHZhbHVlOiBgJHtkYXRhVXJsUGFyYW0gPyBkYXRhVXJsUGFyYW0gOiAnaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3ZlZ2EvdmVnYS1kYXRhc2V0cy9tYXN0ZXIvZGF0YS8nICsgZGF0YVNldH1gLFxuLy8gICBzdWJtaXQ6ICdmZXRjaERhdGEnXG4vLyB9KVxuXG5kYXRhUGF0aCA9IFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1Bvc3Q0NS1EYXRhLUNvbGxlY3RpdmUvZGF0YS9yZWZzL2hlYWRzL21haW4vaGF0aGl0cnVzdF9maWN0aW9uL2hhdGhpdHJ1c3RfcG9zdDQ1ZmljdGlvbl9tZXRhZGF0YS5jc3ZcIlxuXG5kYXRhID0gZmV0Y2hEYXRhKGRhdGFQYXRoKVxuXG5kZWZhdWx0RGlzcGxheWVkQ29sdW1ucyA9IFtcbiAgICBcInNob3J0dGl0bGVcIixcbiAgICBcImluZmVycmVkZGF0ZVwiLFxuICAgIFwiYXV0aG9yXCIsXG4gICAgXCJyZWNvcmRpZFwiLFxuICAgIFwiaGF0aGlfcmlnaHRzXCIsXG4gICAgXCJnZW5yZXNcIixcbiAgICBcImlkXCIsXG4gICAgXCJkb2NpZFwiLFxuICAgIFwianV2ZW5pbGVwcm9iXCIsXG4gICAgXCJub25maWNwcm9iXCIsXG4gICAgXCJhdXRob3JfYXV0aG9yaXplZF9oZWFkaW5nXCIsXG4gICAgXCJhdXRob3JfbGNjblwiLFxuICAgIFwiYXV0aG9yX3ZpYWZcIixcbiAgICBcImF1dGhvcl93aWtpZGF0YV9xaWRcIlxuICBdO1xuXG5jYXRlZ29yeUNvbHVtbnMgPSBbXCJoYXRoaV9yaWdodHNcIiwgIFwiZ2VucmVzXCIsXCJnZW9ncmFwaGljc1wiXTtcblxuLy8gUmVvcmRlciB0aGUgYXZhaWxhYmxlIGNvbHVtbnMgdG8gbWF0Y2ggZGVmYXVsdERpc3BsYXllZENvbHVtbnMsIGFwcGVuZGluZyBhbnkgZXh0cmEgY29sdW1ucyBhdCB0aGUgZW5kXG5vcmRlcmVkQ29sdW1ucyA9IFtcbiAgLi4uZGVmYXVsdERpc3BsYXllZENvbHVtbnMsXG4gIC4uLk9iamVjdC5rZXlzKGRhdGFbMF0gfHwge30pLmZpbHRlcihjb2wgPT4gIWRlZmF1bHREaXNwbGF5ZWRDb2x1bW5zLmluY2x1ZGVzKGNvbCkpXG5dO1xuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiLy8gQ3JlYXRlIGEgY2hlY2tib3ggaW5wdXQgd2l0aCBvcmRlcmVkIGNvbHVtbnNcblxuLy8gR2VuZXJhdGUgU3VtbWFyeSBEYXRhIGJhc2VkIG9uIHNlbGVjdGVkIGNvbHVtbnNcbnN1bW1hcnlfZGF0YSA9IHtcbiAgY29uc3Qgc2VsZWN0ZWQgPSBuZXcgU2V0KHNlbGVjdGVkQ29sdW1ucyk7XG4gIHJldHVybiBkYXRhLm1hcChyb3cgPT4ge1xuICAgIGxldCBuZXdSb3cgPSB7fTtcbiAgICBmb3IgKGxldCBrZXkgaW4gcm93KSB7XG4gICAgICBpZiAoc2VsZWN0ZWQuaGFzKGtleSkpIHtcbiAgICAgICAgbmV3Um93W2tleV0gPSByb3dba2V5XTtcbiAgICAgIH1cbiAgICB9XG4gICAgcmV0dXJuIG5ld1JvdztcbiAgfSk7XG59XG5cbnZpZXdvZiBkYXRhU3VtbWFyeVZpZXcgPSBTdW1tYXJ5VGFibGUoc3VtbWFyeV9kYXRhKTtcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBzZWxlY3RlZENvbHVtbnMgPSBJbnB1dHMuY2hlY2tib3gob3JkZXJlZENvbHVtbnMsIHtcbiAgbGFiZWw6IFwiU2VsZWN0IENvbHVtbnNcIixcbiAgdmFsdWU6IGRlZmF1bHREaXNwbGF5ZWRDb2x1bW5zLCAvLyBEZWZhdWx0IHNlbGVjdGVkIGNvbHVtbnNcbn0pO1xuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC00IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiZnVuY3Rpb24gZ2VuZXJhdGVUYWJ1bGF0b3JUYWJsZUZvck9ic2VydmFibGUoXG4gIGNvbnRhaW5lcklkLFxuICBkYXRhLFxuICB7XG4gICAgZGlzcGxheWVkQ29sdW1ucyA9IG51bGwsXG4gICAgY29sdW1uV2lkdGhzID0ge30sXG4gICAgY3VycmVuY3lDb2x1bW5zID0gW10sXG4gICAgY2F0ZWdvcnlDb2x1bW5zID0gW10sXG4gICAgbnVtZXJpY0NvbHVtbnMgPSBbXSxcbiAgICByYW5nZVZhbHVlcyA9IHt9LFxuICAgIHNvcnRDb2x1bW5zID0gW10sXG4gICAgc29ydE9yZGVycyA9IFtdLFxuICAgIGNvbHVtblBvcHVwcyA9IFtdLFxuICAgIGhlaWdodCA9IDY0NSxcbiAgICBwYWdpbmF0aW9uU2l6ZSA9IDEwMDAsXG4gIH0gPSB7fVxuKSB7XG4gIGlmICghZGF0YSB8fCBkYXRhLmxlbmd0aCA9PT0gMCkge1xuICAgIGNvbnNvbGUuZXJyb3IoXCJObyBkYXRhIHByb3ZpZGVkIHRvIGdlbmVyYXRlIHRoZSB0YWJsZS5cIik7XG4gICAgcmV0dXJuIG51bGw7XG4gIH1cblxuICBpZiAoIWRpc3BsYXllZENvbHVtbnMpIHtcbiAgICBkaXNwbGF5ZWRDb2x1bW5zID0gT2JqZWN0LmtleXMoZGF0YVswXSk7XG4gIH1cblxuICBjb25zdCB0YWJ1bGF0b3JDb2x1bW5zID0gZGlzcGxheWVkQ29sdW1ucy5tYXAoKGNvbHVtbikgPT4gKHtcbiAgICB0aXRsZTogY29sdW1uLFxuICAgIGZpZWxkOiBjb2x1bW4sXG4gICAgbWF4SW5pdGlhbFdpZHRoOiAxNTAsXG4gICAgcmVzaXphYmxlOiB0cnVlLFxuICAgIGhlYWRlckZpbHRlcjogbnVtZXJpY0NvbHVtbnMuaW5jbHVkZXMoY29sdW1uKVxuICAgICAgPyBcImlucHV0XCJcbiAgICAgIDogY2F0ZWdvcnlDb2x1bW5zLmluY2x1ZGVzKGNvbHVtbilcbiAgICAgID8gXCJsaXN0XCJcbiAgICAgIDogXCJpbnB1dFwiLFxuICAgIGhlYWRlckZpbHRlclBhcmFtczogY2F0ZWdvcnlDb2x1bW5zLmluY2x1ZGVzKGNvbHVtbilcbiAgICAgID8geyB2YWx1ZXNMb29rdXA6IHRydWUsIGNsZWFyYWJsZTogdHJ1ZSB9XG4gICAgICA6IHt9LFxuICAgIGZvcm1hdHRlcjogY3VycmVuY3lDb2x1bW5zLmluY2x1ZGVzKGNvbHVtbikgPyBcIm1vbmV5XCIgOiB1bmRlZmluZWQsXG4gICAgZm9ybWF0dGVyUGFyYW1zOiBjdXJyZW5jeUNvbHVtbnMuaW5jbHVkZXMoY29sdW1uKVxuICAgICAgPyB7IHN5bWJvbDogXCIkXCIsIHByZWNpc2lvbjogMCB9XG4gICAgICA6IHVuZGVmaW5lZCxcbiAgfSkpO1xuXG4gIGNvbnN0IHRhYmxlID0gbmV3IFRhYnVsYXRvcihjb250YWluZXJJZCwge1xuICAgIGhlaWdodDogaGVpZ2h0LFxuICAgIGRhdGE6IGRhdGEsXG4gICAgY29sdW1uczogdGFidWxhdG9yQ29sdW1ucyxcbiAgICAgY29sdW1uRGVmYXVsdHM6IHtcbiAgICBoZWFkZXJNZW51OiBjb2x1bW5IZWFkZXJNZW51XG4gIH0sXG4vLyAgICBtb3ZhYmxlQ29sdW1uczogdHJ1ZSxcbiAgICBsYXlvdXQ6IFwiZml0RGF0YVN0cmV0Y2hcIixcbiAgICBwYWdpbmF0aW9uOiB0cnVlLFxuICAgIHBhZ2luYXRpb25TaXplOiBwYWdpbmF0aW9uU2l6ZSxcbiAgICBwYWdpbmF0aW9uU2l6ZVNlbGVjdG9yOiBbMTAsIDEwMCwgMTAwMCwgMTAwMDBdLFxuICAgIHBhZ2luYXRpb25Db3VudGVyOiBcInJvd3NcIixcbiAgICBwZXJzaXN0ZW5jZU1vZGU6IGZhbHNlLFxuICAgIGluaXRpYWxTb3J0OiBzb3J0Q29sdW1ucy5tYXAoKGNvbCwgaWR4KSA9PiAoe1xuICAgICAgY29sdW1uOiBjb2wsXG4gICAgICBkaXI6IHNvcnRPcmRlcnNbaWR4XSB8fCBcImFzY1wiLFxuICAgIH0pKSxcbiAgfSk7XG5cbiAgcmV0dXJuIHRhYmxlO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC02IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiLy8gT2JzZXJ2YWJsZSBJbnB1dHNcbi8vIENyZWF0ZSBUYWJ1bGF0b3IgVGFibGVcbmh0bWxgPGRpdiBpZD1cInRhYmxlLWNvbnRhaW5lclwiIHN0eWxlPVwiaGVpZ2h0OiA2MDBweFwiPjwvZGl2PmBcblxuZ2VuZXJhdGVUYWJ1bGF0b3JUYWJsZUZvck9ic2VydmFibGUoXCIjdGFibGUtY29udGFpbmVyXCIsIGRhdGEsIHtcbiAgZGlzcGxheWVkQ29sdW1uczogc2VsZWN0ZWRDb2x1bW5zLFxuXG4gICAgY29sdW1uUG9wdXBzOiBbXG4gIFwiU2hvcnRlbmVkIHRpdGxlIG9mIHRoZSB3b3JrXCIsICAvLyBzaG9ydHRpdGxlXG4gIFwiSW5mZXJyZWQgZGF0ZSBvZiB0aGUgd29ya1wiLCAgICAvLyBpbmZlcnJlZGRhdGVcbiAgXCJBdXRob3Igb2YgdGhlIHdvcmtcIiwgICAgICAgICAgIC8vIGF1dGhvclxuICBcIlVuaXF1ZSByZWNvcmQgSURcIiwgICAgICAgICAgICAgLy8gcmVjb3JkaWRcbiAgXCJSaWdodHMgY29kZSBmcm9tIEhhdGhpVHJ1c3RcIiwgIC8vIGhhdGhpX3JpZ2h0c1xuICBcIkdlbnJlcyBhc3NvY2lhdGVkIHdpdGggdGhlIHdvcmtcIiwgIC8vIGdlbnJlc1xuICBcIlVuaXF1ZSBpZGVudGlmaWVyIGZvciB0aGUgdGl0bGUgaW4gdGhlIHRpdGxlcyBkYXRhc2V0IChtYXkgY29udGFpbiBkdXBsaWNhdGVzIGZvciByZXByaW50ZWQgd29ya3MpXCIsIC8vIGlkXG4gIFwiVW5pcXVlIHZvbHVtZSBJRCBmcm9tIEhhdGhpVHJ1c3RcIiwgLy8gZG9jaWQgKGh0aWQpXG4gIFwiUHJvYmFiaWxpdHkgdGhhdCB0aGUgd29yayBpcyBmb3IgYSBqdXZlbmlsZSBhdWRpZW5jZVwiLCAvLyBqdXZlbmlsZXByb2JcbiAgXCJQcm9iYWJpbGl0eSB0aGF0IHRoZSB3b3JrIGlzIG5vbmZpY3Rpb25cIiwgLy8gbm9uZmljcHJvYlxuICBcIkF1dGhvcuKAmXMgYXV0aG9yaXplZCBOYW1lIEF1dGhvcml0eSBDb29wZXJhdGl2ZSAoTkFDTykgaGVhZGluZ1wiLCAvLyBhdXRob3JfYXV0aG9yaXplZF9oZWFkaW5nXG4gIFwiQXV0aG9y4oCZcyBMQ0NOIGZyb20gaWQubG9jLmdvdlwiLCAvLyBhdXRob3JfbGNjblxuICBcIkF1dGhvcuKAmXMgdmlhZi5vcmcgY2x1c3RlciBudW1iZXJcIiwgLy8gYXV0aG9yX3ZpYWZcbiAgXCJBdXRob3LigJlzIFdpa2lkYXRhIFEgbnVtYmVyXCIgICAgICAvLyBhdXRob3Jfd2lraWRhdGFfcWlkXG5dLFxuICAgIC8vIGNvbHVtbldpZHRoczogeyBcImdlbmRlclwiOiBcIjUwcHhcIiwgXCJyb2xlXCI6IFwiNzVweFwiLCBcIm1mYV9kZWdyZWVcIjogXCIxMDBweFwiLCBcInByaXplX25hbWVcIjogXCIxMDBweFwiIH0sXG4gICAgY3VycmVuY3lDb2x1bW5zOiBbXCJwcml6ZV9hbW91bnRcIl0sXG4gICAgY2F0ZWdvcnlDb2x1bW5zOiBbXCJoYXRoaV9yaWdodHNcIiwgIFwiZ2VucmVzXCIsXCJnZW9ncmFwaGljc1wiXSxcbiAgICAvLyBzb3J0Q29sdW1uczogW1wicHJpemVfeWVhclwiXSxcbiAgICAvLyBzb3J0T3JkZXJzOiBbXCJkZXNjXCJdXG4gIHBhZ2luYXRpb25TaXplOiAxMDAwLFxufSk7XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTciLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJjb2x1bW5IZWFkZXJNZW51ID0gW1xuICB7XG4gICAgbGFiZWw6ICdIaWRlIENvbHVtbicsXG4gICAgYWN0aW9uOiBmdW5jdGlvbiAoZSwgY29sdW1uKSB7XG4gICAgICBjb2x1bW4uaGlkZSgpO1xuICAgIH1cbiAgfSxcbiAge1xuICAgIGxhYmVsOiBcIkZyZWV6ZSBDb2x1bW5cIixcbiAgICBhY3Rpb246IGZ1bmN0aW9uIChlLCBjb2x1bW4pIHtcbiAgICAgIGNvbHVtbi51cGRhdGVEZWZpbml0aW9uKHsgZnJvemVuOiB0cnVlIH0pO1xuICAgIH1cbiAgfSxcbiAge1xuICAgIGxhYmVsOiAnRGVsZXRlIENvbHVtbicsXG4gICAgYWN0aW9uOiBmdW5jdGlvbiAoZSwgY29sdW1uKSB7XG4gICAgICBjb2x1bW4uZGVsZXRlKCk7XG4gICAgfVxuICB9XG5dO1xuXG5cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtOCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIGRhdGEgPSBmZXRjaERhdGEoZGF0YVVybClcblxuZGF0YVVybFBhcmFtID0gbmV3IFVSTFNlYXJjaFBhcmFtcyhodG1sYDxhIGhyZWY+YC5zZWFyY2gpLmdldCgnZGF0YVVybCcpXG5cblxuYXN5bmMgZnVuY3Rpb24gZmV0Y2hEYXRhKGRhdGFVcmwpIHtcbiAgbGV0IGRhdGEgPSBbXTtcbiAgaWYgKGRhdGFVcmwuZW5kc1dpdGgoJy5jc3YnKSkge1xuICAgIGRhdGEgPSBhd2FpdCBkMy5jc3ZQYXJzZShhd2FpdCBkMy50ZXh0KGRhdGFVcmwpLCBkMy5hdXRvVHlwZSk7XG4gIH1cbiAgZWxzZSBpZiAoZGF0YVVybC5lbmRzV2l0aCgnLmpzb24nKSkge1xuICAgIGRhdGEgPSBhd2FpdCBkMy5qc29uKGRhdGFVcmwpO1xuICB9XG4gIGVsc2UgaWYgKGRhdGFVcmwuZW5kc1dpdGgoJy5hcnJvdycpKSB7XG4gICAgZGF0YSA9IGxvYWRBcnJvd0RhdGEoZGF0YVVybCk7XG4gIH1cbiAgcmV0dXJuIGRhdGE7XG59XG5cbmFzeW5jIGZ1bmN0aW9uIGxvYWRBcnJvd0RhdGEoZGF0YVVybCl7XG4gIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZGF0YVVybCk7XG4gIGNvbnN0IGFycmF5QnVmZmVyID0gYXdhaXQgcmVzcG9uc2UuYXJyYXlCdWZmZXIoKTtcbiAgY29uc3QgdGFibGUgPSBhcnJvdy5UYWJsZS5mcm9tKG5ldyBVaW50OEFycmF5KGFycmF5QnVmZmVyKSk7XG4gIGNvbnN0IHJvd3MgPSBBcnJheSh0YWJsZS5sZW5ndGgpO1xuICBjb25zdCBmaWVsZHMgPSB0YWJsZS5zY2hlbWEuZmllbGRzLm1hcChkID0+IGQubmFtZSk7XG4gIGZvciAobGV0IGk9MCwgbj1yb3dzLmxlbmd0aDsgaTxuOyArK2kpIHtcbiAgICBjb25zdCBwcm90byA9IHt9O1xuICAgIGZpZWxkcy5mb3JFYWNoKChmaWVsZE5hbWUsIGluZGV4KSA9PiB7XG4gICAgICBjb25zdCBjb2x1bW4gPSB0YWJsZS5nZXRDb2x1bW5BdChpbmRleCk7XG4gICAgICBwcm90b1tmaWVsZE5hbWVdID0gY29sdW1uLmdldChpKTtcbiAgICB9KTtcbiAgICByb3dzW2ldID0gcHJvdG87XG4gIH1cbiAgcmV0dXJuIHJvd3M7XG59XG5cbmFzeW5jIGZ1bmN0aW9uIGRvd25sb2FkKGRhdGF1cmwsIGZpbGVOYW1lKSB7XG4gIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZGF0YXVybCk7XG4gIGNvbnN0IGJsb2IgPSBhd2FpdCByZXNwb25zZS5ibG9iKCk7XG5cbiAgY29uc3QgbGluayA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJhXCIpO1xuICBsaW5rLmhyZWYgPSBVUkwuY3JlYXRlT2JqZWN0VVJMKGJsb2IpO1xuICBsaW5rLmRvd25sb2FkID0gZmlsZU5hbWU7XG4gIGxpbmsuY2xpY2soKTtcbiAgVVJMLnJldm9rZU9iamVjdFVSTChsaW5rLmhyZWYpOyAvLyBDbGVhbiB1cFxufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC05IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidGFibGVTdHlsZXMgPSBodG1sIGBcbjxzdHlsZT5cbi8qIGFkZCBzcGFjZSBmb3Igc29ydCBkaXJlY3Rpb24gc3ltYm9sICovXG50aGVhZCB0aCBzcGFuIHtcbiAgbWFyZ2luLWxlZnQ6IDAgIWltcG9ydGFudDtcbiAgcGFkZGluZy1yaWdodDogMC40cmVtO1xufVxuXG4udGFidWxhdG9yIC50YWJ1bGF0b3ItdGFibGVob2xkZXJ7XG4gIGJhY2tncm91bmQtY29sb3I6IGFsaWNlYmx1ZTtcbn1cbjwvc3R5bGU+YFxuXG5odG1sYDxsaW5rIGhyZWY9J2h0dHBzOi8vdW5wa2cuY29tL3RhYnVsYXRvci10YWJsZXNANS4zLjEvZGlzdC9jc3MvdGFidWxhdG9yLm1pbi5jc3MnIHJlbD0nc3R5bGVzaGVldCcgLz5cbnRhYnVsYXRvci5taW4uY3NzYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIGltcG9ydCBKdWFuJ3Mgc3VtbWFyeSB0YWJsZVxuaW1wb3J0IHsgU3VtbWFyeVRhYmxlIH0gZnJvbSBcImZjYjk3MTM5MGRhZThmNmRcIlxuXG5UYWJ1bGF0b3IgPSByZXF1aXJlKCdodHRwczovL3VucGtnLmNvbS90YWJ1bGF0b3ItdGFibGVzQDUuMy4xJyk7XG5cbmFycm93ID0gcmVxdWlyZSgnYXBhY2hlLWFycm93QDYuMC4xJylcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnZGF0YVN1bW1hcnlWaWV3JykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3NlbGVjdGVkQ29sdW1ucycpIn1dfQ==
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
@@ -1103,232 +1211,382 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 'Tabular Data Viewer'</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Taras Novak (@RandomFractals)</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: 'code'</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>Use this <span class="co">[</span><span class="ot">Tabular Data Viewer 中</span><span class="co">](https://twitter.com/hashtag/TabularDataViewer?src=hashtag_click)</span> notebook 📓 to view sample datasets or preview any public</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Apache Arrow</span><span class="co">](https://observablehq.com/@randomfractals/apache-arrow)</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>**CSV**, or **JSON array** data with <span class="co">[</span><span class="ot">Summary Table</span><span class="co">](https://observablehq.com/@observablehq/summary-table)</span> and <span class="co">[</span><span class="ot">Tabulator</span><span class="co">](http://tabulator.info/)</span>. Just paste your data url to fetch it.</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>Also, try our <span class="co">[</span><span class="ot">Data Table</span><span class="co">](https://github.com/RandomFractals/vscode-data-table/releases)</span> 🈸 notebook 📓 cell ⌗ output renderer extension with <span class="co">[</span><span class="ot">VSCode Notebooks</span><span class="co">](https://marketplace.visualstudio.com/search?target=VSCode&amp;category=Notebooks&amp;sortBy=Installs)</span> 📚.</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="in">viewof dataSet = Inputs.select(dataSets, {</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="in">  label: html`&lt;b&gt;dataset&lt;/b&gt;`</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="in">viewof dataUrl = Inputs.text({</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="in">  label: html`&lt;b&gt;dataUrl&lt;/b&gt;`,</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="in">  placeholder: 'type data url and click fetch',</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="in">  value: `${dataUrlParam ? dataUrlParam : 'https://raw.githubusercontent.com/vega/vega-datasets/master/data/' + dataSet}`,</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="in">  submit: 'fetchData'</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="in">shareLink = md `*share a link to your [data](https://observablehq.com/@randomfractals/tabular-data-viewer?dataUrl=${dataUrl})*`</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="in">viewof dataSummaryView = SummaryTable(data)</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tabular Data View</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="in">viewof tableOptions = Inputs.form([</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="in">  Inputs.button('Download', {reduce: () =&gt; table.download('csv', 'data.csv')}),</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="in">])</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="in">tableContainer = html `&lt;div id="table-container" style="height: 600px"&gt;</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;`</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="in">table = new Tabulator('#table-container', {</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="in">  height: 645,</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="in">  autoColumns: true,</span></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="in">  columnDefaults: {</span></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="in">    headerMenu: columnHeaderMenu</span></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="in">  clipboard: true, // eanble clipboard copy and paste</span></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="in">  clipboardPasteAction: 'replace',</span></span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="in">  layout: tableLayout,</span></span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="in">  layoutColumnsOnNewData: true,</span></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="in">  movableColumns: movableColumns,</span></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="in">  movableRows: movableRows,</span></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="in">  selectable: selectableRows,</span></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="in">  rowContextMenu: rowContextMenu,</span></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="in">  pagination: pagination,</span></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="in">  paginationSize: paginationSize,</span></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="in">  paginationSizeSelector: pageSizes,</span></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="in">  renderVerticalBuffer: 300, // set virtual DOM buffer to 300px</span></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="in">  debugInvalidOptions: true, // tabulator warnings</span></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="in">  debugEventsExternal: ['tableBuilding', 'dataLoaded', 'tableBuilt'], // log specified tabulator events</span></span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="in">    data: data,</span></span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="in">  persistenceMode: 'local',</span></span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="in">  persistenceID: dataUrl,</span></span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="in">  persistentLayout: true,</span></span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="in">  persistence: {</span></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="in">    sort: true,</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="in">    filter: true,</span></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="in">    group: true,</span></span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="in">    columns: true,</span></span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a><span class="in">});</span></span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### Table UX Tips</span></span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hold **CTRL** or **Shift** key when clicking on column headers to **Sort** table data by multiple columns.</span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>See <span class="co">[</span><span class="ot">Clipboard</span><span class="co">](http://tabulator.info/docs/5.0/clipboard)</span> options for the clipboard copy and paste data options.</span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use row context menu to **Delete** or **Freeze** a row.</span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## Table Toggles</span></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a><span class="in">viewof tableLayout = Inputs.select(tableLayouts, {value: 'fitDataStretch', label: 'Table Layout'})</span></span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a><span class="in">viewof pagination = Inputs.toggle({label: 'Pagination', value: true})</span></span>
-<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="in">viewof paginationSize = Inputs.select(pageSizes, {value: 100000, label: 'Page Size'})</span></span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a><span class="in">viewof movableColumns = Inputs.toggle({label: 'Movable Columns', value: true})</span></span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="in">viewof movableRows = Inputs.toggle({label: 'Movable Rows', value: true})</span></span>
-<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a><span class="in">viewof selectableRows = Inputs.toggle({label: 'Selectable Rows', value: true})</span></span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="in">// from: http://tabulator.info/docs/5.0/layout</span></span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a><span class="in">tableLayouts = [</span></span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a><span class="in">  'fitData',</span></span>
-<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a><span class="in">  'fitDataFill',</span></span>
-<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="in">  'fitDataStretch',</span></span>
-<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="in">  'fitDataTable',</span></span>
-<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="in">  'fitColumns'</span></span>
-<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a><span class="in">]</span></span>
-<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a><span class="in">pageSizes = [20, 100, 1000, 10000, 100000, 1000000, 10000000]</span></span>
-<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a><span class="in">columnHeaderMenu = [</span></span>
-<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a><span class="in">  {</span></span>
-<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a><span class="in">    label: 'Hide Column',</span></span>
-<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a><span class="in">    action: function (e, column) {</span></span>
-<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a><span class="in">      column.hide();</span></span>
-<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
-<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a><span class="in">  {</span></span>
-<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="in">    label: "Freeze Column",</span></span>
-<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a><span class="in">    action: function (e, column) {</span></span>
-<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a><span class="in">      column.updateDefinition({ frozen: true });</span></span>
-<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
-<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a><span class="in">  {</span></span>
-<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a><span class="in">    label: 'Delete Column',</span></span>
-<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a><span class="in">    action: function (e, column) {</span></span>
-<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="in">      column.delete();</span></span>
-<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a><span class="in">];</span></span>
-<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a><span class="in">// row context menu. see: http://tabulator.info/docs/5.0/menu</span></span>
-<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a><span class="in">rowContextMenu = [</span></span>
-<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a><span class="in">  {</span></span>
-<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a><span class="in">    label: "&lt;i class='fas fa-trash'&gt;&lt;/i&gt; Delete Row",</span></span>
-<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a><span class="in">    action: function(e, row) {row.delete()}</span></span>
-<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
-<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a><span class="in">  {</span></span>
-<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="in">    label: "Freeze Row",</span></span>
-<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a><span class="in">    action: function (e, row) { row.freeze(); }</span></span>
-<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a><span class="in">]</span></span>
-<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
-<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
-<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a><span class="in">data = fetchData(dataUrl)</span></span>
-<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a><span class="in">dataUrlParam = new URLSearchParams(html`&lt;a href&gt;`.search).get('dataUrl')</span></span>
-<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a><span class="in">dataSets = [</span></span>
-<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a><span class="in">  'airports.csv', 'co2-concentration.csv', 'disasters.csv', 'flights-3m.csv', 'flights-airport.csv',</span></span>
-<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a><span class="in">  'gapminder-health-income.csv', 'github.csv', 'iowa-electricity.csv', 'la-riots.csv', 'lookup_groups.csv',</span></span>
-<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a><span class="in">  'lookup_people.csv', 'population_engineers_hurricanes.csv', 'seattle-temps.csv', 'seattle-weather.csv',</span></span>
-<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a><span class="in">  'sf-temps.csv', 'sp500.csv', 'stocks.csv', 'us-employment.csv', 'weather.csv', 'windvectors.csv', 'zipcodes.csv',</span></span>
-<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a><span class="in">  'barley.json', 'birdstrikes.json', 'budget.json', 'budgets.json', 'burtin.json', 'cars.json', 'climate.json',</span></span>
-<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a><span class="in">  'countries.json', 'crimea.json', 'driving.json', 'flare-dependencies.json', 'flare.json',</span></span>
-<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a><span class="in">  'flights-2k.json', 'flights-5k.json', 'flights-10k.json', 'flights-20k.json',</span></span>
-<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a><span class="in">  'flights-200k.json', 'flights-200k.arrow',</span></span>
-<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a><span class="in">  'gapminder.json', 'income.json', 'iris.json', 'jobs.json', 'londonCentroids.json',</span></span>
-<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a><span class="in">  'monarchs.json', 'movies.json', 'normal-2d.json', 'points.json',</span></span>
-<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a><span class="in">  'udistrict.json', 'unemployment-across-industries.json', 'us-state-capitals.json',</span></span>
-<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a><span class="in">  'weball26.json', 'wheat.json'</span></span>
-<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a><span class="in">]</span></span>
-<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a><span class="in">async function fetchData(dataUrl) {</span></span>
-<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a><span class="in">  let data = [];</span></span>
-<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a><span class="in">  if (dataUrl.endsWith('.csv')) {</span></span>
-<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a><span class="in">    data = await d3.csvParse(await d3.text(dataUrl), d3.autoType);</span></span>
-<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (dataUrl.endsWith('.json')) {</span></span>
-<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a><span class="in">    data = await d3.json(dataUrl);</span></span>
-<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (dataUrl.endsWith('.arrow')) {</span></span>
-<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a><span class="in">    data = loadArrowData(dataUrl);</span></span>
-<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a><span class="in">  return data;</span></span>
-<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a><span class="in">async function loadArrowData(dataUrl){</span></span>
-<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a><span class="in">  const response = await fetch(dataUrl);</span></span>
-<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a><span class="in">  const arrayBuffer = await response.arrayBuffer();</span></span>
-<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a><span class="in">  const table = arrow.Table.from(new Uint8Array(arrayBuffer));</span></span>
-<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a><span class="in">  const rows = Array(table.length);</span></span>
-<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a><span class="in">  const fields = table.schema.fields.map(d =&gt; d.name);</span></span>
-<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a><span class="in">  for (let i=0, n=rows.length; i&lt;n; ++i) {</span></span>
-<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a><span class="in">    const proto = {};</span></span>
-<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a><span class="in">    fields.forEach((fieldName, index) =&gt; {</span></span>
-<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a><span class="in">      const column = table.getColumnAt(index);</span></span>
-<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a><span class="in">      proto[fieldName] = column.get(i);</span></span>
-<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a><span class="in">    });</span></span>
-<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a><span class="in">    rows[i] = proto;</span></span>
-<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a><span class="in">  return rows;</span></span>
-<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Table Styles</span></span>
-<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
-<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a><span class="in">tableStyles = html `</span></span>
-<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style&gt;</span></span>
-<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a><span class="in">/* add space for sort direction symbol */</span></span>
-<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a><span class="in">thead th span {</span></span>
-<span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a><span class="in">  margin-left: 0 !important;</span></span>
-<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a><span class="in">  padding-right: 0.4rem;</span></span>
-<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a><span class="in">.tabulator .tabulator-tableholder{</span></span>
-<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: aliceblue;</span></span>
-<span id="cb7-221"><a href="#cb7-221" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/style&gt;`</span></span>
-<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a><span class="in">html`&lt;link href='https://unpkg.com/tabulator-tables@5.3.1/dist/css/tabulator.min.css' rel='stylesheet' /&gt;</span></span>
-<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a><span class="in">tabulator.min.css`</span></span>
-<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## Imports</span></span>
-<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
-<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a><span class="in">import {SummaryTable} from "@observablehq/summary-table"</span></span>
-<span id="cb7-234"><a href="#cb7-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-235"><a href="#cb7-235" aria-hidden="true" tabindex="-1"></a><span class="in">Tabulator = require('https://unpkg.com/tabulator-tables@5.3.1');</span></span>
-<span id="cb7-236"><a href="#cb7-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-237"><a href="#cb7-237" aria-hidden="true" tabindex="-1"></a><span class="in">arrow = require('apache-arrow@6.0.1')</span></span>
-<span id="cb7-238"><a href="#cb7-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 'Tabular Data Viewer'</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Taras Novak (@RandomFractals)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: 'code'</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>Use this <span class="co">[</span><span class="ot">Tabular Data Viewer 中</span><span class="co">](https://twitter.com/hashtag/TabularDataViewer?src=hashtag_click)</span> notebook 📓 to view sample datasets or preview any public</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Apache Arrow</span><span class="co">](https://observablehq.com/@randomfractals/apache-arrow)</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>**CSV**, or **JSON array** data with <span class="co">[</span><span class="ot">Summary Table</span><span class="co">](https://observablehq.com/@observablehq/summary-table)</span> and <span class="co">[</span><span class="ot">Tabulator</span><span class="co">](http://tabulator.info/)</span>. Just paste your data url to fetch it.</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>Also, try our <span class="co">[</span><span class="ot">Data Table</span><span class="co">](https://github.com/RandomFractals/vscode-data-table/releases)</span> 🈸 notebook 📓 cell ⌗ output renderer extension with <span class="co">[</span><span class="ot">VSCode Notebooks</span><span class="co">](https://marketplace.visualstudio.com/search?target=VSCode&amp;category=Notebooks&amp;sortBy=Installs)</span> 📚.</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="in">// viewof dataSet = Inputs.select(dataSets, {</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="in">//   label: html`&lt;b&gt;dataset&lt;/b&gt;`</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="in">// })</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="in">// viewof dataUrl = Inputs.text(</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="in">//   label: html`&lt;b&gt;dataUrl&lt;/b&gt;`,</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="in">//   placeholder: 'type data url and click fetch',</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="in">//   value: `${dataUrlParam ? dataUrlParam : 'https://raw.githubusercontent.com/vega/vega-datasets/master/data/' + dataSet}`,</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="in">//   submit: 'fetchData'</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="in">// })</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="in">dataPath = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/hathitrust_fiction/hathitrust_post45fiction_metadata.csv"</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="in">data = fetchData(dataPath)</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="in">defaultDisplayedColumns = [</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="in">    "shorttitle",</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="in">    "inferreddate",</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="in">    "author",</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="in">    "recordid",</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="in">    "hathi_rights",</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="in">    "genres",</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="in">    "id",</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="in">    "docid",</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="in">    "juvenileprob",</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="in">    "nonficprob",</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="in">    "author_authorized_heading",</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="in">    "author_lccn",</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="in">    "author_viaf",</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="in">    "author_wikidata_qid"</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="in">  ];</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="in">categoryColumns = ["hathi_rights",  "genres","geographics"];</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="in">// Reorder the available columns to match defaultDisplayedColumns, appending any extra columns at the end</span></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="in">orderedColumns = [</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="in">  ...defaultDisplayedColumns,</span></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="in">  ...Object.keys(data[0] || {}).filter(col =&gt; !defaultDisplayedColumns.includes(col))</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="in">];</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon="false" collapse="true"}</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## View Summary of Columns</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a><span class="in">//|echo: false</span></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="in">// Create a checkbox input with ordered columns</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="in">// Generate Summary Data based on selected columns</span></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="in">summary_data = {</span></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="in">  const selected = new Set(selectedColumns);</span></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a><span class="in">  return data.map(row =&gt; {</span></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="in">    let newRow = {};</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="in">    for (let key in row) {</span></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a><span class="in">      if (selected.has(key)) {</span></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="in">        newRow[key] = row[key];</span></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="in">      }</span></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="in">    return newRow;</span></span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a><span class="in">  });</span></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a><span class="in">viewof dataSummaryView = SummaryTable(summary_data);</span></span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="fu">## Select Columns</span></span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a><span class="in">viewof selectedColumns = Inputs.checkbox(orderedColumns, {</span></span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a><span class="in">  label: "Select Columns",</span></span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a><span class="in">  value: defaultDisplayedColumns, // Default selected columns</span></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a><span class="in">});</span></span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a><span class="in">function generateTabulatorTableForObservable(</span></span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a><span class="in">  containerId,</span></span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a><span class="in">  data,</span></span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a><span class="in">  {</span></span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a><span class="in">    displayedColumns = null,</span></span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a><span class="in">    columnWidths = {},</span></span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a><span class="in">    currencyColumns = [],</span></span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a><span class="in">    categoryColumns = [],</span></span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a><span class="in">    numericColumns = [],</span></span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a><span class="in">    rangeValues = {},</span></span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a><span class="in">    sortColumns = [],</span></span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a><span class="in">    sortOrders = [],</span></span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a><span class="in">    columnPopups = [],</span></span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a><span class="in">    height = 645,</span></span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a><span class="in">    paginationSize = 1000,</span></span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a><span class="in">  } = {}</span></span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a><span class="in">) {</span></span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!data || data.length === 0) {</span></span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a><span class="in">    console.error("No data provided to generate the table.");</span></span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a><span class="in">    return null;</span></span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!displayedColumns) {</span></span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a><span class="in">    displayedColumns = Object.keys(data[0]);</span></span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a><span class="in">  const tabulatorColumns = displayedColumns.map((column) =&gt; ({</span></span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a><span class="in">    title: column,</span></span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a><span class="in">    field: column,</span></span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a><span class="in">    maxInitialWidth: 150,</span></span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a><span class="in">    resizable: true,</span></span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a><span class="in">    headerFilter: numericColumns.includes(column)</span></span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a><span class="in">      ? "input"</span></span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a><span class="in">      : categoryColumns.includes(column)</span></span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a><span class="in">      ? "list"</span></span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a><span class="in">      : "input",</span></span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a><span class="in">    headerFilterParams: categoryColumns.includes(column)</span></span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a><span class="in">      ? { valuesLookup: true, clearable: true }</span></span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a><span class="in">      : {},</span></span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a><span class="in">    formatter: currencyColumns.includes(column) ? "money" : undefined,</span></span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a><span class="in">    formatterParams: currencyColumns.includes(column)</span></span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a><span class="in">      ? { symbol: "$", precision: 0 }</span></span>
+<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a><span class="in">      : undefined,</span></span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a><span class="in">  }));</span></span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a><span class="in">  const table = new Tabulator(containerId, {</span></span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a><span class="in">    height: height,</span></span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a><span class="in">    data: data,</span></span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a><span class="in">    columns: tabulatorColumns,</span></span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a><span class="in">     columnDefaults: {</span></span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a><span class="in">    headerMenu: columnHeaderMenu</span></span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a><span class="in">//    movableColumns: true,</span></span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a><span class="in">    layout: "fitDataStretch",</span></span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a><span class="in">    pagination: true,</span></span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a><span class="in">    paginationSize: paginationSize,</span></span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a><span class="in">    paginationSizeSelector: [10, 100, 1000, 10000],</span></span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a><span class="in">    paginationCounter: "rows",</span></span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a><span class="in">    persistenceMode: false,</span></span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a><span class="in">    initialSort: sortColumns.map((col, idx) =&gt; ({</span></span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a><span class="in">      column: col,</span></span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a><span class="in">      dir: sortOrders[idx] || "asc",</span></span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a><span class="in">    })),</span></span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a><span class="in">  });</span></span>
+<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a><span class="in">  return table;</span></span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a><span class="in">// Add fullscreen event listener</span></span>
+<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a><span class="in">      document.addEventListener("fullscreenchange", () =&gt; {</span></span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a><span class="in">        if (document.fullscreenElement) {</span></span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a><span class="in">          // Fullscreen mode: adjust table height</span></span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a><span class="in">          table.setHeight(window.innerHeight - 50); // Adjust for padding/margins</span></span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a><span class="in">        } else {</span></span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a><span class="in">          // Exit fullscreen: reset table height</span></span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a><span class="in">          table.setHeight(645);</span></span>
+<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a><span class="in">        }</span></span>
+<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a><span class="in">      });</span></span>
+<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a><span class="in">      // Add download buttons</span></span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a><span class="in">      document</span></span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a><span class="in">        .querySelectorAll("#button-container button")</span></span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a><span class="in">        .forEach((button) =&gt; {</span></span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a><span class="in">          button.addEventListener("click", () =&gt; {</span></span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a><span class="in">            const type = button.getAttribute("id").replace("download-", "");</span></span>
+<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a><span class="in">            const downloadFilename = `${filename}.${type}`;</span></span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a><span class="in">            if (type === "xlsx") {</span></span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a><span class="in">              table.download("xlsx", downloadFilename, { sheetName: "Sheet1" });</span></span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a><span class="in">            } else if (type === "pdf") {</span></span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a><span class="in">              table.download("pdf", downloadFilename, {</span></span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a><span class="in">                orientation: "portrait",</span></span>
+<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a><span class="in">                title: "Table Data"</span></span>
+<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a><span class="in">              });</span></span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a><span class="in">            } else if (type === "html") {</span></span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a><span class="in">              table.download("html", downloadFilename, { style: true });</span></span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a><span class="in">            } else {</span></span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a><span class="in">              table.download(type, downloadFilename);</span></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a><span class="in">            }</span></span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a><span class="in">          });</span></span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a><span class="in">        });</span></span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a><span class="in">      // Update raw data download button dynamically</span></span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a><span class="in">      // Raw data download using `download` function</span></span>
+<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a><span class="in">      const rawDownloadButton = document.getElementById("download-raw");</span></span>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a><span class="in">      rawDownloadButton.addEventListener("click", () =&gt; {</span></span>
+<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a><span class="in">        download(dataPath, `${filename}.csv`);</span></span>
+<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a><span class="in">      });</span></span>
+<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a><span class="in">      // Copy URL button</span></span>
+<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a><span class="in">      document.getElementById("copy-url").addEventListener("click", () =&gt; {</span></span>
+<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a><span class="in">        const tempInput = document.createElement("input");</span></span>
+<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a><span class="in">        tempInput.value = dataPath;</span></span>
+<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a><span class="in">        document.body.appendChild(tempInput);</span></span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a><span class="in">        tempInput.select();</span></span>
+<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a><span class="in">        document.execCommand("copy");</span></span>
+<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a><span class="in">        document.body.removeChild(tempInput);</span></span>
+<span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a><span class="in">        alert("URL copied to clipboard: " + dataPath);</span></span>
+<span id="cb12-226"><a href="#cb12-226" aria-hidden="true" tabindex="-1"></a><span class="in">      });</span></span>
+<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a><span class="in">// Observable Inputs</span></span>
+<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a><span class="in">// Create Tabulator Table</span></span>
+<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a><span class="in">html`&lt;div id="table-container" style="height: 600px"&gt;&lt;/div&gt;`</span></span>
+<span id="cb12-235"><a href="#cb12-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a><span class="in">generateTabulatorTableForObservable("#table-container", data, {</span></span>
+<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a><span class="in">  displayedColumns: selectedColumns,</span></span>
+<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a><span class="in">    columnPopups: [</span></span>
+<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a><span class="in">  "Shortened title of the work",  // shorttitle</span></span>
+<span id="cb12-241"><a href="#cb12-241" aria-hidden="true" tabindex="-1"></a><span class="in">  "Inferred date of the work",    // inferreddate</span></span>
+<span id="cb12-242"><a href="#cb12-242" aria-hidden="true" tabindex="-1"></a><span class="in">  "Author of the work",           // author</span></span>
+<span id="cb12-243"><a href="#cb12-243" aria-hidden="true" tabindex="-1"></a><span class="in">  "Unique record ID",             // recordid</span></span>
+<span id="cb12-244"><a href="#cb12-244" aria-hidden="true" tabindex="-1"></a><span class="in">  "Rights code from HathiTrust",  // hathi_rights</span></span>
+<span id="cb12-245"><a href="#cb12-245" aria-hidden="true" tabindex="-1"></a><span class="in">  "Genres associated with the work",  // genres</span></span>
+<span id="cb12-246"><a href="#cb12-246" aria-hidden="true" tabindex="-1"></a><span class="in">  "Unique identifier for the title in the titles dataset (may contain duplicates for reprinted works)", // id</span></span>
+<span id="cb12-247"><a href="#cb12-247" aria-hidden="true" tabindex="-1"></a><span class="in">  "Unique volume ID from HathiTrust", // docid (htid)</span></span>
+<span id="cb12-248"><a href="#cb12-248" aria-hidden="true" tabindex="-1"></a><span class="in">  "Probability that the work is for a juvenile audience", // juvenileprob</span></span>
+<span id="cb12-249"><a href="#cb12-249" aria-hidden="true" tabindex="-1"></a><span class="in">  "Probability that the work is nonfiction", // nonficprob</span></span>
+<span id="cb12-250"><a href="#cb12-250" aria-hidden="true" tabindex="-1"></a><span class="in">  "Author’s authorized Name Authority Cooperative (NACO) heading", // author_authorized_heading</span></span>
+<span id="cb12-251"><a href="#cb12-251" aria-hidden="true" tabindex="-1"></a><span class="in">  "Author’s LCCN from id.loc.gov", // author_lccn</span></span>
+<span id="cb12-252"><a href="#cb12-252" aria-hidden="true" tabindex="-1"></a><span class="in">  "Author’s viaf.org cluster number", // author_viaf</span></span>
+<span id="cb12-253"><a href="#cb12-253" aria-hidden="true" tabindex="-1"></a><span class="in">  "Author’s Wikidata Q number"      // author_wikidata_qid</span></span>
+<span id="cb12-254"><a href="#cb12-254" aria-hidden="true" tabindex="-1"></a><span class="in">],</span></span>
+<span id="cb12-255"><a href="#cb12-255" aria-hidden="true" tabindex="-1"></a><span class="in">    // columnWidths: { "gender": "50px", "role": "75px", "mfa_degree": "100px", "prize_name": "100px" },</span></span>
+<span id="cb12-256"><a href="#cb12-256" aria-hidden="true" tabindex="-1"></a><span class="in">    currencyColumns: ["prize_amount"],</span></span>
+<span id="cb12-257"><a href="#cb12-257" aria-hidden="true" tabindex="-1"></a><span class="in">    categoryColumns: ["hathi_rights",  "genres","geographics"],</span></span>
+<span id="cb12-258"><a href="#cb12-258" aria-hidden="true" tabindex="-1"></a><span class="in">    // sortColumns: ["prize_year"],</span></span>
+<span id="cb12-259"><a href="#cb12-259" aria-hidden="true" tabindex="-1"></a><span class="in">    // sortOrders: ["desc"]</span></span>
+<span id="cb12-260"><a href="#cb12-260" aria-hidden="true" tabindex="-1"></a><span class="in">  paginationSize: 1000,</span></span>
+<span id="cb12-261"><a href="#cb12-261" aria-hidden="true" tabindex="-1"></a><span class="in">});</span></span>
+<span id="cb12-262"><a href="#cb12-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-263"><a href="#cb12-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-264"><a href="#cb12-264" aria-hidden="true" tabindex="-1"></a>&lt;div id='button-container2'&gt;</span>
+<span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a>  &lt;button id="download-raw"&gt;&lt;i class="fas fa-download"&gt;&lt;/i&gt;&lt;/i&gt; Download Full Data&lt;/button&gt;</span>
+<span id="cb12-266"><a href="#cb12-266" aria-hidden="true" tabindex="-1"></a>  &lt;button id="copy-url"&gt;&lt;i class="fas fa-copy"&gt;&lt;/i&gt; Copy Full Data URL&lt;/button&gt;</span>
+<span id="cb12-267"><a href="#cb12-267" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb12-268"><a href="#cb12-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-269"><a href="#cb12-269" aria-hidden="true" tabindex="-1"></a>&lt;div id='button-container'&gt;</span>
+<span id="cb12-270"><a href="#cb12-270" aria-hidden="true" tabindex="-1"></a>  &lt;button id="download-csv"&gt;&lt;i class="fas fa-download"&gt;&lt;/i&gt;&lt;/i&gt; Download CSV&lt;/button&gt;</span>
+<span id="cb12-271"><a href="#cb12-271" aria-hidden="true" tabindex="-1"></a>  &lt;button id="download-json"&gt;&lt;i class="fas fa-download"&gt;&lt;/i&gt;&lt;/i&gt; Download JSON&lt;/button&gt;</span>
+<span id="cb12-272"><a href="#cb12-272" aria-hidden="true" tabindex="-1"></a>  &lt;button id="download-xlsx"&gt;&lt;i class="fas fa-download"&gt;&lt;/i&gt;&lt;/i&gt; Download Excel&lt;/button&gt;</span>
+<span id="cb12-273"><a href="#cb12-273" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb12-274"><a href="#cb12-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-275"><a href="#cb12-275" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tabular Data View</span></span>
+<span id="cb12-276"><a href="#cb12-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-279"><a href="#cb12-279" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-280"><a href="#cb12-280" aria-hidden="true" tabindex="-1"></a><span class="in">columnHeaderMenu = [</span></span>
+<span id="cb12-281"><a href="#cb12-281" aria-hidden="true" tabindex="-1"></a><span class="in">  {</span></span>
+<span id="cb12-282"><a href="#cb12-282" aria-hidden="true" tabindex="-1"></a><span class="in">    label: 'Hide Column',</span></span>
+<span id="cb12-283"><a href="#cb12-283" aria-hidden="true" tabindex="-1"></a><span class="in">    action: function (e, column) {</span></span>
+<span id="cb12-284"><a href="#cb12-284" aria-hidden="true" tabindex="-1"></a><span class="in">      column.hide();</span></span>
+<span id="cb12-285"><a href="#cb12-285" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb12-286"><a href="#cb12-286" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
+<span id="cb12-287"><a href="#cb12-287" aria-hidden="true" tabindex="-1"></a><span class="in">  {</span></span>
+<span id="cb12-288"><a href="#cb12-288" aria-hidden="true" tabindex="-1"></a><span class="in">    label: "Freeze Column",</span></span>
+<span id="cb12-289"><a href="#cb12-289" aria-hidden="true" tabindex="-1"></a><span class="in">    action: function (e, column) {</span></span>
+<span id="cb12-290"><a href="#cb12-290" aria-hidden="true" tabindex="-1"></a><span class="in">      column.updateDefinition({ frozen: true });</span></span>
+<span id="cb12-291"><a href="#cb12-291" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb12-292"><a href="#cb12-292" aria-hidden="true" tabindex="-1"></a><span class="in">  },</span></span>
+<span id="cb12-293"><a href="#cb12-293" aria-hidden="true" tabindex="-1"></a><span class="in">  {</span></span>
+<span id="cb12-294"><a href="#cb12-294" aria-hidden="true" tabindex="-1"></a><span class="in">    label: 'Delete Column',</span></span>
+<span id="cb12-295"><a href="#cb12-295" aria-hidden="true" tabindex="-1"></a><span class="in">    action: function (e, column) {</span></span>
+<span id="cb12-296"><a href="#cb12-296" aria-hidden="true" tabindex="-1"></a><span class="in">      column.delete();</span></span>
+<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a><span class="in">];</span></span>
+<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a><span class="fu">### Table UX Tips</span></span>
+<span id="cb12-305"><a href="#cb12-305" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hold **CTRL** or **Shift** key when clicking on column headers to **Sort** table data by multiple columns.</span>
+<span id="cb12-306"><a href="#cb12-306" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>See <span class="co">[</span><span class="ot">Clipboard</span><span class="co">](http://tabulator.info/docs/5.0/clipboard)</span> options for the clipboard copy and paste data options.</span>
+<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use row context menu to **Delete** or **Freeze** a row.</span>
+<span id="cb12-308"><a href="#cb12-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-309"><a href="#cb12-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
+<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a><span class="in">// data = fetchData(dataUrl)</span></span>
+<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a><span class="in">dataUrlParam = new URLSearchParams(html`&lt;a href&gt;`.search).get('dataUrl')</span></span>
+<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a><span class="in">async function fetchData(dataUrl) {</span></span>
+<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a><span class="in">  let data = [];</span></span>
+<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a><span class="in">  if (dataUrl.endsWith('.csv')) {</span></span>
+<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a><span class="in">    data = await d3.csvParse(await d3.text(dataUrl), d3.autoType);</span></span>
+<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (dataUrl.endsWith('.json')) {</span></span>
+<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a><span class="in">    data = await d3.json(dataUrl);</span></span>
+<span id="cb12-327"><a href="#cb12-327" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb12-328"><a href="#cb12-328" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (dataUrl.endsWith('.arrow')) {</span></span>
+<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a><span class="in">    data = loadArrowData(dataUrl);</span></span>
+<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a><span class="in">  return data;</span></span>
+<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb12-333"><a href="#cb12-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-334"><a href="#cb12-334" aria-hidden="true" tabindex="-1"></a><span class="in">async function loadArrowData(dataUrl){</span></span>
+<span id="cb12-335"><a href="#cb12-335" aria-hidden="true" tabindex="-1"></a><span class="in">  const response = await fetch(dataUrl);</span></span>
+<span id="cb12-336"><a href="#cb12-336" aria-hidden="true" tabindex="-1"></a><span class="in">  const arrayBuffer = await response.arrayBuffer();</span></span>
+<span id="cb12-337"><a href="#cb12-337" aria-hidden="true" tabindex="-1"></a><span class="in">  const table = arrow.Table.from(new Uint8Array(arrayBuffer));</span></span>
+<span id="cb12-338"><a href="#cb12-338" aria-hidden="true" tabindex="-1"></a><span class="in">  const rows = Array(table.length);</span></span>
+<span id="cb12-339"><a href="#cb12-339" aria-hidden="true" tabindex="-1"></a><span class="in">  const fields = table.schema.fields.map(d =&gt; d.name);</span></span>
+<span id="cb12-340"><a href="#cb12-340" aria-hidden="true" tabindex="-1"></a><span class="in">  for (let i=0, n=rows.length; i&lt;n; ++i) {</span></span>
+<span id="cb12-341"><a href="#cb12-341" aria-hidden="true" tabindex="-1"></a><span class="in">    const proto = {};</span></span>
+<span id="cb12-342"><a href="#cb12-342" aria-hidden="true" tabindex="-1"></a><span class="in">    fields.forEach((fieldName, index) =&gt; {</span></span>
+<span id="cb12-343"><a href="#cb12-343" aria-hidden="true" tabindex="-1"></a><span class="in">      const column = table.getColumnAt(index);</span></span>
+<span id="cb12-344"><a href="#cb12-344" aria-hidden="true" tabindex="-1"></a><span class="in">      proto[fieldName] = column.get(i);</span></span>
+<span id="cb12-345"><a href="#cb12-345" aria-hidden="true" tabindex="-1"></a><span class="in">    });</span></span>
+<span id="cb12-346"><a href="#cb12-346" aria-hidden="true" tabindex="-1"></a><span class="in">    rows[i] = proto;</span></span>
+<span id="cb12-347"><a href="#cb12-347" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb12-348"><a href="#cb12-348" aria-hidden="true" tabindex="-1"></a><span class="in">  return rows;</span></span>
+<span id="cb12-349"><a href="#cb12-349" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb12-350"><a href="#cb12-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-351"><a href="#cb12-351" aria-hidden="true" tabindex="-1"></a><span class="in">async function download(dataurl, fileName) {</span></span>
+<span id="cb12-352"><a href="#cb12-352" aria-hidden="true" tabindex="-1"></a><span class="in">  const response = await fetch(dataurl);</span></span>
+<span id="cb12-353"><a href="#cb12-353" aria-hidden="true" tabindex="-1"></a><span class="in">  const blob = await response.blob();</span></span>
+<span id="cb12-354"><a href="#cb12-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-355"><a href="#cb12-355" aria-hidden="true" tabindex="-1"></a><span class="in">  const link = document.createElement("a");</span></span>
+<span id="cb12-356"><a href="#cb12-356" aria-hidden="true" tabindex="-1"></a><span class="in">  link.href = URL.createObjectURL(blob);</span></span>
+<span id="cb12-357"><a href="#cb12-357" aria-hidden="true" tabindex="-1"></a><span class="in">  link.download = fileName;</span></span>
+<span id="cb12-358"><a href="#cb12-358" aria-hidden="true" tabindex="-1"></a><span class="in">  link.click();</span></span>
+<span id="cb12-359"><a href="#cb12-359" aria-hidden="true" tabindex="-1"></a><span class="in">  URL.revokeObjectURL(link.href); // Clean up</span></span>
+<span id="cb12-360"><a href="#cb12-360" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb12-361"><a href="#cb12-361" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-362"><a href="#cb12-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-363"><a href="#cb12-363" aria-hidden="true" tabindex="-1"></a><span class="fu">## Table Styles</span></span>
+<span id="cb12-364"><a href="#cb12-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-367"><a href="#cb12-367" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-368"><a href="#cb12-368" aria-hidden="true" tabindex="-1"></a><span class="in">tableStyles = html `</span></span>
+<span id="cb12-369"><a href="#cb12-369" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style&gt;</span></span>
+<span id="cb12-370"><a href="#cb12-370" aria-hidden="true" tabindex="-1"></a><span class="in">/* add space for sort direction symbol */</span></span>
+<span id="cb12-371"><a href="#cb12-371" aria-hidden="true" tabindex="-1"></a><span class="in">thead th span {</span></span>
+<span id="cb12-372"><a href="#cb12-372" aria-hidden="true" tabindex="-1"></a><span class="in">  margin-left: 0 !important;</span></span>
+<span id="cb12-373"><a href="#cb12-373" aria-hidden="true" tabindex="-1"></a><span class="in">  padding-right: 0.4rem;</span></span>
+<span id="cb12-374"><a href="#cb12-374" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb12-375"><a href="#cb12-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-376"><a href="#cb12-376" aria-hidden="true" tabindex="-1"></a><span class="in">.tabulator .tabulator-tableholder{</span></span>
+<span id="cb12-377"><a href="#cb12-377" aria-hidden="true" tabindex="-1"></a><span class="in">  background-color: aliceblue;</span></span>
+<span id="cb12-378"><a href="#cb12-378" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb12-379"><a href="#cb12-379" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/style&gt;`</span></span>
+<span id="cb12-380"><a href="#cb12-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-381"><a href="#cb12-381" aria-hidden="true" tabindex="-1"></a><span class="in">html`&lt;link href='https://unpkg.com/tabulator-tables@5.3.1/dist/css/tabulator.min.css' rel='stylesheet' /&gt;</span></span>
+<span id="cb12-382"><a href="#cb12-382" aria-hidden="true" tabindex="-1"></a><span class="in">tabulator.min.css`</span></span>
+<span id="cb12-383"><a href="#cb12-383" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-384"><a href="#cb12-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-385"><a href="#cb12-385" aria-hidden="true" tabindex="-1"></a><span class="fu">## Imports</span></span>
+<span id="cb12-386"><a href="#cb12-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-389"><a href="#cb12-389" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb12-390"><a href="#cb12-390" aria-hidden="true" tabindex="-1"></a><span class="in">// import Juan's summary table</span></span>
+<span id="cb12-391"><a href="#cb12-391" aria-hidden="true" tabindex="-1"></a><span class="in">import { SummaryTable } from "fcb971390dae8f6d"</span></span>
+<span id="cb12-392"><a href="#cb12-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-393"><a href="#cb12-393" aria-hidden="true" tabindex="-1"></a><span class="in">Tabulator = require('https://unpkg.com/tabulator-tables@5.3.1');</span></span>
+<span id="cb12-394"><a href="#cb12-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-395"><a href="#cb12-395" aria-hidden="true" tabindex="-1"></a><span class="in">arrow = require('apache-arrow@6.0.1')</span></span>
+<span id="cb12-396"><a href="#cb12-396" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
