@@ -147,20 +147,6 @@
     "text": "Principal Investigator: Alexander Manshel\nResearch Assistants: Alexandra Colby, Nived Dharmaraj, Emaline Gonzalez Thomas, Xujia Guan, Adam Hill, Nicole Huang, Richard Joseph, Matthew Molinaro, Jordan Pruett, Jaede Shillingford\nThis dataset contains a comprehensive list of the writers sponsored by National Endowment for the Arts fellowships from the organization’s founding in 1965 to 2024, including information about those writers’ demographics, education, and geography."
   },
   {
-    "objectID": "posts/nea-creative-writing-fellowships/index.html#explore-nea-fellowships-by-category",
-    "href": "posts/nea-creative-writing-fellowships/index.html#explore-nea-fellowships-by-category",
-    "title": "The National Endowment for the Arts Creative Writing Fellowships (1965-2024)",
-    "section": "Explore NEA Fellowships by Category",
-    "text": "Explore NEA Fellowships by Category\n\nviewof groupByColumn\n\n\n\n\n\n\n\nviewof topX\n\n\n\n\n\n\n\nbar_chart"
-  },
-  {
-    "objectID": "posts/nea-creative-writing-fellowships/index.html#explore-nea-fellowships-by-year",
-    "href": "posts/nea-creative-writing-fellowships/index.html#explore-nea-fellowships-by-year",
-    "title": "The National Endowment for the Arts Creative Writing Fellowships (1965-2024)",
-    "section": "Explore NEA Fellowships by Year",
-    "text": "Explore NEA Fellowships by Year\n\nline_chart\n\n\n\n\n\n\n\nviewof neaGrantYearRange"
-  },
-  {
     "objectID": "posts/nea-creative-writing-fellowships/index.html#a-note-on-sensitive-information",
     "href": "posts/nea-creative-writing-fellowships/index.html#a-note-on-sensitive-information",
     "title": "The National Endowment for the Arts Creative Writing Fellowships (1965-2024)",
