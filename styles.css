@@ -1,4 +1,12 @@
 /* css styles */
+
+/* Add to styles.css */
+.hero-content {
+  all: unset;
+  display: block;
+  text-align: center;
+}
+
 #hero-banner {
   position: relative;
   background-color: black;
