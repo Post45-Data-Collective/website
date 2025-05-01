@@ -1,75 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://data.post45.org/submissions.html</loc>
-    <lastmod>2025-03-28T19:19:59.602Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/news/awash-in-data.html</loc>
-    <lastmod>2025-03-28T19:19:59.592Z</lastmod>
+    <loc>https://data.post45.org/news/editor-news.html</loc>
+    <lastmod>2025-05-01T16:31:11.331Z</lastmod>
   </url>
   <url>
     <loc>https://data.post45.org/news/data-analyst-summer-2023.html</loc>
-    <lastmod>2025-03-28T19:19:59.592Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/posts/iowa_writers_workshop/index.html</loc>
-    <lastmod>2025-03-28T19:19:59.593Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/posts/table.html</loc>
-    <lastmod>2025-03-28T19:19:59.594Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/index.html</loc>
-    <lastmod>2025-03-28T19:19:59.594Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/posts/hathitrust_post45_fiction/index.html</loc>
-    <lastmod>2025-03-28T19:19:59.593Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/news.html</loc>
-    <lastmod>2025-03-28T19:19:59.592Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/index.html</loc>
-    <lastmod>2025-03-28T19:19:59.592Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/people.html</loc>
-    <lastmod>2025-03-28T19:19:59.593Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/about.html</loc>
-    <lastmod>2025-03-28T19:19:59.591Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/posts/feminist-bookstore-news/index.html</loc>
-    <lastmod>2025-03-28T19:19:59.593Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/posts/nea-creative-writing-fellowships/index.html</loc>
-    <lastmod>2025-03-28T19:19:59.593Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/posts/nyt_hardcover_fiction_bestsellers/index.html</loc>
-    <lastmod>2025-03-28T19:19:59.594Z</lastmod>
-  </url>
-  <url>
-    <loc>https://data.post45.org/posts/the-nordic-noir-in-translation-database-2000-2020/index.html</loc>
-    <lastmod>2025-03-28T19:19:59.601Z</lastmod>
+    <lastmod>2025-05-01T16:31:11.331Z</lastmod>
   </url>
   <url>
     <loc>https://data.post45.org/news/ddp-recap.html</loc>
-    <lastmod>2025-03-28T19:19:59.592Z</lastmod>
+    <lastmod>2025-05-01T16:31:11.331Z</lastmod>
   </url>
   <url>
-    <loc>https://data.post45.org/news/ddp-rfp-2021.html</loc>
-    <lastmod>2025-03-28T19:19:59.592Z</lastmod>
+    <loc>https://data.post45.org/about.html</loc>
+    <lastmod>2025-05-01T16:31:11.329Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/news.html</loc>
+    <lastmod>2025-05-01T16:31:11.331Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/posts/table.html</loc>
+    <lastmod>2025-05-01T16:31:11.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/posts/iowa_writers_workshop/index.html</loc>
+    <lastmod>2025-05-01T16:31:11.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/index.html</loc>
+    <lastmod>2025-05-01T16:31:11.333Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/posts/feminist-bookstore-news/index.html</loc>
+    <lastmod>2025-05-01T16:31:11.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/posts/nea-creative-writing-fellowships/index.html</loc>
+    <lastmod>2025-05-01T16:31:11.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/submissions.html</loc>
+    <lastmod>2025-05-01T16:31:11.341Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/posts/futuristic_fiction/index.html</loc>
+    <lastmod>2025-05-01T16:31:11.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/posts/the-nordic-noir-in-translation-database-2000-2020/index.html</loc>
+    <lastmod>2025-05-01T16:31:11.340Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/posts/nyt_hardcover_fiction_bestsellers/index.html</loc>
+    <lastmod>2025-05-01T16:31:11.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/posts/hathitrust_post45_fiction/index.html</loc>
+    <lastmod>2025-05-01T16:31:11.332Z</lastmod>
   </url>
   <url>
     <loc>https://data.post45.org/our-data.html</loc>
-    <lastmod>2025-03-28T19:19:59.592Z</lastmod>
+    <lastmod>2025-05-01T16:31:11.331Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/people.html</loc>
+    <lastmod>2025-05-01T16:31:11.331Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/index.html</loc>
+    <lastmod>2025-05-01T16:31:11.331Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/news/awash-in-data.html</loc>
+    <lastmod>2025-05-01T16:31:11.331Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/news/ddp-rfp-2021.html</loc>
+    <lastmod>2025-05-01T16:31:11.331Z</lastmod>
   </url>
 </urlset>
