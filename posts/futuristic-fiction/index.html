@@ -8,7 +8,7 @@
 
 <meta name="author" content="Grant Wythoff">
 <meta name="author" content="Theodore Leane">
-<meta name="dcterms.date" content="2025-05-30">
+<meta name="dcterms.date" content="2025-06-09">
 
 <title>Time Horizons of Futuristic Fiction – Post45 Data Collective</title>
 <style>
@@ -117,6 +117,20 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </script>
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../../site_libs/datatables-binding-0.33/datatables.js"></script>
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="../../site_libs/dt-ext-buttons-1.13.6/css/buttons.dataTables.min.css" rel="stylesheet">
+<script src="../../site_libs/dt-ext-buttons-1.13.6/js/dataTables.buttons.min.js"></script>
+<script src="../../site_libs/dt-ext-buttons-1.13.6/js/buttons.html5.min.js"></script>
+<script src="../../site_libs/dt-ext-buttons-1.13.6/js/buttons.colVis.min.js"></script>
+<script src="../../site_libs/dt-ext-buttons-1.13.6/js/buttons.print.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
@@ -136,10 +150,10 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <meta name="citation_editor" content="Alexander Manshel">
 <meta name="citation_editor" content="J.D. Porter">
 <meta name="citation_editor" content="Melanie Walsh">
-<meta name="citation_publication_date" content="2025-05-30">
-<meta name="citation_cover_date" content="2025-05-30">
+<meta name="citation_publication_date" content="2025-06-09">
+<meta name="citation_cover_date" content="2025-06-09">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-05-30">
+<meta name="citation_online_date" content="2025-06-09">
 <meta name="citation_fulltext_html_url" content="https://data.post45.org/posts/futuristic-fiction/">
 <meta name="citation_doi" content="10.18737/CNJV1733p4520221212">
 <meta name="citation_language" content="en">
@@ -261,7 +275,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 30, 2025</p>
+      <p class="date">June 9, 2025</p>
     </div>
   </div>
   
@@ -321,18 +335,18 @@ Creative Commons License
 <p>These data visualizations were made by Grant Wythoff with additional help from Melanie Walsh.</p>
 <p>Use the search bar to filter records in the table and scatterplot below. Search input can include title, creator (author, director, etc.), year of release or setting (e.g.&nbsp;2044), and franchise (e.g.&nbsp;Star Trek).</p>
 <div class="cell hidden">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="89" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 88;"><span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof search<span class="op">,</span></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>viewof selectedMedia<span class="op">,</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>viewof table<span class="op">,</span></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>viewof YearRange<span class="op">,</span></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>tippy<span class="op">,</span></span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot<span class="op">,</span></span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>viewof min<span class="op">,</span></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>viewof max<span class="op">,</span></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>viewof elapsedSlider<span class="op">,</span></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>filteredData<span class="op">,</span></span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot3<span class="op">,</span></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot2} <span class="im">from</span> <span class="st">"aae4dce4851fbb21"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="90" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 89;"><span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof search<span class="op">,</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>viewof selectedMedia<span class="op">,</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>viewof table<span class="op">,</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>viewof YearRange<span class="op">,</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>tippy<span class="op">,</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot<span class="op">,</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>viewof min<span class="op">,</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>viewof max<span class="op">,</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>viewof elapsedSlider<span class="op">,</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>filteredData<span class="op">,</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot3<span class="op">,</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot2} <span class="im">from</span> <span class="st">"aae4dce4851fbb21"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -340,18 +354,18 @@ Creative Commons License
 </div>
 </div>
 <div class="cell hidden">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="108" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 107;"><span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="co">// table_data = fetchData(</span></span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="co">//   "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nea_writing_fellowships/nea_fellowships.csv"</span></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="co">// )</span></span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>thff <span class="op">=</span> d3<span class="op">.</span><span class="fu">csv</span>(</span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/futuristic_fiction/futuristic_fiction.csv"</span><span class="op">,</span></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>  (d) <span class="kw">=&gt;</span> ({</span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>d<span class="op">,</span></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    <span class="dt">released</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">released</span><span class="op">,</span></span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year_set</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">year_set</span><span class="op">,</span></span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    <span class="dt">years_distant</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">years_distant</span></span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="109" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 108;"><span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="co">// table_data = fetchData(</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="co">//   "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nea_writing_fellowships/nea_fellowships.csv"</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="co">// )</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>thff <span class="op">=</span> d3<span class="op">.</span><span class="fu">csv</span>(</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/futuristic_fiction/futuristic_fiction.csv"</span><span class="op">,</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>  (d) <span class="kw">=&gt;</span> ({</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span>d<span class="op">,</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>    <span class="dt">released</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">released</span><span class="op">,</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year_set</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">year_set</span><span class="op">,</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>    <span class="dt">years_distant</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">years_distant</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-2" data-nodetype="declaration">
 
@@ -360,7 +374,7 @@ Creative Commons License
 </div>
 <!-- A plot that zeroes in on 20th- and 21st-century works set 50–40 million years in the future. The y-axis displays years elapsed between publication and setting, rather than the future year set. -->
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="129" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 128;"><span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;br&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="130" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 129;"><span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;br&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-3-1" data-nodetype="expression">
@@ -368,7 +382,7 @@ Creative Commons License
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="130" data-source-offset="-11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 129;"><span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>viewof search</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="131" data-source-offset="-11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 130;"><span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>viewof search</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-3-2" data-nodetype="expression">
@@ -376,7 +390,7 @@ Creative Commons License
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="131" data-source-offset="-25"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 130;"><span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;br&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="132" data-source-offset="-25"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 131;"><span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;br&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-3-3" data-nodetype="expression">
@@ -384,7 +398,7 @@ Creative Commons License
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="132" data-source-offset="-36"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 131;"><span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="133" data-source-offset="-36"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 132;"><span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-3-4" data-nodetype="expression">
@@ -392,34 +406,42 @@ Creative Commons License
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="133" data-source-offset="-42"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 132;"><span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-6ad62f0130a1cea57a97" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6ad62f0130a1cea57a97">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[""]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>dummy<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"B","buttons":[{"extend":"csv","text":"CSV","action":"function ( e, dt, node, config ) {\n                fetch('https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/futuristic_fiction/futuristic_fiction.csv')\n                  .then(response => response.text())\n                  .then(data => {\n                    var blob = new Blob([data], { type: 'text/csv' });\n                    var url = window.URL.createObjectURL(blob);\n                    var link = document.createElement('a');\n                    link.href = url;\n                    link.download = decodeURIComponent('futuristic_fiction.csv');\n                    document.body.appendChild(link);\n                    link.click();\n                    window.URL.revokeObjectURL(url);\n                    document.body.removeChild(link);\n                  });\n              }"},{"extend":"collection","text":"<i class='fa fa-copy'><\/i> Copy Dataset URL","action":"function (e, dt, node, config) {\n                var tempInput = document.createElement('input');\n                tempInput.value = 'https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/futuristic_fiction/futuristic_fiction.csv';\n                document.body.appendChild(tempInput);\n                tempInput.select();\n                document.execCommand('copy');\n                document.body.removeChild(tempInput);\n                alert('Dataset URL copied to clipboard: https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/futuristic_fiction/futuristic_fiction.csv');\n              }"}],"columnDefs":[{"visible":false,"targets":0},{"name":"dummy","targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.buttons.0.action","options.buttons.1.action"],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="153" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 152;"><span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-3-5" data-nodetype="expression">
+<div id="ojs-cell-4-1" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb8" data-startfrom="134" data-source-offset="-64"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 133;"><span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a>viewof elapsedSlider</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb8" data-startfrom="154" data-source-offset="-22"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 153;"><span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a>viewof elapsedSlider</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-3-6" data-nodetype="expression">
+<div id="ojs-cell-4-2" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb9" data-startfrom="135" data-source-offset="-85"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 134;"><span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>viewof YearRange</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb9" data-startfrom="155" data-source-offset="-43"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 154;"><span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a>viewof YearRange</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-3-7" data-nodetype="expression">
+<div id="ojs-cell-4-3" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb10" data-startfrom="136" data-source-offset="-102"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 135;"><span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>viewof selectedMedia</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb10" data-startfrom="156" data-source-offset="-60"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 155;"><span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a>viewof selectedMedia</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-3-8" data-nodetype="expression">
+<div id="ojs-cell-4-4" data-nodetype="expression">
 
 </div>
 </div>
@@ -428,88 +450,88 @@ Creative Commons License
 <!-- A scatter plot showing all of the records on a logarithmic scale. -->
 <p>In order to show all of the works in the dataset on a single plot, we can use a logarithmic scale to capture the million-, billion-, and trillion-year outliers.</p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb11" data-startfrom="144" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 143;"><span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb11" data-startfrom="164" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 163;"><span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-4" data-nodetype="expression">
+<div id="ojs-cell-5" data-nodetype="expression">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb12" data-startfrom="149" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 148;"><span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;style&gt;</span></span>
-<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a><span class="vs">  .medium-cards {</span></span>
-<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: flex;</span></span>
-<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a><span class="vs">    flex-wrap: wrap;</span></span>
-<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a><span class="vs">    gap: 1rem;</span></span>
-<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a><span class="vs">    justify-content: flex-start;</span></span>
-<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a><span class="vs">  .medium-card {</span></span>
-<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a><span class="vs">    flex: 1 1 calc(33% - 1rem);</span></span>
-<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a><span class="vs">    min-width: 140px;</span></span>
-<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a><span class="vs">    max-width: 200px;</span></span>
-<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 1rem;</span></span>
-<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 8px;</span></span>
-<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #f9f9f9;</span></span>
-<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a><span class="vs">    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);</span></span>
-<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a><span class="vs">  .medium-card h4 {</span></span>
-<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin: 0 0 0.3rem 0;</span></span>
-<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 1rem;</span></span>
-<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a><span class="vs">  .medium-card .big {</span></span>
-<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 1.2rem;</span></span>
-<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-weight: bold;</span></span>
+<div class="sourceCode cell-code hidden" id="cb12" data-startfrom="169" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 168;"><span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;style&gt;</span></span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a><span class="vs">  .medium-cards {</span></span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: flex;</span></span>
+<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a><span class="vs">    flex-wrap: wrap;</span></span>
+<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a><span class="vs">    gap: 1rem;</span></span>
+<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a><span class="vs">    justify-content: flex-start;</span></span>
 <span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
 <span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a><span class="vs">  @media (max-width: 768px) {</span></span>
-<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a><span class="vs">    .medium-card {</span></span>
-<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a><span class="vs">      flex: 1 1 calc(50% - 1rem);</span></span>
-<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a><span class="vs">    }</span></span>
-<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a><span class="vs">  @media (max-width: 480px) {</span></span>
-<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a><span class="vs">    .medium-card {</span></span>
-<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a><span class="vs">      flex: 1 1 100%;</span></span>
-<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a><span class="vs">    }</span></span>
-<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/style&gt;</span></span>
-<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;div class="medium-cards"&gt;</span></span>
-<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
-<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Film 🎞️&lt;/h4&gt;</span></span>
-<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"film"</span> <span class="op">||</span> d<span class="op">.</span><span class="at">stateId</span> <span class="op">===</span> <span class="st">"RU"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
-<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
-<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
-<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Prose Fiction 📖&lt;/h4&gt;</span></span>
-<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"prose fiction"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
-<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
-<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
-<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Television 📺&lt;/h4&gt;</span></span>
-<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"television"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
-<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
-<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
-<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Video Games 👾&lt;/h4&gt;</span></span>
-<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"video game"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
-<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
-<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
-<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Comics 💥&lt;/h4&gt;</span></span>
-<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"comics"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
-<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a><span class="vs">  .medium-card {</span></span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a><span class="vs">    flex: 1 1 calc(33% - 1rem);</span></span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a><span class="vs">    min-width: 140px;</span></span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a><span class="vs">    max-width: 200px;</span></span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 1rem;</span></span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 8px;</span></span>
+<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #f9f9f9;</span></span>
+<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a><span class="vs">    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);</span></span>
+<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a><span class="vs">  .medium-card h4 {</span></span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin: 0 0 0.3rem 0;</span></span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 1rem;</span></span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a><span class="vs">  .medium-card .big {</span></span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 1.2rem;</span></span>
+<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-weight: bold;</span></span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a><span class="vs">  @media (max-width: 768px) {</span></span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a><span class="vs">    .medium-card {</span></span>
+<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a><span class="vs">      flex: 1 1 calc(50% - 1rem);</span></span>
+<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a><span class="vs">    }</span></span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a><span class="vs">  @media (max-width: 480px) {</span></span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a><span class="vs">    .medium-card {</span></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a><span class="vs">      flex: 1 1 100%;</span></span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a><span class="vs">    }</span></span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/style&gt;</span></span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;div class="medium-cards"&gt;</span></span>
 <span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
-<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Other&lt;/h4&gt;</span></span>
-<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span></span>
-<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a>      <span class="op">!</span>[<span class="st">"fiction"</span><span class="op">,</span> <span class="st">"film"</span><span class="op">,</span> <span class="st">"television"</span><span class="op">,</span> <span class="st">"video game"</span><span class="op">,</span> <span class="st">"comics"</span>]<span class="op">.</span><span class="fu">includes</span>(d<span class="op">.</span><span class="at">medium</span>)</span>
-<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a>    )<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
-<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
-<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;br&gt;</span></span>
-<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Film 🎞️&lt;/h4&gt;</span></span>
+<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"film"</span> <span class="op">||</span> d<span class="op">.</span><span class="at">stateId</span> <span class="op">===</span> <span class="st">"RU"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
+<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
+<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Prose Fiction 📖&lt;/h4&gt;</span></span>
+<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"prose fiction"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
+<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
+<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Television 📺&lt;/h4&gt;</span></span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"television"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
+<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
+<span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Video Games 👾&lt;/h4&gt;</span></span>
+<span id="cb12-226"><a href="#cb12-226" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"video game"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
+<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
+<span id="cb12-229"><a href="#cb12-229" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Comics 💥&lt;/h4&gt;</span></span>
+<span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">medium</span> <span class="op">===</span> <span class="st">"comics"</span>)<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
+<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="medium-card"&gt;</span></span>
+<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Other&lt;/h4&gt;</span></span>
+<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span class="big"&gt;</span><span class="sc">${</span>filteredData<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span></span>
+<span id="cb12-235"><a href="#cb12-235" aria-hidden="true" tabindex="-1"></a>      <span class="op">!</span>[<span class="st">"fiction"</span><span class="op">,</span> <span class="st">"film"</span><span class="op">,</span> <span class="st">"television"</span><span class="op">,</span> <span class="st">"video game"</span><span class="op">,</span> <span class="st">"comics"</span>]<span class="op">.</span><span class="fu">includes</span>(d<span class="op">.</span><span class="at">medium</span>)</span>
+<span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a>    )<span class="op">.</span><span class="at">length</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="st">"en-US"</span>)<span class="sc">}</span><span class="vs"> works&lt;/span&gt;</span></span>
+<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;br&gt;</span></span>
+<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-5" data-nodetype="expression">
+<div id="ojs-cell-6" data-nodetype="expression">
 
 </div>
 </div>
@@ -700,7 +722,7 @@ WHERE
   editor = {Manshel, Alexander and Porter, J.D. and Walsh, Melanie},
   title = {Time {Horizons} of {Futuristic} {Fiction}},
   journal = {Post45 Data Collective},
-  date = {2025-05-30},
+  date = {2025-06-09},
   url = {https://data.post45.org/posts/futuristic-fiction/},
   doi = {10.18737/CNJV1733p4520221212},
   langid = {en},
@@ -711,10 +733,10 @@ WHERE
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-wythoff2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Wythoff, Grant, and Theodore Leane. 2025. <span>“Time Horizons of
 Futuristic Fiction.”</span> Edited by Alexander Manshel, J.D. Porter,
-and Melanie Walsh. <em>Post45 Data Collective</em>, May. <a href="https://doi.org/10.18737/CNJV1733p4520221212">https://doi.org/10.18737/CNJV1733p4520221212</a>.
+and Melanie Walsh. <em>Post45 Data Collective</em>, June. <a href="https://doi.org/10.18737/CNJV1733p4520221212">https://doi.org/10.18737/CNJV1733p4520221212</a>.
 </div></div></section></div></main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuaW1wb3J0IHt2aWV3b2Ygc2VhcmNoLFxudmlld29mIHNlbGVjdGVkTWVkaWEsXG52aWV3b2YgdGFibGUsXG52aWV3b2YgWWVhclJhbmdlLFxudGlwcHksXG52aWV3b2YgZnV0dXJpc3RpY1Bsb3QsXG52aWV3b2YgbWluLFxudmlld29mIG1heCxcbnZpZXdvZiBlbGFwc2VkU2xpZGVyLFxuZmlsdGVyZWREYXRhLFxudmlld29mIGZ1dHVyaXN0aWNQbG90MyxcbnZpZXdvZiBmdXR1cmlzdGljUGxvdDJ9IGZyb20gXCJhYWU0ZGNlNDg1MWZiYjIxXCJcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiLy8gdGFibGVfZGF0YSA9IGZldGNoRGF0YShcbi8vICAgXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vUG9zdDQ1LURhdGEtQ29sbGVjdGl2ZS9kYXRhL3JlZnMvaGVhZHMvbWFpbi9uZWFfd3JpdGluZ19mZWxsb3dzaGlwcy9uZWFfZmVsbG93c2hpcHMuY3N2XCJcbi8vIClcbnRoZmYgPSBkMy5jc3YoXG4gIFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1Bvc3Q0NS1EYXRhLUNvbGxlY3RpdmUvZGF0YS9yZWZzL2hlYWRzL21haW4vZnV0dXJpc3RpY19maWN0aW9uL2Z1dHVyaXN0aWNfZmljdGlvbi5jc3ZcIixcbiAgKGQpID0+ICh7XG4gICAgLi4uZCxcbiAgICByZWxlYXNlZDogK2QucmVsZWFzZWQsXG4gICAgeWVhcl9zZXQ6ICtkLnllYXJfc2V0LFxuICAgIHllYXJzX2Rpc3RhbnQ6ICtkLnllYXJzX2Rpc3RhbnRcbiAgfSlcbilcblxuXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJodG1sYDxicj5gXG52aWV3b2Ygc2VhcmNoXG5odG1sYDxicj5gXG50YWJsZVxudmlld29mIGZ1dHVyaXN0aWNQbG90XG52aWV3b2YgZWxhcHNlZFNsaWRlclxudmlld29mIFllYXJSYW5nZVxudmlld29mIHNlbGVjdGVkTWVkaWFcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBmdXR1cmlzdGljUGxvdDNcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuXG5odG1sYFxuPHN0eWxlPlxuICAubWVkaXVtLWNhcmRzIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtd3JhcDogd3JhcDtcbiAgICBnYXA6IDFyZW07XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LXN0YXJ0O1xuICB9XG5cbiAgLm1lZGl1bS1jYXJkIHtcbiAgICBmbGV4OiAxIDEgY2FsYygzMyUgLSAxcmVtKTtcbiAgICBtaW4td2lkdGg6IDE0MHB4O1xuICAgIG1heC13aWR0aDogMjAwcHg7XG4gICAgcGFkZGluZzogMXJlbTtcbiAgICBib3JkZXItcmFkaXVzOiA4cHg7XG4gICAgYmFja2dyb3VuZDogI2Y5ZjlmOTtcbiAgICBib3gtc2hhZG93OiAwIDFweCA0cHggcmdiYSgwLCAwLCAwLCAwLjA4KTtcbiAgfVxuXG4gIC5tZWRpdW0tY2FyZCBoNCB7XG4gICAgbWFyZ2luOiAwIDAgMC4zcmVtIDA7XG4gICAgZm9udC1zaXplOiAxcmVtO1xuICB9XG5cbiAgLm1lZGl1bS1jYXJkIC5iaWcge1xuICAgIGZvbnQtc2l6ZTogMS4ycmVtO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICB9XG5cbiAgQG1lZGlhIChtYXgtd2lkdGg6IDc2OHB4KSB7XG4gICAgLm1lZGl1bS1jYXJkIHtcbiAgICAgIGZsZXg6IDEgMSBjYWxjKDUwJSAtIDFyZW0pO1xuICAgIH1cbiAgfVxuXG4gIEBtZWRpYSAobWF4LXdpZHRoOiA0ODBweCkge1xuICAgIC5tZWRpdW0tY2FyZCB7XG4gICAgICBmbGV4OiAxIDEgMTAwJTtcbiAgICB9XG4gIH1cbjwvc3R5bGU+XG5cbjxkaXYgY2xhc3M9XCJtZWRpdW0tY2FyZHNcIj5cbiAgPGRpdiBjbGFzcz1cIm1lZGl1bS1jYXJkXCI+XG4gICAgPGg0PkZpbG0g8J+Onu+4jzwvaDQ+XG4gICAgPHNwYW4gY2xhc3M9XCJiaWdcIj4ke2ZpbHRlcmVkRGF0YS5maWx0ZXIoKGQpID0+IGQubWVkaXVtID09PSBcImZpbG1cIiB8fCBkLnN0YXRlSWQgPT09IFwiUlVcIikubGVuZ3RoLnRvTG9jYWxlU3RyaW5nKFwiZW4tVVNcIil9IHdvcmtzPC9zcGFuPlxuICA8L2Rpdj5cbiAgPGRpdiBjbGFzcz1cIm1lZGl1bS1jYXJkXCI+XG4gICAgPGg0PlByb3NlIEZpY3Rpb24g8J+TljwvaDQ+XG4gICAgPHNwYW4gY2xhc3M9XCJiaWdcIj4ke2ZpbHRlcmVkRGF0YS5maWx0ZXIoKGQpID0+IGQubWVkaXVtID09PSBcInByb3NlIGZpY3Rpb25cIikubGVuZ3RoLnRvTG9jYWxlU3RyaW5nKFwiZW4tVVNcIil9IHdvcmtzPC9zcGFuPlxuICA8L2Rpdj5cbiAgPGRpdiBjbGFzcz1cIm1lZGl1bS1jYXJkXCI+XG4gICAgPGg0PlRlbGV2aXNpb24g8J+TujwvaDQ+XG4gICAgPHNwYW4gY2xhc3M9XCJiaWdcIj4ke2ZpbHRlcmVkRGF0YS5maWx0ZXIoKGQpID0+IGQubWVkaXVtID09PSBcInRlbGV2aXNpb25cIikubGVuZ3RoLnRvTG9jYWxlU3RyaW5nKFwiZW4tVVNcIil9IHdvcmtzPC9zcGFuPlxuICA8L2Rpdj5cbiAgPGRpdiBjbGFzcz1cIm1lZGl1bS1jYXJkXCI+XG4gICAgPGg0PlZpZGVvIEdhbWVzIPCfkb48L2g0PlxuICAgIDxzcGFuIGNsYXNzPVwiYmlnXCI+JHtmaWx0ZXJlZERhdGEuZmlsdGVyKChkKSA9PiBkLm1lZGl1bSA9PT0gXCJ2aWRlbyBnYW1lXCIpLmxlbmd0aC50b0xvY2FsZVN0cmluZyhcImVuLVVTXCIpfSB3b3Jrczwvc3Bhbj5cbiAgPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJtZWRpdW0tY2FyZFwiPlxuICAgIDxoND5Db21pY3Mg8J+SpTwvaDQ+XG4gICAgPHNwYW4gY2xhc3M9XCJiaWdcIj4ke2ZpbHRlcmVkRGF0YS5maWx0ZXIoKGQpID0+IGQubWVkaXVtID09PSBcImNvbWljc1wiKS5sZW5ndGgudG9Mb2NhbGVTdHJpbmcoXCJlbi1VU1wiKX0gd29ya3M8L3NwYW4+XG4gIDwvZGl2PlxuICA8ZGl2IGNsYXNzPVwibWVkaXVtLWNhcmRcIj5cbiAgICA8aDQ+T3RoZXI8L2g0PlxuICAgIDxzcGFuIGNsYXNzPVwiYmlnXCI+JHtmaWx0ZXJlZERhdGEuZmlsdGVyKChkKSA9PlxuICAgICAgIVtcImZpY3Rpb25cIiwgXCJmaWxtXCIsIFwidGVsZXZpc2lvblwiLCBcInZpZGVvIGdhbWVcIiwgXCJjb21pY3NcIl0uaW5jbHVkZXMoZC5tZWRpdW0pXG4gICAgKS5sZW5ndGgudG9Mb2NhbGVTdHJpbmcoXCJlbi1VU1wiKX0gd29ya3M8L3NwYW4+XG4gIDwvZGl2PlxuPC9kaXY+XG48YnI+XG5gXG4ifV19
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuaW1wb3J0IHt2aWV3b2Ygc2VhcmNoLFxudmlld29mIHNlbGVjdGVkTWVkaWEsXG52aWV3b2YgdGFibGUsXG52aWV3b2YgWWVhclJhbmdlLFxudGlwcHksXG52aWV3b2YgZnV0dXJpc3RpY1Bsb3QsXG52aWV3b2YgbWluLFxudmlld29mIG1heCxcbnZpZXdvZiBlbGFwc2VkU2xpZGVyLFxuZmlsdGVyZWREYXRhLFxudmlld29mIGZ1dHVyaXN0aWNQbG90MyxcbnZpZXdvZiBmdXR1cmlzdGljUGxvdDJ9IGZyb20gXCJhYWU0ZGNlNDg1MWZiYjIxXCJcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiLy8gdGFibGVfZGF0YSA9IGZldGNoRGF0YShcbi8vICAgXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vUG9zdDQ1LURhdGEtQ29sbGVjdGl2ZS9kYXRhL3JlZnMvaGVhZHMvbWFpbi9uZWFfd3JpdGluZ19mZWxsb3dzaGlwcy9uZWFfZmVsbG93c2hpcHMuY3N2XCJcbi8vIClcbnRoZmYgPSBkMy5jc3YoXG4gIFwiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1Bvc3Q0NS1EYXRhLUNvbGxlY3RpdmUvZGF0YS9yZWZzL2hlYWRzL21haW4vZnV0dXJpc3RpY19maWN0aW9uL2Z1dHVyaXN0aWNfZmljdGlvbi5jc3ZcIixcbiAgKGQpID0+ICh7XG4gICAgLi4uZCxcbiAgICByZWxlYXNlZDogK2QucmVsZWFzZWQsXG4gICAgeWVhcl9zZXQ6ICtkLnllYXJfc2V0LFxuICAgIHllYXJzX2Rpc3RhbnQ6ICtkLnllYXJzX2Rpc3RhbnRcbiAgfSlcbilcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiaHRtbGA8YnI+YFxudmlld29mIHNlYXJjaFxuaHRtbGA8YnI+YFxudGFibGVcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBmdXR1cmlzdGljUGxvdFxudmlld29mIGVsYXBzZWRTbGlkZXJcbnZpZXdvZiBZZWFyUmFuZ2VcbnZpZXdvZiBzZWxlY3RlZE1lZGlhXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTUiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgZnV0dXJpc3RpY1Bsb3QzXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJcblxuaHRtbGBcbjxzdHlsZT5cbiAgLm1lZGl1bS1jYXJkcyB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LXdyYXA6IHdyYXA7XG4gICAgZ2FwOiAxcmVtO1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1zdGFydDtcbiAgfVxuXG4gIC5tZWRpdW0tY2FyZCB7XG4gICAgZmxleDogMSAxIGNhbGMoMzMlIC0gMXJlbSk7XG4gICAgbWluLXdpZHRoOiAxNDBweDtcbiAgICBtYXgtd2lkdGg6IDIwMHB4O1xuICAgIHBhZGRpbmc6IDFyZW07XG4gICAgYm9yZGVyLXJhZGl1czogOHB4O1xuICAgIGJhY2tncm91bmQ6ICNmOWY5Zjk7XG4gICAgYm94LXNoYWRvdzogMCAxcHggNHB4IHJnYmEoMCwgMCwgMCwgMC4wOCk7XG4gIH1cblxuICAubWVkaXVtLWNhcmQgaDQge1xuICAgIG1hcmdpbjogMCAwIDAuM3JlbSAwO1xuICAgIGZvbnQtc2l6ZTogMXJlbTtcbiAgfVxuXG4gIC5tZWRpdW0tY2FyZCAuYmlnIHtcbiAgICBmb250LXNpemU6IDEuMnJlbTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgfVxuXG4gIEBtZWRpYSAobWF4LXdpZHRoOiA3NjhweCkge1xuICAgIC5tZWRpdW0tY2FyZCB7XG4gICAgICBmbGV4OiAxIDEgY2FsYyg1MCUgLSAxcmVtKTtcbiAgICB9XG4gIH1cblxuICBAbWVkaWEgKG1heC13aWR0aDogNDgwcHgpIHtcbiAgICAubWVkaXVtLWNhcmQge1xuICAgICAgZmxleDogMSAxIDEwMCU7XG4gICAgfVxuICB9XG48L3N0eWxlPlxuXG48ZGl2IGNsYXNzPVwibWVkaXVtLWNhcmRzXCI+XG4gIDxkaXYgY2xhc3M9XCJtZWRpdW0tY2FyZFwiPlxuICAgIDxoND5GaWxtIPCfjp7vuI88L2g0PlxuICAgIDxzcGFuIGNsYXNzPVwiYmlnXCI+JHtmaWx0ZXJlZERhdGEuZmlsdGVyKChkKSA9PiBkLm1lZGl1bSA9PT0gXCJmaWxtXCIgfHwgZC5zdGF0ZUlkID09PSBcIlJVXCIpLmxlbmd0aC50b0xvY2FsZVN0cmluZyhcImVuLVVTXCIpfSB3b3Jrczwvc3Bhbj5cbiAgPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJtZWRpdW0tY2FyZFwiPlxuICAgIDxoND5Qcm9zZSBGaWN0aW9uIPCfk5Y8L2g0PlxuICAgIDxzcGFuIGNsYXNzPVwiYmlnXCI+JHtmaWx0ZXJlZERhdGEuZmlsdGVyKChkKSA9PiBkLm1lZGl1bSA9PT0gXCJwcm9zZSBmaWN0aW9uXCIpLmxlbmd0aC50b0xvY2FsZVN0cmluZyhcImVuLVVTXCIpfSB3b3Jrczwvc3Bhbj5cbiAgPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJtZWRpdW0tY2FyZFwiPlxuICAgIDxoND5UZWxldmlzaW9uIPCfk7o8L2g0PlxuICAgIDxzcGFuIGNsYXNzPVwiYmlnXCI+JHtmaWx0ZXJlZERhdGEuZmlsdGVyKChkKSA9PiBkLm1lZGl1bSA9PT0gXCJ0ZWxldmlzaW9uXCIpLmxlbmd0aC50b0xvY2FsZVN0cmluZyhcImVuLVVTXCIpfSB3b3Jrczwvc3Bhbj5cbiAgPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJtZWRpdW0tY2FyZFwiPlxuICAgIDxoND5WaWRlbyBHYW1lcyDwn5G+PC9oND5cbiAgICA8c3BhbiBjbGFzcz1cImJpZ1wiPiR7ZmlsdGVyZWREYXRhLmZpbHRlcigoZCkgPT4gZC5tZWRpdW0gPT09IFwidmlkZW8gZ2FtZVwiKS5sZW5ndGgudG9Mb2NhbGVTdHJpbmcoXCJlbi1VU1wiKX0gd29ya3M8L3NwYW4+XG4gIDwvZGl2PlxuICA8ZGl2IGNsYXNzPVwibWVkaXVtLWNhcmRcIj5cbiAgICA8aDQ+Q29taWNzIPCfkqU8L2g0PlxuICAgIDxzcGFuIGNsYXNzPVwiYmlnXCI+JHtmaWx0ZXJlZERhdGEuZmlsdGVyKChkKSA9PiBkLm1lZGl1bSA9PT0gXCJjb21pY3NcIikubGVuZ3RoLnRvTG9jYWxlU3RyaW5nKFwiZW4tVVNcIil9IHdvcmtzPC9zcGFuPlxuICA8L2Rpdj5cbiAgPGRpdiBjbGFzcz1cIm1lZGl1bS1jYXJkXCI+XG4gICAgPGg0Pk90aGVyPC9oND5cbiAgICA8c3BhbiBjbGFzcz1cImJpZ1wiPiR7ZmlsdGVyZWREYXRhLmZpbHRlcigoZCkgPT5cbiAgICAgICFbXCJmaWN0aW9uXCIsIFwiZmlsbVwiLCBcInRlbGV2aXNpb25cIiwgXCJ2aWRlbyBnYW1lXCIsIFwiY29taWNzXCJdLmluY2x1ZGVzKGQubWVkaXVtKVxuICAgICkubGVuZ3RoLnRvTG9jYWxlU3RyaW5nKFwiZW4tVVNcIil9IHdvcmtzPC9zcGFuPlxuICA8L2Rpdj5cbjwvZGl2PlxuPGJyPlxuYFxuIn1dfQ==
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
