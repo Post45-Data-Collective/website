@@ -207,14 +207,14 @@
     "href": "submissions.html",
     "title": "Submissions",
     "section": "",
-    "text": "The Post45 Data Collective peer reviews and houses literary and cultural data from 1945 to the present.\nAll datasets are accompanied by a contextual statement or “data essay” that addresses (in 4,000 words or less) the significance of the data; the social and historical context of the data; how the data was collected, cleaned, and organized; and possible ethical concerns or misuses of the data. Data essays are published alongside datasets on the Post45 Data Collective website.\nIf you’re interested in submitting a dataset to the Post45 Data Collective, please prepare a data essay and format your data according to the guidelines below. When you’re ready, email the dataset and data essay (as a Word document) to Melanie Walsh (melwalsh@uw.edu), Alexander Manshel (alexander.manshel@mcgill.ca ), and J.D. Porter (porterjd@sas.upenn.edu )."
+    "text": "The Post45 Data Collective peer reviews and houses literary and cultural data from 1945 to the present.\nAll datasets are accompanied by a contextual statement or “data essay” that addresses (in 4,000 words or less) the significance of the data; the social and historical context of the data; how the data was collected, cleaned, and organized; and possible ethical concerns or misuses of the data.\nIf you’re interested in submitting a dataset to the Post45 Data Collective, please prepare a data essay with this template and format your data according to the guidelines below. Please submit your essay as a Google Doc or a Word document. We use Quarto to create our website, so if you are familiar with Quarto, you can also create your essay with our .qmd template.\nWhen you’re ready, email your dataset and data essay to Melanie Walsh (melwalsh@uw.edu), Alexander Manshel (alexander.manshel@mcgill.ca), and J.D. Porter (porterjd@sas.upenn.edu)."
   },
   {
     "objectID": "submissions.html#peer-review-data-essay-criteria",
     "href": "submissions.html#peer-review-data-essay-criteria",
     "title": "Submissions",
     "section": "Peer Review & Data Essay Criteria",
-    "text": "Peer Review & Data Essay Criteria\nData essays should include the following sections and answer most, if not all, of the following questions. This criteria is also used by reviewers during the peer review process."
+    "text": "Peer Review & Data Essay Criteria\nData essays should include the following sections and answer most, if not all, of the following questions."
   },
   {
     "objectID": "submissions.html#significance-and-context",
