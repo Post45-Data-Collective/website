@@ -1,6 +1,16 @@
 [
   {
-    "listing": "/our-data.html",
+    "listing": "/news.html",
+    "items": [
+      "/news/editor-news.html",
+      "/news/data-analyst-summer-2023.html",
+      "/news/ddp-recap.html",
+      "/news/ddp-rfp-2021.html",
+      "/news/awash-in-data.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
     "items": [
       "/posts/british-literary-prizes/index.html",
       "/posts/feminist-bookstore-news/index.html",
@@ -13,17 +23,7 @@
     ]
   },
   {
-    "listing": "/news.html",
-    "items": [
-      "/news/editor-news.html",
-      "/news/data-analyst-summer-2023.html",
-      "/news/ddp-recap.html",
-      "/news/ddp-rfp-2021.html",
-      "/news/awash-in-data.html"
-    ]
-  },
-  {
-    "listing": "/index.html",
+    "listing": "/our-data.html",
     "items": [
       "/posts/british-literary-prizes/index.html",
       "/posts/feminist-bookstore-news/index.html",
