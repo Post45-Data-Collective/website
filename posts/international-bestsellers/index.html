@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sean DiLeonardi">
+<meta name="author" content="Becca Cohen">
+<meta name="author" content="Dan Sinykin">
+<meta name="dcterms.date" content="2025-07-03">
+
+<title>International Bestsellers: The Dataset – Post45 Data Collective</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/p45dc-fav-icon.jpg" rel="icon" type="image/jpeg">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b2390a390996509fa11aead5942e2ca1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-H9Z8DC0X8Q"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
+</script>
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="International Bestsellers: The Dataset – Post45 Data Collective">
+<meta property="og:description" content="The “International Bestsellers” dataset draws attention to how globalization has affected the publishing industry in the first decades of the twenty-first century. Under multinational conglomerates, works of fiction have increasingly circulated across national borders; “bestsellers” serve the bottom line and work as advertisements for themselves just by being bestsellers. “International Bestsellers” provides the most comprehensive data on twenty-first-century bestsellers. It contains bestseller lists in fiction for France, Germany, Italy, Spain, and the United States, and periodic lists from 40 other countries, from June 2013 through December 2022.">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Book_stack_on_a_white_background_%28worldwide_bestsellers%29.jpg/1280px-Book_stack_on_a_white_background_%28worldwide_bestsellers%29.jpg">
+<meta property="og:site_name" content="Post45 Data Collective">
+<meta name="twitter:title" content="International Bestsellers: The Dataset – Post45 Data Collective">
+<meta name="twitter:description" content="The “International Bestsellers” dataset draws attention to how globalization has affected the publishing industry in the first decades of the twenty-first century. Under multinational conglomerates, works of fiction have increasingly circulated across national borders; “bestsellers” serve the bottom line and work as advertisements for themselves just by being bestsellers. “International Bestsellers” provides the most comprehensive data on twenty-first-century bestsellers. It contains bestseller lists in fiction for France, Germany, Italy, Spain, and the United States, and periodic lists from 40 other countries, from June 2013 through December 2022.">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Book_stack_on_a_white_background_%28worldwide_bestsellers%29.jpg/1280px-Book_stack_on_a_white_background_%28worldwide_bestsellers%29.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="International Bestsellers: The Dataset">
+<meta name="citation_abstract" content="The &amp;amp;quot;International Bestsellers&quot; dataset draws attention to how globalization has affected the publishing industry in the first decades of the twenty-first century. Under multinational conglomerates, works of fiction have increasingly circulated across national borders; “bestsellers” serve the bottom line and work as advertisements for themselves just by being bestsellers. “International Bestsellers” provides the most comprehensive data on twenty-first-century bestsellers. It contains bestseller lists in fiction for France, Germany, Italy, Spain, and the United States, and periodic lists from 40 other countries, from June 2013 through December 2022.
+">
+<meta name="citation_author" content="Sean DiLeonardi">
+<meta name="citation_author" content="Becca Cohen">
+<meta name="citation_author" content="Dan Sinykin">
+<meta name="citation_editor" content="Alexander Manshel">
+<meta name="citation_editor" content="J.D. Porter">
+<meta name="citation_editor" content="Melanie Walsh">
+<meta name="citation_publication_date" content="2025-07-03">
+<meta name="citation_cover_date" content="2025-07-03">
+<meta name="citation_year" content="2025">
+<meta name="citation_online_date" content="2025-07-03">
+<meta name="citation_fulltext_html_url" content="https://data.post45.org/posts/international-bestsellers/">
+<meta name="citation_doi" content="10.18737/IBDATA2025">
+<meta name="citation_language" content="en">
+<meta name="citation_journal_title" content="Post45 Data Collective">
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Post45 Data Collective</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../our-data.html"> 
+<span class="menu-text">Our Data</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../submissions.html"> 
+<span class="menu-text">Submissions</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../people.html"> 
+<span class="menu-text">People</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../news.html"> 
+<span class="menu-text">News</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Post45-Data-Collective/website"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#explore-bestsellers-by-country" id="toc-explore-bestsellers-by-country" class="nav-link active" data-scroll-target="#explore-bestsellers-by-country">Explore Bestsellers by Country</a></li>
+  <li><a href="#data-table" id="toc-data-table" class="nav-link" data-scroll-target="#data-table">Data Table</a></li>
+  <li><a href="#significance-context" id="toc-significance-context" class="nav-link" data-scroll-target="#significance-context"><strong>Significance &amp; Context</strong></a></li>
+  <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">Dataset Description</a></li>
+  <li><a href="#collection-creation" id="toc-collection-creation" class="nav-link" data-scroll-target="#collection-creation">Collection &amp; Creation</a></li>
+  <li><a href="#ethical-considerations" id="toc-ethical-considerations" class="nav-link" data-scroll-target="#ethical-considerations">Ethical Considerations</a></li>
+  <li><a href="#versioning" id="toc-versioning" class="nav-link" data-scroll-target="#versioning">Versioning</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">International Bestsellers: The Dataset</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">dataset</div>
+    <div class="quarto-category">bestsellers</div>
+    <div class="quarto-category">publishing</div>
+    <div class="quarto-category">translation</div>
+    <div class="quarto-category">literature</div>
+    <div class="quarto-category">draft</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta column-page-right">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://www.greensburg.pitt.edu/people/sean-dileonardi-phd">Sean DiLeonardi</a> <a href="mailto:sed148@pitt.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-4424-972X" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p><a href="https://rscohen2.github.io/">Becca Cohen</a> <a href="mailto:rcohen21@illinois.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-2521-3662" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p><a href="http://www.dansinykin.com/">Dan Sinykin</a> <a href="mailto:daniel.sinykin@emory.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-5245-2333" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 3, 2025</p>
+    </div>
+  </div>
+  
+    
+    <div>
+    <div class="quarto-title-meta-heading">Doi</div>
+    <div class="quarto-title-meta-contents">
+      <p class="doi">
+        <a href="https://doi.org/10.18737/IBDATA2025">10.18737/IBDATA2025</a>
+      </p>
+    </div>
+  </div>
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>The “International Bestsellers” dataset draws attention to how globalization has affected the publishing industry in the first decades of the twenty-first century. Under multinational conglomerates, works of fiction have increasingly circulated across national borders; “bestsellers” serve the bottom line and work as advertisements for themselves just by being bestsellers. “International Bestsellers” provides the most comprehensive data on twenty-first-century bestsellers. It contains bestseller lists in fiction for France, Germany, Italy, Spain, and the United States, and periodic lists from 40 other countries, from June 2013 through December 2022.</p>
+  </div>
+</div>
+
+
+</header>
+
+
+<!-- EDITORIAL TEAM: Create a new directory in posts/ with appropriate title for data essay (which will become the URL slug, e.g. /nea-creative-writing-fellowships becomes https://post45-data-collective.github.io/website/posts/nea-creative-writing-fellowships/).
+
+Then, duplicate this template, rename it index.qmd, and place it inside the appropriate directory inside /posts.
+
+Then fill in the rest of the information above and below. -->
+<!-- Include image for data essay -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.library.illinois.edu/rbx/hgwells2016/wp-content/uploads/2016/09/TimeMachine_Berkeley_1200.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Source: <a href="https://www.library.illinois.edu/rbx/hgwells2016/category/the-time-machine/">University of Illinois</a></figcaption>
+</figure>
+</div>
+<!-- Include brief introduction to/description of data essay  -->
+<!-- If there are multiple datasets, please provide a title for each dataset with its own description  -->
+<section id="explore-bestsellers-by-country" class="level1">
+<h1>Explore Bestsellers by Country</h1>
+<div class="cell hidden">
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="74" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 73;"><span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof year<span class="op">,</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>viewof month<span class="op">,</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>viewof select<span class="op">,</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>viewof title<span class="op">,</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>monthLabel<span class="op">,</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>table} <span class="im">from</span> <span class="st">"772639d6da19355b"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display hidden">
+<div id="ojs-cell-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="87" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 86;"><span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>viewof select</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="88" data-source-offset="-14"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 87;"><span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;h3&gt;Bestsellers in </span><span class="sc">${</span>select<span class="sc">}</span><span class="vs">&lt;/h1&gt;</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;h3&gt;</span><span class="sc">${</span>monthLabel<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">&lt;h2&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="90" data-source-offset="-84"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 89;"><span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>viewof year</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="91" data-source-offset="-97"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 90;"><span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>viewof month</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="92" data-source-offset="-110"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 91;"><span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;br&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="93" data-source-offset="-121"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 92;"><span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-table" class="level1">
+<h1>Data Table</h1>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb8" data-startfrom="100" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 99;"><span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof dataSummaryView<span class="op">,</span> Tabulator<span class="op">,</span> viewof selectedColumns<span class="op">,</span> viewof dataSet<span class="op">,</span> tableContainer<span class="op">,</span> fetchData<span class="op">,</span> generateTabulatorTableFromCSV<span class="op">,</span> progress<span class="op">,</span> progressbar} <span class="im">from</span> <span class="st">"8bb63a6cde9addff"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell hidden">
+<div class="sourceCode cell-code hidden" id="cb9" data-startfrom="107" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 106;"><span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> <span class="fu">fetchData</span>(<span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/international_bestsellers/international_bestsellers.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display hidden">
+<div id="ojs-cell-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell hidden">
+<div class="sourceCode cell-code hidden" id="cb10" data-startfrom="114" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 113;"><span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="co">// International Bestsellers Table (with correct columns)</span></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="fu">generateTabulatorTableFromCSV</span>(</span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#table-container4"</span><span class="op">,</span></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/international_bestsellers/international_bestsellers.csv"</span><span class="op">,</span></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a>    <span class="dt">displayedColumns</span><span class="op">:</span> [</span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a>      <span class="st">"date"</span><span class="op">,</span>                <span class="co">// Date of the bestseller list (month/year)</span></span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>      <span class="st">"country"</span><span class="op">,</span>             <span class="co">// Country where the list was published</span></span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>      <span class="st">"rank"</span><span class="op">,</span>                <span class="co">// Position on the list (1 = top)</span></span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>      <span class="st">"title"</span><span class="op">,</span>               <span class="co">// Title of the book</span></span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a>      <span class="st">"author"</span><span class="op">,</span>              <span class="co">// Author's name</span></span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a>      <span class="st">"nationality"</span><span class="op">,</span>         <span class="co">// Author's nationality</span></span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a>      <span class="st">"gender"</span><span class="op">,</span>              <span class="co">// Author's gender</span></span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>      <span class="st">"entry_id"</span><span class="op">,</span>            <span class="co">// Unique ID for the entry</span></span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a>      <span class="st">"publisher"</span><span class="op">,</span>           <span class="co">// Publisher of this edition</span></span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>      <span class="st">"publication_country"</span>  <span class="co">// Publisher's country</span></span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnPopups</span><span class="op">:</span> [</span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Date of the bestseller list (month and year)."</span><span class="op">,</span>       <span class="co">// date</span></span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Country where the bestseller list was published."</span><span class="op">,</span>     <span class="co">// country</span></span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Ranking on the bestseller list (1 = top seller)."</span><span class="op">,</span>     <span class="co">// rank</span></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Title of the book."</span><span class="op">,</span>                                   <span class="co">// title</span></span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Name of the book’s author."</span><span class="op">,</span>                           <span class="co">// author</span></span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Author’s nationality."</span><span class="op">,</span>                                <span class="co">// nationality</span></span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Author’s gender, if known."</span><span class="op">,</span>                           <span class="co">// gender</span></span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Unique identifier for this entry in the dataset."</span><span class="op">,</span>     <span class="co">// entry_id</span></span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Publisher of this edition."</span><span class="op">,</span>                           <span class="co">// publisher</span></span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Country where the publisher is based."</span>                 <span class="co">// publication_country</span></span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnWidths</span><span class="op">:</span> {</span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>      <span class="st">"date"</span><span class="op">:</span> <span class="st">"24px"</span><span class="op">,</span></span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a>      <span class="st">"country"</span><span class="op">:</span> <span class="st">"24px"</span><span class="op">,</span></span>
+<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>      <span class="st">"rank"</span><span class="op">:</span> <span class="st">"12px"</span><span class="op">,</span></span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a>      <span class="st">"title"</span><span class="op">:</span> <span class="st">"40px"</span><span class="op">,</span></span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a>      <span class="st">"author"</span><span class="op">:</span> <span class="st">"35px"</span><span class="op">,</span></span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a>      <span class="st">"publisher"</span><span class="op">:</span> <span class="st">"30px"</span><span class="op">,</span></span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Adjust as desired</span></span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a>    <span class="dt">numericColumns</span><span class="op">:</span> [<span class="st">"rank"</span>]<span class="op">,</span></span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a>    <span class="dt">categoryColumns</span><span class="op">:</span> [<span class="st">"country"</span><span class="op">,</span> <span class="st">"gender"</span><span class="op">,</span> <span class="st">"nationality"</span><span class="op">,</span> <span class="st">"publication_country"</span>]<span class="op">,</span></span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a>    <span class="co">// No linkColumns needed unless you add URLs</span></span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a>    <span class="co">// linkColumns: [],</span></span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Sort primarily by date, then by rank</span></span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortColumns</span><span class="op">:</span> [<span class="st">"date"</span><span class="op">,</span> <span class="st">"rank"</span>]<span class="op">,</span></span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortOrders</span><span class="op">:</span> [<span class="st">"desc"</span><span class="op">,</span> <span class="st">"asc"</span>]<span class="op">,</span></span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a>    <span class="dt">buttonContainerId</span><span class="op">:</span> <span class="st">"#button-container1"</span><span class="op">,</span></span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rawButtonId</span><span class="op">:</span> <span class="st">"#download-raw1"</span><span class="op">,</span></span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a>    <span class="dt">urlCopyButtonId</span><span class="op">:</span> <span class="st">"#copy-url1"</span><span class="op">,</span></span>
+<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display hidden">
+<div id="ojs-cell-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div id="table-container4" style="height: 500px">
+
+</div>
+Download Full Data
+<div id="button-container">
+<p><button id="download-raw1"><i class="fas fa-download"></i> Download Full Data</button> <button id="copy-url1"><i class="fas fa-copy"></i> Copy Full Data URL</button></p>
+</div>
+<p>Download Table Data (including filtered options)</p>
+<div id="button-container1">
+<p><button id="download-csv"><i class="fas fa-download"></i> Download CSV</button> <button id="download-json"><i class="fas fa-download"></i> Download JSON</button> <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button></p>
+</div>
+<div id="progress-container" style="width: 100%; display: block;">
+<progress id="progress-bar" style="width: 100%;" max="100" value="0"></progress>
+<div id="progress-text" style="text-align: center; margin-top: 5px;">
+
+</div>
+</div>
+<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">
+<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>
+<!-- Excel script -->
+<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Creative Commons License
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p xmlns:cc="http://creativecommons.org/ns#">
+</p><p>This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"></a></p>
+<p></p>
+</div>
+</div>
+</section>
+<section id="significance-context" class="level1">
+<h1><strong>Significance &amp; Context</strong></h1>
+<p>The “International Bestsellers” dataset draws attention to how globalization has affected the publishing industry in the first decades of the twenty-first century. Under multinational conglomerates, works of fiction have increasingly circulated across national borders; “bestsellers” serve the bottom line and work as advertisements for themselves just by being bestsellers. “International Bestsellers” provides the most comprehensive data on twenty-first-century bestsellers.</p>
+<p>“International Bestsellers” contains bestseller lists in fiction for France, Germany, Italy, Spain, and the United States, and periodic lists from 40 other countries, from June 2013 through December 2022. In total, the dataset contains 7,909 entries, each with eight columns of information, totaling 63,272 data points.</p>
+<p>No other existing dataset covers twenty-first-century international bestsellers with information on author nationality, gender, publisher, and country of first publication. Thus, our dataset is relevant to post-1945 scholarship and will be especially useful for scholars in book history, publishing studies, sociology of literature, and twenty-first-century literary studies.</p>
+<p>The dataset invites investigation into questions such as:</p>
+<ul>
+<li>Who are the bestselling authors of the early twenty-first century?<br>
+</li>
+<li>What are the bestselling titles?<br>
+</li>
+<li>Which publishers have the greatest success selling in international markets?<br>
+</li>
+<li>How do the economics of multinational publishers affect the success of an international bestseller?<br>
+</li>
+<li>What are the routes by which bestsellers travel from one national market to another?<br>
+</li>
+<li>And in what ways do the gender and/or nationality of an author correspond with bestseller status?</li>
+</ul>
+<p>We created this dataset to begin to answer some of these questions. Our first peer-reviewed essay based on insights gleaned from this data was published in December 2024. We plan to use our data in subsequent studies to look further into how international publication networks, country of origin, and author nationality and gender relate to a novel’s success as an international bestseller.</p>
+</section>
+<section id="dataset-description" class="level1">
+<h1>Dataset Description</h1>
+<ul>
+<li><p><strong>date</strong><br>
+The year and month the bestseller list was published by <em>Publishing Trends</em> or, for the U.S., the first week of the month in <em>NYT Hardcover Fiction Bestsellers</em>. Reflects aggregation date, not necessarily peak sales.</p></li>
+<li><p><strong>country</strong><br>
+The country where the bestseller list originates, as reported by <em>Publishing Trends</em> or NYT. France, Germany, Italy, Spain, and the U.S. have the most consistent coverage; other countries are included periodically.</p></li>
+<li><p><strong>rank</strong><br>
+The title’s position on the bestseller list for that month and country (1 = highest selling, 10 = lowest).</p></li>
+<li><p><strong>title</strong><br>
+The title of the work as listed in the source. Uses the English-language translation where available; otherwise, the most apt translation or reported title from <em>Publishing Trends</em>. Titles are standardized across all entries for the same work.</p></li>
+<li><p><strong>author</strong><br>
+The author(s) of the work as listed in the original source. Multiple authors are separated by a semicolon (;). Pseudonyms are recorded as given.</p></li>
+<li><p><strong>nationality</strong><br>
+The country or countries of legal citizenship for the author(s), based on self-attribution or reputable sources. Dual citizenship is separated by a comma (,); multiple authors by a semicolon (;).</p></li>
+<li><p><strong>gender</strong><br>
+The gender identity of the author(s), attributed by the author or reputable sources. Uses <code>m</code> for man, <code>w</code> for woman, and <code>n</code> for nonbinary. Multiple authors/genders separated by a semicolon (;).</p></li>
+<li><p><strong>publisher</strong><br>
+The name of the original publisher of the title, based on available research and sources. For self-published works, the corporate entity/platform is listed (e.g., Amazon KDP, Wattpad).</p></li>
+<li><p><strong>publisherCountry</strong><br>
+The country where the original publisher is headquartered. This may reflect the national HQ of a multinational publisher or the country of a self-publishing platform. Determined by mapping publishers to countries, with manual correction when necessary.</p></li>
+</ul>
+<hr>
+<p><strong>Special values and conventions:</strong></p>
+<ul>
+<li><code>NaN</code>: Indicates missing or unavailable information in any field.<br>
+</li>
+<li><strong>Multiple authors/values:</strong> Distinct values (authors, nationalities, genders) are separated by a semicolon (;). Shared values (e.g., dual citizenship for one author) are separated by a comma (,).</li>
+</ul>
+</section>
+<section id="collection-creation" class="level1">
+<h1>Collection &amp; Creation</h1>
+<p>Our dataset contains entries for June 2013 through December 2022. Each month includes a ranked list of the top ten international bestsellers for each country as reported by <em>Publishing Trends</em>. For data on France, Italy, Spain, and Germany, we acquired bestseller lists from <em>Publishing Trends</em> (<em>PT</em>), a monthly newsletter published by Market Partners International, a New York based consulting firm. In consultation with Nina Sabak of <em>PT</em>, who edited the column on international bestsellers during the time of our collection, we scraped the site with OCR techniques as well as by hand. Minor gaps in the data are because the online column skips a few months throughout 2013-2022, and thus data did not exist for these months.</p>
+<p>From <em>Publishing Trends</em>, we gleaned what became columns for “Date,” “Country,” “Rank,” “Title,” and “Author.” We will walk through what these categories represent and how we determined entries for each. “Date” is the date—year and month—that the bestseller list was published by <em>Publishing Trends</em>. <em>PT</em> aggregates bestseller lists from multiple sources, reporting on bestsellers as given by each source at the time the report is generated. In most instances, booksellers update bestseller lists weekly, so the <em>PT</em> reports represent a snapshot of the month’s bestsellers. We describe our data as “monthly” in the sense that the lists have been aggregated by <em>PT</em> on a monthly basis. “Country” is the country where the bestseller list originates. The protocol at <em>PT</em> is to include Spain, France, Germany, and Italy each month, along with two other countries that are not consistent from month to month. Therefore, the number of entries for Italy, Spain, France, and Germany are roughly the same (1,140 entries each; 1,130 for France). However, the number of entries for the other 40 countries are not, with a range from 100 entries (Brazil) to 10 (Nigeria, Malta, and Iceland). “Rank” is the title’s rank on the bestseller list from 1 to 10. “Author” is the title’s author as listed in the original data source. We sometimes adjusted “Title” from its listing in <em>PT</em>. <em>PT</em> reports titles in English. As a rule, the site gives the title as the English-language translation if one exists. If there is no English-language translation, the site offers its own. The site’s own translations can vary for the same book from month-to-month; sometimes a book that wasn’t translated is later translated and then listed under its published English-language title. We have made such variations uniform, selecting a single title for all instances. Where a published English-language title exists, we use that. Where not, we have chosen that which we judged most apt from the versions on <em>Publishing Trends</em>.</p>
+<p>We supplemented data from <em>Publishing Trends</em> with data on US bestsellers, which we drew from Jordan Pruett’s “<em>NYT</em> Hardcover Fiction Bestsellers” as published in the Post45 Data Collective. Because Pruett’s data is weekly, and to align US data with the monthly reporting schedule of <em>PT</em> described above, we used <em>NYT</em> data from the first week of each month. We use Pruett’s data for “Date,” “Country,” “Rank,” “Title,” and “Author” on all bestsellers in the United States.</p>
+<p>We supplemented <em>Publishing Trends</em> and “<em>NYT</em> Hardcover Fiction Bestsellers” with additional columns for “Nationality,” “Gender,” “publisherCountry,” and “Publisher.” “Nationality” contains the nationality of the author; this data was compiled by research assistant Stephen Altobelli. We determined author nationality by self-attribution or attribution by a reputable source, such as the author’s publisher or a reputable publication such as the <em>New York Times</em> or <em>Publishers Weekly</em>. If the author was born in one country but lives in another, we determined their country of legal citizenship; in cases of dual citizenship, we list both countries; if we could not identify an author’s citizenship, we list the country of residence at the time of compilation. Throughout the dataset, a semicolon (;) separates distinct values, such as when a title has more than one author, each of whom are linked to their own nationality and gender. Alternately, a comma (,) separates values shared by an entity (usually, authors with dual citizenship). This difference also highlights a significant number of pseudonyms in which multiple authors work under a single name and may contain multiple nationality or gender data points. For example, see Carmen Mola (Spain), Iny Lorentz (Germany), Christina Lauren (U.S.), Helena S. Paige (South Africa), and Sveva Casati Matignani (Italy).</p>
+<p>“Gender” contains the gender of the author; this data was also compiled by Stephen Altobelli. We use “m” for man, “w” for woman, and “n” for nonbinary. We determined author gender by self-attribution or attribution by a reputable source, such as the author’s publisher or a reputable publication such as the <em>New York Times</em> or <em>Publishers Weekly</em>.</p>
+<p>“Publisher” contains the original publisher of the title and “publisherCountry” contains the original country of publication (based on primary national headquarters of publisher). <em>Publishing Trends</em> includes the publisher in the country where the title is a bestseller and the US publisher if the title has one. We found that when the author’s nationality matches the country where the title was a bestseller (e.g., Andrea Camilleri, Italy), the listed publisher was almost always the original publisher. We also found that when the author’s nationality is US and a US publisher is listed, the US publisher is almost always the original publisher. Given the limits on our time and our inability to hand annotate the complete dataset, we applied these as two rules. We then sampled 300 instances and checked by hand, finding greater than 90% accuracy. Where we found errors we fixed them. This means there is error in the dataset, but at a level we deemed acceptable. To determine “publisherCountry,” we created a dictionary mapping publishers to countries of publication and inferred the latter wherever we had the former.</p>
+<p>The remaining titles—those for which author nationality did not match the country where the title was a bestseller or where the author was not from the US with a listed US publisher—we turned, first, to WorldCat’s data on year of publication for all formats and editions. In most cases, we were able to determine the original publisher/country of publication. If the earliest WorldCat entry appeared suspicious (e.g., listed a year far earlier than any other for the title) or if the title was published by more than one publisher in its initial year, we searched for corroborating evidence with literary agents, publishers, and booksellers. The results of this process present several areas that were consistently addressed within the dataset but require some explanation:</p>
+<p>1) In some cases, titles published simultaneously in multiple countries, especially in the English-speaking world, did not present an obvious original publisher. If additional research did not resolve the issue, we defaulted to the author’s native country.<br>
+2) Occasionally, our research determined that an author published with a multinational publisher headquartered in one country, even though the publisher oversees an imprint or subsidiary in the author’s native country. For example, if an Argentinian author publishes with Planeta, the country of publication is Spain; likewise an Australian author who publishes with Pan Macmillan is listed as first published in the UK. This is especially common in countries that were previous territories of another country. Thus the legacy of colonialism is present in the data, due to so-called “commonwealth rights,” in which publishers automatically retain market rights in previous territories. However, if we found evidence that the author first contracted with the native subsidiary, we listed the publisher along with the name of the country (e.g., Pan Macmillan Australia). It’s worth noting that this is more common in the Anglosphere, such as with Australia and Canada, than with the Hispanosphere.<br>
+3) At the same time, the ever-increasing centrality of the US disrupts these trends, as noted by the numerous UK authors who choose to publish select titles originally with a US publisher, including literary celebrities such as J.K. Rowling, Neil Gaiman, and Jojo Moyes. These instances required individual research, thus some degree of error may remain in this category, as we’ve corrected the most notable exceptions.<br>
+4) Finally, for self-published titles we made the decision to attribute publisherCountry to the country of the corporate entity or platform used by the author. For example, in our dataset the country of publication for titles published through Wattpad is Canada; for Amazon’s Kindle Direct Publishing, the United States; for The Writers’ Coffee Shop, Australia; etc. This decision is consistent with our attention to the institutions of publication, rather than author nationality, in determining the country of publication.</p>
+<p>Regarding genre, while the dataset is generally limited to adult fiction, titles representative of other industry categories such as nonfiction, children’s literature, anime, and young adult literature occasionally show up on international lists, due to the variances in how foreign booksellers market, label, and list bestsellers. In a single instance (Hong Kong 07-2013), we removed a list generated by <em>Publishing Trends</em> from our dataset because it was entirely composed of nonfiction titles, thus making it inconsistent with the rest of the corpus.</p>
+<p>In rare instances, mostly due to self-published authors using online handles, we could not identify personal data. In these cases, “NaN” signifies no available data. In one instance, the data is missing from the original source (Spain 2016-09, rank 10).</p>
+</section>
+<section id="ethical-considerations" class="level1">
+<h1>Ethical Considerations</h1>
+<p>Author gender and nationality data could be considered sensitive, especially in the case where a particular author is using a pseudonym to mask one of these identifiers. However, all our data derives from publicly available information and is, therefore, not confidential.</p>
+</section>
+<section id="versioning" class="level1">
+<h1>Versioning</h1>
+<p>We had intended to update the dataset annually using the same methodology described here. In 2023, Nina Sabak left <em>Publishing Trends</em>, and in September, the international bestseller section of the periodical was paused with no indication of being resumed. Without a consistent data source, expanding the dataset may be impossible, but we are working to identify possible solutions.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{dileonardi2025,
+  author = {DiLeonardi, Sean and Cohen, Becca and Sinykin, Dan},
+  editor = {Manshel, Alexander and Porter, J.D. and Walsh, Melanie},
+  title = {International {Bestsellers:} {The} {Dataset}},
+  journal = {Post45 Data Collective},
+  date = {2025-07-03},
+  url = {https://data.post45.org/posts/international-bestsellers/},
+  doi = {10.18737/IBDATA2025},
+  langid = {en},
+  abstract = {The “International Bestsellers” dataset draws attention to
+    how globalization has affected the publishing industry in the first
+    decades of the twenty-first century. Under multinational
+    conglomerates, works of fiction have increasingly circulated across
+    national borders; “bestsellers” serve the bottom line and work as
+    advertisements for themselves just by being bestsellers.
+    “International Bestsellers” provides the most comprehensive data on
+    twenty-first-century bestsellers. It contains bestseller lists in
+    fiction for France, Germany, Italy, Spain, and the United States,
+    and periodic lists from 40 other countries, from June 2013 through
+    December 2022.}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-dileonardi2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+DiLeonardi, Sean, Becca Cohen, and Dan Sinykin. 2025.
+<span>“International Bestsellers: The Dataset.”</span> Edited by
+Alexander Manshel, J.D. Porter, and Melanie Walsh. <em>Post45 Data
+Collective</em>, July. <a href="https://doi.org/10.18737/IBDATA2025">https://doi.org/10.18737/IBDATA2025</a>.
+</div></div></section></div></main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuaW1wb3J0IHt2aWV3b2YgeWVhcixcbnZpZXdvZiBtb250aCxcbnZpZXdvZiBzZWxlY3QsXG52aWV3b2YgdGl0bGUsXG5tb250aExhYmVsLFxudGFibGV9IGZyb20gXCI3NzI2MzlkNmRhMTkzNTViXCJcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBzZWxlY3Rcbmh0bWxgPGgzPkJlc3RzZWxsZXJzIGluICR7c2VsZWN0fTwvaDE+XG48aDM+JHttb250aExhYmVsfSAke3llYXJ9PGgyPmBcbnZpZXdvZiB5ZWFyIFxudmlld29mIG1vbnRoXG5odG1sYDxicj5gXG50YWJsZVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiaW1wb3J0IHt2aWV3b2YgZGF0YVN1bW1hcnlWaWV3LCBUYWJ1bGF0b3IsIHZpZXdvZiBzZWxlY3RlZENvbHVtbnMsIHZpZXdvZiBkYXRhU2V0LCB0YWJsZUNvbnRhaW5lciwgZmV0Y2hEYXRhLCBnZW5lcmF0ZVRhYnVsYXRvclRhYmxlRnJvbUNTViwgcHJvZ3Jlc3MsIHByb2dyZXNzYmFyfSBmcm9tIFwiOGJiNjNhNmNkZTlhZGRmZlwiXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJyYXdfZGF0YSA9IGZldGNoRGF0YShcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9Qb3N0NDUtRGF0YS1Db2xsZWN0aXZlL2RhdGEvcmVmcy9oZWFkcy9tYWluL2ludGVybmF0aW9uYWxfYmVzdHNlbGxlcnMvaW50ZXJuYXRpb25hbF9iZXN0c2VsbGVycy5jc3ZcIilcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuLy8gSW50ZXJuYXRpb25hbCBCZXN0c2VsbGVycyBUYWJsZSAod2l0aCBjb3JyZWN0IGNvbHVtbnMpXG5nZW5lcmF0ZVRhYnVsYXRvclRhYmxlRnJvbUNTVihcbiAgXCIjdGFibGUtY29udGFpbmVyNFwiLFxuICBcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9Qb3N0NDUtRGF0YS1Db2xsZWN0aXZlL2RhdGEvcmVmcy9oZWFkcy9tYWluL2ludGVybmF0aW9uYWxfYmVzdHNlbGxlcnMvaW50ZXJuYXRpb25hbF9iZXN0c2VsbGVycy5jc3ZcIixcbiAge1xuICAgIGRpc3BsYXllZENvbHVtbnM6IFtcbiAgICAgIFwiZGF0ZVwiLCAgICAgICAgICAgICAgICAvLyBEYXRlIG9mIHRoZSBiZXN0c2VsbGVyIGxpc3QgKG1vbnRoL3llYXIpXG4gICAgICBcImNvdW50cnlcIiwgICAgICAgICAgICAgLy8gQ291bnRyeSB3aGVyZSB0aGUgbGlzdCB3YXMgcHVibGlzaGVkXG4gICAgICBcInJhbmtcIiwgICAgICAgICAgICAgICAgLy8gUG9zaXRpb24gb24gdGhlIGxpc3QgKDEgPSB0b3ApXG4gICAgICBcInRpdGxlXCIsICAgICAgICAgICAgICAgLy8gVGl0bGUgb2YgdGhlIGJvb2tcbiAgICAgIFwiYXV0aG9yXCIsICAgICAgICAgICAgICAvLyBBdXRob3IncyBuYW1lXG4gICAgICBcIm5hdGlvbmFsaXR5XCIsICAgICAgICAgLy8gQXV0aG9yJ3MgbmF0aW9uYWxpdHlcbiAgICAgIFwiZ2VuZGVyXCIsICAgICAgICAgICAgICAvLyBBdXRob3IncyBnZW5kZXJcbiAgICAgIFwiZW50cnlfaWRcIiwgICAgICAgICAgICAvLyBVbmlxdWUgSUQgZm9yIHRoZSBlbnRyeVxuICAgICAgXCJwdWJsaXNoZXJcIiwgICAgICAgICAgIC8vIFB1Ymxpc2hlciBvZiB0aGlzIGVkaXRpb25cbiAgICAgIFwicHVibGljYXRpb25fY291bnRyeVwiICAvLyBQdWJsaXNoZXIncyBjb3VudHJ5XG4gICAgXSxcblxuICAgIGNvbHVtblBvcHVwczogW1xuICAgICAgXCJEYXRlIG9mIHRoZSBiZXN0c2VsbGVyIGxpc3QgKG1vbnRoIGFuZCB5ZWFyKS5cIiwgICAgICAgLy8gZGF0ZVxuICAgICAgXCJDb3VudHJ5IHdoZXJlIHRoZSBiZXN0c2VsbGVyIGxpc3Qgd2FzIHB1Ymxpc2hlZC5cIiwgICAgIC8vIGNvdW50cnlcbiAgICAgIFwiUmFua2luZyBvbiB0aGUgYmVzdHNlbGxlciBsaXN0ICgxID0gdG9wIHNlbGxlcikuXCIsICAgICAvLyByYW5rXG4gICAgICBcIlRpdGxlIG9mIHRoZSBib29rLlwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gdGl0bGVcbiAgICAgIFwiTmFtZSBvZiB0aGUgYm9va+KAmXMgYXV0aG9yLlwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIGF1dGhvclxuICAgICAgXCJBdXRob3LigJlzIG5hdGlvbmFsaXR5LlwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gbmF0aW9uYWxpdHlcbiAgICAgIFwiQXV0aG9y4oCZcyBnZW5kZXIsIGlmIGtub3duLlwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIGdlbmRlclxuICAgICAgXCJVbmlxdWUgaWRlbnRpZmllciBmb3IgdGhpcyBlbnRyeSBpbiB0aGUgZGF0YXNldC5cIiwgICAgIC8vIGVudHJ5X2lkXG4gICAgICBcIlB1Ymxpc2hlciBvZiB0aGlzIGVkaXRpb24uXCIsICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gcHVibGlzaGVyXG4gICAgICBcIkNvdW50cnkgd2hlcmUgdGhlIHB1Ymxpc2hlciBpcyBiYXNlZC5cIiAgICAgICAgICAgICAgICAgLy8gcHVibGljYXRpb25fY291bnRyeVxuICAgIF0sXG5cbiAgICBjb2x1bW5XaWR0aHM6IHtcbiAgICAgIFwiZGF0ZVwiOiBcIjI0cHhcIixcbiAgICAgIFwiY291bnRyeVwiOiBcIjI0cHhcIixcbiAgICAgIFwicmFua1wiOiBcIjEycHhcIixcbiAgICAgIFwidGl0bGVcIjogXCI0MHB4XCIsXG4gICAgICBcImF1dGhvclwiOiBcIjM1cHhcIixcbiAgICAgIFwicHVibGlzaGVyXCI6IFwiMzBweFwiLFxuICAgICAgLy8gQWRqdXN0IGFzIGRlc2lyZWRcbiAgICB9LFxuXG4gICAgbnVtZXJpY0NvbHVtbnM6IFtcInJhbmtcIl0sXG4gICAgY2F0ZWdvcnlDb2x1bW5zOiBbXCJjb3VudHJ5XCIsIFwiZ2VuZGVyXCIsIFwibmF0aW9uYWxpdHlcIiwgXCJwdWJsaWNhdGlvbl9jb3VudHJ5XCJdLFxuXG4gICAgLy8gTm8gbGlua0NvbHVtbnMgbmVlZGVkIHVubGVzcyB5b3UgYWRkIFVSTHNcbiAgICAvLyBsaW5rQ29sdW1uczogW10sXG5cbiAgICAvLyBTb3J0IHByaW1hcmlseSBieSBkYXRlLCB0aGVuIGJ5IHJhbmtcbiAgICBzb3J0Q29sdW1uczogW1wiZGF0ZVwiLCBcInJhbmtcIl0sXG4gICAgc29ydE9yZGVyczogW1wiZGVzY1wiLCBcImFzY1wiXSxcblxuICAgIGJ1dHRvbkNvbnRhaW5lcklkOiBcIiNidXR0b24tY29udGFpbmVyMVwiLFxuICAgIHJhd0J1dHRvbklkOiBcIiNkb3dubG9hZC1yYXcxXCIsXG4gICAgdXJsQ29weUJ1dHRvbklkOiBcIiNjb3B5LXVybDFcIixcbiAgfVxuKTtcbiJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../posts/international-bestsellers";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/data\.post45\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p style="color:white">
+Supported by <a href="https://www.neh.gov"><img src="https://www.neh.gov/sites/default/files/styles/background_hero_ultra_large_2600/public/2024-10/NEH%20Seal%20with%20Full%20Name%20-%20Inversed%20Color.png" class="img-fluid" alt="National Endowment for the Humanities" width="75"></a> <a href="https://digitalscholarship.emory.edu/"><img src="https://www.jhrehab.org/wp-content/uploads/2023/10/Data-Center-ecds-logo.png?w=640" class="img-fluid" alt="Emory Center for Digital Scholarship" width="75"></a> Built with <a href="https://quarto.org/"><img src="https://raw.githubusercontent.com/github/explore/80f119e965a9a3df7b74c3f7b63a502e3d0ded36/topics/quarto/quarto.png" class="img-fluid" alt="Quarto" width="65"></a>
+</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
