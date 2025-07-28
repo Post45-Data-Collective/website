@@ -63,6 +63,69 @@
   }
 }
 
+.ib-buttons {
+  padding: 0.5em 1em;
+  background-color: #f9f9f9;
+  /* border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer; */
+  /* color: black; */
+  background-color: #455B64;
+  transition: background-color 0.2s ease;
+}
+
+.ib-buttons:hover {
+  background-color: #FFBA00;
+}
+
+.dropdown-group {
+
+  display: flex;
+  flex-direction: row;
+  gap:  1rem;
+  align-items: center;
+  /* justify-content: flex-start; */
+
+}
+@media (max-width: 768px) {.dropdown-group {
+
+  display: flex;
+  flex-direction: row;
+  gap:  1rem;
+  align-items: flex-end;
+  /* justify-content: flex-start; */
+
+}}
+
+figcaption {
+  text-align: center;
+}
+
+/* .ib-prev {
+  color: #555;
+}
+
+.ib-next {
+  color: #0077cc;
+} */
+
+.ib-button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Space between buttons */
+}
+
+@media (max-width: 768px) { .ib-button-group {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  gap: 5px; /* Space between buttons */
+}
+}
+
 
   /* Set datatable column widths */
 

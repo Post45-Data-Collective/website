@@ -3,26 +3,26 @@ title: "International Bestsellers: The Dataset"
 author:
   - name: "Sean DiLeonardi"
     # affiliation: "Assistant Professor of English & Director, Center for Digital Studies, University of Pittsburgh at Greensburg"
-    orcid: "0000-0002-4424-972X"
+    # orcid: "0000-0002-4424-972X"
     url: "https://www.greensburg.pitt.edu/people/sean-dileonardi-phd"
     email: "sed148@pitt.edu"
   - name: "Becca Cohen"
     # affiliation: "PhD Student, School of Information Sciences, University of Illinois Urbana-Champaign"
-    orcid: "0000-0003-2521-3662"
+    # orcid: "0000-0003-2521-3662"
     url: "https://rscohen2.github.io/"
     # LinkedIn: https://www.linkedin.com/in/rebecca-cohen-3640a2145/
     email: "rcohen21@illinois.edu"
   - name: "Dan Sinykin"
     # affiliation: "Associate Professor of English, Emory University; Quantitative Theory & Methods"
-    orcid: "0000-0002-5245-2333"
+    # orcid: "0000-0002-5245-2333"
     url: "http://www.dansinykin.com/"
     email: "daniel.sinykin@emory.edu"
 abstract: |
-  The "International Bestsellers" dataset draws attention to how globalization has affected the publishing industry in the first decades of the twenty-first century. Under multinational conglomerates, works of fiction have increasingly circulated across national borders; “bestsellers” serve the bottom line and work as advertisements for themselves just by being bestsellers. “International Bestsellers” provides the most comprehensive data on twenty-first-century bestsellers. It contains bestseller lists in fiction for France, Germany, Italy, Spain, and the United States, and periodic lists from 40 other countries, from June 2013 through December 2022.
-categories: [dataset, bestsellers, publishing, translation, literature, draft]
-image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Book_stack_on_a_white_background_%28worldwide_bestsellers%29.jpg/1280px-Book_stack_on_a_white_background_%28worldwide_bestsellers%29.jpg"
+  This dataset contains bestseller lists in fiction for France, Germany, Italy, Spain, and the United States, and periodic lists from 40 other countries, from June 2013 through December 2022. Data is drawn from *Publishing Trends* and *The New York Times*.
+categories: [bestsellers, publishing, translation, literature, dataset, draft]
+image: "https://m.media-amazon.com/images/I/616nzgP+DgL._SL1500_.jpg"
 doi: "10.18737/IBDATA2025" # example DOI, replace with actual if available
-date: "2025-07-03"
+date: "2025-07-29"
 citation:
   type: article-journal
   container-title: "Post45 Data Collective"
@@ -60,7 +60,7 @@ Then fill in the rest of the information above and below. -->
 
 <!-- Include image for data essay -->
 
-![Source: [University of Illinois](https://www.library.illinois.edu/rbx/hgwells2016/category/the-time-machine/)](https://www.library.illinois.edu/rbx/hgwells2016/wp-content/uploads/2016/09/TimeMachine_Berkeley_1200.jpg){fig-align="center" width="50%"}
+![Spanish edition of *The Girl on the Train* (2015) by Paula Hawkins.](https://m.media-amazon.com/images/I/616nzgP+DgL._SL1500_.jpg){fig-align="center" width=50%}
 
 <!-- Include brief introduction to/description of data essay  -->
 
@@ -73,24 +73,34 @@ Then fill in the rest of the information above and below. -->
 //|echo: false
 //|output: false
 
-import {viewof year,
-viewof month,
+import {
 viewof select,
-viewof title,
+countryReset,
+viewof yearMonthNav,
+viewof selectedYear,
+viewof selectedMonth,
 monthLabel,
 table} from "772639d6da19355b"
 ```
 
-
 ```{ojs}
-//|echo: false
-viewof select
-html`<h3>Bestsellers in ${select}</h1>
-<h3>${monthLabel} ${year}<h2>`
-viewof year 
-viewof month
-html`<br>`
-table
+//| echo: false
+
+html`
+${viewof select}
+${viewof selectedYear}
+${viewof selectedMonth}
+`
+
+html`<div>
+  <h3 >Bestsellers in ${select} — ${monthLabel(selectedMonth)} ${selectedYear}</h4>
+</div>
+`
+html`<div style="height: 400px; overflow-y: auto">${table}</div>`
+
+html`<div class="ib-button-group">
+${viewof yearMonthNav}
+</div>`
 ```
 
 # Data Table
@@ -145,12 +155,12 @@ generateTabulatorTableFromCSV(
     ],
 
     columnWidths: {
-      "date": "24px",
-      "country": "24px",
-      "rank": "12px",
-      "title": "40px",
-      "author": "35px",
-      "publisher": "30px",
+      // "date": "15px",
+      // "country": "15px",
+      // // "rank": "10px",
+      // "title": "30px",
+      // "author": "30px",
+      // "publisher": "30px",
       // Adjust as desired
     },
 
@@ -216,6 +226,8 @@ This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0
 
 # **Significance & Context**
 
+***See the authors' related journal article:** ["Brand Management: International Bestsellers and the Death of the Author, Again"](https://doi.org/10.1353/sdn.2024.a948008) in Studies in the Novel (2024).*
+
 The “International Bestsellers” dataset draws attention to how globalization has affected the publishing industry in the first decades of the twenty-first century. Under multinational conglomerates, works of fiction have increasingly circulated across national borders; “bestsellers” serve the bottom line and work as advertisements for themselves just by being bestsellers. “International Bestsellers” provides the most comprehensive data on twenty-first-century bestsellers.
 
 “International Bestsellers” contains bestseller lists in fiction for France, Germany, Italy, Spain, and the United States, and periodic lists from 40 other countries, from June 2013 through December 2022\. In total, the dataset contains 7,909 entries, each with eight columns of information, totaling 63,272 data points.
@@ -231,7 +243,7 @@ The dataset invites investigation into questions such as:
 - What are the routes by which bestsellers travel from one national market to another?  
 - And in what ways do the gender and/or nationality of an author correspond with bestseller status? 
 
-We created this dataset to begin to answer some of these questions. Our first peer-reviewed essay based on insights gleaned from this data was published in December 2024\. We plan to use our data in subsequent studies to look further into how international publication networks, country of origin, and author nationality and gender relate to a novel’s success as an international bestseller.
+We created this dataset to begin to answer some of these questions. Our first peer-reviewed essay based on insights gleaned from this data, ["Brand Management: International Bestsellers and the Death of the Author, Again,"](https://doi.org/10.1353/sdn.2024.a948008) was published in December 2024. We plan to use our data in subsequent studies to look further into how international publication networks, country of origin, and author nationality and gender relate to a novel’s success as an international bestseller.
 
 
 # Dataset Description
@@ -240,7 +252,7 @@ We created this dataset to begin to answer some of these questions. Our first pe
   The year and month the bestseller list was published by *Publishing Trends* or, for the U.S., the first week of the month in *NYT Hardcover Fiction Bestsellers*. Reflects aggregation date, not necessarily peak sales.  
     
 - **country**  
-  The country where the bestseller list originates, as reported by *Publishing Trends* or NYT. France, Germany, Italy, Spain, and the U.S. have the most consistent coverage; other countries are included periodically.  
+  The country where the bestseller list originates, as reported by *Publishing Trends* or *NYT*. France, Germany, Italy, Spain, and the U.S. have the most consistent coverage; other countries are included periodically.  
     
 - **rank**  
   The title’s position on the bestseller list for that month and country (1 \= highest selling, 10 \= lowest).  
@@ -276,7 +288,7 @@ Our dataset contains entries for June 2013 through December 2022\. Each month in
 
 From *Publishing Trends*, we gleaned what became columns for “Date,” “Country,” “Rank,” “Title,” and “Author.” We will walk through what these categories represent and how we determined entries for each. “Date” is the date—year and month—that the bestseller list was published by *Publishing Trends*. *PT* aggregates bestseller lists from multiple sources, reporting on bestsellers as given by each source at the time the report is generated. In most instances, booksellers update bestseller lists weekly, so the *PT* reports represent a snapshot of the month’s bestsellers. We describe our data as “monthly” in the sense that the lists have been aggregated by *PT* on a monthly basis. “Country” is the country where the bestseller list originates. The protocol at *PT* is to include Spain, France, Germany, and Italy each month, along with two other countries that are not consistent from month to month. Therefore, the number of entries for Italy, Spain, France, and Germany are roughly the same (1,140 entries each; 1,130 for France). However, the number of entries for the other 40 countries are not, with a range from 100 entries (Brazil) to 10 (Nigeria, Malta, and Iceland). “Rank” is the title’s rank on the bestseller list from 1 to 10\. “Author” is the title’s author as listed in the original data source. We sometimes adjusted “Title” from its listing in *PT*. *PT* reports titles in English. As a rule, the site gives the title as the English-language translation if one exists. If there is no English-language translation, the site offers its own. The site’s own translations can vary for the same book from month-to-month; sometimes a book that wasn’t translated is later translated and then listed under its published English-language title. We have made such variations uniform, selecting a single title for all instances. Where a published English-language title exists, we use that. Where not, we have chosen that which we judged most apt from the versions on *Publishing Trends*.
 
-We supplemented data from *Publishing Trends* with data on US bestsellers, which we drew from Jordan Pruett’s “*NYT* Hardcover Fiction Bestsellers” as published in the Post45 Data Collective. Because Pruett’s data is weekly, and to align US data with the monthly reporting schedule of *PT* described above, we used *NYT* data from the first week of each month. We use Pruett’s data for “Date,” “Country,” “Rank,” “Title,” and “Author” on all bestsellers in the United States.
+We supplemented data from *Publishing Trends* with data on US bestsellers, which we drew from Jordan Pruett’s [“*NYT* Hardcover Fiction Bestsellers”](https://data.post45.org/posts/nyt_hardcover_fiction_bestsellers/) as published in the Post45 Data Collective. Because Pruett’s data is weekly, and to align US data with the monthly reporting schedule of *PT* described above, we used *NYT* data from the first week of each month. We use Pruett’s data for “Date,” “Country,” “Rank,” “Title,” and “Author” on all bestsellers in the United States.
 
 We supplemented *Publishing Trends* and “*NYT* Hardcover Fiction Bestsellers” with additional columns for “Nationality,” “Gender,” “publisherCountry,” and “Publisher.” “Nationality” contains the nationality of the author; this data was compiled by research assistant Stephen Altobelli. We determined author nationality by self-attribution or attribution by a reputable source, such as the author’s publisher or a reputable publication such as the *New York Times* or *Publishers Weekly*. If the author was born in one country but lives in another, we determined their country of legal citizenship; in cases of dual citizenship, we list both countries; if we could not identify an author’s citizenship, we list the country of residence at the time of compilation. Throughout the dataset, a semicolon (;) separates distinct values, such as when a title has more than one author, each of whom are linked to their own nationality and gender. Alternately, a comma (,) separates values shared by an entity (usually, authors with dual citizenship). This difference also highlights a significant number of pseudonyms in which multiple authors work under a single name and may contain multiple nationality or gender data points. For example, see Carmen Mola (Spain), Iny Lorentz (Germany), Christina Lauren (U.S.), Helena S. Paige (South Africa), and Sveva Casati Matignani (Italy).
 
