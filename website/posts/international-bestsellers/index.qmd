@@ -21,7 +21,7 @@ abstract: |
   This dataset contains bestseller lists in fiction for France, Germany, Italy, Spain, and the United States, and periodic lists from 40 other countries, from June 2013 through December 2022. Data is drawn from *Publishing Trends* and *The New York Times*.
 categories: [bestsellers, publishing, translation, literature, dataset, draft]
 image: "https://m.media-amazon.com/images/I/616nzgP+DgL._SL1500_.jpg"
-doi: "10.18737/IBDATA2025" # example DOI, replace with actual if available
+doi: "10.18737/386521" # example DOI, replace with actual if available
 date: "2025-07-29"
 citation:
   type: article-journal
