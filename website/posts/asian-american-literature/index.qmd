@@ -19,14 +19,14 @@ author:
   #   email: "daniel.sinykin@emory.edu"
 abstract: |
   This dataset traces the Asian American literary canon through nearly 1,900 scholarly citations from 1971 to 2023, capturing which authors and texts have shaped the field over time.
-categories: [canon, asian american, literature, dataset, draft]
-image: "hhttps://m.media-amazon.com/images/I/51Z5IAW440L._SY445_SX342_ControlCacheEqualizer_.jpg"
-doi: "10.18737/IBDATA2025" # example DOI, replace with actual if available
-date: "2025-08-15"
+categories: [asian american, literature, canon, fiction, dataset, draft]
+image: "grid.png"
+doi: "10.18737/092211" # example DOI, replace with actual if available
+date: "2025-08-13"
 citation:
   type: article-journal
   container-title: "Post45 Data Collective"
-  doi: "10.18737/IBDATA2025" # example DOI, update if needed
+  doi: "10.18737/092211" # example DOI, update if needed
   editor:
     - Alexander Manshel
     - J.D. Porter
@@ -50,6 +50,9 @@ aliases:
   - /asian-american-literature
 ---
 
+**Principal Investigator**: Long Le-Khac\
+**Research Assistants**: Kate Hao, Taylor Huie
+
 ```{=html}
 <!-- EDITORIAL TEAM: Create a new directory in posts/ with appropriate title for data essay (which will become the URL slug, e.g. /nea-creative-writing-fellowships becomes https://post45-data-collective.github.io/website/posts/nea-creative-writing-fellowships/).
 
@@ -60,7 +63,7 @@ Then fill in the rest of the information above and below. -->
 
 <!-- Include image for data essay -->
 
-![Native Speaker.](https://m.media-amazon.com/images/I/51Z5IAW440L._SY445_SX342_ControlCacheEqualizer_.jpg){fig-align="center" width=40%}
+![Most cited Asian American texts.](grid.png){fig-align="center" width=100%}
 
 <!-- Include brief introduction to/description of data essay  -->
 
@@ -92,65 +95,74 @@ generateTabulatorTableFromCSV(
   "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/asian_american_literature/canon_asian_american_literature.csv",
   {
     displayedColumns: [
-      
-      "title",                     // Primary text title
-      "author_name",              // Primary author's name
-      "publication_year",         // Original publication year
-       "scholarship_title",        // Title of the scholarly article
-      "scholar_name",             // Author of the scholarly article
-      "scholarship_year",        // Year of scholarly publication
-      "scholarship_venue",       // Journal/book/etc.
-      "genre",                    // Literary form or medium
-       "birth_year",               // Author's birth year
-      "gender",                   // Author's gender
-      "ethnicity_national_origin_group", // Ethnic/national origin
-      "race",                     // Author's race
-      "publisher",                // Original publisher or venue
-      "text_awards",              // Awards won by the text
-      "nyt_bestseller",           // NYT bestseller status
-      
-     
-      "birth_nation",             // Birth nation
-      "native_foreign",           // U.S. born or immigrant
-      "immigrant_generation",     // Immigrant generation
-      "education_level",          // Formal education level
-      "degree",                   // Highest degree
-      "mfa",                      // MFA degree earned
-      "university_teacher",       // University instructor status
-      "author_awards",            // Awards won by the author
-     
-      "mla_doi"                   // MLA accession number or DOI
-    ],
+  "title",                     // Primary text title
+  "publication_year",           // Original publication year
+  "genre",                      // Literary form or medium
+  "publisher",                  // Original publisher or venue
+  "text_awards",                // Awards won by the text
+  "nyt_bestseller",             // NYT bestseller status
 
-    columnPopups: [
-            "Title of the primary literary text.",
+  "author_name",                // Primary author's name
+  "birth_year",                 // Author's birth year
+  "gender",                     // Author's gender
+  "ethnicity_national_origin_group", // Ethnic/national origin
+  "race",                       // Author's race
+  "birth_nation",               // Birth nation
+  "native_foreign",             // U.S. born or immigrant
+  "immigrant_generation",       // Immigrant generation
+  "immigration_year",           // Year of immigration
+  "nations",                    // Nations lived in
+  "states",                     // U.S. states lived in
+  "cities",                     // Cities lived in
+  "education_level",            // Formal education level
+  "degree",                     // Highest degree
+  "mfa",                        // MFA degree earned
+  "degree_institution",         // Institution granting highest degree
+  "university_teacher",         // University instructor status
+  "teaching_institution",       // Institutions where taught
+  "author_awards",              // Awards won by the author
 
-            "Name of the primary text’s author.",
+  "scholarship_title",          // Title of the scholarly article
+  "scholar_name",               // Author of the scholarly article
+  "scholarship_year",           // Year of scholarly publication
+  "scholarship_venue",          // Journal/book/etc.
+  "mla_doi"                     // MLA accession number or DOI
+],
 
-      "Original year of publication for the text.",
-      "Title of the scholarly publication analyzing the text/author.",
-      "Author(s) of the scholarly work.",
-      "Year the scholarly work was published.",
-      "Where the scholarly work appeared (e.g., journal, book).",
-      "Form or medium of the text (e.g., Novel, Poetry).",
-      "Author’s birth year.",
-      "Author’s gender (based on self-ID or sources).",
-      "Author’s ethnic background or national origin group.",
-      "Race of the author (per Census-style categories).",
-      "Publisher or venue of the text.",
-      "Awards won by the text.",
-      "Was the text a NYT bestseller? (Y/N/N/A).",
-      "Nation where the author was born.",
-      "Whether the author is U.S. born or an immigrant.",
-      "Generation of immigration to the U.S., if applicable.",
-      "Level of formal education completed by the author.",
-      "Highest degree earned by the author.",
-      "Whether the author earned an MFA degree.",
-      "Has the author taught at a university?",
-      "Awards won by the author (not including text awards).",
-      
-      "MLA Bibliography ID or DOI for the scholarly work."
-    ],
+columnPopups: [
+  "Title of the primary literary text.",
+  "Original year of publication for the text.",
+  "Form or medium of the text (e.g., Novel, Poetry).",
+  "Publisher or venue of the text.",
+  "Awards won by the text.",
+  "Was the text a NYT bestseller? (Y/N/N/A).",
+
+  "Name of the primary text’s author.",
+  "Author’s birth year.",
+  "Author’s gender (based on self-ID or sources).",
+  "Author’s ethnic background or national origin group.",
+  "Race of the author (per Census-style categories).",
+  "Nation where the author was born.",
+  "Whether the author is U.S. born or an immigrant.",
+  "Generation of immigration to the U.S., if applicable.",
+  "Year of U.S. immigration (if applicable).",
+  "Nations where the author has lived.",
+  "U.S. states where the author has lived.",
+  "Cities where the author has lived.",
+  "Level of formal education completed by the author.",
+  "Highest degree earned by the author.",
+  "Whether the author earned an MFA degree.",
+  "Institution(s) granting the author’s highest degree(s).",
+  "Has the author taught at a university?",
+  "Institutions where the author has taught.",
+  "Awards won by the author (not including text awards).",
+
+  "Title of the scholarly publication analyzing the text/author.",
+  "Author(s) of the scholarly work.",
+  "Year the scholarly work was published.",
+  "Where the scholarly work appeared (e.g., journal, book).",
+  "MLA Bibliography ID or DOI for the scholarly work."
+],
 
     columnWidths: {
       title: "25%",
@@ -168,11 +180,11 @@ generateTabulatorTableFromCSV(
     numericColumns: ["publication_year", "birth_year", "immigration_year", "scholarship_year"],
     categoryColumns: [
       "genre", "gender", "race", "native_foreign", "mfa", 
-      "university_teacher", "nyt_bestseller", "education_level", "degree"
+      "university_teacher", "nyt_bestseller", "education_level", "degree", "immigrant_generation"
     ],
 
-    sortColumns: ["author_name"],
-    sortOrders: ["asc"],
+    sortColumns: ["publication_year"],
+    sortOrders: ["desc"],
 
     buttonContainerId: "#button-container1",
     rawButtonId: "#download-raw1",
@@ -229,7 +241,7 @@ This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0
 //|echo: false
 //|output: false
 // https://observablehq.com/d/75d37bad8cc92862
-import {viewof groupByColumn, viewof topX, fetchData, viewof table_data, filtered_data, line_plot, title, bar_chart} from "11054a49b79e0508"
+import {viewof groupByColumn, viewof topX, fetchData, viewof table_data, filtered_data, line_plot, title, bar_chart, line_plot2} from "11054a49b79e0508"
 ```
 
 
@@ -256,6 +268,7 @@ bar_chart
 ```{ojs}
 //|echo: false
 line_plot
+line_plot2
 ```
 
 
@@ -268,7 +281,7 @@ This dataset addresses that need. Representing the canon that scholars of Asian 
 
 The dataset captures nearly 1,900 instances in which a primary text has been studied as an Asian American work. The dataset allows for tracking the scholarly attention of Asian American literary studies over time and examining the kinds of texts and authors the field has emphasized, making possible meta-critical study of how scholars of Asian American literature have constructed their object of inquiry. With this data, we can ask, how have the definitions, boundaries, and internal structures of this corpus transformed over time? How to define Asian American literature, where to draw its boundaries, and which groups have been included or excluded have long been central debates in the field (Koshy, Lowe, Chuh). These debates have often been theoretical. This dataset offers the chance to ground these debates in empirical examinations of the concrete corpus-building practices of scholars. On one important level, Asian American literature is the body of texts that have been discussed as Asian American by the hundreds of scholars who have helped institutionalize the idea of this literature. Publication by publication, scholars in Asian American studies have made choices about which works deserve attention as Asian American literature. These choices have accreted over decades into a canon that has shaped the idea of Asian American literature and bears systemic inequities. This shaping demands scrutiny. This dataset allows for that scrutiny.   
 
-For scholars of Asian American literature, this dataset offers many possibilities. For example, they could mine the immigration data to examine how the transnational turn in Asian American studies and its responses to mass immigration made the Asian American canon more transnational and immigrant-centered. They could mine the geographic data to assess whether the field has expanded its attention beyond long-established ethnic communities in California and Hawai‘i. They can track how the genres centered by the field have shifted over time. Members of the research team have used this dataset to examine inequalities of period, ethnicity, and gender in the canon of Asian American literature. These are just a few examples of the kinds of studies this dataset enables.  
+For scholars of Asian American literature, this dataset offers many possibilities. For example, they could mine the immigration data to examine how the transnational turn in Asian American studies and its responses to mass immigration made the Asian American canon more transnational and immigrant-centered. They could mine the geographic data to assess whether the field has expanded its attention beyond long-established ethnic communities in California and Hawai‘i. They can track how the genres centered by the field have shifted over time. Members of the research team have used this dataset to examine inequalities of period, ethnicity, and gender in the canon of Asian American literature (Le-Khac and Hao). These are just a few examples of the kinds of studies this dataset enables.  
 
 For scholars beyond Asian American studies who are interested in canon formation, this dataset offers a particularly interesting case, because the formation of Asian American literature as a self-conscious body of works is a recent development unfolding over the last 50 years. This dataset spans this time period, allowing scholars to track the full development of a canon from a nascent formation to a mature body that has become large and established enough to generate its own internal pressures and inequalities.   
 
@@ -307,39 +320,102 @@ We tried to keep the data collection capacious and uncommitted to any one defini
 
 # **Description**
 
-“The Canon of Asian American Literature” catalogs the instances of study from 1971 to 2023 of literary texts and authors in Asian American-focused scholarship indexed in the MLA Bibliography or appearing in *Amerasia Journal* and *The Journal of Asian American Studies*. The csv version allows users to run code on the data. For users exploring the data manually, a more legible Excel version is offered. Each row in the file represents one instance of study of a primary text. If a primary text is not listed, that row represents an instance in which an author was studied without sustained attention to any particular text (e.g., an article on a poet where the analysis moves across many poems). There are nearly 1,900 rows of data. Going across, there are 6 columns of metadata describing the primary text, 19 columns describing the primary text author, and 5 columns describing the scholarly publication studying the text/author. To the far right are columns describing second, third, and fourth primary text authors if applicable. Here are descriptions of the metadata in each column. 
+“The Canon of Asian American Literature” catalogs the instances of study from 1971 to 2023 of literary texts and authors in Asian American-focused scholarship indexed in the MLA Bibliography or appearing in *Amerasia Journal* and *The Journal of Asian American Studies*. The csv version allows users to run code on the data. For users exploring the data manually, a more legible Excel version is offered.
 
-* title: Primary text title.   
-* publication\_year: Original publication year of the primary text. For a series across multiple years, a range is listed.   
-* genre: The primary text’s form or medium. Values: “Novel,” “Poetry,” “Short Story(ies),” “Prose Nonfiction,” “Drama,” “Film,” “Television,” “Graphic Narrative,” “Anthology,” “Artist Book,” “Social Media,” “Video Game,” “Photography,” “Music,” “Textbook.” Individual short stories and story collections are listed as “Short Story(ies).” “Drama” includes theater and performance art. For multigenre texts, values are combined with slashes, e.g., “Poetry/Short Story(ies).”   
-* publisher: The original publisher of the primary text. For short stories and serialized novels, the periodical is listed; for a short story in a collection, the publisher of the collection; for drama, the theater where the work premiered; for television series, the network; for films, the distribution company.   
-* text\_awards: Up to three awards won by the primary text, emphasizing the most prestigious awards. “And more” indicates further awards not listed. Blank indicates no awards won as far as we could determine.   
-* nyt\_bestseller: “Y” indicates a *New York Times* Hardcover Fiction Bestseller (1931-2020), following Pruett’s dataset. “N” if not. “N/A” if not fiction or not published from 1931-2020.   
-* author\_name: The name of the author of the primary text. When a professional name is more widely used than a real name, it is listed.   
-* birth\_year: Author’s birth year.   
-* gender: Author’s gender. Wherever possible, this is based on self-identification in biographical materials or interviews. When that was unavailable, values are based on pronouns or identifications used by scholars/journalists, which could differ from how the author self identifies. “F” for cisgender female; “M” for cisgender male; “TF” for transgender using she pronouns; “TM” for transgender using he pronouns; “MG” for mixed gender; “NB” for nonbinary. Transgender, mixed gender, and nonbinary values are only used when the author self-identifies as such.   
-* ethnicity\_national\_origin\_group: The author’s ethnic background or national origin group, based on self-identification in biographical materials or interviews. When that was unavailable, it’s based on identifications by scholars, journalists, and reference works. Usually, national origin group is listed. When information linked the author to a specific ethnic group within a multiethnic nation, the specific ethnicity is listed with the nation in parentheses, e.g., “Chinese (from Taiwan).” For White and Black authors, national origin group and ethnicity were frequently unknown; in such cases, the panethnic categories “Euro American” and “African American” are listed. Native American groups are listed without nation parentheses as they are national groups in themselves.  
-* race: Author’s race, derived from the ethnicity\_national\_origin\_group data. When ethnicity/national origin information was unavailable, race is based on self-identification in biographical materials or interviews or identifications by scholars, journalists, and reference works. The categories (and the ethnic/national origin groups belonging to each) align with the U.S. Census’s 2024 updated categories (Marks and Battle), with some differences: we use “Native American” for “American Indian or Alaska Native,” “Latinx” for “Hispanic or Latino,” “MENA” for “Middle Eastern or North African,” and “Pacific Islander” for “Native Hawaiian or Pacific Islander.” Because Jewish Americans are often racialized in ways distinct from non-Jewish White Americans, we include “Jewish” as a racial category. We also treat Latinx as a racialized panethnic category not an ethnicity. Multiracial authors are listed as multiracial followed by multiple categories, e.g., “Multiracial Asian-White.”  
-* birth\_nation: Author’s birth nation, reflecting the name and colonial status at the time of birth, e.g., “Philippines (United States territory).” The present-day name is in parentheses if significantly different. Colonized territories that are not incorporated into the colonizing nation are listed as themselves with parentheses noting the controlling nation, e.g., “Guam (U.S. territory).”   
-* native\_foreign: Native indicates U.S. born. Foreign indicates foreign-born immigrant to the U.S. This column follows largely from the birth\_nation column. “N/A” if irrelevant, e.g. Asian-Canadian authors or authors in Asia.   
-* immigrant\_generation: The immigrant generation of authors in the U.S. “1” indicates immigration to the U.S. at age 13 or above, “1.5” indicates immigration at age 12 or below, “2” indicates at least one immigrant parent, etc. “N/A” is for Native Americans and for those who have no personal or family history of immigration to the U.S.   
-* immigration\_year: Year of U.S. immigration. “N/A” if not applicable.   
-* nations: Nations in which the author has lived. The residence columns—nations, states, cities—focus on residence in the range of years.   
-* states: U.S. states where the author has lived.   
-* cities: Cities where the author has lived.   
-* education\_level: The author’s formal education level. Values: “No High School,” “Some High School,” “High School,” “Some Undergraduate,” “Undergraduate,” “Some Graduate,” and “Graduate.”  
-* degree: The highest degree earned by the author.   
-* mfa: Whether the author earned a Master of Fine Arts degree (in any medium).   
-* degree\_institution: The institution(s) granting the author’s highest degree(s).   
-* university\_teacher: Whether the author has held a position as instructor or faculty at a college or university.   
-* teaching\_institution: Up to three institutions where the author has been a college/university instructor or faculty. “And more” indicates further institutions not listed.   
-* author\_awards: Up to three awards won by the author, emphasizing the most prestigious awards. “And more” indicates further awards not listed. This column does not repeat awards already listed in the text\_awards column. Blank indicates no awards won as far as we could determine.   
-* scholarship\_title: Title of the scholarly publication studying the primary text/author.   
-* scholar\_name: Name of the author(s) of the scholarly publication.   
-* scholarship\_year: Publication year of the scholarly work.  
-* scholarship\_venue: For publications that aren’t books, this lists where the piece appeared: journal for articles, edited volume for book chapters, dissertation database for dissertations.   
-* mla\_doi: MLA Bibliography accession number for the scholarly publication. Searching the bibliography for this number will bring up the record. For pieces not indexed in the bibliography, a DOI is listed.   
-* 2\_author\_name, 2\_birth\_year, etc.: Fields for additional authors of the primary text, mirroring the primary author columns. The leading number indicates the ordinal position of the author, e.g., 2\_birth\_year indicates the second author’s birth year. If these fields are blank, the primary text does not have additional authors. 
+Each row in the file represents one instance of study of a primary text. If a primary text is not listed, that row represents an instance in which an author was studied without sustained attention to any particular text (e.g., an article on a poet where the analysis moves across many poems). There are nearly 1,900 rows of data. Going across, there are 6 columns of metadata describing the primary text, 19 columns describing the primary text author, and 5 columns describing the scholarly publication studying the text/author. To the far right are columns describing second, third, and fourth primary text authors if applicable. Here are descriptions of the metadata in each column. 
+
+**title**  
+Primary text title.  
+
+**publication_year**  
+Original publication year of the primary text. For a series across multiple years, a range is listed.  
+
+**genre**  
+The primary text’s form or medium. Values: “Novel,” “Poetry,” “Short Story(ies),” “Prose Nonfiction,” “Drama,” “Film,” “Television,” “Graphic Narrative,” “Anthology,” “Artist Book,” “Social Media,” “Video Game,” “Photography,” “Music,” “Textbook.” Individual short stories and story collections are listed as “Short Story(ies).” “Drama” includes theater and performance art. For multigenre texts, values are combined with slashes, e.g., “Poetry/Short Story(ies).”  
+
+**publisher**  
+The original publisher of the primary text. For short stories and serialized novels, the periodical is listed; for a short story in a collection, the publisher of the collection; for drama, the theater where the work premiered; for television series, the network; for films, the distribution company.  
+
+**text_awards**  
+Up to three awards won by the primary text, emphasizing the most prestigious awards. “And more” indicates further awards not listed. Blank indicates no awards won as far as we could determine.  
+
+**nyt_bestseller**  
+“Y” indicates a *New York Times* Hardcover Fiction Bestseller (1931–2020), following Pruett’s dataset. “N” if not. “N/A” if not fiction or not published from 1931–2020.  
+
+**author_name**  
+The name of the author of the primary text. When a professional name is more widely used than a real name, it is listed.  
+
+**birth_year**  
+Author’s birth year.  
+
+**gender**  
+Author’s gender. Wherever possible, this is based on self-identification in biographical materials or interviews. When that was unavailable, values are based on pronouns or identifications used by scholars/journalists, which could differ from how the author self-identifies. “F” for cisgender female; “M” for cisgender male; “TF” for transgender using she pronouns; “TM” for transgender using he pronouns; “MG” for mixed gender; “NB” for nonbinary. Transgender, mixed gender, and nonbinary values are only used when the author self-identifies as such.  
+
+**ethnicity_national_origin_group**  
+The author’s ethnic background or national origin group, based on self-identification in biographical materials or interviews. When that was unavailable, it’s based on identifications by scholars, journalists, and reference works. Usually, national origin group is listed. When information linked the author to a specific ethnic group within a multiethnic nation, the specific ethnicity is listed with the nation in parentheses, e.g., “Chinese (from Taiwan).” For White and Black authors, national origin group and ethnicity were frequently unknown; in such cases, the panethnic categories “Euro American” and “African American” are listed. Native American groups are listed without nation parentheses as they are national groups in themselves.  
+
+**race**  
+Author’s race, derived from the ethnicity_national_origin_group data. When ethnicity/national origin information was unavailable, race is based on self-identification in biographical materials or interviews or identifications by scholars, journalists, and reference works. The categories (and the ethnic/national origin groups belonging to each) align with the U.S. Census’s 2024 updated categories (Marks and Battle), with some differences: we use “Native American” for “American Indian or Alaska Native,” “Latinx” for “Hispanic or Latino,” “MENA” for “Middle Eastern or North African,” and “Pacific Islander” for “Native Hawaiian or Pacific Islander.” Because Jewish Americans are often racialized in ways distinct from non-Jewish White Americans, we include “Jewish” as a racial category. We also treat Latinx as a racialized panethnic category not an ethnicity. Multiracial authors are listed as multiracial followed by multiple categories, e.g., “Multiracial Asian-White.”  
+
+**birth_nation**  
+Author’s birth nation, reflecting the name and colonial status at the time of birth, e.g., “Philippines (United States territory).” The present-day name is in parentheses if significantly different. Colonized territories that are not incorporated into the colonizing nation are listed as themselves with parentheses noting the controlling nation, e.g., “Guam (United States territory).”  
+
+**native_foreign**  
+Native indicates U.S. born. Foreign indicates foreign-born immigrant to the U.S. This column follows largely from the birth_nation column. “N/A” if irrelevant, e.g., Asian-Canadian authors or authors in Asia.  
+
+**immigrant_generation**  
+The immigrant generation of authors in the U.S. “1” indicates immigration to the U.S. at age 13 or above, “1.5” indicates immigration at age 12 or below, “2” indicates at least one immigrant parent, etc. “N/A” is for Native Americans and for those who have no personal or family history of immigration to the U.S.  
+
+**immigration_year**  
+Year of U.S. immigration. “N/A” if not applicable.  
+
+**nations**  
+Nations in which the author has lived. The residence columns—nations, states, cities—focus on residence in the range of years.  
+
+**states**  
+U.S. states where the author has lived.  
+
+**cities**  
+Cities where the author has lived.  
+
+**education_level**  
+The author’s formal education level. Values: “No High School,” “Some High School,” “High School,” “Some Undergraduate,” “Undergraduate,” “Some Graduate,” and “Graduate.”  
+
+**degree**  
+The highest degree earned by the author.  
+
+**mfa**  
+Whether the author earned a Master of Fine Arts degree (in any medium).  
+
+**degree_institution**  
+The institution(s) granting the author’s highest degree(s).  
+
+**university_teacher**  
+Whether the author has held a position as instructor or faculty at a college or university.  
+
+**teaching_institution**  
+Up to three institutions where the author has been a college/university instructor or faculty. “And more” indicates further institutions not listed.  
+
+**author_awards**  
+Up to three awards won by the author, emphasizing the most prestigious awards. “And more” indicates further awards not listed. This column does not repeat awards already listed in the text_awards column. Blank indicates no awards won as far as we could determine.  
+
+**scholarship_title**  
+Title of the scholarly publication studying the primary text/author.  
+
+**scholar_name**  
+Name of the author(s) of the scholarly publication.  
+
+**scholarship_year**  
+Publication year of the scholarly work.  
+
+**scholarship_venue**  
+For publications that aren’t books, this lists where the piece appeared: journal for articles, edited volume for book chapters, dissertation database for dissertations.  
+
+**mla_doi**  
+MLA Bibliography accession number for the scholarly publication. Searching the bibliography for this number will bring up the record. For pieces not indexed in the bibliography, a DOI is listed.  
+
+**2_author_name, 2_birth_year, etc.**  
+Fields for additional authors of the primary text, mirroring the primary author columns. The leading number indicates the ordinal position of the author, e.g., 2_birth_year indicates the second author’s birth year. If these fields are blank, the primary text does not have additional authors.
 
 In each metadata column, there are authors and texts for whom we could not find information. Unless otherwise specified in the descriptions above, blanks indicate no information found. 
 
@@ -515,36 +591,66 @@ The principal investigator plans to work with research assistants and collaborat
 
 # **Bibliography**
 
-Arte Público Press. “Recovering the US Hispanic Literary Heritage Digital Collections.” [https://usldhrecovery.uh.edu/](https://usldhrecovery.uh.edu/).   
+<div style="padding-left: 2em; text-indent: -2em;">
+
+
+Arte Público Press. “Recovering the US Hispanic Literary Heritage Digital Collections.” [https://usldhrecovery.uh.edu/](https://usldhrecovery.uh.edu/). 
+
 Cheung, King-Kok, and Stan Yogi. *Asian American Literature: An Annotated Bibliography*. Modern Language Association of America, 1988\.  
+
 Chuh, Kandice. *Imagine Otherwise: On Asian Americanist Critique*. Duke University Press, 2003\.  
-Grossman, Claire, Juliana Spahr, and Stephanie Young. “The Index of Major Literary Prizes in the US.” Edited by Dan Sinykin and Melanie Walsh. *Post45 Data Collective*, 2022\. [https://doi.org/10.18737/CNJV1733p4520221212](https://doi.org/10.18737/CNJV1733p4520221212).  
+
+Grossman, Claire, Juliana Spahr, and Stephanie Young. “The Index of Major Literary Prizes in the US.” Edited by Dan Sinykin and Melanie Walsh. *Post45 Data Collective*, 2022\. [https://doi.org/<wbr>10.18737<wbr>/CNJV1733p4520221212](https://doi.org/10.18737/CNJV1733p4520221212).  
+
 \-----. “Literature’s Vexed Democratization.” *American Literary History* 33, no. 2 (2021): 298–319.  
-“Black Book Interactive Project,” Illinois Open Publishing Network, [https://iopn.library.illinois.edu/omeka/s/BBIP/page/welcome](https://iopn.library.illinois.edu/omeka/s/BBIP/page/welcome).  
+
+“Black Book Interactive Project,” Illinois Open Publishing Network, [https://iopn.library.illinois.edu/<wbr>omeka<wbr>/s/BBIP/page/welcome](https://iopn.library.illinois.edu/omeka/s/BBIP/page/welcome).  
+
 Grazevich, Greg, interview by the author, June 13, 2025\.   
-Hiura, Arnold T., and Stephen H. Sumida. *Asian American Literature of Hawaii: An Annotated Bibliography*. Hawaii Ethnic Resources Center, Talk Story, 1979\.  
+Hiura, Arnold T., and Stephen H. Sumida. *Asian American Literature of Hawaii: An Annotated Bibliography*. Hawaii Ethnic Resources Center, Talk Story, 1979\. 
+
 Ho, Jennifer Ann. *Racial Ambiguity in Asian American Culture*. Rutgers University Press, 2015\.  
-Huang, Guiyou. *The Columbia Guide to Asian American Literature since 1945*. Columbia University Press, 2006\.  
+
+Huang, Guiyou. *The Columbia Guide to Asian American Literature since 1945*. Columbia University Press, 2006\. 
+
 Koshy, Susan. “The Fiction of Asian American Literature.” *Yale Journal of Criticism* 9, no. 2 (1996): 315–46.  
+
+Le-Khac, Long and Kate Hao. “The Asian American Literature We’ve Constructed.” Post45 no.7 / Journal of Cultural Analytics no. 4 (2021): 146-179. 
+
 Lim, Shirley Geok-lin, John Blair Gamber, Stephen Hong Sohn, and Gina Valentino. “Introduction.” In *Transnational Asian American Literature: Sites and Transits*, 1–26. Temple University Press, 2006\.  
+
 Liu, Miles Xian. *Asian American Playwrights: A Bio-Bibliographical Critical Sourcebook*. Greenwood Press, 2002\.  
+
 Lowe, Lisa. *Immigrant Acts: On Asian American Cultural Politics*. Duke University Press, 1996\.  
+
 Lye, Colleen. “Racial Form.” *Representations* 104 (2008): 92–101.  
-Manshel, Alexander, Laura B. McGrath, and J.D. Porter, “Who Cares about Literary Prizes?” *Public Books*, September 3, 2019, [https://www.publicbooks.org/who-cares-about-literary-prizes/](https://www.publicbooks.org/who-cares-about-literary-prizes/).  
-Marks, Rachel, and Karen Battle. “What Updates to OMB’s Race/Ethnicity Standards Mean for the Census Bureau.” *United States Census Bureau* (blog), April 8, 2024\. [https://www.census.gov/newsroom/blogs/random-samplings/2024/04/updates-race-ethnicity-standards.html](https://www.census.gov/newsroom/blogs/random-samplings/2024/04/updates-race-ethnicity-standards.html).  
+
+Manshel, Alexander, Laura B. McGrath, and J.D. Porter, “Who Cares about Literary Prizes?” *Public Books*, September 3, 2019, [https://www.publicbooks.org/who-cares-about-literary-prizes/](https://www.publicbooks.org/who-cares-about-literary-prizes/).
+
+Marks, Rachel, and Karen Battle. “What Updates to OMB’s Race/Ethnicity Standards Mean for the Census Bureau.” *United States Census Bureau* (blog), April 8, 2024\. [https://www.census.gov/<wbr>newsroom<wbr>/blogs/random-samplings/<wbr>2024<wbr>/04/updates-race-ethnicity-standards.html](https://www.census.gov/newsroom/blogs/random-samplings/2024/04/updates-race-ethnicity-standards.html).  
+
 Modern Language Association. “About the MLA International Bibliography.” Accessed June 17, 2025\. [https://www.mla.org/Publications/MLA-International-Bibliography/About-the-MLA-International-Bibliography](https://www.mla.org/Publications/MLA-International-Bibliography/About-the-MLA-International-Bibliography).  
-Niiya, Brian, ed. Densho Encyclopedia. [https://encyclopedia.densho.org/](https://encyclopedia.densho.org/).  
-Pruett, Jordan. “*New York Times* Hardcover Fiction Bestsellers (1931-2020).” Edited by Dan Sinykin and Melanie Walsh. *Post45 Data Collective*, 2022\. [https://doi.org/10.18737/CNJV1733p4520220211](https://doi.org/10.18737/CNJV1733p4520220211)  
-“Asian Heritage in Canada.” Toronto Metropolitan University Libraries.  [https://library.torontomu.ca/asianheritage/](https://library.torontomu.ca/asianheritage/).  
+
+Niiya, Brian, ed. Densho Encyclopedia. [https://encyclopedia.densho.org/](https://encyclopedia.densho.org/). 
+
+Pruett, Jordan. “*New York Times* Hardcover Fiction Bestsellers (1931-2020).” Edited by Dan Sinykin and Melanie Walsh. *Post45 Data Collective*, 2022\. [https://doi.org/<wbr>10.18737<wbr>/CNJV1733p4520220211](https://doi.org/10.18737/CNJV1733p4520220211)  
+
+“Asian Heritage in Canada.” Toronto Metropolitan University Libraries.  [https://library.torontomu.ca/asianheritage/](https://library.torontomu.ca/asianheritage/). 
+
 Sinykin, Dan and Edwin Roland, “Against Conglomeration,” *Journal of Cultural Analytics* 6, no. 2 (2021): 72–107.  
 So, Richard Jean. *Redlining Culture: A Data History of Racial Inequality and Postwar Fiction.* Columbia University Press, 2021\.  
-Song, Min Hyoung. *The Children of 1965: On Writing, and Not Writing, as an Asian American*. Duke University Press, 2013\.  
-Sumida, Stephen H. “Asian/Pacific American Literature in the Classroom,” *American Literature* 65, no. 2 (1993): 348–53.  
+
+Song, Min Hyoung. *The Children of 1965: On Writing, and Not Writing, as an Asian American*. Duke University Press, 2013\. 
+
+Sumida, Stephen H. “Asian/Pacific American Literature in the Classroom,” *American Literature* 65, no. 2 (1993): 348–53.
+
 Wong, Sau-ling Cynthia, and Stephen H. Sumida, eds. *A Resource Guide to Asian American Literature*. Modern Language Association of America, 2001\.  
+
 Xu, Wenying. *Historical Dictionary of Asian American Literature and Theater*. Second edition. Rowman & Littlefield, 2022\.  
 
+</div>
 
-[^1]: Notes
+[^1]: In the 1970s, Stephen Sumida recalls, “we could carry all Asian American texts in print to class with one hand” (352). In comparison, this dataset shows nearly 350 unique texts published in the 21st century, and those are just the texts studied by scholars. Since the 1990s, Asian American writers have published at “an unprecedented rate” (Song 10). 
 
 [^2]:  This dataset is not a comprehensive bibliography of all published Asian American literature. It represents works that scholars have specifically framed as “Asian American.” This includes texts predating the term that scholars have retroactively incorporated into the canon. It excludes texts that scholars have exclusively categorized under broader categories, e.g. “Third World literature,” or narrower ethnic-specific labels, e.g. “Chinese American.” A comprehensive bibliography is out of reach. Gathering race data on every published author in the U.S. is impractical. Moreover, the nature of “Asian American literature”—a constructed, unstable, panethnic category with continually debated definitions—complicates any comprehensive bibliography built on a stable definition. Instead of imposing a singular definition, grasping this literature requires tracking how significant publics have actively built, defined, and debated it. In this dataset, that public is scholars of Asian American literature. 
 
