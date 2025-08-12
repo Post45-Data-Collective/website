@@ -1,15 +1,5 @@
 [
   {
-    "listing": "/news.html",
-    "items": [
-      "/news/editor-news.html",
-      "/news/data-analyst-summer-2023.html",
-      "/news/ddp-recap.html",
-      "/news/ddp-rfp-2021.html",
-      "/news/awash-in-data.html"
-    ]
-  },
-  {
     "listing": "/our-data.html",
     "items": [
       "/posts/international-bestsellers/index.html",
@@ -20,8 +10,18 @@
       "/posts/the-nordic-noir-in-translation-database-2000-2020/index.html",
       "/posts/the-index-of-major-literary-prizes-in-the-us/index.html",
       "/posts/nyt_hardcover_fiction_bestsellers/index.html",
-      "/posts/hathitrust_post45_fiction/index.html",
-      "/posts/iowa_writers_workshop/index.html"
+      "/posts/iowa_writers_workshop/index.html",
+      "/posts/hathitrust_post45_fiction/index.html"
+    ]
+  },
+  {
+    "listing": "/news.html",
+    "items": [
+      "/news/editor-news.html",
+      "/news/data-analyst-summer-2023.html",
+      "/news/ddp-recap.html",
+      "/news/ddp-rfp-2021.html",
+      "/news/awash-in-data.html"
     ]
   },
   {
@@ -35,8 +35,8 @@
       "/posts/the-nordic-noir-in-translation-database-2000-2020/index.html",
       "/posts/the-index-of-major-literary-prizes-in-the-us/index.html",
       "/posts/nyt_hardcover_fiction_bestsellers/index.html",
-      "/posts/hathitrust_post45_fiction/index.html",
-      "/posts/iowa_writers_workshop/index.html"
+      "/posts/iowa_writers_workshop/index.html",
+      "/posts/hathitrust_post45_fiction/index.html"
     ]
   }
 ]
