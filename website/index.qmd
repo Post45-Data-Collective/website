@@ -17,11 +17,12 @@ listing:
   categories: unnumbered 
   sort-ui: false
   filter-ui: true
-  image-height: 200px
+  # image-height: 12rem
 repo-actions: false
 description: | 
   The Post45 Data Collective peer reviews and houses literary and cultural data from 1945 to the present.
 toc: false
+image: "images/p45dc-logo.jpg"
 ---
 
 ::: {#hero-banner .column-screen}

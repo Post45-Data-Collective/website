@@ -26,7 +26,7 @@ citation:
   url: https://data.post45.org/nyt-fiction-bestsellers-data/
   editor:
   - Dan Sinykin
-  - Melanie Walsh
+  - Laura McGrath
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
@@ -73,29 +73,23 @@ At a later stage, persistent identifiers, such as VIAF, LCCN, and Wikidata ident
 # Load the function
 source("../../scripts/createDataTable.R")
 
-data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-lists.csv"
+data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-lists.csv"
 
 createDataTable(
-  data_path = data_path,
+    data_path = data_path,
+    style = "bootstrap", # Bootstrap DataTables style
+    bootstrap_classes = "table-condensed", # Add extra classes
 
-     style = "bootstrap",  # Bootstrap DataTables style
-  bootstrap_classes = "table-condensed",  # Add extra classes
-
-   displayed_columns = c("week", "year", "rank", "title", "author", "oclc_eholdings", "oclc_holdings", "oclc_isbn", "oclc_owi", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata" 
-),
-
+    displayed_columns = c("week", "year", "rank", "title", "author", "oclc_eholdings", "oclc_holdings", "oclc_isbn", "oclc_owi", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata"),
     column_widths = c("week" = "75px", "rank" = "75px", "year" = "75px", "author" = "100px"),
-
     date_columns = c("week"),
 
-  # currency_columns = c("prize_amount"),
+    # currency_columns = c("prize_amount"),
 
-  # category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree"),
+    # category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree"),
 
-   sort_columns = c("week"),
-   sort_orders = c("desc"),
-
-  
+    sort_columns = c("week"),
+    sort_orders = c("desc"),
 )
 
 # Print out column names to make it easier to customize above
@@ -151,20 +145,18 @@ The second dataset provides title-level data for every unique title that appeare
 # Load the function
 source("../../scripts/createDataTable.R")
 
-data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-titles.csv"
+data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-titles.csv"
 
 createDataTable(
-  data_path = data_path,
+    data_path = data_path,
+    displayed_columns = c("first_week", "year", "id", "title", "author", "total_weeks", "best_rank", "debut_rank", "oclc_holdings", "oclc_eholdings", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata", "oclc", "oclc_isbn", "oclc_owi"),
 
-  displayed_columns = c("first_week","year", "id", "title", "author", "total_weeks", "best_rank", "debut_rank", "oclc_holdings", "oclc_eholdings", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata",  "oclc",   "oclc_isbn", "oclc_owi"
-),
+    # currency_columns = c("prize_amount"),
 
-  # currency_columns = c("prize_amount"),
+    # category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree"),
 
-  # category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree"),
-
-  # sort_columns = c("prize_year"),
-  # sort_orders = c("desc")
+    # sort_columns = c("prize_year"),
+    # sort_orders = c("desc")
 )
 
 # Print out column names to make it easier to customize above
@@ -208,19 +200,18 @@ This dataset also includes various persistent identifiers and information from O
 # Load the function
 source("../../scripts/createDataTable.R")
 
-data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-hathitrust_metadata.csv"
+data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-hathitrust_metadata.csv"
 
 createDataTable(
-  data_path = data_path,
+    data_path = data_path,
+    displayed_columns = c("first_week", "year", "title", "author", "htid", "hathi_rights", "best_rank", "debut_rank", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata_qid", "isbn", "oclc", "oclc_eholdings", "oclc_holdings", "oclc_owi"),
 
-   displayed_columns = c("first_week", "year", "title", "author", "htid", "hathi_rights", "best_rank", "debut_rank", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata_qid", "isbn", "oclc", "oclc_eholdings", "oclc_holdings", "oclc_owi"),
+    # currency_columns = c("prize_amount"),
 
-  # currency_columns = c("prize_amount"),
+    # category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree"),
 
-  # category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree"),
-
-  # sort_columns = c("prize_year"),
-  # sort_orders = c("desc")
+    # sort_columns = c("prize_year"),
+    # sort_orders = c("desc")
 )
 
 # df <- read.csv(data_path)

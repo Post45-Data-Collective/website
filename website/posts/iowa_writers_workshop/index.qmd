@@ -33,7 +33,7 @@ citation:
   url: https://data.post45.org/iowa-writers-workshop-data/
   editor:
   - Dan Sinykin
-  - Melanie Walsh
+  - Laura McGrath
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
@@ -82,25 +82,22 @@ The first dataset includes full, given, middle, family, pen names, gender, and c
 # Load the function
 source("../../scripts/createDataTable.R")
 
-data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-people.csv"
+data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-people.csv"
 
 createDataTable(
-  data_path = data_path,
+    data_path = data_path,
 
-  # displayed_columns = c("full_name", "gender",
-  #  "mfa_degree", "role", "prize_year", "prize_name", "prize_amount", "prize_institution", "prize_type", "prize_genre", "author_wikidata", "author_viaf", "author_lccn", "elite_institution", "graduate_degree", "stegner", "title_of_winning_book"),
+    # displayed_columns = c("full_name", "gender",
+    #  "mfa_degree", "role", "prize_year", "prize_name", "prize_amount", "prize_institution", "prize_type", "prize_genre", "author_wikidata", "author_viaf", "author_lccn", "elite_institution", "graduate_degree", "stegner", "title_of_winning_book"),
 
-  # currency_columns = c("prize_amount"),
+    # currency_columns = c("prize_amount"),
 
-  column_widths = c("gender" = "100px", "country" = "100px"),
-
-  category_columns = c("gender", "country"),
-
-  sort_columns = c("full_name"),
-  sort_orders = c("desc")
-
+    column_widths = c("gender" = "100px", "country" = "100px"),
+    category_columns = c("gender", "country"),
+    sort_columns = c("full_name"),
+    sort_orders = c("desc")
 )
-  # Print out column names to make it easier to customize above
+# Print out column names to make it easier to customize above
 # df <- read.csv(data_path)
 
 # cat(paste(shQuote(colnames(df), type = "cmd"), collapse = ", "))
@@ -161,22 +158,20 @@ The second dataset includes thesis and matriculation records for Iowa graduates 
 # Load the function
 source("../../scripts/createDataTable.R")
 
-data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-graduations.csv"
+data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-graduations.csv"
 
 createDataTable(
-  data_path = data_path,
+    data_path = data_path,
+    displayed_columns = c("year", "graduate_name", "advisor_name", "genre", "thesis_title", "degree", "program", "institution", "record_id", "graduate_id", "advisor_id", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata"),
 
- displayed_columns = c("year", "graduate_name", "advisor_name", "genre", "thesis_title", "degree",  "program", "institution", "record_id", "graduate_id",  "advisor_id",  "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata"),
+    # currency_columns = c("prize_amount"),
 
-  # currency_columns = c("prize_amount"),
-
-  category_columns = c("genre", "program", "institution", "degree"),
-
-   column_widths = c("thesis_title" = "100px", "year" = "75px", "genre" = "90px", "program" = "100px", "institution" = "100px"),
+    category_columns = c("genre", "program", "institution", "degree"),
+    column_widths = c("thesis_title" = "100px", "year" = "75px", "genre" = "90px", "program" = "100px", "institution" = "100px"),
 
 
-  # sort_columns = c("prize_year"),
-  # sort_orders = c("desc")
+    # sort_columns = c("prize_year"),
+    # sort_orders = c("desc")
 )
 
 # df <- read.csv(data_path)
@@ -231,23 +226,22 @@ The third dataset includes works by notable Iowa Writers’ Workshop authors tha
 # Load the function
 source("../../scripts/createDataTable.R")
 
-data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-hathitrust_metadata.csv"
+data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-hathitrust_metadata.csv"
 
 createDataTable(
-  data_path = data_path,
+    data_path = data_path,
+    displayed_columns = c(
+        "author1", "author1_normalized", "title", "date", "htid", "hathi_rights", "oclc_holdings", "oclc_eholdings", "place", "publisher_marc", "imprint", "isbn", "isbn_most_common_edition", "lccn", "oclc", "oclc_owi", "person_id",
+        "id", "author2", "author3", "author4", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata_qid"
+    ),
+    column_widths = c("title" = "100px", "date" = "75px"),
 
-   displayed_columns = c("author1", "author1_normalized", "title", "date", "htid", "hathi_rights", "oclc_holdings",  "oclc_eholdings", "place", "publisher_marc","imprint", "isbn", "isbn_most_common_edition", "lccn", "oclc", "oclc_owi", "person_id",
-   "id",  "author2", "author3", "author4", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata_qid"     
-),
+    # currency_columns = c("prize_amount"),
 
- column_widths = c("title" = "100px", "date" = "75px"),
+    category_columns = c("hathi_rights"),
 
-  # currency_columns = c("prize_amount"),
-
-  category_columns = c("hathi_rights"),
-
-  # sort_columns = c("prize_year"),
-  # sort_orders = c("desc")
+    # sort_columns = c("prize_year"),
+    # sort_orders = c("desc")
 )
 
 # df <- read.csv(data_path)
