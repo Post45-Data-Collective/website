@@ -292,14 +292,14 @@ generateTabulatorTableFromCSV(
 ,
 
     columnWidths: {
-      title: "25%",
-      author_name: "20%",
-      scholar_name: "20%",
-            publication_year: "20%",
-            scholarship_title: "20%",
+      // title: "25%",
+      // author_name: "20%",
+      // scholar_name: "20%",
+      //       publication_year: "20%",
+      //       scholarship_title: "20%",
 
-            author_awards: "20%",
-                        text_awards: "20%"
+      //       author_awards: "20%",
+      //                   text_awards: "20%"
 
 
     },
