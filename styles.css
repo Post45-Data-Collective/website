@@ -47,6 +47,8 @@
   font-size: 90px; /* Responsive font size based on viewport width */
 }
 
+
+
 @media (max-width: 768px) {
   .hero-content {
       width: 80%; /* Make content narrower on mobile */
