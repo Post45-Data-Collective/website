@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,14 +71,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../images/p45dc-fav-icon.jpg" rel="icon" type="image/jpeg">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ef0aa4ac0158fbf4d4a2df703f3ae90f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-55e935fd79e5aecefa0dfbe2259d5a95.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -153,6 +154,8 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Post45 Data Collective</span>
     </a>
@@ -304,7 +307,7 @@ Then fill in the rest of the information above and below. -->
 <section id="data-table" class="level1">
 <h1>Data Table</h1>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="75" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 74;"><span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof dataSummaryView<span class="op">,</span> Tabulator<span class="op">,</span> viewof selectedColumns<span class="op">,</span> viewof dataSet<span class="op">,</span> tableContainer<span class="op">,</span> fetchData<span class="op">,</span> generateTabulatorTableFromCSV<span class="op">,</span> progress<span class="op">,</span> progressbar} <span class="im">from</span> <span class="st">"8bb63a6cde9addff"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="75" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 74;"><span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof dataSummaryView<span class="op">,</span> Tabulator<span class="op">,</span> viewof selectedColumns<span class="op">,</span> viewof dataSet<span class="op">,</span> tableContainer<span class="op">,</span> fetchData<span class="op">,</span> generateTabulatorTableFromCSV<span class="op">,</span> progress<span class="op">,</span> progressbar} <span class="im">from</span> <span class="st">"8bb63a6cde9addff"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -312,7 +315,7 @@ Then fill in the rest of the information above and below. -->
 </div>
 </div>
 <div class="cell hidden">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="82" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 81;"><span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> <span class="fu">fetchData</span>(<span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/futuristic_fiction/futuristic_fiction.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="82" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 81;"><span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> <span class="fu">fetchData</span>(<span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/futuristic_fiction/futuristic_fiction.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-2" data-nodetype="declaration">
 
@@ -320,7 +323,7 @@ Then fill in the rest of the information above and below. -->
 </div>
 </div>
 <div class="cell hidden">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="89" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 88;"><span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="co">// Example usage</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="89" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 88;"><span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="co">// Example usage</span></span>
 <span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="fu">generateTabulatorTableFromCSV</span>(</span>
 <span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#table-container4"</span><span class="op">,</span></span>
 <span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/futuristic_fiction/futuristic_fiction.csv"</span><span class="op">,</span></span>
@@ -393,7 +396,7 @@ Then fill in the rest of the information above and below. -->
 <span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rawButtonId</span><span class="op">:</span> <span class="st">"#download-raw1"</span><span class="op">,</span></span>
 <span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>    <span class="dt">urlCopyButtonId</span><span class="op">:</span> <span class="st">"#copy-url1"</span><span class="op">,</span></span>
 <span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-3" data-nodetype="expression">
 
@@ -427,7 +430,7 @@ Download Full Data
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Creative Commons License
+<span class="screen-reader-only">Tip</span>Creative Commons License
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -442,7 +445,7 @@ Creative Commons License
 <p>These data visualizations were made by Grant Wythoff with additional help from Melanie Walsh.</p>
 <p>Use the search bar to filter records in the scatterplot below. Search input can include title, creator (author, director, etc.), year of release or setting (e.g.&nbsp;2044), and franchise (e.g.&nbsp;Star Trek).</p>
 <div class="cell hidden">
-<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="215" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 214;"><span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof search<span class="op">,</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="215" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 214;"><span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof search<span class="op">,</span></span>
 <span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a>viewof selectedMedia<span class="op">,</span></span>
 <span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a>viewof table<span class="op">,</span></span>
 <span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a>viewof YearRange<span class="op">,</span></span>
@@ -453,7 +456,7 @@ Creative Commons License
 <span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a>viewof elapsedSlider<span class="op">,</span></span>
 <span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a>filteredData<span class="op">,</span></span>
 <span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot3<span class="op">,</span></span>
-<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot2} <span class="im">from</span> <span class="st">"aae4dce4851fbb21"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot2} <span class="im">from</span> <span class="st">"aae4dce4851fbb21"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-4" data-nodetype="declaration">
 
@@ -461,7 +464,7 @@ Creative Commons License
 </div>
 </div>
 <div class="cell hidden">
-<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="234" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 233;"><span id="cb5-234"><a href="#cb5-234" aria-hidden="true" tabindex="-1"></a><span class="co">// table_data = fetchData(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="234" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 233;"><span id="cb5-234"><a href="#cb5-234" aria-hidden="true" tabindex="-1"></a><span class="co">// table_data = fetchData(</span></span>
 <span id="cb5-235"><a href="#cb5-235" aria-hidden="true" tabindex="-1"></a><span class="co">//   "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nea_writing_fellowships/nea_fellowships.csv"</span></span>
 <span id="cb5-236"><a href="#cb5-236" aria-hidden="true" tabindex="-1"></a><span class="co">// )</span></span>
 <span id="cb5-237"><a href="#cb5-237" aria-hidden="true" tabindex="-1"></a>thff <span class="op">=</span> d3<span class="op">.</span><span class="fu">csv</span>(</span>
@@ -472,7 +475,7 @@ Creative Commons License
 <span id="cb5-242"><a href="#cb5-242" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year_set</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">year_set</span><span class="op">,</span></span>
 <span id="cb5-243"><a href="#cb5-243" aria-hidden="true" tabindex="-1"></a>    <span class="dt">years_distant</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">years_distant</span></span>
 <span id="cb5-244"><a href="#cb5-244" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-5" data-nodetype="declaration">
 
@@ -481,7 +484,7 @@ Creative Commons License
 </div>
 <!-- A plot that zeroes in on 20th- and 21st-century works set 50–40 million years in the future. The y-axis displays years elapsed between publication and setting, rather than the future year set. -->
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="255" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 254;"><span id="cb6-255"><a href="#cb6-255" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;br&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="255" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 254;"><span id="cb6-255"><a href="#cb6-255" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;br&gt;`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-6-1" data-nodetype="expression">
@@ -489,7 +492,7 @@ Creative Commons License
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="256" data-source-offset="-11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 255;"><span id="cb7-256"><a href="#cb7-256" aria-hidden="true" tabindex="-1"></a>viewof search</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="256" data-source-offset="-11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 255;"><span id="cb7-256"><a href="#cb7-256" aria-hidden="true" tabindex="-1"></a>viewof search</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-6-2" data-nodetype="expression">
@@ -497,7 +500,7 @@ Creative Commons License
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb8" data-startfrom="257" data-source-offset="-25"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 256;"><span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;br&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="257" data-source-offset="-25"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 256;"><span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;br&gt;`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-6-3" data-nodetype="expression">
@@ -507,7 +510,7 @@ Creative Commons License
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb9" data-startfrom="262" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 261;"><span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="262" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 261;"><span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-7-1" data-nodetype="expression">
@@ -515,7 +518,7 @@ Creative Commons License
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb10" data-startfrom="263" data-source-offset="-22"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 262;"><span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a>viewof elapsedSlider</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb10" data-startfrom="263" data-source-offset="-22"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 262;"><span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a>viewof elapsedSlider</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-7-2" data-nodetype="expression">
@@ -523,7 +526,7 @@ Creative Commons License
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb11" data-startfrom="264" data-source-offset="-43"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 263;"><span id="cb11-264"><a href="#cb11-264" aria-hidden="true" tabindex="-1"></a>viewof YearRange</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb11" data-startfrom="264" data-source-offset="-43"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 263;"><span id="cb11-264"><a href="#cb11-264" aria-hidden="true" tabindex="-1"></a>viewof YearRange</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-7-3" data-nodetype="expression">
@@ -531,7 +534,7 @@ Creative Commons License
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code hidden" id="cb12" data-startfrom="265" data-source-offset="-60"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 264;"><span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a>viewof selectedMedia</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb12" data-startfrom="265" data-source-offset="-60"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 264;"><span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a>viewof selectedMedia</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-7-4" data-nodetype="expression">
@@ -543,7 +546,7 @@ Creative Commons License
 <!-- A scatter plot showing all of the records on a logarithmic scale. -->
 <p>In order to show all of the works in the dataset on a single plot, we can use a logarithmic scale to capture the million-, billion-, and trillion-year outliers.</p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb13" data-startfrom="273" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 272;"><span id="cb13-273"><a href="#cb13-273" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb13" data-startfrom="273" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 272;"><span id="cb13-273"><a href="#cb13-273" aria-hidden="true" tabindex="-1"></a>viewof futuristicPlot3</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-8" data-nodetype="expression">
 
@@ -551,7 +554,7 @@ Creative Commons License
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb14" data-startfrom="278" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 277;"><span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb14" data-startfrom="278" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 277;"><span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`</span></span>
 <span id="cb14-279"><a href="#cb14-279" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;style&gt;</span></span>
 <span id="cb14-280"><a href="#cb14-280" aria-hidden="true" tabindex="-1"></a><span class="vs">  .medium-cards {</span></span>
 <span id="cb14-281"><a href="#cb14-281" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: flex;</span></span>
@@ -620,7 +623,7 @@ Creative Commons License
 <span id="cb14-344"><a href="#cb14-344" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
 <span id="cb14-345"><a href="#cb14-345" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;</span></span>
 <span id="cb14-346"><a href="#cb14-346" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;br&gt;</span></span>
-<span id="cb14-347"><a href="#cb14-347" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-347"><a href="#cb14-347" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-9" data-nodetype="expression">
 
@@ -888,13 +891,14 @@ window._ojs.runtime.interpretFromScriptTags();
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

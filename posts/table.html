@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../images/p45dc-fav-icon.jpg" rel="icon" type="image/jpeg">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4bb77de2c1e6c12f0c0b2aa1b93d121d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-98cf34956207ad9a520da81e2602b03d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -135,6 +136,8 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Post45 Data Collective</span>
     </a>
@@ -218,7 +221,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb1" data-startfrom="31" data-source-offset="-362"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 30;"><span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>dataPath <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/hathitrust_fiction/hathitrust_post45fiction_metadata.csv"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" data-startfrom="31" data-source-offset="-362"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 30;"><span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>dataPath <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/hathitrust_fiction/hathitrust_post45fiction_metadata.csv"</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">fetchData</span>(dataPath)</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
@@ -245,7 +248,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>orderedColumns <span class="op">=</span> [</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span>defaultDisplayedColumns<span class="op">,</span></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span><span class="bu">Object</span><span class="op">.</span><span class="fu">keys</span>(data[<span class="dv">0</span>] <span class="op">||</span> {})<span class="op">.</span><span class="fu">filter</span>(col <span class="kw">=&gt;</span> <span class="op">!</span>defaultDisplayedColumns<span class="op">.</span><span class="fu">includes</span>(col))</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -284,12 +287,12 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-View Summary of Columns
+<span class="screen-reader-only">Note</span>View Summary of Columns
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -298,7 +301,7 @@ View Summary of Columns
 <div class="cell">
 <details class="code-fold hidden">
 <summary>code</summary>
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="69" data-source-offset="-100"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 68;"><span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>summary_data <span class="op">=</span> {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="69" data-source-offset="-100"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 68;"><span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>summary_data <span class="op">=</span> {</span>
 <span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> selected <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>(selectedColumns)<span class="op">;</span></span>
 <span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">.</span><span class="fu">map</span>(row <span class="kw">=&gt;</span> {</span>
 <span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> newRow <span class="op">=</span> {}<span class="op">;</span></span>
@@ -311,7 +314,7 @@ View Summary of Columns
 <span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
 <span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>viewof dataSummaryView <span class="op">=</span> <span class="fu">SummaryTable</span>(summary_data)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>viewof dataSummaryView <span class="op">=</span> <span class="fu">SummaryTable</span>(summary_data)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -336,10 +339,10 @@ View Summary of Columns
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb3" data-startfrom="88" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 87;"><span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>viewof selectedColumns <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">checkbox</span>(orderedColumns<span class="op">,</span> {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" data-startfrom="88" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 87;"><span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>viewof selectedColumns <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">checkbox</span>(orderedColumns<span class="op">,</span> {</span>
 <span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Select Columns"</span><span class="op">,</span></span>
 <span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> defaultDisplayedColumns<span class="op">,</span> <span class="co">// Default selected columns</span></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-3" data-nodetype="declaration">
@@ -350,7 +353,7 @@ View Summary of Columns
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb4" data-startfrom="96" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 95;"><span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">generateTabulatorTableForObservable</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" data-startfrom="96" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 95;"><span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">generateTabulatorTableForObservable</span>(</span>
 <span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>  containerId<span class="op">,</span></span>
 <span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>  data<span class="op">,</span></span>
 <span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>  {</span>
@@ -416,7 +419,7 @@ View Summary of Columns
 <span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
 <span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> table<span class="op">;</span></span>
-<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-4" data-nodetype="declaration">
@@ -425,7 +428,7 @@ View Summary of Columns
 </div>
 </div>
 <div class="quarto-ojs-syntax-error">
-<div class="sourceCode" id="cb5" data-startfrom="166" data-syntax-error-position="1356" data-source-offset="9"><pre class="sourceCode numberSource numberLines java code-with-copy"><code class="sourceCode java" style="counter-reset: source-line 165;"><span id="cb5-166"><a href="#cb5-166"></a>```<span class="op">{</span>ojs<span class="op">}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-startfrom="166" data-syntax-error-position="1356" data-source-offset="9"><pre class="sourceCode numberSource numberLines java code-with-copy"><code class="sourceCode java" style="counter-reset: source-line 165;"><span id="cb5-166"><a href="#cb5-166"></a>```<span class="op">{</span>ojs<span class="op">}</span></span>
 <span id="cb5-167"><a href="#cb5-167"></a><span class="co">// Add fullscreen event listener</span></span>
 <span id="cb5-168"><a href="#cb5-168"></a>      document<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"fullscreenchange"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
 <span id="cb5-169"><a href="#cb5-169"></a>        <span class="cf">if</span> <span class="op">(</span>document<span class="op">.</span><span class="fu">fullscreenElement</span><span class="op">)</span> <span class="op">{</span></span>
@@ -477,15 +480,15 @@ View Summary of Columns
 <span id="cb5-215"><a href="#cb5-215"></a>        document<span class="op">.</span><span class="fu">body</span><span class="op">.</span><span class="fu">removeChild</span><span class="op">(</span>tempInput<span class="op">);</span></span>
 <span id="cb5-216"><a href="#cb5-216"></a>        <span class="fu">alert</span><span class="op">(</span><span class="st">"URL copied to clipboard: "</span> <span class="op">+</span> dataPath<span class="op">);</span></span>
 <span id="cb5-217"><a href="#cb5-217"></a>      <span class="op">});</span></span>
-<span id="cb5-218"><a href="#cb5-218"></a>```</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-218"><a href="#cb5-218"></a>```</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-OJS Syntax Error (line 203, column 7)Unexpected token
+<span class="screen-reader-only">Important</span>OJS Syntax Error (line 203, column 7)Unexpected token
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -497,7 +500,7 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb6" data-startfrom="223" data-source-offset="-47"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 222;"><span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;div id="table-container" style="height: 600px"&gt;&lt;/div&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" data-startfrom="223" data-source-offset="-47"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 222;"><span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;div id="table-container" style="height: 600px"&gt;&lt;/div&gt;`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -508,7 +511,7 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 </div>
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb7" data-startfrom="225" data-source-offset="-109"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 224;"><span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a><span class="fu">generateTabulatorTableForObservable</span>(<span class="st">"#table-container"</span><span class="op">,</span> data<span class="op">,</span> {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" data-startfrom="225" data-source-offset="-109"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 224;"><span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a><span class="fu">generateTabulatorTableForObservable</span>(<span class="st">"#table-container"</span><span class="op">,</span> data<span class="op">,</span> {</span>
 <span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a>  <span class="dt">displayedColumns</span><span class="op">:</span> selectedColumns<span class="op">,</span></span>
 <span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnPopups</span><span class="op">:</span> [</span>
@@ -533,7 +536,7 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 <span id="cb7-247"><a href="#cb7-247" aria-hidden="true" tabindex="-1"></a>    <span class="co">// sortColumns: ["prize_year"],</span></span>
 <span id="cb7-248"><a href="#cb7-248" aria-hidden="true" tabindex="-1"></a>    <span class="co">// sortOrders: ["desc"]</span></span>
 <span id="cb7-249"><a href="#cb7-249" aria-hidden="true" tabindex="-1"></a>  <span class="dt">paginationSize</span><span class="op">:</span> <span class="dv">1000</span><span class="op">,</span></span>
-<span id="cb7-250"><a href="#cb7-250" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-250"><a href="#cb7-250" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -555,7 +558,7 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb8" data-startfrom="266" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 265;"><span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a>columnHeaderMenu <span class="op">=</span> [</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" data-startfrom="266" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 265;"><span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a>columnHeaderMenu <span class="op">=</span> [</span>
 <span id="cb8-267"><a href="#cb8-267" aria-hidden="true" tabindex="-1"></a>  {</span>
 <span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Hide Column'</span><span class="op">,</span></span>
 <span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a>    <span class="dt">action</span><span class="op">:</span> <span class="kw">function</span> (e<span class="op">,</span> column) {</span>
@@ -574,7 +577,7 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 <span id="cb8-282"><a href="#cb8-282" aria-hidden="true" tabindex="-1"></a>      column<span class="op">.</span><span class="fu">delete</span>()<span class="op">;</span></span>
 <span id="cb8-283"><a href="#cb8-283" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb8-284"><a href="#cb8-284" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb8-285"><a href="#cb8-285" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-285"><a href="#cb8-285" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-7" data-nodetype="declaration">
@@ -596,7 +599,7 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb9" data-startfrom="302" data-source-offset="-30"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 301;"><span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a>dataUrlParam <span class="op">=</span> <span class="kw">new</span> <span class="fu">URLSearchParams</span>(<span class="fu">html</span><span class="vs">`&lt;a href&gt;`</span><span class="op">.</span><span class="at">search</span>)<span class="op">.</span><span class="fu">get</span>(<span class="st">'dataUrl'</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" data-startfrom="302" data-source-offset="-30"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 301;"><span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a>dataUrlParam <span class="op">=</span> <span class="kw">new</span> <span class="fu">URLSearchParams</span>(<span class="fu">html</span><span class="vs">`&lt;a href&gt;`</span><span class="op">.</span><span class="at">search</span>)<span class="op">.</span><span class="fu">get</span>(<span class="st">'dataUrl'</span>)</span>
 <span id="cb9-303"><a href="#cb9-303" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-304"><a href="#cb9-304" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-305"><a href="#cb9-305" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">fetchData</span>(dataUrl) {</span>
@@ -639,7 +642,7 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 <span id="cb9-342"><a href="#cb9-342" aria-hidden="true" tabindex="-1"></a>  link<span class="op">.</span><span class="at">download</span> <span class="op">=</span> fileName<span class="op">;</span></span>
 <span id="cb9-343"><a href="#cb9-343" aria-hidden="true" tabindex="-1"></a>  link<span class="op">.</span><span class="fu">click</span>()<span class="op">;</span></span>
 <span id="cb9-344"><a href="#cb9-344" aria-hidden="true" tabindex="-1"></a>  URL<span class="op">.</span><span class="fu">revokeObjectURL</span>(link<span class="op">.</span><span class="at">href</span>)<span class="op">;</span> <span class="co">// Clean up</span></span>
-<span id="cb9-345"><a href="#cb9-345" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-345"><a href="#cb9-345" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -676,7 +679,7 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb10" data-startfrom="351" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 350;"><span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a>tableStyles <span class="op">=</span> <span class="fu">html</span> <span class="vs">`</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" data-startfrom="351" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 350;"><span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a>tableStyles <span class="op">=</span> <span class="fu">html</span> <span class="vs">`</span></span>
 <span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;style&gt;</span></span>
 <span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a><span class="vs">/* add space for sort direction symbol */</span></span>
 <span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a><span class="vs">thead th span {</span></span>
@@ -690,7 +693,7 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 <span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/style&gt;`</span></span>
 <span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`&lt;link href='https://unpkg.com/tabulator-tables@5.3.1/dist/css/tabulator.min.css' rel='stylesheet' /&gt;</span></span>
-<span id="cb10-365"><a href="#cb10-365" aria-hidden="true" tabindex="-1"></a><span class="vs">tabulator.min.css`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-365"><a href="#cb10-365" aria-hidden="true" tabindex="-1"></a><span class="vs">tabulator.min.css`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -713,11 +716,11 @@ OJS Syntax Error (line 203, column 7)Unexpected token
 <div class="cell">
 <details class="code-fold">
 <summary>code</summary>
-<div class="sourceCode cell-code" id="cb11" data-startfrom="372" data-source-offset="-31"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 371;"><span id="cb11-372"><a href="#cb11-372" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { SummaryTable } <span class="im">from</span> <span class="st">"fcb971390dae8f6d"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" data-startfrom="372" data-source-offset="-31"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 371;"><span id="cb11-372"><a href="#cb11-372" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { SummaryTable } <span class="im">from</span> <span class="st">"fcb971390dae8f6d"</span></span>
 <span id="cb11-373"><a href="#cb11-373" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-374"><a href="#cb11-374" aria-hidden="true" tabindex="-1"></a>Tabulator <span class="op">=</span> <span class="pp">require</span>(<span class="st">'https://unpkg.com/tabulator-tables@5.3.1'</span>)<span class="op">;</span></span>
 <span id="cb11-375"><a href="#cb11-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-376"><a href="#cb11-376" aria-hidden="true" tabindex="-1"></a>arrow <span class="op">=</span> <span class="pp">require</span>(<span class="st">'apache-arrow@6.0.1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-376"><a href="#cb11-376" aria-hidden="true" tabindex="-1"></a>arrow <span class="op">=</span> <span class="pp">require</span>(<span class="st">'apache-arrow@6.0.1'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -810,13 +813,14 @@ window._ojs.runtime.interpretFromScriptTags();
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1209,7 +1213,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> 'Tabular Data Viewer'</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Taras Novak (@RandomFractals)</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [ignore]</span></span>
@@ -1586,7 +1590,7 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb12-395"><a href="#cb12-395" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-396"><a href="#cb12-396" aria-hidden="true" tabindex="-1"></a>arrow <span class="op">=</span> <span class="pp">require</span>(<span class="st">'apache-arrow@6.0.1'</span>)</span>
 <span id="cb12-397"><a href="#cb12-397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
