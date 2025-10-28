@@ -1,30 +1,31 @@
 ---
 title: "People"
-
 ---
 
 ### The Editors
 
+- [**Alexander Manshel**](https://www.mcgill.ca/english/staff/alexander-manshel), Associate Professor, McGill University  
+- [**J.D. Porter**](https://pricelab.sas.upenn.edu/fellows/porter-jd), DH Specialist, University of Pennsylvania  
 - [**Melanie Walsh**](https://melaniewalsh.org/), Assistant Professor, Information School at the University of Washington  
-- [**Alexander Manshel**](https://www.mcgill.ca/english/staff/alexander-manshel), Associate Professor, McGill University
-- [**J.D. Porter**](https://pricelab.sas.upenn.edu/fellows/porter-jd), DH Specialist, University of Pennsylvania
 
 ### The Editorial Board
-- **Katherine Bode**, Professor of Literary and Textual Studies, ANU  
-- **J.D. Connor**, Associate Professor of Cinematic Arts, USC  
-- **Jennifer Doty**, Research Data Librarian, Emory  
-- **Lauren F. Klein**, Associate Professor of English and Quantitative Theory and Methods, Emory  
-- **Laura B. McGrath**, Assistant Professor of English and Digital Humanities, Temple University  
-- **Thomas Padilla**, Bristle Cone Strategy 
-- **Kenton Rambsy**, Assistant Professor of African American Literature and Digital Humanities, UT-Arlington  
-- **Dan Sinykin**, Associate Professor of English, Emory University  
-- **Richard Jean So**, Assistant Professor of English, McGill  
-- **Lindsay Thomas**, Associate Professor of English, Cornell University  
+
+- [**Katherine Bode**](https://slll.cass.anu.edu.au/centres/calc/people/professor-katherine-bode), Professor of Literary and Textual Studies, ANU  
+- [**J.D. Connor**](https://cinema.usc.edu/directories/profile.cfm?id=41972), Associate Professor of Cinematic Arts, USC  
+- [**Jenna Courtade**](https://guides.library.miami.edu/people/jmc525), Research Data Management Librarian, University of Miami  
+- [**Jennifer Doty**](https://libraries.emory.edu/contact/staff-directory/jennifer-doty), Research Data Librarian, Emory  
+- [**Lauren F. Klein**](https://lklein.com/), Professor of Data & Decision Sciences and English, Emory  
+- [**Laura B. McGrath**](https://laurabmcgrath.com/), Assistant Professor of English and Digital Humanities, Temple University  
+- [**Thomas Padilla**](https://www.thomaspadilla.org/), Authors Alliance and Bristlecone Strategy  
+- [**Kenton Rambsy**](https://profiles.howard.edu/kenton-rambsy), Associate Professor of African American Literature and Digital Humanities, Howard University  
+- [**Dan Sinykin**](https://english.emory.edu/people/bios/sinykin-dan.html), Associate Professor of English, Emory University  
+- [**Richard Jean So**](https://www.mcgill.ca/english/staff/richard-jean-so), Assistant Professor of English, McGill  
+- [**Lindsay Thomas**](https://lindsaythomas.net/), Associate Professor of English, Cornell University  
 
 ### The Project Team
-- **Matt Miller** (Data Analyst), Library of Congress  
-- **Neel Gupta** (Editorial Assistant), PhD Student, Information School, University of Washington  
-- **Em Nordling** (Editorial Assistant), PhD Student, English, Emory University  
-- **Bailey Betik** (Digital Publication Specialist), Emory Center for Digital Scholarship  
-- **Sara Palmer** (Digital Text Specialist), Emory Center for Digital Scholarship  
 
+- [**Matt Miller**](https://thisismattmiller.com/), Data Analyst, Library of Congress  
+- [**Neel Gupta**](https://ischool.uw.edu/people/phd/profile/ngupta1), Editorial Assistant, PhD Student, Information School, University of Washington  
+- [**Em Nordling**](https://english.emory.edu/people/grad-students.html), Editorial Assistant, PhD Candidate, English, Emory University  
+- [**Bailey Betik**](https://ecds.emory.edu/about/staff/betik-bailey.html), Digital Publication Specialist, Emory Center for Digital Scholarship  
+- [**Sara Palmer**](https://ecds.emory.edu/about/staff/palmer-sara.html), Digital Text Specialist, Emory Center for Digital Scholarship  
