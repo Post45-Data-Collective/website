@@ -98,6 +98,34 @@ ul.task-list li input[type="checkbox"] {
       window['quarto-listing-loaded']();
     }
   })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-news .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-news'] = new List('listing-news', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
   </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-H9Z8DC0X8Q"></script>
 
@@ -204,7 +232,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"><div class="category" data-category="TUZB">MFA</div><div class="category" data-category="YXNpYW4lMjBhbWVyaWNhbg==">asian american</div><div class="category" data-category="YmVzdHNlbGxlcnM=">bestsellers</div><div class="category" data-category="Ym9va3N0b3Jl">bookstore</div><div class="category" data-category="YnJpdGlzaA==">british</div><div class="category" data-category="Y2Fub24=">canon</div><div class="category" data-category="Y29taWNz">comics</div><div class="category" data-category="ZGF0YXNldA==">dataset</div><div class="category" data-category="ZWR1Y2F0aW9u">education</div><div class="category" data-category="ZmVtaW5pc3Q=">feminist</div><div class="category" data-category="ZmljdGlvbg==">fiction</div><div class="category" data-category="ZmlsbQ==">film</div><div class="category" data-category="Z2VuZGVy">gender</div><div class="category" data-category="Z2VucmUlMjBmaWN0aW9u">genre fiction</div><div class="category" data-category="Z2xvYmFs">global</div><div class="category" data-category="bGl0ZXJhdHVyZQ==">literature</div><div class="category" data-category="bWV0YWRhdGE=">metadata</div><div class="category" data-category="cHJpbnQ=">print</div><div class="category" data-category="cHJpemVz">prizes</div><div class="category" data-category="cHVibGlzaGluZw==">publishing</div><div class="category" data-category="cmFjZQ==">race</div><div class="category" data-category="cmFkaW8=">radio</div><div class="category" data-category="c2NpZW5jZSUyMGZpY3Rpb24=">science fiction</div><div class="category" data-category="c3BlY3VsYXRpdmUlMjBmaWN0aW9u">speculative fiction</div><div class="category" data-category="dGVsZXZpc2lvbg==">television</div><div class="category" data-category="dHJhbnNsYXRpb24=">translation</div><div class="category" data-category="dmlkZW8lMjBnYW1lcw==">video games</div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"><div class="category" data-category="TUZB">MFA</div><div class="category" data-category="YXNpYW4lMjBhbWVyaWNhbg==">asian american</div><div class="category" data-category="YmVzdHNlbGxlcnM=">bestsellers</div><div class="category" data-category="Ym9va3N0b3Jl">bookstore</div><div class="category" data-category="YnJpdGlzaA==">british</div><div class="category" data-category="Y2Fub24=">canon</div><div class="category" data-category="Y29taWNz">comics</div><div class="category" data-category="ZGF0YXNldA==">dataset</div><div class="category" data-category="ZWR1Y2F0aW9u">education</div><div class="category" data-category="ZmVtaW5pc3Q=">feminist</div><div class="category" data-category="ZmljdGlvbg==">fiction</div><div class="category" data-category="ZmlsbQ==">film</div><div class="category" data-category="Z2VuZGVy">gender</div><div class="category" data-category="Z2VucmUlMjBmaWN0aW9u">genre fiction</div><div class="category" data-category="Z2xvYmFs">global</div><div class="category" data-category="bGl0ZXJhdHVyZQ==">literature</div><div class="category" data-category="bWV0YWRhdGE=">metadata</div><div class="category" data-category="bmV3cw==">news</div><div class="category" data-category="cHJpbnQ=">print</div><div class="category" data-category="cHJpemVz">prizes</div><div class="category" data-category="cHVibGlzaGluZw==">publishing</div><div class="category" data-category="cmFjZQ==">race</div><div class="category" data-category="cmFkaW8=">radio</div><div class="category" data-category="c2NpZW5jZSUyMGZpY3Rpb24=">science fiction</div><div class="category" data-category="c3BlY3VsYXRpdmUlMjBmaWN0aW9u">speculative fiction</div><div class="category" data-category="c3R1ZGVudHM=">students</div><div class="category" data-category="dGVsZXZpc2lvbg==">television</div><div class="category" data-category="dHJhbnNsYXRpb24=">translation</div><div class="category" data-category="dmlkZW8lMjBnYW1lcw==">video games</div><div class="category" data-category="d29ya3Nob3A=">workshop</div></div></div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
@@ -223,6 +251,61 @@ The Post45 Data Collective peer reviews and houses literary and cultural data fr
 <p><img class="hero-image" src="images/p45dc-logo.jpg" alt="post45 dc logo"></p>
 </div>
 <hr>
+<section id="news" class="level1">
+<h1>News</h1>
+<div id="listing-news" class="quarto-listing quarto-listing-container-default">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="bmV3cyUyQ3N0dWRlbnRzJTJDd29ya3Nob3A=" data-listing-date-sort="1761548400000" data-listing-file-modified-sort="1761675620380" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="198">
+<div class="thumbnail">
+<p><a href="./news/grad-workshop.html" class="no-external"></a></p><a href="./news/grad-workshop.html" class="no-external">
+<p><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Color16.jpg" class="thumbnail-image"></p>
+</a><p><a href="./news/grad-workshop.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title" data-anchor-id="news">
+<a href="./news/grad-workshop.html" class="no-external">Workshop for Graduate Students—March 2026</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./news/grad-workshop.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">
+news
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('c3R1ZGVudHM='); return false;">
+students
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('d29ya3Nob3A='); return false;">
+workshop
+</div>
+</div>
+<div class="listing-description">
+<a href="./news/grad-workshop.html" class="no-external">We’re excited to host a virtual workshop where graduate students can present work-in-progress that engages with data from the Post45 Data Collective in some way.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./news/grad-workshop.html" class="no-external">
+<div class="listing-date">
+Oct 27, 2025
+</div>
+<div class="listing-author">
+Melanie Walsh
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
 <section id="datasets" class="level1">
 <h1>Datasets</h1>
 <div id="listing-datasets" class="quarto-listing quarto-listing-container-default">
@@ -647,7 +730,7 @@ Jordan Pruett
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="ZWR1Y2F0aW9uJTJDTUZBJTJDZ2VuZGVyJTJDZGF0YXNldA==" data-listing-date-sort="1618988400000" data-listing-file-modified-sort="1755051757032" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3276">
+<div class="quarto-post image-right" data-index="9" data-categories="ZWR1Y2F0aW9uJTJDTUZBJTJDZ2VuZGVyJTJDZGF0YXNldA==" data-listing-date-sort="1618988400000" data-listing-file-modified-sort="1761674831152" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3276">
 <div class="thumbnail">
 <p><a href="./posts/iowa_writers_workshop/index.html" class="no-external"></a></p><a href="./posts/iowa_writers_workshop/index.html" class="no-external">
 <p><img loading="lazy" src="https://www.pw.org/files/styles/conference_pic/public/small_press_images/dey_house_and_gsl.jpg?itok=IE-ihqaz" class="thumbnail-image"></p>

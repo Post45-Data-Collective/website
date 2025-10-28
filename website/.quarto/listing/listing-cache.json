@@ -4,7 +4,9 @@
       "news"
     ],
     "index.qmd": [
-      "posts"
+      "posts",
+      "news",
+      "news/grad-workshop.qmd"
     ],
     "our-data.qmd": [
       "posts"

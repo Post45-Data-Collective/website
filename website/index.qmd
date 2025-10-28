@@ -8,15 +8,22 @@ search: false
 # title: "Post45 Data Collective"
 # title-block-banner: images/p45dc-logo.jpg
 listing:
-  id: datasets
-  contents: posts
-  exclude:
-    categories: ["news", "ignore", "draft"]
-  sort: "date desc"
-  type: default
-  categories: unnumbered 
-  sort-ui: false
-  filter-ui: true
+  - id: datasets
+    contents: posts
+    exclude:
+      categories: ["news", "ignore", "draft"]
+    sort: "date desc"
+    type: default
+    categories: unnumbered 
+    sort-ui: false
+    filter-ui: true
+  - id: news
+    contents: news/grad-workshop.qmd
+    type: default
+    sort: "date desc"
+    categories: unnumbered 
+    sort-ui: false
+    filter-ui: true
   # image-height: 12rem
 repo-actions: false
 description: | 
@@ -40,6 +47,11 @@ image: "images/p45dc-logo.jpg"
 
 
 ---
+
+# News
+
+::: {#news}
+:::
 
 # Datasets
 

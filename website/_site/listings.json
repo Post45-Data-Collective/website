@@ -28,12 +28,14 @@
       "/posts/the-index-of-major-literary-prizes-in-the-us/index.html",
       "/posts/nyt_hardcover_fiction_bestsellers/index.html",
       "/posts/iowa_writers_workshop/index.html",
-      "/posts/hathitrust_post45_fiction/index.html"
+      "/posts/hathitrust_post45_fiction/index.html",
+      "/news/grad-workshop.html"
     ]
   },
   {
     "listing": "/news.html",
     "items": [
+      "/news/grad-workshop.html",
       "/news/editor-news.html",
       "/news/data-analyst-summer-2023.html",
       "/news/ddp-recap.html",

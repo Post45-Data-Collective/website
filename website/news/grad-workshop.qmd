@@ -1,0 +1,38 @@
+---
+title: "Workshop for Graduate Students—March 2026"
+date: "2025-10-27"
+author: 
+    - name: Melanie Walsh
+abstract: "We're excited to host a virtual workshop where graduate students can present work-in-progress that engages with data from the Post45 Data Collective in some way."
+page-layout: article
+categories: [news, students, workshop]
+format-links: [ipynb, pdf, docx]
+code-tools: false
+image: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Color16.jpg"
+---
+
+
+![](https://upload.wikimedia.org/wikipedia/commons/7/7c/Color16.jpg)
+
+
+*Submit a proposal for the Post45 Data Collective Graduate Wokrshop [here](https://docs.google.com/forms/d/e/1FAIpQLSelPcZjKtXzTcab8P9-AymEL-FvtHBWo5VMj9SsW-OjA5yMOg/viewform).*
+
+The Post45 Data Collective invites graduate students in the humanities or adjacent fields to explore cultural data reflexively and collaboratively in a mini-workshop hosted virtually on **Friday, March 13**. 
+
+This one-day workshop will explore the intersections of DH scholarship and DH professionalization, inviting early-career scholars **to think alongside editors from the P45DC (Alexander Manshel, J.D. Porter, and Melanie Walsh), the Nineteenth-Century Data Collective, *Post45 Journal*, and *Public Book*s**. Feedback will focus not only on how to make meaning from data, but also how to situate data-driven humanities scholarship in an ever-changing professional landscape. 
+
+The mini-workshop will consist of ~12 short graduate student presentations (10-15 minutes) that each use one or more of the P45DC datasets.
+
+Presentations themselves should be approached creatively and expansively: some projects might be polished and complete, and others might be in exploratory or in-progress phases. 
+
+Post-presentation discussion will be oriented toward future possibilities of your project, including insight from more senior scholars on topics like peer review, public-facing publication, dissertation writing, or framing for the job market.
+
+Timeline
+
+Mon, December 1: Proposals due
+
+Mon, December 15: Notification of successful submissions
+
+Fri, March 13: Mini-workshop (held virtually)
+
+Submit [a proposal here](https://docs.google.com/forms/d/e/1FAIpQLSelPcZjKtXzTcab8P9-AymEL-FvtHBWo5VMj9SsW-OjA5yMOg/viewform)!
