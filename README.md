@@ -13,14 +13,15 @@ Benefits of Quarto include: publication-quality, citeable articles and reference
 1. **Install R** (version 4.3 or higher recommended)
 
    - Download from [CRAN](https://cran.r-project.org/)
-   - Or use your package manager (e.g., `brew install r` on macOS)
 
 2. **Install Quarto**
 
    - Download from [quarto.org](https://quarto.org/docs/get-started/)
 
-3. **Install RStudio** (optional but recommended)
-   - Download from [posit.co](https://posit.co/download/rstudio-desktop/)
+3. **Install a code editor** (optional but recommended)
+   - **RStudio**: Download from [posit.co](https://posit.co/download/rstudio-desktop/)
+   - **VS Code**: Download from [code.visualstudio.com](https://code.visualstudio.com/)
+     - Install the [Quarto extension](https://marketplace.visualstudio.com/items?itemName=quarto.quarto) for VS Code
 
 ### Installation
 
@@ -51,11 +52,17 @@ This will install all the R packages specified in `renv.lock`, ensuring you have
 
 To preview the website locally:
 
+**Option 1: Command line**
+
 ```bash
 quarto preview
 ```
 
-Or to render the site:
+**Option 2: VS Code**
+
+- Open a `.qmd` file and click the "Preview" button in the top right corner of the editor
+
+To render the site:
 
 ```bash
 quarto render
