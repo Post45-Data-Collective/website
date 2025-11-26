@@ -15,27 +15,34 @@ aliases:
 
 The Post45 Data Collective peer reviews and houses literary and cultural data from 1945 to the present.
 
-All datasets are accompanied by a contextual statement or “data essay” that addresses (in **4,000 words or less**) the significance of the data; the social and historical context of the data; how the data was collected, cleaned, and organized; and possible ethical concerns or misuses of the data. 
+**Data Tables**: All datasets on the Post45 Data Collective website are displayed as interactive data tables, which enables users to filter, explore, and download them. The creation of the data tables is handled by the Post45 Data Collective editorial team. Contributors need only submit a spreadsheet file(s), such as an Excel or CSV file.
 
-If you’re interested in submitting a dataset to the Post45 Data Collective, please prepare a data essay with [this template](https://docs.google.com/document/d/1Xm2ikqir-JceGoHwq1dI9qkVcXPTHWTGBAt0R3gN6S8/edit?usp=sharing) and format your data according to the guidelines below. Please submit your essay as a Google Doc or a Word document. We use [Quarto](https://quarto.org/) to create our website, so if you are familiar with Quarto, you can also create your essay with our [.qmd template](https://github.com/Post45-Data-Collective/website/blob/main/data_essay_template.qmd).
+**Data Essays**: All datasets are accompanied by a contextual statement or “data essay” that addresses (in 4,000 words or less) the significance of the data; the social and historical context of the data; how the data was collected, cleaned, and organized; and possible ethical concerns or misuses of the data. This essay will be prepared by the contributors.
 
-When you’re ready, email your dataset and data essay to Melanie Walsh (melwalsh@uw.edu), Alexander Manshel (alexander.manshel@mcgill.ca), and J.D. Porter (porterjd@sas.upenn.edu).
+**Visualizations**: We sometimes feature visualizations alongside the data tables, such as those featured in ["The Canon of Asian American Literature."](https://data.post45.org/posts/asian-american-literature/#explore-the-asian-american-literary-canon) We use [Quarto](https://quarto.org/) to host our website, and we can display visualizations created with Python, R, and JavaScript [Observable notebooks](https://quarto.org/docs/interactive/ojs/). If you'd like to prepare your own visualization or discuss the creation of one, please get in touch.
 
-Peer Review & Data Essay Criteria
----------------------------------
+# Interested in Submitting?
 
-Data essays should include the following sections and answer most, if not all, of the following questions. 
+If you’re interested in submitting to the Post45 Data Collective, please consult our ["data formatting"](#dataset-criteria-preparing-formatting) guidelines below, and prepare a data essay with [this Google Doc/Word template](https://docs.google.com/document/d/1Xm2ikqir-JceGoHwq1dI9qkVcXPTHWTGBAt0R3gN6S8/edit?usp=sharing).
 
-Significance and Context 
--------------------------
+We would appreciate if you share your data essay as a Google Doc or a Word document. If you're familiar with [Quarto](https://quarto.org/), you can also submit with our [.qmd template](https://github.com/Post45-Data-Collective/website/blob/main/data_essay_template.qmd).
+
+When you’re ready, please email your dataset and data essay to Melanie Walsh (melwalsh@uw.edu), Alexander Manshel (alexander.manshel@mcgill.ca), and J.D. Porter (porterjd@sas.upenn.edu).
+
+**Please note that no technical expertise is required to submit to the Post45 Data Collective!** We know that many researchers have created valuable datasets manually, and we are eager to work with you to publish this data. We may be able to offer some technical support to help clean, manipulate, or augment data. Feel free to reach out if you'd like to discuss this possibility.
+
+# Data Essay Criteria
+
+Data essays (4,000 words or less) should include the following sections and answer most, if not all, of the following questions. 
+
+### Significance and Context 
 
 *   How is the data significant for the field of literary studies and cultural studies, especially post-1945 scholarship?
 *   What is the social and historical context of the data? What background information or domain knowledge is necessary to use this data responsibly? (Please note that Post45 Data Collective datasets are often used by people who do not specialize in post-1945 scholarship.)
 *   Who might the data be useful for? What could the data be used for? Please suggest at least three specific uses.
 *   For what purpose was the dataset created? Was there a gap that needed to be filled? Has the data been used already? Does similar or overlapping data exist publicly? If so, please describe.
 
-Collection + Creation
----------------------
+### Collection + Creation
 
 *   How and when was the data collected, acquired, or created? What mechanisms or procedures were used to curate it (e.g. human curation, software, API)?
 *   If the data was hand-curated, what organizational heuristic was adopted, and why?
@@ -45,49 +52,49 @@ Collection + Creation
 
 Provide sufficient detail such that readers understand how the dataset was created, and would within reason be able to recreate it.
 
-Description
------------
+### Description
 
 *   What does the data describe? Are all instances included or a selection? If selected, what principles were used to justify inclusions and exclusions?
 *   If your dataset uses categorical variables or other labels or fields that you have created, explain how they were constructed. Should the user be aware of any categories or fields that condense or erase information?
 *   Is any information missing? If so, please provide a description, explaining why this information is missing (e.g. because it was unavailable). Are there any errors, sources of noise, or redundancies? If so, please describe.
 
-Ethical Considerations
-----------------------
+### Ethical Considerations
 
 *   What possible negative impacts or harms might result from the publication of your data? How could the data be misused?
 *   Does the dataset contain information that might be considered confidential (e.g. data that includes the content of individuals’ non-public communications)? If so, please describe.
 *   Does the dataset contain information that might be considered sensitive (e.g. data that reveals racial or ethnic origins, sexual orientations, religious beliefs, political opinions or union memberships, or locations; financial or health data; biometric or genetic data; forms of government identification, such as social security numbers; criminal history)? If so, please describe.
 *   Were any ethical review processes undertaken in the collection or curation of this dataset (e.g. the consultation of an institutional review board)? If so, please describe these review processes, including the outcomes, as well as a link to supporting documentation.
 
-Versioning
-----------
+### Versioning
 
 *   Will the data be updated (e.g. to correct errors, add new instances, delete instances)? If so, please describe how often and by whom.
 
-Bibliography
-------------
+### Bibliography
 
 *   Please provide a list of sources that reference or draw on this data, or that were used or consulted to produce the data. If there are other sources that would help users understand this data, please include them, as well.
 
-Licensing
----------
+### Licensing
 
 *   What is the license for this data? If applicable, the data must be deposited under an open license that permits unrestricted access (e.g. CC0, CC-BY).
 
 
-Preparing + Formatting Your Data
---------------------------------
+# Dataset Criteria: Preparing + Formatting
 
 The Post45 Data Collective aims to maximize the reusability and interoperability of our datasets. To that end, we have worked to include unique identifiers, such as [OCLC numbers](https://en.wikipedia.org/wiki/OCLC#Identifiers_and_linked_data), [ISBNs](https://en.wikipedia.org/wiki/ISBN), [HathiTrust ids](https://www.hathitrust.org/hathifiles_description), and [VIAF records](https://en.wikipedia.org/wiki/Virtual_International_Authority_File), for data related to books and authors whenever possible.
 
-When curating your own datasets, please use similar unique identifiers. If necessary, we may be able to help potential authors add unique identifiers to datasets. Please reach out to the editors to consult about this possibility.
+When curating your own datasets, we ask that you use similar unique identifiers.
 
-For further help, consider the following resources:
+To aid in this process, we've been developing a new tool called BookReconciler, which can help automatically add persistent identifiers to spreadsheets with book title and author information. You can learn more about installing and using BookReconciler on [our GitHub page](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service?tab=readme-ov-file#bookreconciler--02--metadata-enrichment-and-work-level-clustering). We also published a [tutorial on YouTube](https://www.youtube.com/watch?v=V9ZJoFowRJM).
 
-•    [Format your data](https://www.ukdataservice.ac.uk/manage-data/format.aspx) from the UK Data Service
+<iframe width="560" height="315" src="https://www.youtube.com/embed/V9ZJoFowRJM?si=fBNX_2jLysuspFzS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-•    [Sustainability of Digital Formats](http://Sustainability of Digital Formats) from the Library of Congress
+While our goal is to make BookReconciler as accessible as possible, we understand that the barrier to entry is still high. If you're not able to add persistent identifiers to your dataset, we may be able to collaborate with you to make this possible.
+
+For further help formatting your datasets, consider the following resources:
+
+- Tips for formatting your data from our friends at the [Nineteenth-Century Data Collective](https://c19datacollective.com/criteria/dataset-preparation/)
+
+-  Tips for formatting your data from the [UK Data Service](https://www.ukdataservice.ac.uk/manage-data/format.aspx)
 
 
 _The language for these criteria was drawn from Katherine Bode, Jennifer Doty, Lauren F. Klein, Melanie Walsh, Cultural Analytics, Journal of Open Humanities Data, and “Datasheets for Datasets” by Timnit Gebru et. al._

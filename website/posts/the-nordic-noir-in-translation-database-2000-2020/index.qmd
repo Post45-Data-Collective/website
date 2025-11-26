@@ -45,12 +45,12 @@ aliases:
 
 ![](https://upload.wikimedia.org/wikipedia/commons/d/d7/NordicPassportUnion.png){fig-align="center" width="50%"}
 
+**Update (10/31/2025):** Please note that the authors of this dataset and data essay updated both documents in October 2025. After discovering that several translations were missing, specifically concerning Norwegian, the authors augmented their data with information scraped from the website Goodreads. The revised dataset now has 1,661 additional rows, and two additional columns: `author_gender` and `translator`. The first (February 2024) version of the dataset is still accessible [here](https://github.com/Post45-Data-Collective/data/blob/main/nordic_noir_translation_database/nordic_noir_translation_database-v1.csv).
+
 **Related article(s):** “On top of the world: mapping the Nordic crime fiction boom based on translation data,” _Translation Studies,_ [https://doi.org/10.1080/14781700.2024.2333737](https://doi.org/10.1080/14781700.2024.2333737) 
 
 This dataset contains bibliographic records of (in theory) all translations of Nordic crime fiction for adults, written in any of the five main Nordic languages (Danish, Finnish, Icelandic, Norwegian and Swedish) and published in translation during the period 2000–2020. The dataset is delimited to include only _first edition_ translations published in _print book form_. 
 
-
-**Update (10/31/2025):** Please note that the authors of this dataset and essay updated both documents in October 2025. See the "Versioning" section of the data essay for additional information. The first (February 2024) version of the dataset is still accessible [here](https://github.com/Post45-Data-Collective/data/blob/main/nordic_noir_translation_database/nordic_noir_translation_database-v1.csv).
 
 ## Data Table
 

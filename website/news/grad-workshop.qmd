@@ -1,9 +1,9 @@
 ---
-title: "Workshop for Graduate Students—March 2026"
+title: "Workshop for Graduate Students—March 2026 (Deadline: December 1, 2025)"
 date: "2025-10-27"
 author: 
     - name: Melanie Walsh
-abstract: "We're excited to host a virtual workshop where graduate students can present work-in-progress that engages with data from the Post45 Data Collective in some way."
+abstract: "We're excited to host a virtual workshop where graduate students can present work-in-progress that engages with data from the Post45 Data Collective."
 page-layout: article
 categories: [news, students, workshop]
 format-links: [ipynb, pdf, docx]
@@ -15,11 +15,13 @@ image: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Color16.jpg"
 ![](https://upload.wikimedia.org/wikipedia/commons/7/7c/Color16.jpg)
 
 
-*Submit a proposal for the Post45 Data Collective Graduate Wokrshop [here](https://docs.google.com/forms/d/e/1FAIpQLSelPcZjKtXzTcab8P9-AymEL-FvtHBWo5VMj9SsW-OjA5yMOg/viewform).*
+<p style="color:red; font-weight:bold">PROPOSAL DEADLINE: Monday, December 1, 2025.</p>
+
+*Submit a proposal for the Post45 Data Collective Graduate Workshop [here](https://docs.google.com/forms/d/e/1FAIpQLSelPcZjKtXzTcab8P9-AymEL-FvtHBWo5VMj9SsW-OjA5yMOg/viewform) or below.*
 
 The Post45 Data Collective invites graduate students in the humanities or adjacent fields to explore cultural data reflexively and collaboratively in a mini-workshop hosted virtually on **Friday, March 13**. 
 
-This one-day workshop will explore the intersections of DH scholarship and DH professionalization, inviting early-career scholars **to think alongside editors from the P45DC (Alexander Manshel, J.D. Porter, and Melanie Walsh), the Nineteenth-Century Data Collective, *Post45 Journal*, and *Public Book*s**. Feedback will focus not only on how to make meaning from data, but also how to situate data-driven humanities scholarship in an ever-changing professional landscape. 
+This one-day workshop will explore the intersections of DH scholarship and DH professionalization, inviting early-career scholars to think alongside editors from the P45DC (Alexander Manshel, J.D. Porter, and Melanie Walsh), the Nineteenth-Century Data Collective, *Post45 Journal*, and *Public Book*s**. Feedback will focus not only on how to make meaning from data, but also how to situate data-driven humanities scholarship in an ever-changing professional landscape. 
 
 The mini-workshop will consist of ~12 short graduate student presentations (10-15 minutes) that each use one or more of the P45DC datasets.
 
@@ -27,12 +29,4 @@ Presentations themselves should be approached creatively and expansively: some p
 
 Post-presentation discussion will be oriented toward future possibilities of your project, including insight from more senior scholars on topics like peer review, public-facing publication, dissertation writing, or framing for the job market.
 
-Timeline
-
-Mon, December 1: Proposals due
-
-Mon, December 15: Notification of successful submissions
-
-Fri, March 13: Mini-workshop (held virtually)
-
-Submit [a proposal here](https://docs.google.com/forms/d/e/1FAIpQLSelPcZjKtXzTcab8P9-AymEL-FvtHBWo5VMj9SsW-OjA5yMOg/viewform)!
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSelPcZjKtXzTcab8P9-AymEL-FvtHBWo5VMj9SsW-OjA5yMOg/viewform?embedded=true" width="640" height="3497" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
