@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>News – Post45 Data Collective</title>
+<title>Style Guide – Post45 Data Collective</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./images/p45dc-fav-icon.jpg" rel="icon" type="image/jpeg">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,35 +67,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-news .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-news'] = new List('listing-news', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-H9Z8DC0X8Q"></script>
 
 <script type="text/javascript">
@@ -108,41 +77,12 @@ gtag('js', new Date());
 gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="News – Post45 Data Collective">
+<meta property="og:title" content="Style Guide – Post45 Data Collective">
 <meta property="og:image" content="https://data.post45.org/images/p45dc-fav-icon.jpg">
 <meta property="og:site_name" content="Post45 Data Collective">
-<meta name="twitter:title" content="News – Post45 Data Collective">
+<meta name="twitter:title" content="Style Guide – Post45 Data Collective">
 <meta name="twitter:image" content="https://data.post45.org/images/p45dc-fav-icon.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -181,7 +121,7 @@ window.Quarto = {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./news.html" aria-current="page"> 
+    <a class="nav-link" href="./news.html"> 
 <span class="menu-text">News</span></a>
   </li>  
   <li class="nav-item compact">
@@ -201,14 +141,23 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-unnumbered"><div class="category" data-category="ZWRpdG9ycw==">editors</div><div class="category" data-category="Z3JhbnRz">grants</div><div class="category" data-category="bGF1bmNo">launch</div><div class="category" data-category="bmV3cw==">news</div><div class="category" data-category="c3R1ZGVudHM=">students</div><div class="category" data-category="dGVhbQ==">team</div><div class="category" data-category="d29ya3Nob3A=">workshop</div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#heading-1" id="toc-heading-1" class="nav-link active" data-scroll-target="#heading-1">Heading 1</a>
+  <ul class="collapse">
+  <li><a href="#heading-2" id="toc-heading-2" class="nav-link" data-scroll-target="#heading-2">Heading 2</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">News</h1>
+<h1 class="title">Style Guide</h1>
 </div>
 
 
@@ -224,230 +173,24 @@ window.Quarto = {
 
 </header>
 
-
-<div id="listing-news" class="quarto-listing quarto-listing-container-default">
-<div class="listing-actions-group">
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bmV3cyUyQ3N0dWRlbnRzJTJDd29ya3Nob3A=" data-listing-date-sort="1761548400000" data-listing-file-modified-sort="1764184067855" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="195">
-<div class="thumbnail">
-<p><a href="./news/grad-workshop.html" class="no-external"></a></p><a href="./news/grad-workshop.html" class="no-external">
-<p><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Color16.jpg" class="thumbnail-image"></p>
-</a><p><a href="./news/grad-workshop.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./news/grad-workshop.html" class="no-external">Workshop for Graduate Students—March 2026 (Deadline: December 1, 2025)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./news/grad-workshop.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">
-news
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('c3R1ZGVudHM='); return false;">
-students
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('d29ya3Nob3A='); return false;">
-workshop
-</div>
-</div>
-<div class="listing-description">
-<a href="./news/grad-workshop.html" class="no-external">We’re excited to host a virtual workshop where graduate students can present work-in-progress that engages with data from the Post45 Data Collective.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./news/grad-workshop.html" class="no-external">
-<div class="listing-date">
-Oct 27, 2025
-</div>
-<div class="listing-author">
-Melanie Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bmV3cyUyQ2VkaXRvcnM=" data-listing-date-sort="1746082800000" data-listing-file-modified-sort="1746124685024" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="319">
-<div class="thumbnail">
-<p><a href="./news/editor-news.html" class="no-external"></a></p><a href="./news/editor-news.html" class="no-external">
-<p><img loading="lazy" src="https://cdn.lareviewofbooks.org/unsafe/750x0/filters:format(jpeg):quality(75)/https%3A%2F%2Fassets.lareviewofbooks.org%2Fuploads%2F202301blood-book-3.jpg" class="thumbnail-image"></p>
-</a><p><a href="./news/editor-news.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./news/editor-news.html" class="no-external">Announcing Two New Co-Editors—And Saying Goodbye to Dan</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./news/editor-news.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">
-news
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('ZWRpdG9ycw=='); return false;">
-editors
-</div>
-</div>
-<div class="listing-description">
-<a href="./news/editor-news.html" class="no-external">We are excited to announce that Alexander Manshel and J.D. Porter will be joining Melanie Walsh as co-editors of the Post45 Data Collective.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./news/editor-news.html" class="no-external">
-<div class="listing-date">
-May 1, 2025
-</div>
-<div class="listing-author">
-Melanie Walsh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bmV3cyUyQ3RlYW0=" data-listing-date-sort="1682924400000" data-listing-file-modified-sort="1730428128779" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="191">
-<div class="thumbnail">
-<p><a href="./news/data-analyst-summer-2023.html" class="no-external"></a></p><a href="./news/data-analyst-summer-2023.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./news/data-analyst-summer-2023.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./news/data-analyst-summer-2023.html" class="no-external">Data Analyst (Summer 2023)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./news/data-analyst-summer-2023.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">
-news
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('dGVhbQ=='); return false;">
-team
-</div>
-</div>
-<div class="listing-description">
-<a href="./news/data-analyst-summer-2023.html" class="no-external">The Post45 Data Collective is looking to hire a data analyst this summer. </a>
-</div>
-</div>
-<div class="metadata">
-<a href="./news/data-analyst-summer-2023.html" class="no-external">
-<div class="listing-date">
-May 1, 2023
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bmV3cyUyQ2dyYW50cw==" data-listing-date-sort="1633071600000" data-listing-file-modified-sort="1730428138075" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="787">
-<div class="thumbnail">
-<p><a href="./news/ddp-recap.html" class="no-external"></a></p><a href="./news/ddp-recap.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./news/ddp-recap.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./news/ddp-recap.html" class="no-external">Recapping the Data Development Project, 2021</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./news/ddp-recap.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">
-news
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Z3JhbnRz'); return false;">
-grants
-</div>
-</div>
-<div class="listing-description">
-<a href="./news/ddp-recap.html" class="no-external">In summer of 2021, the Post45 Data Collective awarded its inaugural round of Data Development Grants.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./news/ddp-recap.html" class="no-external">
-<div class="listing-date">
-Oct 1, 2021
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bmV3cyUyQ2dyYW50cw==" data-listing-date-sort="1619852400000" data-listing-file-modified-sort="1730428144561" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="121">
-<div class="thumbnail">
-<p><a href="./news/ddp-rfp-2021.html" class="no-external"></a></p><a href="./news/ddp-rfp-2021.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./news/ddp-rfp-2021.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./news/ddp-rfp-2021.html" class="no-external">Data Development Project Grants, 2021</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./news/ddp-rfp-2021.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">
-news
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Z3JhbnRz'); return false;">
-grants
-</div>
-</div>
-<div class="listing-description">
-<a href="./news/ddp-rfp-2021.html" class="no-external">The Post45 Data Collective is accepting applications for the Data Development Project.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./news/ddp-rfp-2021.html" class="no-external">
-<div class="listing-date">
-May 1, 2021
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bmV3cyUyQ2xhdW5jaA==" data-listing-date-sort="1618470000000" data-listing-file-modified-sort="1730428119316" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1140">
-<div class="thumbnail">
-<p><a href="./news/awash-in-data.html" class="no-external"></a></p><a href="./news/awash-in-data.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./news/awash-in-data.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./news/awash-in-data.html" class="no-external">Awash in Data</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./news/awash-in-data.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">
-news
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('bGF1bmNo'); return false;">
-launch
-</div>
-</div>
-<div class="listing-description">
-<a href="./news/awash-in-data.html" class="no-external">We—Laura and Dan—decided to form a collective to address the challenges that we and our colleagues were beginning to face.</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./news/awash-in-data.html" class="no-external">
-<div class="listing-date">
-Apr 15, 2021
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
+<nav id="TOC-body" role="doc-toc">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#heading-1" id="toc-heading-1">Heading 1</a>
+  <ul>
+  <li><a href="#heading-2" id="toc-heading-2">Heading 2</a></li>
+  </ul></li>
+  </ul>
+</nav>
+<section id="heading-1" class="level1">
+<h1>Heading 1</h1>
+<section id="heading-2" class="level2">
+<h2 class="anchored" data-anchor-id="heading-2">Heading 2</h2>
 
 
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

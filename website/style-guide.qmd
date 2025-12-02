@@ -1,0 +1,12 @@
+---
+title: "Style Guide"
+format:
+  html:
+    toc: true
+    toc-location: right-body   # or left-body
+    toc-title: "Table of Contents"
+---
+
+# Heading 1
+
+## Heading 2

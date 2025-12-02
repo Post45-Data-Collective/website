@@ -760,7 +760,7 @@
     "href": "news/grad-workshop.html",
     "title": "Workshop for Graduate Students—March 2026 (Deadline: December 1, 2025)",
     "section": "",
-    "text": "PROPOSAL DEADLINE: Monday, December 1, 2025.\n\nSubmit a proposal for the Post45 Data Collective Graduate Workshop here or below.\nThe Post45 Data Collective invites graduate students in the humanities or adjacent fields to explore cultural data reflexively and collaboratively in a mini-workshop hosted virtually on Friday, March 13.\nThis one-day workshop will explore the intersections of DH scholarship and DH professionalization, inviting early-career scholars to think alongside editors from the P45DC (Alexander Manshel, J.D. Porter, and Melanie Walsh), the Nineteenth-Century Data Collective, Post45 Journal, and Public Books. Feedback will focus not only on how to make meaning from data, but also how to situate data-driven humanities scholarship in an ever-changing professional landscape.\nThe mini-workshop will consist of ~12 short graduate student presentations (10-15 minutes) that each use one or more of the P45DC datasets.\nPresentations themselves should be approached creatively and expansively: some projects might be polished and complete, and others might be in exploratory or in-progress phases.\nPost-presentation discussion will be oriented toward future possibilities of your project, including insight from more senior scholars on topics like peer review, public-facing publication, dissertation writing, or framing for the job market.\n\nLoading…"
+    "text": "PROPOSAL DEADLINE: Monday, December 1, 2025.\n\nSubmit a proposal for the Post45 Data Collective Graduate Workshop here or below.\nThe Post45 Data Collective invites graduate students in the humanities or adjacent fields to explore cultural data reflexively and collaboratively in a mini-workshop hosted virtually on Friday, March 13.\nThis one-day workshop will explore the intersections of DH scholarship and DH professionalization, inviting early-career scholars to think alongside editors from the P45DC (Alexander Manshel, J.D. Porter, and Melanie Walsh), the Nineteenth-Century Data Collective, Post45 Journal, and Public Books**. Feedback will focus not only on how to make meaning from data, but also how to situate data-driven humanities scholarship in an ever-changing professional landscape.\nThe mini-workshop will consist of ~12 short graduate student presentations (10-15 minutes) that each use one or more of the P45DC datasets.\nPresentations themselves should be approached creatively and expansively: some projects might be polished and complete, and others might be in exploratory or in-progress phases.\nPost-presentation discussion will be oriented toward future possibilities of your project, including insight from more senior scholars on topics like peer review, public-facing publication, dissertation writing, or framing for the job market.\n\nLoading…"
   },
   {
     "objectID": "submissions.html#data-essay-criteria",
@@ -775,5 +775,19 @@
     "title": "Submissions",
     "section": "Dataset Criteria: Preparing + Formatting",
     "text": "Dataset Criteria: Preparing + Formatting\nThe Post45 Data Collective aims to maximize the reusability and interoperability of our datasets. To that end, we have worked to include unique identifiers, such as OCLC numbers, ISBNs, HathiTrust ids, and VIAF records, for data related to books and authors whenever possible.\nWhen curating your own datasets, please use similar unique identifiers. If necessary, we may be able to help potential authors add unique identifiers to datasets. Please reach out to the editors to consult about this possibility.\nFor further help, consider the following resources:\n•    Format your data from the UK Data Service\n•    Sustainability of Digital Formats from the Library of Congress\nThe language for these criteria was drawn from Katherine Bode, Jennifer Doty, Lauren F. Klein, Melanie Walsh, Cultural Analytics, Journal of Open Humanities Data, and “Datasheets for Datasets” by Timnit Gebru et. al."
+  },
+  {
+    "objectID": "style-guide.html",
+    "href": "style-guide.html",
+    "title": "Style Guide",
+    "section": "",
+    "text": "Heading 1\n  \n  Heading 2"
+  },
+  {
+    "objectID": "style-guide.html#heading-2",
+    "href": "style-guide.html#heading-2",
+    "title": "Style Guide",
+    "section": "Heading 2",
+    "text": "Heading 2"
   }
 ]
