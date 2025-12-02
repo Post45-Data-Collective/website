@@ -1,19 +1,13 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/news.html",
     "items": [
-      "/posts/asian-american-literature/index.html",
-      "/posts/international-bestsellers/index.html",
-      "/posts/futuristic-fiction/index.html",
-      "/posts/british-literary-prizes/index.html",
-      "/posts/feminist-bookstore-news/index.html",
-      "/posts/nea-creative-writing-fellowships/index.html",
-      "/posts/the-nordic-noir-in-translation-database-2000-2020/index.html",
-      "/posts/the-index-of-major-literary-prizes-in-the-us/index.html",
-      "/posts/nyt_hardcover_fiction_bestsellers/index.html",
-      "/posts/iowa_writers_workshop/index.html",
-      "/posts/hathitrust_post45_fiction/index.html",
-      "/news/grad-workshop.html"
+      "/news/grad-workshop.html",
+      "/news/editor-news.html",
+      "/news/data-analyst-summer-2023.html",
+      "/news/ddp-recap.html",
+      "/news/ddp-rfp-2021.html",
+      "/news/awash-in-data.html"
     ]
   },
   {
@@ -33,14 +27,20 @@
     ]
   },
   {
-    "listing": "/news.html",
+    "listing": "/index.html",
     "items": [
-      "/news/grad-workshop.html",
-      "/news/editor-news.html",
-      "/news/data-analyst-summer-2023.html",
-      "/news/ddp-recap.html",
-      "/news/ddp-rfp-2021.html",
-      "/news/awash-in-data.html"
+      "/posts/asian-american-literature/index.html",
+      "/posts/international-bestsellers/index.html",
+      "/posts/futuristic-fiction/index.html",
+      "/posts/british-literary-prizes/index.html",
+      "/posts/feminist-bookstore-news/index.html",
+      "/posts/nea-creative-writing-fellowships/index.html",
+      "/posts/the-nordic-noir-in-translation-database-2000-2020/index.html",
+      "/posts/the-index-of-major-literary-prizes-in-the-us/index.html",
+      "/posts/nyt_hardcover_fiction_bestsellers/index.html",
+      "/posts/iowa_writers_workshop/index.html",
+      "/posts/hathitrust_post45_fiction/index.html",
+      "/news/grad-workshop.html"
     ]
   }
 ]
