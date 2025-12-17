@@ -43,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-55e935fd79e5aecefa0dfbe2259d5a95.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -84,15 +87,11 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Post45 Data Collective Tabular Data Style Guide – Post45 Data Collective">
 <meta property="og:description" content="Created by Em Nordling, August 2025; Updated December 2025">
-<meta property="og:image" content="https://data.post45.org/images/styleguide1.png">
+<meta property="og:image" content="https://data.post45.org/URL or filepath">
 <meta property="og:site_name" content="Post45 Data Collective">
-<meta property="og:image:height" content="107">
-<meta property="og:image:width" content="1999">
 <meta name="twitter:title" content="Post45 Data Collective Tabular Data Style Guide – Post45 Data Collective">
 <meta name="twitter:description" content="Created by Em Nordling, August 2025; Updated December 2025">
-<meta name="twitter:image" content="https://data.post45.org/images/styleguide1.png">
-<meta name="twitter:image-height" content="107">
-<meta name="twitter:image-width" content="1999">
+<meta name="twitter:image" content="https://data.post45.org/URL or filepath">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -576,11 +575,11 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </li>
 <li>… unique IDs <strong>do not duplicate</strong> across datasets (e.g.&nbsp;same ID for both a line of author data and a line of publication data)</li>
 </ul>
-<p><img src="./images/styleguide1.png" class="img-fluid"></p>
+<p><a href="./images/styleguide1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./images/styleguide1.png" class="border img-fluid"></a></p>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>First two entries for Toni Morrison in “<a href="https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table" class="external" target="_blank">Major Literary Prize Winners and Judges</a>”</em></p>
 </blockquote>
-<p><img src="./images/styleguide2.png" class="img-fluid"></p>
+<p><a href="./images/styleguide2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./images/styleguide2.png" class="border img-fluid"></a></p>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>Entry for Toni Morrison’s</em> Beloved <em>in “<a href="https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table-1" class="external" target="_blank">Prize-Winning Authors’ Books</a>,” a dataset linked to the one above. Though the author and full_name formats differ, the datasets are still easily linked using the LCCN and VIAF ID fields.</em></p>
 </blockquote>
@@ -606,7 +605,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </ul></li>
 <li><p><strong>Standardize the <em>type</em> of information</strong> included in each field. This is especially important to consider for freeform fields such as “notes” or “description” that rely on a researcher’s subjective interpretation. Instead of putting every piece of information into one field (e.g.&nbsp;notes), split and categorize the types of information being gathered to make them more legible (e.g.&nbsp;physical_description, image_description, advertisements, summary, related_texts) (see <a href="#other-descriptive-data">Other Descriptive Data</a>).</p></li>
 </ul>
-<p><img src="./images/styleguide3.png" class="img-fluid"></p>
+<p><a href="./images/styleguide3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./images/styleguide3.png" class="border img-fluid"></a></p>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>Note how the “<a href="https://data.post45.org/posts/futuristic-fiction/" class="external" target="_blank">Time Horizons of Futuristic Fiction</a>” dataset separates freeform fields like “notes” and “predictions” based on the types of information they contain</em></p>
 </blockquote>
@@ -695,11 +694,11 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </ul>
 </div>
 </div>
-<p><img src="./images/styleguide4.png" class="img-fluid"></p>
+<p><a href="./images/styleguide4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="./images/styleguide4.png" class="border img-fluid"></a></p>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>Library of Congress name authority for Prince</em></p>
 </blockquote>
-<p><img src="./images/styleguide5.png" class="img-fluid"></p>
+<p><a href="./images/styleguide5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="./images/styleguide5.png" class="border img-fluid"></a></p>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>Wikidata entry for Prince</em></p>
 </blockquote>
@@ -1611,6 +1610,38 @@ Supported by <a href="https://www.neh.gov"><img src="https://www.neh.gov/sites/d
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
