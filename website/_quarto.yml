@@ -20,6 +20,7 @@ website:
   navbar:
     right:
       - our-data.qmd
+      - our-tools.qmd
       - submissions.qmd
       - people.qmd
       - about.qmd
