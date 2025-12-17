@@ -346,3 +346,7 @@ table.dataTable thead>tr>td.sorting_desc:after {
   opacity: .70;  /* Set full opacity */
 /* } */ 
 
+border {
+  border: 3px solid #747474;
+  padding: 5px;
+}

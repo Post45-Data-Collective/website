@@ -1,6 +1,8 @@
 ---
 title: "Post45 Data Collective Tabular Data Style Guide"
 description: "*Created by Em Nordling, August 2025; Updated December 2025*"
+lightbox: true
+image: URL or filepath
 format:
   html:
     toc: true
@@ -192,11 +194,11 @@ Does your submission include multiple linked datasets? For instance, “[The Ind
 * … cross-listed data like author names are **consistent across datasets** (or that intentional variations are explained in your data essay)  
 * … unique IDs **do not duplicate** across datasets (e.g. same ID for both a line of author data and a line of publication data)
 
-![][styleguide1]
+![][styleguide1]{.border}
 
 > **Example**: *First two entries for Toni Morrison in “[Major Literary Prize Winners and Judges](https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table){.external target="_blank"}"*
 
-![][styleguide2]
+![][styleguide2]{.border}
 
 > **Example**: *Entry for Toni Morrison’s* Beloved *in “[Prize-Winning Authors’ Books](https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table-1){.external target="_blank"},” a dataset linked to the one above. Though the author and full_name formats differ, the datasets are still easily linked using the LCCN and VIAF ID fields.*
 
@@ -217,7 +219,7 @@ To make your data usable for future researchers, we recommend limiting your scop
 
 * **Standardize the *type* of information** included in each field. This is especially important to consider for freeform fields such as “notes” or “description” that rely on a researcher’s subjective interpretation. Instead of putting every piece of information into one field (e.g. notes), split and categorize the types of information being gathered to make them more legible (e.g. physical\_description, image\_description, advertisements, summary, related\_texts) (see [Other Descriptive Data](#other-descriptive-data)).
 
-![][styleguide3]
+![][styleguide3]{.border}
 
 > **Example**: *Note how the “[Time Horizons of Futuristic Fiction](https://data.post45.org/posts/futuristic-fiction/){.external target="_blank"}” dataset separates freeform fields like “notes” and “predictions” based on the types of information they contain*
 
@@ -263,11 +265,11 @@ External vocabularies and authorities provide accessible language, curated by ex
 * [Traditional Knowledge (TK) Labels](https://localcontexts.org/labels/traditional-knowledge-labels/){.external target="_blank"} Keywords for indigenous cultures
 :::
 
-![][styleguide4] 
+![][styleguide4]{.border}
 
 > **Example**: *Library of Congress name authority for Prince* 
 
-![][styleguide5] 
+![][styleguide5]{.border}
 
 > **Example**: *Wikidata entry for Prince*
 
