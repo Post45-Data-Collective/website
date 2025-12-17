@@ -1,0 +1,202 @@
+---
+title: "Our Tools"
+# image: profile.jpg
+aliases:
+  - /our-tools/
+format:
+  html:
+    toc: true
+---
+
+# BookReconciler 📘💎 — Metadata Enrichment and Work-Level Clustering
+
+```{=html}
+<a class="github-button" href="https://github.com/Post45-Data-Collective/openrefine-reconciliation-service" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star this project on Github">Check out and star this project on Github</a><script async defer src="https://buttons.github.io/buttons.js"></script>
+
+```
+---
+
+
+
+**BookReconciler 📘💎** is a tool that helps you reconcile and enrich bibliographic data from multiple library and knowledge sources:
+
+1. **Library of Congress**
+2. **Google Books**
+3. **OCLC / WorldCat**
+4. **HathiTrust**
+5. **VIAF**
+6. **Wikidata**
+
+You can take a spreadsheet with only title and author information, and you can add identifiers like **ISBNs**, **OCLC numbers**, or **HathiTrust Volume IDs**, as well as valuable contextual information like Library of Congress **Subject Headings**, **genres**, **descriptions**, **page counts**, and **dates of first publicatio**n. Additionally, you can find and cluster different editions or manifestations of the same _Work_ (e.g., translations, reprints, etc.).
+
+![](images/bookreconociler-logo-ps-white.png)
+
+
+The tool currently works as an extension of the software application **[OpenRefine](https://openrefine.org/)**, which makes it accessible to those with and without computational experience. It includes a user-friendly, human-in-the-loop interface for manually evaluating matches, defining _Works_ (e.g., whether to include translations or not), and configuring the behavior of the service (e.g., matching all possible editions or just the best one).
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/V9ZJoFowRJM?si=fneEOjEq4s3NNxY9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+The tool can also serve as a **bridge to computational text analysis**. A HathiTrust Volume ID can be used to computationally access the full text (for public domain works) or "bags of words" (for in-copyright works) for any text that is held by the HathiTrust Digital Library. This enable users to move from metadata to full computational text analysis. To learn more about accessing full text with Volume IDs, see the [HathiTrust Feature Reader](https://github.com/htrc/htrc-feature-reader?tab=readme-ov-file#usage) Python package.
+
+---
+
+# Installation
+
+## 1. Install OpenRefine
+
+BookReconciler 📘💎 is designed to work with **OpenRefine**, an open-source tool for working with messy data.
+
+1. Visit the [OpenRefine download page](https://openrefine.org/download).
+2. Download the latest release for your operating system (Windows, macOS, or Linux).
+3. Unzip the package (if needed) and follow the included instructions to start OpenRefine.
+4. Once running, OpenRefine will be available at:  
+   <http://127.0.0.1:3333/>
+
+---
+
+## 2. Install BookReconciler
+
+Choose the installation method that works best for your system:
+
+<details open>
+<summary><b>Option 1: Desktop App (Recommended)</b></summary>
+
+<br>
+
+Download and run the standalone desktop app.
+
+#### <img src="https://img.shields.io/badge/-MacOS-000000?logo=apple&logoColor=white" height="20"/> macOS (Intel or Apple Silicon):
+
+1. **[Download the latest macOS app](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service/releases/latest)**
+2. Open the `.dmg` file and drag **BookReconciler.app** to your Applications folder
+3. Launch **BookReconciler** — your browser will automatically open to <http://127.0.0.1:5001/>
+
+**Note:** On first launch, macOS may show a security warning. Right-click the app and select **Open** → **Open** to bypass.
+
+#### <img src="https://img.shields.io/badge/-Windows-0078D4?logo=windows&logoColor=white" height="20"/> Windows:
+
+1. **[Download the latest Windows installer](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service/releases/latest)** (`.exe`)
+2. Run the installer and follow the prompts
+3. Launch **BookReconciler** from your Start Menu — your browser will automatically open to <http://127.0.0.1:5001/>
+
+**Note:** Windows may show a SmartScreen warning. Click **More info** → **Run anyway**.
+
+Once launched, you can access:
+
+- **Configuration interface:** <http://127.0.0.1:5001/>
+- **OpenRefine endpoint:** <http://127.0.0.1:5001/api/v1/reconcile>
+
+You can find more installation options on [GitHub](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service).
+
+---
+
+# Usage
+
+1. Open your dataset/project in OpenRefine.
+2. Click a column you want to reconcile—for example, the book "title" column.
+3. Choose **Reconcile → Start reconciling…**
+   ![](images/start-reconciling.png)
+4. Click **Add Standard Service**.
+   ![](images/add-service.png)
+5. Paste the service URL for BookReconciler, which will connect you with Library of Congress, Wikidata, Google Books, and more:
+
+   ```
+   http://127.0.0.1:5001/api/v1/reconcile
+   ```
+
+6. Select a reconciliation type (e.g., `LC_Work_Id`, `OCLC_Record`, `HathiTrust`, `VIAF_Personal`, `VIAF_Title`, `Wikidata_Title`).
+7. Optionally, add "Additional Properties," like the author's name, which may help improve match performance.
+   ![](images/additional-properties.png)
+8. Click **Start Reconciling**.
+9. Wait for reconciliation to complete. This can take seconds to hours depending on the number of values. Then, inspect matches.
+   ![](images/inspect.png)
+10. Lastly, add new values—ISBNs, Subject Headings, Descriptions, etc.—based on matches. Select Edit Column -> Add columns from reconciled values...
+    ![](images/add.png)
+    Choose the values that you want to add from "Suggested Properties" (possible values are different for each service).
+    ![](images/add-columns.png)
+    They will be added to the spreadsheet.
+    ![](images/new-values.png)
+
+---
+
+# Customization
+
+Open <http://127.0.0.1:5001/> to adjust how BookReconciler matches, clusters, and writes back data. No code editing required.
+
+### Book Title Matching
+
+- **Single Match Mode**  
+  Finds the _best single edition_ (manifestation) of a work.  
+  Good when you care about a specific edition (e.g., a 1950 reprint).  
+  Uses Title + Author (and Publication Year if available).
+
+- **Cluster Match Mode**  
+  Groups _all editions_ of the same **work** into a cluster (work-level).  
+  Best for gathering as many identifiers as possible or studying works across editions.
+
+### Extend Data Behavior (how identifiers are written back)
+
+- **Join Mode** — all identifiers in one cell, separated by a pipe `|`.  
+  Example:
+
+  ```
+  123456789 | 987654321 | 192837465 | 564738291
+  ```
+
+- **Row Mode** — each identifier in its own row.  
+  Example:
+  ```
+  123456789
+  987654321
+  192837465
+  564738291
+  ```
+
+### Remove Subtitle from Titles
+
+- **Keep Subtitles** — Titles remain as-is (e.g., _Moby-Dick: or, The Whale_).
+- **Remove Subtitles** — Attempts to strip subtitles (e.g., _Moby-Dick_).
+
+---
+
+## Optional: OCLC / WorldCat API Keys
+
+If you plan to use OCLC’s protected endpoints, you can input your API keys on the configuration page.
+
+---
+
+# Credit & Citation
+
+This code is primarily written by [Matt Miller](https://thisismattmiller.com/), with contributions from Melanie Walsh. This project is supported by the Post45 Data Collective. The code is licensed under the **MIT License** (see [`LICENSE`](LICENSE) for details).
+
+This project was initially supported by a grant from the National Endowment for the Humanities (NEH), ["Post45 Data Collective: Enhancing Cultural Data Documentation, Interoperability, and Reach,"](https://apps.neh.gov/publicquery/AwardDetail.aspx?gn=HAA-301046-24) and led by co-PIs Dan Sinykin and Melanie Walsh. The grant was slated to run from 2024-2026, but it was abruptly cancelled in spring 2025.
+
+If you use this tool, we'd love to hear from you! You can fill out [this Google Form](https://forms.gle/akbcCGiLvCaDcpWAA) or email us. 
+
+If you use this tool as part of a publication, you can credit us by citing the following paper:  
+["BookReconciler📘💎: An Open-Source Tool for Metadata Enrichment and Work-Level Clustering"](https://arxiv.org/abs/2512.10165).  
+Matt Miller, Dan Sinykin, and Melanie Walsh.
+_Joint Conference on Digital Libraries_, Resources Track.
+
+BibTeX Citation:
+
+```{bibtex}
+@inproceedings{miller-2025-bookreconciler,
+  title = {BookReconciler📘💎: An Open-Source Tool for Metadata Enrichment and Work-Level Clustering},
+  author = {Miller, Matt and Sinykin, Dan and Walsh, Melanie},
+  booktitle = {Joint Conference on Digital Libraries},
+  month = dec,
+  year = {2025},
+  publisher = {ACM/IEEE},
+}
+```
+
+---
+
+# Contributing
+
+In the near term, maintenance of this tool will be supported by the Post45 Data Collective. However, to grow and sustain this project, we strongly welcome and encourage contributions from the broader community (or funding :D ).
+
+---
