@@ -182,7 +182,7 @@ _Joint Conference on Digital Libraries_, Resources Track.
 
 BibTeX Citation:
 
-```{bibtex}
+```
 @inproceedings{miller-2025-bookreconciler,
   title = {BookReconciler📘💎: An Open-Source Tool for Metadata Enrichment and Work-Level Clustering},
   author = {Miller, Matt and Sinykin, Dan and Walsh, Melanie},
