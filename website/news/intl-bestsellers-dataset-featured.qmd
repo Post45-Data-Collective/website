@@ -1,7 +1,7 @@
 ---
 title: "International Bestsellers Dataset Featured on Lit Hub & Substack"
 date: "2026-2-24"
-abstract: "James Folta (@jamesfolta.com) and F. Poretti (@fporetti) dive into our International Bestsellers dataset to investigate what the world has been reading and what great books we might have been sleeping on."
+abstract: "James Folta ([@jamesfolta.com](https://bsky.app/profile/did:plc:d6aq3pbjhvlxlrym5jrv2yni)) and F. Poretti ((@fporetti)[@fporetti](https://substack.com/@fporetti)) dive into our International Bestsellers dataset to investigate what the world has been reading and what great books we might have been sleeping on."
 page-layout: full
 categories: [news, analysis]
 format-links: [ipynb, pdf, docx]
@@ -9,20 +9,19 @@ code-tools: false
 image: "lithub-screenshot.png"
 ---
 
-Over the last two weeks, we have been excited to see our International Bestsellers dataset put to good use by James Folta [@jamesfolta.com](https://bsky.app/profile/did:plc:d6aq3pbjhvlxlrym5jrv2yni) on Lit Hub and by F. Poretti [@fporetti](https://substack.com/@fporetti) on Substack. 
+Over the last two weeks, we have been excited to see our International Bestsellers dataset put to good use by James Folta ([@jamesfolta.com](https://bsky.app/profile/did:plc:d6aq3pbjhvlxlrym5jrv2yni)) on Lit Hub and by F. Poretti [@fporetti](https://substack.com/@fporetti) on Substack. 
 
 Composed by Sean DiLeonardi, Becca Cohen, and Dan Sinykin, the dataset draws together fiction bestsellers lists from Publishing Trends and The New York Times between June 2013 through December 2022, delineating the nationalities of authors, publishers, and list sources alike. 
 
-In an article on Lit Hub on February 17, James Folta [@jamesfolta.com](https://bsky.app/profile/did:plc:d6aq3pbjhvlxlrym5jrv2yni) investigated the international names and titles in the dataset. What authors cross over most frequently? Which books have climbed the international charts? “The world,” he writes, “doesn’t have terrible taste, it seems.” And the lists can provide, it turns out, an excellent source of reading recommendations for those interested in venturing out of their prescribed national fare.
+In an article on Lit Hub on February 17, James Folta ([@jamesfolta.com](https://bsky.app/profile/did:plc:d6aq3pbjhvlxlrym5jrv2yni)) investigated the international names and titles in the dataset. What authors cross over most frequently? Which books have climbed the international charts? “The world,” he writes, “doesn’t have terrible taste, it seems.” And the lists can provide, it turns out, an excellent source of reading recommendations for those interested in venturing out of their prescribed national fare.
 
-![](lithub-screenshot.png)
+![Fig. 1 Lit Hub Article Title](lithub-screenshot.png){width=60%}
 
-Folta’s article came on the heels of a Substack article by F. Poretti [@fporetti](https://substack.com/@fporetti) on February 11. Poretti used the data to visualize publishing flows between the represented countries, investigating not only how US Publishing lives up to its “3% Rule” (in which only 3% of books published in the US are translations), but also whether similar trends can be identified in other nations. Can these trends be chalked up to rising cultural chauvinism? Or have our media ecosystems shifted due to publisher consolidation, algorithmic shopping, and other economic trends? 
-
-[insert visualization from: https://public.flourish.studio/visualisation/27458581/]
+Folta’s article came on the heels of a Substack article by F. Poretti ([@fporetti](https://substack.com/@fporetti)) on February 11. Poretti used the data to visualize publishing flows between the represented countries, investigating not only how US Publishing lives up to its “3% Rule” (in which only 3% of books published in the US are translations), but also whether similar trends can be identified in other nations. Can these trends be chalked up to rising cultural chauvinism? Or have our media ecosystems shifted due to publisher consolidation, algorithmic shopping, and other economic trends? 
 
 <div class="flourish-embed flourish-sankey" data-src="visualisation/27458581"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/27458581/thumbnail" width="100%" alt="sankey visualization" /></noscript></div>
+Fig. 2 Data visualizationg by F. Poretti {text-align: center;}
 
 The Post45 Data Collective aims to make cultural data more accessible, explorable, and re-usable. These articles are two fantastic examples of why and how our data can be put to use, whether in analyzing cultural and economic trends or in exploring new avenues for reading and cultural discovery. 
 
-We can’t wait to see what scholars, readers, and data wonks will do with our datasets next! Why not try out The Canon of Asian American Literature or Time Horizons of Futuristic Fiction for your next round of inquiry?
+We can’t wait to see what scholars, readers, and data wonks will do with our datasets next! Why not try out [The Canon of Asian American Literature](https://data.post45.org/posts/asian-american-literature/) or [Time Horizons of Futuristic Fiction](https://data.post45.org/posts/futuristic-fiction/) for your next round of inquiry?
