@@ -6,7 +6,8 @@
     "index.qmd": [
       "posts",
       "news",
-      "news/grad-workshop.qmd"
+      "news/grad-workshop.qmd",
+      "news/intl-bestsellers-dataset-featured.qmd"
     ],
     "our-data.qmd": [
       "posts"

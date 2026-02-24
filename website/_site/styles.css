@@ -7,6 +7,11 @@
   text-align: center;
 }
 
+border {
+  border: 2px solid #ccc;
+  padding: 5px;
+}
+
 #hero-banner {
   position: relative;
   background-color: black;
@@ -346,3 +351,7 @@ table.dataTable thead>tr>td.sorting_desc:after {
   opacity: .70;  /* Set full opacity */
 /* } */ 
 
+border {
+  border: 3px solid #747474;
+  padding: 5px;
+}

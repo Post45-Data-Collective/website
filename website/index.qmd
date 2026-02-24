@@ -18,7 +18,7 @@ listing:
     sort-ui: false
     filter-ui: true
   - id: news
-    contents: news/grad-workshop.qmd
+    contents: news/intl-bestsellers-dataset-featured.qmd
     type: default
     sort: "date desc"
     categories: unnumbered 
