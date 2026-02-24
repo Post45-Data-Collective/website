@@ -7,6 +7,8 @@ format:
     toc-location: right-body   # or left-body
     toc-title: "Table of Contents"
     toc-depth: 3
+  
+
 ---
 
 
@@ -263,11 +265,11 @@ External vocabularies and authorities provide accessible language, curated by ex
 * [Traditional Knowledge (TK) Labels](https://localcontexts.org/labels/traditional-knowledge-labels/){.external target="_blank"} Keywords for indigenous cultures
 :::
 
-![][styleguide4] 
+![][styleguide4]{.border} 
 
 > **Example**: *Library of Congress name authority for Prince* 
 
-![][styleguide5] 
+![][styleguide5]{.border}  
 
 > **Example**: *Wikidata entry for Prince*
 
