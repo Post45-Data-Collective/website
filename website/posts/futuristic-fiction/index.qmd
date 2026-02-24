@@ -24,7 +24,7 @@ date: "2025-06-24"
 citation:
   type: article-journal
   container-title: "Post45 Data Collective"
-  doi: "10.18737/CNJV1733p4520221212"
+  doi: "10.18737/552626"
   # url: https://example.com/summarizing-output
   editor:
   - Alexander Manshel
