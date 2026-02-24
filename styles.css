@@ -7,6 +7,11 @@
   text-align: center;
 }
 
+border {
+  border: 2px solid #ccc;
+  padding: 5px;
+}
+
 #hero-banner {
   position: relative;
   background-color: black;
