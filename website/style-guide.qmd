@@ -51,7 +51,7 @@ At the Post45 Data Collective, we aim to make humanities research data accessibl
 
 * [OpenRefine](https://openrefine.org/){.external target="_blank"} 
   * [“Cleaning Data with Open Refine"](https://programminghistorian.org/en/lessons/cleaning-data-with-openrefine){.external target="_blank"} 
-  * [Post45DC OpenRefine Reconciliation Service](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service){.external target="_blank"} 
+  * [Post45DC OpenRefine Reconciliation Service](https://data.post45.org/our-tools.html){.external target="_blank"} 
 * [Breve](https://hdlab.stanford.edu/breve/){.external target="_blank"} 
 * [Tidyr](https://tidyr.tidyverse.org/articles/tidy-data.html){.external target="_blank"} (tidyverse suite of tools for R) 
 * [Visidata](https://www.visidata.org/){.external target="_blank"} 
@@ -159,10 +159,10 @@ For example, if you format your name fields as “Last Name, First Name” and i
 
 | Internal Delimiter | Original Entry | Split Entries |
 | :---- | :---- | :---- |
-| **Comma-separated** | “Du Bois, W.E.B., Mayhew, Henry” | “Du Bois””W.E.B.””Mayhew””Henry” |
-| **Semicolon-separated** | “Du Bois, W.E.B.; Mayhew, Henry” | “Du Bois, W.E.B.””Mayhew, Henry” |
+| **Comma-separated** | “Du Bois, W.E.B., Mayhew, Henry” | “Du Bois”“W.E.B.”“Mayhew”“Henry” |
+| **Semicolon-separated** | “Du Bois, W.E.B.; Mayhew, Henry” | “Du Bois, W.E.B”“Mayhew, Henry” |
 
-> **Example**: *this is what split columns may look like if you use comma or semicolon-separated internal delimiters*
+> **Example**: *this is what split columns may look like if you use comma or semicolon-separated internal delimiters. Note how the comma-separated option unintentionally splits the names by first name / last name and not just by individual*
 
 ## Character Encoding{#character-encoding}
 
@@ -200,7 +200,7 @@ Does your submission include multiple linked datasets? For instance, “[The Ind
 
 > **Example**: *First two entries for Toni Morrison in “[Major Literary Prize Winners and Judges](https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table){.external target="_blank"}"*
 
-![][styleguide2]{.border}
+![][styleguide3]{.border}
 
 > **Example**: *Entry for Toni Morrison’s* Beloved *in “[Prize-Winning Authors’ Books](https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table-1){.external target="_blank"},” a dataset linked to the one above. Though the author and full_name formats differ, the datasets are still easily linked using the LCCN and VIAF ID fields.*
 
@@ -221,7 +221,7 @@ To make your data usable for future researchers, we recommend limiting your scop
 
 * **Standardize the *type* of information** included in each field. This is especially important to consider for freeform fields such as “notes” or “description” that rely on a researcher’s subjective interpretation. Instead of putting every piece of information into one field (e.g. notes), split and categorize the types of information being gathered to make them more legible (e.g. physical\_description, image\_description, advertisements, summary, related\_texts) (see [Other Descriptive Data](#other-descriptive-data)).
 
-![][styleguide3]{.border}
+![][styleguide2]{.border}
 
 > **Example**: *Note how the “[Time Horizons of Futuristic Fiction](https://data.post45.org/posts/futuristic-fiction/){.external target="_blank"}” dataset separates freeform fields like “notes” and “predictions” based on the types of information they contain*
 
@@ -265,6 +265,7 @@ External vocabularies and authorities provide accessible language, curated by ex
 * [Getty](https://www.getty.edu/research/tools/vocabularies/index.html){.external target="_blank"} Art & architecture terms, Artist names, Geography 
 * [ORCID](https://orcid.org/){.external target="_blank"}  Researcher names 
 * [Traditional Knowledge (TK) Labels](https://localcontexts.org/labels/traditional-knowledge-labels/){.external target="_blank"} Keywords for indigenous cultures
+* [Research Organization Registry (ROR)](https://ror.org/) Research and funding organizations
 :::
 
 ![][styleguide4] 
@@ -275,11 +276,11 @@ External vocabularies and authorities provide accessible language, curated by ex
 
 > **Example**: *Wikidata entry for Prince*
 
-When incorporating an external vocabulary entry, make sure to include **BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution** (“n84079379” in the LoC example above or “Q7542” for Wikidata). No need to look these up manually: digital tools like our [OpenRefine script](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service){.external target="_blank"} will help to automatically match many vocabularies to their IDs.
+When incorporating an external vocabulary entry, make sure to include **BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution** (“n84079379” in the LoC example above or “Q7542” for Wikidata). No need to look these up manually: digital tools like our [OpenRefine script](https://data.post45.org/our-tools.html){.external target="_blank"} will help to automatically match many vocabularies to their IDs.
 
 ::: {.callout-note appearance="default"}
 ## **Important Note on HathiTrust IDs**
-At the Post45 Data Collective, we particularly encourage the inclusion of HathiTrust volume IDs for book-related data. These IDs enable researchers to computationally access full text or “bags of words” (unordered text amenable for large-scale analysis) for books that are available in the HathiTrust Digital Library (see the [HTRC Feature Reader GitHub repository](https://github.com/htrc/htrc-feature-reader){.external target="_blank"} for more information). You can find a volume ID in the URL for a specific title. For example, the specific volume of *Pride and Prejudice* found at [https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053\&seq=1](https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&seq=1){.external target="_blank"} has the volume ID hvd.32044013656053. You can use our [OpenRefine tool](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service){.external target="_blank"} to automatically add HathiTrust volume IDs for relevant records. 
+At the Post45 Data Collective, we particularly encourage the inclusion of HathiTrust volume IDs for book-related data. These IDs enable researchers to computationally access full text or “bags of words” (unordered text amenable for large-scale analysis) for books that are available in the HathiTrust Digital Library (see the [HTRC Feature Reader GitHub repository](https://github.com/htrc/htrc-feature-reader){.external target="_blank"} for more information). You can find a volume ID in the URL for a specific title. For example, the specific volume of *Pride and Prejudice* found at [https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053\&seq=1](https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&seq=1){.external target="_blank"} has the volume ID hvd.32044013656053. You can use our [OpenRefine tool](https://data.post45.org/our-tools.html){.external target="_blank"} to automatically add HathiTrust volume IDs for relevant records. 
 
 Keep in mind that HathiTrust IDs represent **specific volumes** that have been digitized by specific institutions, rather than **title-level** data. A single title like *Pride and Prejudice* is likely to have multiple IDs referring to different editions or digitizations of the same title. If your dataset includes title-level data rather than volume-level data, you will need to standardize and document how you selected which ID(s) to include. For example, you might include: 
 
@@ -454,7 +455,7 @@ Amok Time | Star Trek: The Original Series | “2” | “1” |
 
 ### ISBN/ISSN{#isbn-issn}
 
-Including the ISBN or ISSN for a publication can make specific bibliographic information more accessible. Tools like our [OpenRefine script](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service){.external target="_blank"} or citation managers like [Zotero](https://www.zotero.org/){.external target="_blank"} can easily automate searches for this information. 
+Including the ISBN or ISSN for a publication can make specific bibliographic information more accessible. Tools like our [OpenRefine script](https://data.post45.org/our-tools.html){.external target="_blank"} or citation managers like [Zotero](https://www.zotero.org/){.external target="_blank"} can easily automate searches for this information. 
 
 ::: {.callout-note appearance="default"}
 ## **Quick Note** 
