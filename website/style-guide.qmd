@@ -557,7 +557,8 @@ This data style guide draws language, information, and inspiration from the [C19
 
 Thank you to the following parties for their generous feedback on this document: Karl Berglund, Julie Enszer, Long Le-Khac, Jordan Pruett, Lindsay Thomas, Ted Underwood, and Grant Wythoff.
 
-	
+This project was originally funded and then defunded by the [National Endowment for the Humanities](https://www.neh.gov/){.external target="_blank"}. Thank you to [Emory University College of Arts and Sciences](https://college.emory.edu/){.external target="_blank"} for their timely and generous support.
+
 
 [styleguide1]: /images/styleguide1.png
 [styleguide2]: /images/styleguide2.png
