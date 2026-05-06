@@ -336,7 +336,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <li><a href="https://openrefine.org/" class="external" target="_blank">OpenRefine</a>
 <ul>
 <li><a href="https://programminghistorian.org/en/lessons/cleaning-data-with-openrefine" class="external" target="_blank">“Cleaning Data with Open Refine”</a></li>
-<li><a href="https://github.com/Post45-Data-Collective/openrefine-reconciliation-service" class="external" target="_blank">Post45DC OpenRefine Reconciliation Service</a></li>
+<li><a href="https://data.post45.org/our-tools.html" class="external" target="_blank">Post45DC OpenRefine Reconciliation Service</a></li>
 </ul></li>
 <li><a href="https://hdlab.stanford.edu/breve/" class="external" target="_blank">Breve</a></li>
 <li><a href="https://tidyr.tidyverse.org/articles/tidy-data.html" class="external" target="_blank">Tidyr</a> (tidyverse suite of tools for R)</li>
@@ -514,17 +514,17 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <tr class="odd">
 <td style="text-align: left;"><strong>Comma-separated</strong></td>
 <td style="text-align: left;">“Du Bois, W.E.B., Mayhew, Henry”</td>
-<td style="text-align: left;">“Du Bois””W.E.B.””Mayhew””Henry”</td>
+<td style="text-align: left;">“Du Bois”“W.E.B.”“Mayhew”“Henry”</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Semicolon-separated</strong></td>
 <td style="text-align: left;">“Du Bois, W.E.B.; Mayhew, Henry”</td>
-<td style="text-align: left;">“Du Bois, W.E.B.””Mayhew, Henry”</td>
+<td style="text-align: left;">“Du Bois, W.E.B”“Mayhew, Henry”</td>
 </tr>
 </tbody>
 </table>
 <blockquote class="blockquote">
-<p><strong>Example</strong>: <em>this is what split columns may look like if you use comma or semicolon-separated internal delimiters</em></p>
+<p><strong>Example</strong>: <em>this is what split columns may look like if you use comma or semicolon-separated internal delimiters. Note how the comma-separated option unintentionally splits the names by first name / last name and not just by individual</em></p>
 </blockquote>
 </section>
 <section id="character-encoding" class="level2">
@@ -581,7 +581,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>First two entries for Toni Morrison in “<a href="https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table" class="external" target="_blank">Major Literary Prize Winners and Judges</a>“</em></p>
 </blockquote>
-<p><a href="./images/styleguide2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./images/styleguide2.png" class="border img-fluid"></a></p>
+<p><a href="./images/styleguide3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./images/styleguide3.png" class="border img-fluid"></a></p>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>Entry for Toni Morrison’s</em> Beloved <em>in “<a href="https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table-1" class="external" target="_blank">Prize-Winning Authors’ Books</a>,” a dataset linked to the one above. Though the author and full_name formats differ, the datasets are still easily linked using the LCCN and VIAF ID fields.</em></p>
 </blockquote>
@@ -607,7 +607,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </ul></li>
 <li><p><strong>Standardize the <em>type</em> of information</strong> included in each field. This is especially important to consider for freeform fields such as “notes” or “description” that rely on a researcher’s subjective interpretation. Instead of putting every piece of information into one field (e.g.&nbsp;notes), split and categorize the types of information being gathered to make them more legible (e.g.&nbsp;physical_description, image_description, advertisements, summary, related_texts) (see <a href="#other-descriptive-data">Other Descriptive Data</a>).</p></li>
 </ul>
-<p><a href="./images/styleguide3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./images/styleguide3.png" class="border img-fluid"></a></p>
+<p><a href="./images/styleguide2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./images/styleguide2.png" class="border img-fluid"></a></p>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>Note how the “<a href="https://data.post45.org/posts/futuristic-fiction/" class="external" target="_blank">Time Horizons of Futuristic Fiction</a>” dataset separates freeform fields like “notes” and “predictions” based on the types of information they contain</em></p>
 </blockquote>
@@ -693,6 +693,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <li><a href="https://www.getty.edu/research/tools/vocabularies/index.html" class="external" target="_blank">Getty</a> Art &amp; architecture terms, Artist names, Geography</li>
 <li><a href="https://orcid.org/" class="external" target="_blank">ORCID</a> Researcher names</li>
 <li><a href="https://localcontexts.org/labels/traditional-knowledge-labels/" class="external" target="_blank">Traditional Knowledge (TK) Labels</a> Keywords for indigenous cultures</li>
+<li><a href="https://ror.org/">Research Organization Registry (ROR)</a> Research and funding organizations</li>
 </ul>
 </div>
 </div>
@@ -704,7 +705,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>Wikidata entry for Prince</em></p>
 </blockquote>
-<p>When incorporating an external vocabulary entry, make sure to include <strong>BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution</strong> (“n84079379” in the LoC example above or “Q7542” for Wikidata). No need to look these up manually: digital tools like our <a href="https://github.com/Post45-Data-Collective/openrefine-reconciliation-service" class="external" target="_blank">OpenRefine script</a> will help to automatically match many vocabularies to their IDs.</p>
+<p>When incorporating an external vocabulary entry, make sure to include <strong>BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution</strong> (“n84079379” in the LoC example above or “Q7542” for Wikidata). No need to look these up manually: digital tools like our <a href="https://data.post45.org/our-tools.html" class="external" target="_blank">OpenRefine script</a> will help to automatically match many vocabularies to their IDs.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -715,7 +716,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>At the Post45 Data Collective, we particularly encourage the inclusion of HathiTrust volume IDs for book-related data. These IDs enable researchers to computationally access full text or “bags of words” (unordered text amenable for large-scale analysis) for books that are available in the HathiTrust Digital Library (see the <a href="https://github.com/htrc/htrc-feature-reader" class="external" target="_blank">HTRC Feature Reader GitHub repository</a> for more information). You can find a volume ID in the URL for a specific title. For example, the specific volume of <em>Pride and Prejudice</em> found at <a href="https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&amp;seq=1" class="external" target="_blank">https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&amp;seq=1</a> has the volume ID hvd.32044013656053. You can use our <a href="https://github.com/Post45-Data-Collective/openrefine-reconciliation-service" class="external" target="_blank">OpenRefine tool</a> to automatically add HathiTrust volume IDs for relevant records.</p>
+<p>At the Post45 Data Collective, we particularly encourage the inclusion of HathiTrust volume IDs for book-related data. These IDs enable researchers to computationally access full text or “bags of words” (unordered text amenable for large-scale analysis) for books that are available in the HathiTrust Digital Library (see the <a href="https://github.com/htrc/htrc-feature-reader" class="external" target="_blank">HTRC Feature Reader GitHub repository</a> for more information). You can find a volume ID in the URL for a specific title. For example, the specific volume of <em>Pride and Prejudice</em> found at <a href="https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&amp;seq=1" class="external" target="_blank">https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&amp;seq=1</a> has the volume ID hvd.32044013656053. You can use our <a href="https://data.post45.org/our-tools.html" class="external" target="_blank">OpenRefine tool</a> to automatically add HathiTrust volume IDs for relevant records.</p>
 <p>Keep in mind that HathiTrust IDs represent <strong>specific volumes</strong> that have been digitized by specific institutions, rather than <strong>title-level</strong> data. A single title like <em>Pride and Prejudice</em> is likely to have multiple IDs referring to different editions or digitizations of the same title. If your dataset includes title-level data rather than volume-level data, you will need to standardize and document how you selected which ID(s) to include. For example, you might include:</p>
 <ul>
 <li>IDs for ALL matching volumes</li>
@@ -1013,7 +1014,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </section>
 <section id="isbn-issn" class="level3">
 <h3 class="anchored" data-anchor-id="isbn-issn">ISBN/ISSN</h3>
-<p>Including the ISBN or ISSN for a publication can make specific bibliographic information more accessible. Tools like our <a href="https://github.com/Post45-Data-Collective/openrefine-reconciliation-service" class="external" target="_blank">OpenRefine script</a> or citation managers like <a href="https://www.zotero.org/" class="external" target="_blank">Zotero</a> can easily automate searches for this information.</p>
+<p>Including the ISBN or ISSN for a publication can make specific bibliographic information more accessible. Tools like our <a href="https://data.post45.org/our-tools.html" class="external" target="_blank">OpenRefine script</a> or citation managers like <a href="https://www.zotero.org/" class="external" target="_blank">Zotero</a> can easily automate searches for this information.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
