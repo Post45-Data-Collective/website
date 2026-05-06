@@ -12,7 +12,7 @@ abstract: "The *Playboy* Fiction Index (1953–2020) contains metadata for over 
 # Add keywords/categories — should always include "dataset"
 categories: [metadata, fiction, print, dataset, draft]
 # Provide link to an image that will show up in "Our Datasets" aggregation
-image: "https://www.needpix.com/photo/33347/playboy-bunny-logo-club-mens-club-magazine-american-black-hugh-hefner"
+image: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Playboy_Logo_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
 # Insert DOI for this data essay
 doi: "10.18737/552627"
 # date of publication
@@ -49,7 +49,7 @@ header-includes:
 # - /the-index-of-major-literary-prizes-in-the-us/
 ---
 
- ![iStock image of Playboy logo.](https://www.needpix.com/photo/33347/playboy-bunny-logo-club-mens-club-magazine-american-black-hugh-hefner){width=70% fig-align="center"}
+ ![Playboy logo c1960s-70s.](https://upload.wikimedia.org/wikipedia/commons/a/a3/Playboy_Logo_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original){width=40% fig-align="center"}
 
 <!-- Include brief introduction to/description of data essay  -->
 
@@ -77,10 +77,10 @@ source("../../scripts/createDataTable.R")
 
 # MAKE EDITS HERE: Plug in the raw GitHub URL to the dataset below
 createDataTable(
-  data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv")
+  data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv",
 
   # MAKE EDITS HERE: Select the columns that will be displayed in the data table, and the order
-  displayed_columns = ("Unique_ID","Publication_date","Title","Section","Author_name","Last_name","First_name","Author_gender","Author_NEA","Author_bestseller","Author_prize","Author_iowa"),
+  displayed_columns = c("Unique_ID","Publication_date","Title","Section","Author_name","Last_name","First_name","Author_gender","Author_NEA","Author_bestseller","Author_prize","Author_iowa"),
 
    # MAKE EDITS HERE: Customize any column widths 
   # If none, comment out
@@ -93,11 +93,11 @@ createDataTable(
    # MAKE EDITS HERE: Select any columns that should be filterable as a category
   # If none, comment out
 
-  category_columns = ("Publication_date","Section","Author_name","Last_name","First_name","Author_gender","Author_NEA","Author_bestseller","Author_prize","Author_iowa")
+  category_columns = c("Publication_date","Section","Author_name","Last_name","First_name","Author_gender","Author_NEA","Author_bestseller","Author_prize","Author_iowa"),
 
     # Select column to sort by, and order
-  sort_columns = ("Unique_ID"),
-  sort_orders = ("desc")
+  sort_columns = c("Unique_ID"),
+  sort_orders = c("desc")
 )
 ```
 
@@ -143,7 +143,7 @@ Carroll, Jordan S. *Reading the Obscene: Transgressive Editors and the Class Pol
 
 Fraterrigo, Elizabeth. *Playboy and the Making of the Good Life in Modern America*. Oxford University Press, 2009\.
 
-KENNEDY, THOMAS E., and Robie Macauley. “A Last Conversation With Robie Macauley.” *Agni*, no. 45, 1997, pp. 178–92. *JSTOR*, http://www.jstor.org/stable/23007739. Accessed 13 Mar. 2026\.
+Kennedy, Thomas E. and Robie Macauley. “A Last Conversation With Robie Macauley.” *Agni*, no. 45, 1997, pp. 178–92. *JSTOR*, http://www.jstor.org/stable/23007739. Accessed 13 Mar. 2026\.
 
 Nishikawa, Kinohi. “*Playboy and the Making of the Good Life in Modern America* by Elizabeth Fraterrigo, and: *Bachelors and Bunnies: The Sexual Politics of Playboy* by Carrie Pitzulo.” *Journal of Modern Periodical Studies*, vol. 4, no. 1, 2013, pp. 119-128. *Project MUSE*, [https://muse.jhu.edu/article/524293/summary](https://muse.jhu.edu/article/524293/summary).
 
@@ -173,39 +173,41 @@ The dataset records authors only when they are explicitly named in the magazine�
 
 Gender is recorded in binary form (male/female). Users should note that some of these fields condense or simplify information, particularly regarding co-authorship or anonymous publication.
 
-**unique\_id**			unique identifier for each short story in the index
+**unique\_id** <br>
+Unique identifier for each short story in the index
 
-**publication\_date**		magazine issue date (MM-DD-YYYY); for combined   
-Issue the earliest month is used (e.g., Jan/Feb 2016 is recorded as 01/01/2016; Spring 2020 is recorded as 03/01/2020)
+**publication\_date** <br>
+Magazine issue date (MM-DD-YYYY); for combined Issue the earliest month is used (e.g., Jan/Feb 2016 is recorded as 01/01/2016; Spring 2020 is recorded as 03/01/2020)
 
-**title**				story title; title case applied
+**title** <br>
+Story title; title case applied
 
-**section**			section of the magazine in which the short story appeared, as   
-listed in the magazine table of contents
+**section** <br>
+Section of the magazine in which the short story appeared, as listed in the magazine table of contents
 
-**author\_name**			author name  
-names were standardized resolving spelling variations and middle   
-initials
+**author\_name** <br>
+Author name; names were standardized resolving spelling variations and middle initials
 
-**first\_name**			author first name, extracted from author\_name and including  
-middle name
+**first\_name** <br>
+Author first name, extracted from author\_name and including middle name
 
-**last\_name**			author last name, extracted from author\_name
+**last\_name** <br>
+Author last name, extracted from author\_name
 
-**gender**			author gender, recorded in binary form (m/f); co-authored entries,   
-				pseudonyms, and authors for which reliable sources were not  
-available were listed as N/A
+**gender** <br>
+Author gender, recorded in binary form (m/f); co-authored entries, pseudonyms, and authors for which reliable sources were not available were listed as N/A
 
-**author\_NEA**	indicates whether the author received a fellowship from the National Endowment for the Arts (NEA)  
+**author\_NEA** <br>
+Indicates whether the author received a fellowship from the National Endowment for the Arts (NEA) (yes/no)
 				  
-**author\_bestseller**		indicates whether the author has appeared on the *New York*   
-*Times* bestseller list 
+**author\_bestseller** <br>
+Indicates whether the author has appeared on the *New York Times* bestseller list (yes/no)
 
-**author\_prize**			indicates whether the author is the recipient of a major literary  
-prize
+**author\_prize** <br>
+Indicates whether the author is the recipient of a major literary prize (yes/no)
 
-**author\_iowa**			indicates whether the author holds an MFA from the Iowa Writers’  
-Workshop
+**author\_iowa** <br>
+Indicates whether the author holds an MFA from the Iowa Writers’ Workshop (yes/no)
 
 # **Ethical Considerations**
 
