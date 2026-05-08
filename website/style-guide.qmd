@@ -276,7 +276,21 @@ External vocabularies and authorities provide accessible language, curated by ex
 
 > **Example**: *Wikidata entry for Prince*
 
-When incorporating an external vocabulary entry, make sure to include **BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution** (“n84079379” in the LoC example above or “Q7542” for Wikidata). No need to look these up manually: digital tools like our [OpenRefine script](https://data.post45.org/our-tools.html){.external target="_blank"} will help to automatically match many vocabularies to their IDs.
+When incorporating an external vocabulary entry, make sure to include **BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution** (“n84079379” in the LoC example above or “Q7542” for Wikidata). No need to look these up manually — we strongly recommend using our own tool, **BookReconciler**, to add identifiers in bulk.
+
+::: {.callout-tip appearance="default"}
+## **Recommended: Use BookReconciler to add identifiers**
+[**BookReconciler 📘💎**](https://data.post45.org/our-tools.html){.external target="_blank"} is a free, open-source desktop app built by the Post45 Data Collective for adding persistent identifiers to bibliographic data. Given a spreadsheet of book titles and authors, BookReconciler queries multiple authority sources at once — including the **Library of Congress (LCCN)**, **VIAF**, **Wikidata (Q-numbers)**, **HathiTrust (volume IDs)**, **OCLC**, **ISBNs**, and **Google Books** — and matches your records to their canonical identifiers. It also performs work-level clustering, which groups together different editions or volumes of the same title under a single work ID.
+
+BookReconciler runs locally on macOS or Windows and integrates with **OpenRefine**, an open-source tool for cleaning and reconciling messy tabular data. To get started:
+
+1. Install [OpenRefine](https://openrefine.org/){.external target="_blank"}.
+2. Download and install BookReconciler from [data.post45.org/our-tools](https://data.post45.org/our-tools.html){.external target="_blank"} (full step-by-step setup is available there).
+3. Load your dataset into OpenRefine, point its reconciliation service at BookReconciler's local URL, and let it match your titles and authors against the connected authorities.
+4. Add new columns to your dataset for any identifiers you want to keep (LCCN, VIAF, Wikidata Q, HathiTrust ID, ISBN, etc.).
+
+A short [video tutorial on YouTube](https://www.youtube.com/watch?v=V9ZJoFowRJM){.external target="_blank"} walks through the workflow, and the [GitHub repository](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service?tab=readme-ov-file#bookreconciler--02--metadata-enrichment-and-work-level-clustering){.external target="_blank"} has additional documentation. If you cannot install BookReconciler yourself, please reach out to the editorial team — we may be able to help run reconciliation on your dataset before publication.
+:::
 
 ::: {.callout-note appearance="default"}
 ## **Important Note on HathiTrust IDs**
