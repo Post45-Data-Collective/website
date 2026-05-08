@@ -12,7 +12,7 @@ abstract: "The *Playboy* Fiction Index (1953–2020) contains metadata for over 
 # Add keywords/categories — should always include "dataset"
 categories: [metadata, fiction, print, dataset, draft]
 # Provide link to an image that will show up in "Our Datasets" aggregation
-image: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Playboy_Logo_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a8/PlayboyLogo.svg/500px-PlayboyLogo.svg.png"
 # Insert DOI for this data essay
 doi: "10.18737/552627"
 # date of publication
@@ -50,7 +50,7 @@ header-includes:
 # - /the-index-of-major-literary-prizes-in-the-us/
 ---
 
- ![Playboy logo c1960s-70s.](https://upload.wikimedia.org/wikipedia/commons/a/a3/Playboy_Logo_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original){width=40% fig-align="center"}
+ ![Playboy logo c1960s-70s.](https://upload.wikimedia.org/wikipedia/en/thumb/a/a8/PlayboyLogo.svg/500px-PlayboyLogo.svg.png){width=40% fig-align="center"}
 
 <!-- Include brief introduction to/description of data essay  -->
 
@@ -79,16 +79,16 @@ generateTabulatorTableFromCSV(
   "#table-container-playboy",
   "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv",
   {
-    displayedColumns: ["unique_id", "publication_date", "year", "title", "section",
-                       "author_name", "last_name", "first_name", "author_gender",
+    displayedColumns: ["unique_id", "publication_date", "year", "author_name",
+                       "title", "section", "last_name", "first_name", "author_gender",
                        "author_nea", "author_bestseller", "author_prize", "author_iowa"],
     columnPopups: [
       "Unique identifier for each short story in the index",
       "Magazine issue date (MM/DD/YYYY)",
       "Year of the magazine issue (extracted from publication_date)",
+      "Author name; standardized spelling and middle initials",
       "Story title; title case applied",
       "Section of the magazine in which the story appeared",
-      "Author name; standardized spelling and middle initials",
       "Author last name",
       "Author first name (including middle name)",
       "Author gender (M/F); N/A for co-authored or unverified",
