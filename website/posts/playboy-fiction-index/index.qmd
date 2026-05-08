@@ -45,6 +45,9 @@ page-layout: full
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 # aliases:
 # - /the-index-of-major-literary-prizes-in-the-us/
 ---
@@ -59,46 +62,219 @@ header-includes:
 
 # Data Table
 
-<!-- FOR EDITORIAL TEAM:
+```{=html}
+<div id="year-slider-wrap" style="margin: 1em 0; padding: 0.75em 1em; border: 1px solid #ddd; border-radius: 4px; background: #fafafa;">
+  <div><strong>Filter by year:</strong> <span id="year-slider-label" style="font-weight: 600;">1953 – 2020</span></div>
+  <div style="display: flex; align-items: center; gap: 0.5em; margin-top: 0.5em;">
+    <span style="font-size: 0.85em; color: #666; min-width: 3em; text-align: right;">1953</span>
+    <div style="position: relative; flex: 1; height: 30px;">
+      <div id="year-slider-track" style="position: absolute; top: 13px; left: 0; right: 0; height: 4px; background: #ddd; border-radius: 2px;"></div>
+      <div id="year-slider-range" style="position: absolute; top: 13px; height: 4px; background: #c8102e; border-radius: 2px; left: 0; right: 0;"></div>
+      <input id="year-slider-min" type="range" min="1953" max="2020" value="1953" step="1"
+        style="position: absolute; width: 100%; pointer-events: none; -webkit-appearance: none; appearance: none; background: transparent; height: 30px; top: 0;">
+      <input id="year-slider-max" type="range" min="1953" max="2020" value="2020" step="1"
+        style="position: absolute; width: 100%; pointer-events: none; -webkit-appearance: none; appearance: none; background: transparent; height: 30px; top: 0;">
+    </div>
+    <span style="font-size: 0.85em; color: #666; min-width: 3em;">2020</span>
+  </div>
+</div>
 
-To create a data table, first add the dataset to the datasets/ directory in the GitHub repo. 
+<style>
+#year-slider-wrap input[type="range"] { background: transparent; }
+#year-slider-wrap input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none; appearance: none;
+  height: 18px; width: 18px; border-radius: 50%;
+  background: #c8102e; border: 2px solid white; cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  margin-top: -6px;
+}
+#year-slider-wrap input[type="range"]::-moz-range-thumb {
+  pointer-events: auto;
+  height: 18px; width: 18px; border-radius: 50%;
+  background: #c8102e; border: 2px solid white; cursor: pointer;
+}
+#year-slider-wrap input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px; background: transparent; border-radius: 2px;
+}
+#year-slider-wrap input[type="range"]::-moz-range-track {
+  height: 4px; background: transparent; border-radius: 2px;
+}
+#playboy-table-status { font-size: 0.85em; color: #666; margin-top: 0.5em; }
+</style>
 
-Then, find the raw GitHub URL for that dataset and insert it below, customizing columns as needed.
+<div id="table-container-playboy" style="height: 600px"></div>
+<div id="playboy-table-status">Loading data…</div>
 
-Areas that need to be edited are marked with MAKE EDITS HERE -->
+<div style="margin-top: 1em;">
+  <strong>Download Full Data (including hidden columns)</strong>
+  <div style='margin: 0.25em 0;'>
+    <button id="download-raw-playboy"><i class="fas fa-download"></i> Download Full Data</button>
+    <button id="copy-url-playboy"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+  </div>
+  <strong>Download Table Data (currently filtered rows / visible columns)</strong>
+  <div id='button-container-playboy' style='margin: 0.25em 0;'>
+    <button id="download-csv-playboy"><i class="fas fa-download"></i> Download CSV</button>
+    <button id="download-json-playboy"><i class="fas fa-download"></i> Download JSON</button>
+    <button id="download-xlsx-playboy"><i class="fas fa-download"></i> Download Excel</button>
+  </div>
+</div>
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
+<script>
+(function() {
+  var DATA_URL = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv";
+  var YEAR_MIN = 1953;
+  var YEAR_MAX = 2020;
 
-# Load the function
-source("../../scripts/createDataTable.R")
+  // Lightweight CSV parser handling quoted values + commas in quotes.
+  function parseCSV(text) {
+    var rows = [];
+    var row = [];
+    var field = '';
+    var inQuotes = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (inQuotes) {
+        if (c === '"') {
+          if (text[i+1] === '"') { field += '"'; i++; } else { inQuotes = false; }
+        } else {
+          field += c;
+        }
+      } else {
+        if (c === '"') { inQuotes = true; }
+        else if (c === ',') { row.push(field); field = ''; }
+        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+        else if (c === '\r') { /* skip */ }
+        else { field += c; }
+      }
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    var header = rows.shift();
+    return rows.filter(function(r) { return r.length === header.length; }).map(function(r) {
+      var obj = {};
+      header.forEach(function(h, idx) { obj[h] = r[idx]; });
+      return obj;
+    });
+  }
 
-# MAKE EDITS HERE: Plug in the raw GitHub URL to the dataset below
-createDataTable(
-  data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv",
+  function buildTable(data) {
+    var COLS = [
+      { title: "unique_id",         field: "unique_id",         headerFilter: "input", sorter: "number", width: 100 },
+      { title: "publication_date",  field: "publication_date",  headerFilter: "input", width: 130 },
+      { title: "year",              field: "year",              headerFilter: "input", sorter: "number", width: 80 },
+      { title: "title",             field: "title",             headerFilter: "input", widthGrow: 2 },
+      { title: "section",           field: "section",           headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 130 },
+      { title: "author_name",       field: "author_name",       headerFilter: "input" },
+      { title: "last_name",         field: "last_name",         headerFilter: "input" },
+      { title: "first_name",        field: "first_name",        headerFilter: "input" },
+      { title: "author_gender",     field: "author_gender",     headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
+      { title: "author_nea",        field: "author_nea",        headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
+      { title: "author_bestseller", field: "author_bestseller", headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 130 },
+      { title: "author_prize",      field: "author_prize",      headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
+      { title: "author_iowa",       field: "author_iowa",       headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
+    ];
 
-  # MAKE EDITS HERE: Select the columns that will be displayed in the data table, and the order
-  displayed_columns = c("Unique_ID","Publication_date","Title","Section","Author_name","Last_name","First_name","Author_gender","Author_NEA","Author_bestseller","Author_prize","Author_iowa"),
+    var table = new Tabulator("#table-container-playboy", {
+      data: data,
+      columns: COLS,
+      height: 600,
+      layout: "fitDataStretch",
+      pagination: true,
+      paginationSize: 100,
+      paginationSizeSelector: [10, 25, 50, 100, 1000],
+      paginationCounter: "rows",
+      initialSort: [{ column: "unique_id", dir: "asc" }],
+    });
+    return table;
+  }
 
-   # MAKE EDITS HERE: Customize any column widths 
-  # If none, comment out
-   #column_widths = c("gender" = "100px", "role" = "75px", "mfa_degree" = "100px", "prize_name" = "100px"),
+  function setupSlider(table) {
+    var minSlider = document.getElementById('year-slider-min');
+    var maxSlider = document.getElementById('year-slider-max');
+    var label = document.getElementById('year-slider-label');
+    var rangeBar = document.getElementById('year-slider-range');
+    if (!minSlider || !maxSlider) return;
 
-   # MAKE EDITS HERE: Select any columns that should be formatted with a dollar sign
-   # If none, comment out
-  #currency_columns = c("prize_amount"),
+    function clamp(v) { return Math.max(YEAR_MIN, Math.min(YEAR_MAX, v)); }
+    function paintRange(lo, hi) {
+      var span = YEAR_MAX - YEAR_MIN;
+      var leftPct = ((lo - YEAR_MIN) / span) * 100;
+      var rightPct = ((YEAR_MAX - hi) / span) * 100;
+      rangeBar.style.left = leftPct + '%';
+      rangeBar.style.right = rightPct + '%';
+    }
+    function applyFilter() {
+      var lo = clamp(parseInt(minSlider.value, 10));
+      var hi = clamp(parseInt(maxSlider.value, 10));
+      if (lo > hi) { if (this === minSlider) { hi = lo; maxSlider.value = hi; } else { lo = hi; minSlider.value = lo; } }
+      label.textContent = lo + ' – ' + hi;
+      paintRange(lo, hi);
+      table.setFilter([
+        { field: "year", type: ">=", value: lo },
+        { field: "year", type: "<=", value: hi },
+      ]);
+    }
+    minSlider.addEventListener('input', applyFilter);
+    maxSlider.addEventListener('input', applyFilter);
+    paintRange(YEAR_MIN, YEAR_MAX);
+  }
 
-   # MAKE EDITS HERE: Select any columns that should be filterable as a category
-  # If none, comment out
+  function setupDownloads(table) {
+    document.getElementById('download-csv-playboy').addEventListener('click', function() {
+      table.download('csv', 'playboy-fiction-index.csv');
+    });
+    document.getElementById('download-json-playboy').addEventListener('click', function() {
+      table.download('json', 'playboy-fiction-index.json');
+    });
+    document.getElementById('download-xlsx-playboy').addEventListener('click', function() {
+      table.download('xlsx', 'playboy-fiction-index.xlsx', { sheetName: 'Playboy Fiction Index' });
+    });
+    document.getElementById('download-raw-playboy').addEventListener('click', function() {
+      var a = document.createElement('a');
+      a.href = DATA_URL;
+      a.download = 'playboy-fiction-index-metadata_20260415.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    });
+    document.getElementById('copy-url-playboy').addEventListener('click', function() {
+      navigator.clipboard ? navigator.clipboard.writeText(DATA_URL) : (function() {
+        var ti = document.createElement('input'); ti.value = DATA_URL; document.body.appendChild(ti);
+        ti.select(); document.execCommand('copy'); document.body.removeChild(ti);
+      })();
+      alert('URL copied to clipboard: ' + DATA_URL);
+    });
+  }
 
-  category_columns = c("Publication_date","Section","Author_name","Last_name","First_name","Author_gender","Author_NEA","Author_bestseller","Author_prize","Author_iowa"),
+  function init() {
+    var status = document.getElementById('playboy-table-status');
+    if (typeof Tabulator === 'undefined') {
+      // Tabulator script not loaded yet; retry.
+      return setTimeout(init, 200);
+    }
+    fetch(DATA_URL)
+      .then(function(r) { return r.text(); })
+      .then(function(text) {
+        var data = parseCSV(text);
+        status.textContent = data.length + ' stories loaded.';
+        var table = buildTable(data);
+        table.on('tableBuilt', function() {
+          setupSlider(table);
+          setupDownloads(table);
+        });
+        // Fallback in case tableBuilt has already fired.
+        setTimeout(function() { setupSlider(table); setupDownloads(table); }, 800);
+      })
+      .catch(function(err) {
+        status.textContent = 'Failed to load data: ' + err;
+      });
+  }
 
-    # Select column to sort by, and order
-  sort_columns = c("Unique_ID"),
-  sort_orders = c("desc")
-)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 ```
 
 ::: {.callout-tip icon="false"}
@@ -179,6 +355,9 @@ Unique identifier for each short story in the index
 **publication\_date** <br>
 Magazine issue date (MM-DD-YYYY); for combined Issue the earliest month is used (e.g., Jan/Feb 2016 is recorded as 01/01/2016; Spring 2020 is recorded as 03/01/2020)
 
+**year** <br>
+Year of the magazine issue, extracted from publication\_date
+
 **title** <br>
 Story title; title case applied
 
@@ -194,10 +373,10 @@ Author first name, extracted from author\_name and including middle name
 **last\_name** <br>
 Author last name, extracted from author\_name
 
-**gender** <br>
+**author\_gender** <br>
 Author gender, recorded in binary form (m/f); co-authored entries, pseudonyms, and authors for which reliable sources were not available were listed as N/A
 
-**author\_NEA** <br>
+**author\_nea** <br>
 Indicates whether the author received a fellowship from the National Endowment for the Arts (NEA) (yes/no)
 				  
 **author\_bestseller** <br>
