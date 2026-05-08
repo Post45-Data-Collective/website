@@ -45,9 +45,6 @@ page-layout: full
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
-  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
-  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
-  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 # aliases:
 # - /the-index-of-major-literary-prizes-in-the-us/
 ---
@@ -62,294 +59,77 @@ header-includes:
 
 # Data Table
 
-```{=html}
-<style>
-.year-range-filter {
-  position: relative;
-  width: 100%;
-  padding: 0 10px;
-  box-sizing: border-box;
-  font-family: inherit;
-}
-.year-range-filter .yrf-label {
-  font-size: 11px;
-  color: #fff;
-  text-align: center;
-  font-weight: 600;
-  margin-bottom: 4px;
-  letter-spacing: 0;
-}
-.year-range-filter .yrf-track-wrap {
-  position: relative;
-  height: 18px;
-}
-.year-range-filter .yrf-track {
-  position: absolute;
-  top: 8px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: #ccc;
-  border-radius: 2px;
-}
-.year-range-filter .yrf-range {
-  position: absolute;
-  top: 8px;
-  height: 3px;
-  background: #c8102e;
-  border-radius: 2px;
-}
-.year-range-filter input[type="range"] {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 18px;
-  background: transparent;
-  -webkit-appearance: none;
-  appearance: none;
-  pointer-events: none;
-  margin: 0;
-}
-.year-range-filter input[type="range"]::-webkit-slider-runnable-track {
-  height: 3px;
-  background: transparent;
-}
-.year-range-filter input[type="range"]::-moz-range-track {
-  height: 3px;
-  background: transparent;
-}
-.year-range-filter input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  pointer-events: auto;
-  height: 14px;
-  width: 14px;
-  border-radius: 50%;
-  background: #c8102e;
-  border: 2px solid white;
-  cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  margin-top: -6px;
-}
-.year-range-filter input[type="range"]::-moz-range-thumb {
-  pointer-events: auto;
-  height: 14px;
-  width: 14px;
-  border-radius: 50%;
-  background: #c8102e;
-  border: 2px solid white;
-  cursor: pointer;
-}
-/* Give the year column header filter a bit more vertical breathing room */
-#table-container-playboy .tabulator-col[tabulator-field="year"] .tabulator-header-filter {
-  padding: 4px 2px;
-  height: auto;
-}
-#playboy-table-status { font-size: 0.85em; color: #666; margin-top: 0.5em; }
-</style>
+```{ojs}
+//| echo: false
+import {viewof dataSummaryView, Tabulator, viewof selectedColumns, viewof dataSet, tableContainer, fetchData, generateTabulatorTableFromCSV, progress, progressbar} from "8bb63a6cde9addff"
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+raw_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+
+generateTabulatorTableFromCSV(
+  "#table-container-playboy",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv",
+  {
+    displayedColumns: ["unique_id", "publication_date", "year", "title", "section",
+                       "author_name", "last_name", "first_name", "author_gender",
+                       "author_nea", "author_bestseller", "author_prize", "author_iowa"],
+    columnPopups: [
+      "Unique identifier for each short story in the index",
+      "Magazine issue date (MM/DD/YYYY)",
+      "Year of the magazine issue (extracted from publication_date)",
+      "Story title; title case applied",
+      "Section of the magazine in which the story appeared",
+      "Author name; standardized spelling and middle initials",
+      "Author last name",
+      "Author first name (including middle name)",
+      "Author gender (M/F); N/A for co-authored or unverified",
+      "NEA Creative Writing Fellowship recipient (yes/no)",
+      "New York Times bestseller list author (yes/no)",
+      "Major literary prize recipient (yes/no)",
+      "Iowa Writers' Workshop MFA holder (yes/no)"
+    ],
+    rangeSliderColumns: ["year"],
+    dateSliderColumns: ["publication_date"],
+    categoryColumns: ["section", "author_gender", "author_nea", "author_bestseller", "author_prize", "author_iowa"],
+    sortColumns: ["unique_id"],
+    sortOrders: ["asc"],
+    buttonContainerId: "#button-container-playboy",
+    rawButtonId: "#download-raw-playboy",
+    urlCopyButtonId: "#copy-url-playboy",
+  }
+);
+```
 
 <div id="table-container-playboy" style="height: 600px"></div>
-<div id="playboy-table-status">Loading data…</div>
 
-<div style="margin-top: 1em;">
-  <strong>Download Full Data (including hidden columns)</strong>
-  <div style='margin: 0.25em 0;'>
-    <button id="download-raw-playboy"><i class="fas fa-download"></i> Download Full Data</button>
-    <button id="copy-url-playboy"><i class="fas fa-copy"></i> Copy Full Data URL</button>
-  </div>
-  <strong>Download Table Data (currently filtered rows / visible columns)</strong>
-  <div id='button-container-playboy' style='margin: 0.25em 0;'>
-    <button id="download-csv-playboy"><i class="fas fa-download"></i> Download CSV</button>
-    <button id="download-json-playboy"><i class="fas fa-download"></i> Download JSON</button>
-    <button id="download-xlsx-playboy"><i class="fas fa-download"></i> Download Excel</button>
-  </div>
+Download Full Data (including hidden columns)
+
+<div id='button-container'>
+  <button id="download-raw-playboy"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-playboy"><i class="fas fa-copy"></i> Copy Full Data URL</button>
 </div>
 
-<script>
-(function() {
-  var DATA_URL = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv";
-  var YEAR_MIN = 1953;
-  var YEAR_MAX = 2020;
+Download Table Data (including filtered options)
 
-  // Lightweight CSV parser handling quoted values + commas in quotes.
-  function parseCSV(text) {
-    var rows = [];
-    var row = [];
-    var field = '';
-    var inQuotes = false;
-    for (var i = 0; i < text.length; i++) {
-      var c = text[i];
-      if (inQuotes) {
-        if (c === '"') {
-          if (text[i+1] === '"') { field += '"'; i++; } else { inQuotes = false; }
-        } else {
-          field += c;
-        }
-      } else {
-        if (c === '"') { inQuotes = true; }
-        else if (c === ',') { row.push(field); field = ''; }
-        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
-        else if (c === '\r') { /* skip */ }
-        else { field += c; }
-      }
-    }
-    if (field.length || row.length) { row.push(field); rows.push(row); }
-    var header = rows.shift();
-    return rows.filter(function(r) { return r.length === header.length; }).map(function(r) {
-      var obj = {};
-      header.forEach(function(h, idx) { obj[h] = r[idx]; });
-      return obj;
-    });
-  }
+<div id='button-container-playboy'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
-  // Custom header filter editor: dual-handle range slider for the year column.
-  // success(value) is called with {min, max}; the matching headerFilterFunc
-  // below decides whether each row passes.
-  function yearRangeFilterEditor(cell, onRendered, success, cancel, editorParams) {
-    var wrap = document.createElement('div');
-    wrap.className = 'year-range-filter';
-    wrap.innerHTML =
-      '<div class="yrf-label"><span class="yrf-lo">' + YEAR_MIN + '</span> – <span class="yrf-hi">' + YEAR_MAX + '</span></div>' +
-      '<div class="yrf-track-wrap">' +
-        '<div class="yrf-track"></div>' +
-        '<div class="yrf-range"></div>' +
-        '<input type="range" class="yrf-min" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" value="' + YEAR_MIN + '" step="1">' +
-        '<input type="range" class="yrf-max" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" value="' + YEAR_MAX + '" step="1">' +
-      '</div>';
-    var minIn = wrap.querySelector('.yrf-min');
-    var maxIn = wrap.querySelector('.yrf-max');
-    var loLabel = wrap.querySelector('.yrf-lo');
-    var hiLabel = wrap.querySelector('.yrf-hi');
-    var rangeBar = wrap.querySelector('.yrf-range');
+<div id="progress-container" style="width: 100%; display: block;">
+  <progress id="progress-bar" style="width: 100%;" max="100" value="0"></progress>
+  <div id="progress-text" style="text-align: center; margin-top: 5px;"></div>
+</div>
 
-    function paint(lo, hi) {
-      var span = YEAR_MAX - YEAR_MIN;
-      rangeBar.style.left = ((lo - YEAR_MIN) / span * 100) + '%';
-      rangeBar.style.right = ((YEAR_MAX - hi) / span * 100) + '%';
-      loLabel.textContent = lo;
-      hiLabel.textContent = hi;
-    }
-
-    function fire(e) {
-      var lo = parseInt(minIn.value, 10);
-      var hi = parseInt(maxIn.value, 10);
-      // Prevent thumbs from crossing — push the other one along
-      if (e && e.target === minIn && lo > hi) { hi = lo; maxIn.value = hi; }
-      if (e && e.target === maxIn && hi < lo) { lo = hi; minIn.value = lo; }
-      paint(lo, hi);
-      success({ min: lo, max: hi });
-    }
-
-    minIn.addEventListener('input', fire);
-    maxIn.addEventListener('input', fire);
-    // Don't let click/mousedown bubble up to Tabulator (which would trigger sort)
-    wrap.addEventListener('mousedown', function(e) { e.stopPropagation(); });
-    wrap.addEventListener('click', function(e) { e.stopPropagation(); });
-
-    paint(YEAR_MIN, YEAR_MAX);
-    return wrap;
-  }
-
-  function yearRangeFilterFunc(headerValue, rowValue, rowData, filterParams) {
-    if (!headerValue) return true;
-    var y = parseInt(rowValue, 10);
-    if (isNaN(y)) return false;
-    return y >= headerValue.min && y <= headerValue.max;
-  }
-
-  function buildTable(data) {
-    var COLS = [
-      { title: "unique_id",         field: "unique_id",         headerFilter: "input", sorter: "number", width: 100 },
-      { title: "publication_date",  field: "publication_date",  headerFilter: "input", width: 130 },
-      {
-        title: "year", field: "year", sorter: "number", width: 220, minWidth: 220,
-        headerFilter: yearRangeFilterEditor,
-        headerFilterFunc: yearRangeFilterFunc,
-        headerFilterLiveFilter: false,
-      },
-      { title: "title",             field: "title",             headerFilter: "input", widthGrow: 2 },
-      { title: "section",           field: "section",           headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 130 },
-      { title: "author_name",       field: "author_name",       headerFilter: "input" },
-      { title: "last_name",         field: "last_name",         headerFilter: "input" },
-      { title: "first_name",        field: "first_name",        headerFilter: "input" },
-      { title: "author_gender",     field: "author_gender",     headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
-      { title: "author_nea",        field: "author_nea",        headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
-      { title: "author_bestseller", field: "author_bestseller", headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 130 },
-      { title: "author_prize",      field: "author_prize",      headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
-      { title: "author_iowa",       field: "author_iowa",       headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
-    ];
-
-    var table = new Tabulator("#table-container-playboy", {
-      data: data,
-      columns: COLS,
-      height: 600,
-      layout: "fitDataStretch",
-      pagination: true,
-      paginationSize: 100,
-      paginationSizeSelector: [10, 25, 50, 100, 1000],
-      paginationCounter: "rows",
-      initialSort: [{ column: "unique_id", dir: "asc" }],
-    });
-    return table;
-  }
-
-  function setupDownloads(table) {
-    document.getElementById('download-csv-playboy').addEventListener('click', function() {
-      table.download('csv', 'playboy-fiction-index.csv');
-    });
-    document.getElementById('download-json-playboy').addEventListener('click', function() {
-      table.download('json', 'playboy-fiction-index.json');
-    });
-    document.getElementById('download-xlsx-playboy').addEventListener('click', function() {
-      table.download('xlsx', 'playboy-fiction-index.xlsx', { sheetName: 'Playboy Fiction Index' });
-    });
-    document.getElementById('download-raw-playboy').addEventListener('click', function() {
-      var a = document.createElement('a');
-      a.href = DATA_URL;
-      a.download = 'playboy-fiction-index-metadata_20260415.csv';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    });
-    document.getElementById('copy-url-playboy').addEventListener('click', function() {
-      navigator.clipboard ? navigator.clipboard.writeText(DATA_URL) : (function() {
-        var ti = document.createElement('input'); ti.value = DATA_URL; document.body.appendChild(ti);
-        ti.select(); document.execCommand('copy'); document.body.removeChild(ti);
-      })();
-      alert('URL copied to clipboard: ' + DATA_URL);
-    });
-  }
-
-  function init() {
-    var status = document.getElementById('playboy-table-status');
-    if (typeof Tabulator === 'undefined') {
-      // Tabulator script not loaded yet; retry.
-      return setTimeout(init, 200);
-    }
-    fetch(DATA_URL)
-      .then(function(r) { return r.text(); })
-      .then(function(text) {
-        var data = parseCSV(text);
-        status.textContent = data.length + ' stories loaded.';
-        var table = buildTable(data);
-        table.on('tableBuilt', function() {
-          setupDownloads(table);
-        });
-        // Fallback in case tableBuilt has already fired.
-        setTimeout(function() { setupDownloads(table); }, 800);
-      })
-      .catch(function(err) {
-        status.textContent = 'Failed to load data: ' + err;
-      });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-</script>
-```
 
 ::: {.callout-tip icon="false"}
 ## Creative Commons License
@@ -477,3 +257,9 @@ Because *Playboy* ceased print publication in 2020, no new entries will be added
 # **Licensing**
 
 CC by 4.0
+
+<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">
+<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>
+
+<!-- Excel script -->
+<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>

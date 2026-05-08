@@ -165,6 +165,7 @@ generateTabulatorTableFromCSV(
     },
 
     numericColumns: ["rank"],
+    dateSliderColumns: ["date"],
     categoryColumns: ["country", "gender", "nationality", "publication_country"],
 
     // No linkColumns needed unless you add URLs

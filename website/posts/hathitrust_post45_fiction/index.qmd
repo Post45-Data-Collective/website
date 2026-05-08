@@ -136,6 +136,7 @@ generateTabulatorTableFromCSV(
 ],
     // columnWidths: { "gender": "50px", "role": "75px", "mfa_degree": "100px", "prize_name": "100px" },
     currencyColumns: ["prize_amount"],
+    rangeSliderColumns: ["inferreddate"],
     categoryColumns: ["hathi_rights",  "genres","geographics"],
     // sortColumns: ["prize_year"],
     // sortOrders: ["desc"]

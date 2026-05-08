@@ -144,7 +144,8 @@ generateTabulatorTableFromCSV(
       "notes": "30px",
       // Add others if you want
     },
-    numericColumns : ['year_set', 'released', 'years_distant'],
+    rangeSliderColumns: ['year_set', 'released'],
+    numericColumns: ['years_distant'],
 
     // Groupings for dropdowns/filters (customize as needed)
     categoryColumns: [

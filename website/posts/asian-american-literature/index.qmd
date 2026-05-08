@@ -304,9 +304,9 @@ generateTabulatorTableFromCSV(
 
     },
 
-    numericColumns: ["publication_year", "birth_year", "immigration_year", "scholarship_year"],
+    rangeSliderColumns: ["publication_year", "birth_year", "immigration_year", "scholarship_year"],
     categoryColumns: [
-      "genre", "gender", "race", "native_foreign", "mfa", 
+      "genre", "gender", "race", "native_foreign", "mfa",
       "university_teacher", "nyt_bestseller", "education_level", "degree", "immigrant_generation"
     ],
 
@@ -607,9 +607,10 @@ generateTabulatorTableFromCSV(
       "Up to three awards received by the author."
     ],
 
-    numericColumns: ["instances_of_study", "birth_year", "immigration_year"],
+    rangeSliderColumns: ["birth_year", "immigration_year"],
+    numericColumns: ["instances_of_study"],
     categoryColumns: [
-      "gender", "race", "native_foreign", "education_level", 
+      "gender", "race", "native_foreign", "education_level",
       "mfa", "university_teacher", "degree"
     ],
 
@@ -678,7 +679,8 @@ Download Table Data (including filtered options)
       "NYT Hardcover Fiction Bestseller status (Y/N/N/A)."
     ],
 
-    numericColumns: ["instances_of_study", "publication_year"],
+    rangeSliderColumns: ["publication_year"],
+    numericColumns: ["instances_of_study"],
     categoryColumns: ["genre", "nyt_bestseller"],
 
     sortColumns: ["instances_of_study", "title"],

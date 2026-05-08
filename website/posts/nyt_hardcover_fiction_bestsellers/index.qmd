@@ -30,6 +30,9 @@ citation:
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 bibliography: references.bib
 appendix-stlye: none
 license: CC BY
@@ -65,38 +68,72 @@ At a later stage, persistent identifiers, such as VIAF, LCCN, and Wikidata ident
 
 ## Data Table
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-lists.csv"
-
-createDataTable(
-    data_path = data_path,
-    style = "bootstrap", # Bootstrap DataTables style
-    bootstrap_classes = "table-condensed", # Add extra classes
-
-    displayed_columns = c("week", "year", "rank", "title", "author", "oclc_eholdings", "oclc_holdings", "oclc_isbn", "oclc_owi", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata"),
-    column_widths = c("week" = "75px", "rank" = "75px", "year" = "75px", "author" = "100px"),
-    date_columns = c("week"),
-
-    # currency_columns = c("prize_amount"),
-
-    # category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree"),
-
-    sort_columns = c("week"),
-    sort_orders = c("desc"),
-)
-
-# Print out column names to make it easier to customize above
-# df <- read.csv(data_path)
-# cat(paste(shQuote(colnames(df), type = "cmd"), collapse = ", "))
-
+```{ojs}
+//| echo: false
+import {viewof dataSummaryView, Tabulator, viewof selectedColumns, viewof dataSet, tableContainer, fetchData, generateTabulatorTableFromCSV, progress, progressbar} from "8bb63a6cde9addff"
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+nyt_lists_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-lists.csv")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-nyt-lists",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-lists.csv",
+  {
+    displayedColumns: ["week", "year", "rank", "title", "author", "title_id",
+                       "oclc_eholdings", "oclc_holdings", "oclc_isbn", "oclc_owi",
+                       "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata"],
+    columnPopups: [
+      "Date of the bestseller list (week)",
+      "Year of the bestseller list",
+      "Rank on the list (1 = top)",
+      "Title of the novel, as reported by the New York Times",
+      "Author, as reported by the New York Times",
+      "Internal title id mapping to the unique titles dataset",
+      "OCLC electronic holdings count",
+      "OCLC total holdings count",
+      "OCLC ISBN",
+      "OCLC Classify work identifier",
+      "Author's NACO authorized heading",
+      "Author's LCCN",
+      "Author's VIAF cluster number",
+      "Author's Wikidata Q number"
+    ],
+    columnWidths: { "rank": "60px", "year": "75px", "author": "120px" },
+    rangeSliderColumns: ["year"],
+    dateSliderColumns: ["week"],
+    numericColumns: ["rank"],
+    sortColumns: ["week"],
+    sortOrders: ["desc"],
+    buttonContainerId: "#button-container-nyt-lists",
+    rawButtonId: "#download-raw-nyt-lists",
+    urlCopyButtonId: "#copy-url-nyt-lists",
+  }
+);
+```
+
+<div id="table-container-nyt-lists" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-nyt-lists"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-nyt-lists"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-nyt-lists'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ::: {.callout-tip icon="false"}
 ## Creative Commons License
@@ -137,33 +174,70 @@ The second dataset provides title-level data for every unique title that appeare
 
 ## Data Table
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-titles.csv"
-
-createDataTable(
-    data_path = data_path,
-    displayed_columns = c("first_week", "year", "id", "title", "author", "total_weeks", "best_rank", "debut_rank", "oclc_holdings", "oclc_eholdings", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata", "oclc", "oclc_isbn", "oclc_owi"),
-
-    # currency_columns = c("prize_amount"),
-
-    # category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree"),
-
-    # sort_columns = c("prize_year"),
-    # sort_orders = c("desc")
-)
-
-# Print out column names to make it easier to customize above
-# df <- read.csv(data_path)
-# cat(paste(shQuote(colnames(df), type = "cmd"), collapse = ", "))
-
+```{ojs}
+//| echo: false
+//| output: false
+nyt_titles_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-titles.csv")
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-nyt-titles",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-titles.csv",
+  {
+    displayedColumns: ["first_week", "year", "id", "title", "author", "total_weeks",
+                       "best_rank", "debut_rank", "oclc_holdings", "oclc_eholdings",
+                       "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata",
+                       "oclc", "oclc_isbn", "oclc_owi"],
+    columnPopups: [
+      "First week the title appeared on the bestseller list",
+      "First year the title appeared on the list",
+      "Arbitrary unique id for the title",
+      "Title as reported by the New York Times",
+      "Author as reported by the New York Times",
+      "Total number of weeks the title was on the list",
+      "Highest rank achieved by the title",
+      "Bestseller rank in the week of first appearance",
+      "OCLC total holdings count",
+      "OCLC electronic holdings count",
+      "Author's NACO authorized heading",
+      "Author's LCCN",
+      "Author's VIAF cluster number",
+      "Author's Wikidata Q number",
+      "OCLC unique volume identifier (WorldCat)",
+      "OCLC ISBN",
+      "OCLC Classify work identifier"
+    ],
+    rangeSliderColumns: ["year"],
+    dateSliderColumns: ["first_week"],
+    numericColumns: ["total_weeks", "best_rank", "debut_rank"],
+    sortColumns: ["first_week"],
+    sortOrders: ["desc"],
+    buttonContainerId: "#button-container-nyt-titles",
+    rawButtonId: "#download-raw-nyt-titles",
+    urlCopyButtonId: "#copy-url-nyt-titles",
+  }
+);
+```
+
+<div id="table-container-nyt-titles" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-nyt-titles"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-nyt-titles"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-nyt-titles'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ## Description
 
@@ -192,32 +266,76 @@ This dataset also includes various persistent identifiers and information from O
 
 ## Data Table
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-hathitrust_metadata.csv"
-
-createDataTable(
-    data_path = data_path,
-    displayed_columns = c("first_week", "year", "title", "author", "htid", "hathi_rights", "best_rank", "debut_rank", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata_qid", "isbn", "oclc", "oclc_eholdings", "oclc_holdings", "oclc_owi"),
-
-    # currency_columns = c("prize_amount"),
-
-    # category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree"),
-
-    # sort_columns = c("prize_year"),
-    # sort_orders = c("desc")
-)
-
-# df <- read.csv(data_path)
-# cat(paste(shQuote(colnames(df), type = "cmd"), collapse = ", "))
-
+```{ojs}
+//| echo: false
+//| output: false
+nyt_hathi_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-hathitrust_metadata.csv")
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-nyt-hathi",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nyt_hardcover_fiction_bestsellers/nyt_hardcover_fiction_bestsellers-hathitrust_metadata.csv",
+  {
+    displayedColumns: ["first_week", "year", "title", "author", "htid", "hathi_rights",
+                       "best_rank", "debut_rank", "author_authorized_heading", "author_lccn",
+                       "author_viaf", "author_wikidata_qid", "isbn", "oclc",
+                       "oclc_eholdings", "oclc_holdings", "oclc_owi"],
+    columnPopups: [
+      "First week the title appeared on the bestseller list",
+      "First year the title appeared on the list",
+      "Title as reported by the New York Times",
+      "Author as reported by the New York Times",
+      "HathiTrust unique volume identifier",
+      "HathiTrust rights code",
+      "Highest rank achieved by the title",
+      "Bestseller rank in the week of first appearance",
+      "Author's NACO authorized heading",
+      "Author's LCCN",
+      "Author's VIAF cluster number",
+      "Author's Wikidata Q number",
+      "ISBN",
+      "OCLC unique volume identifier (WorldCat)",
+      "OCLC electronic holdings count",
+      "OCLC total holdings count",
+      "OCLC Classify work identifier"
+    ],
+    rangeSliderColumns: ["year"],
+    dateSliderColumns: ["first_week"],
+    numericColumns: ["best_rank", "debut_rank"],
+    categoryColumns: ["hathi_rights"],
+    sortColumns: ["first_week"],
+    sortOrders: ["desc"],
+    buttonContainerId: "#button-container-nyt-hathi",
+    rawButtonId: "#download-raw-nyt-hathi",
+    urlCopyButtonId: "#copy-url-nyt-hathi",
+  }
+);
+```
+
+<div id="table-container-nyt-hathi" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-nyt-hathi"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-nyt-hathi"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-nyt-hathi'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
+
+<div id="progress-container" style="width: 100%; display: block;">
+  <progress id="progress-bar" style="width: 100%;" max="100" value="0"></progress>
+  <div id="progress-text" style="text-align: center; margin-top: 5px;"></div>
+</div>
 
 ## Collection and Creation
 
