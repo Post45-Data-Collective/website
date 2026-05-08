@@ -15,7 +15,7 @@ format:
 
 
 
-# <font color="midnightblue">**Introduction**</font>{#introduction}
+# **Introduction**{#introduction}
 
 In the **Post45 Data Collective Tabular Data Style Guide**, you will find what it says on the tin: a cheatsheet for how to present and submit your tabular data to P45DC. This guide provides support at multiple points throughout your data journey, whether you are actively making data decisions or have already collected, curated, and documented your data. Though our guidelines are targeted to the latter-end of the dataset lifecycle (specifically storage, publication, and reusability), they will also be helpful for making critical decisions well in advance of submitting to P45DC.
 
@@ -68,7 +68,7 @@ At the Post45 Data Collective, we aim to make humanities research data accessibl
 
 ---
 
-# <font color="midnightblue">**General Tips & Suggestions** </font>{#general-tips-suggestions}
+# **General Tips & Suggestions**{#general-tips-suggestions}
 
 We recommend the following basic best practices for preparing your dataset.
 
@@ -127,7 +127,7 @@ Be attentive to **licensing requirements** that might vary based on the accessib
 
 ---
 
-# <font color="midnightblue">**Files & File Organization**</font>{#files-file-organization}
+# **Files & File Organization**{#files-file-organization}
 
 ## File Formats{#file-formats}
 
@@ -206,7 +206,7 @@ Does your submission include multiple linked datasets? For instance, “[The Ind
 
 ---
 
-# <font color="midnightblue">**Data Structure**</font>{#data-structure}
+# **Data Structure**{#data-structure}
 
 ## Scope{#scope}
 
@@ -292,7 +292,7 @@ For clarity, you may also consider supplementing your volume-level HathiTrust da
 
 ---
 
-# <font color="midnightblue">**Data Types**</font>{#data-types}
+# **Data Types**{#data-types}
 
 The following standards for formatting entries in your dataset will ensure that your data is sortable, machine-readable, and easily parsable for human readers. In all cases, column names may be duplicated serially for the purposes of multiple entries (e.g. genre1, genre 2, genre3) (see: [Data Structure](#data-structure)).
 
@@ -551,7 +551,7 @@ Depending on the scope and type of data in your dataset, you may require some fi
 
 ---
 
-# <font color="midnightblue">**Acknowledgements**</font>
+# **Acknowledgements**
 
 This data style guide draws language, information, and inspiration from the [C19 Data Collective Data Documentation guide](https://c19datacollective.com/criteria/data-documentation/){.external target="_blank"} and [Humanities Data Preparation Guide](https://doi.org/10.17605/OSF.IO/C9N5K){.external target="_blank"}, as well as the [Digital Curation Network](https://datacuration.network/){.external target="_blank"}. Enormous thanks in particular to Sarah E. Reiff Conell, Research Data Management Specialist at Princeton University Library, for her gracious guidance, support, and permissions.
 
