@@ -276,7 +276,7 @@ External vocabularies and authorities provide accessible language, curated by ex
 
 > **Example**: *Wikidata entry for Prince*
 
-When incorporating an external vocabulary entry, make sure to include **BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution** (“n84079379” in the LoC example above or “Q7542” for Wikidata). No need to look these up manually — we strongly recommend using our own tool, **BookReconciler**, to add identifiers in bulk.
+When incorporating an external vocabulary entry, make sure to include **BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution** (“n84079379” in the LoC example above or “Q7542” for Wikidata). You can look these up manually, one record at a time, by searching each authority's website — or, if you have more than a handful of records, you can let our own tool, **BookReconciler**, match them automatically in bulk.
 
 ::: {.callout-tip appearance="default"}
 ## **Recommended: Use BookReconciler to add identifiers**
