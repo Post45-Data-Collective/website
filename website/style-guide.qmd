@@ -51,7 +51,7 @@ At the Post45 Data Collective, we aim to make humanities research data accessibl
 
 * [OpenRefine](https://openrefine.org/){.external target="_blank"} 
   * [“Cleaning Data with Open Refine"](https://programminghistorian.org/en/lessons/cleaning-data-with-openrefine){.external target="_blank"} 
-  * [Post45DC OpenRefine Reconciliation Service](https://data.post45.org/our-tools.html){.external target="_blank"} 
+  * [BookReconciler 📘💎](https://data.post45.org/our-tools.html){.external target="_blank"}
 * [Breve](https://hdlab.stanford.edu/breve/){.external target="_blank"} 
 * [Tidyr](https://tidyr.tidyverse.org/articles/tidy-data.html){.external target="_blank"} (tidyverse suite of tools for R) 
 * [Visidata](https://www.visidata.org/){.external target="_blank"} 
