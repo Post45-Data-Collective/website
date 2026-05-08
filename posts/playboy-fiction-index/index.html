@@ -256,40 +256,88 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <!-- # 1. Title of dataset 1 -->
 <section id="data-table" class="level1">
 <h1>Data Table</h1>
-<div id="year-slider-wrap" style="margin: 1em 0; padding: 0.75em 1em; border: 1px solid #ddd; border-radius: 4px; background: #fafafa;">
-  <div><strong>Filter by year:</strong> <span id="year-slider-label" style="font-weight: 600;">1953 – 2020</span></div>
-  <div style="display: flex; align-items: center; gap: 0.5em; margin-top: 0.5em;">
-    <span style="font-size: 0.85em; color: #666; min-width: 3em; text-align: right;">1953</span>
-    <div style="position: relative; flex: 1; height: 30px;">
-      <div id="year-slider-track" style="position: absolute; top: 13px; left: 0; right: 0; height: 4px; background: #ddd; border-radius: 2px;"></div>
-      <div id="year-slider-range" style="position: absolute; top: 13px; height: 4px; background: #c8102e; border-radius: 2px; left: 0; right: 0;"></div>
-      <input id="year-slider-min" type="range" min="1953" max="2020" value="1953" step="1" style="position: absolute; width: 100%; pointer-events: none; -webkit-appearance: none; appearance: none; background: transparent; height: 30px; top: 0;">
-      <input id="year-slider-max" type="range" min="1953" max="2020" value="2020" step="1" style="position: absolute; width: 100%; pointer-events: none; -webkit-appearance: none; appearance: none; background: transparent; height: 30px; top: 0;">
-    </div>
-    <span style="font-size: 0.85em; color: #666; min-width: 3em;">2020</span>
-  </div>
-</div>
-
 <style>
-#year-slider-wrap input[type="range"] { background: transparent; }
-#year-slider-wrap input[type="range"]::-webkit-slider-thumb {
+.year-range-filter {
+  position: relative;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+.year-range-filter .yrf-label {
+  font-size: 11px;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: 0;
+}
+.year-range-filter .yrf-track-wrap {
+  position: relative;
+  height: 18px;
+}
+.year-range-filter .yrf-track {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ccc;
+  border-radius: 2px;
+}
+.year-range-filter .yrf-range {
+  position: absolute;
+  top: 8px;
+  height: 3px;
+  background: #c8102e;
+  border-radius: 2px;
+}
+.year-range-filter input[type="range"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 18px;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: none;
+  margin: 0;
+}
+.year-range-filter input[type="range"]::-webkit-slider-runnable-track {
+  height: 3px;
+  background: transparent;
+}
+.year-range-filter input[type="range"]::-moz-range-track {
+  height: 3px;
+  background: transparent;
+}
+.year-range-filter input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
   pointer-events: auto;
-  -webkit-appearance: none; appearance: none;
-  height: 18px; width: 18px; border-radius: 50%;
-  background: #c8102e; border: 2px solid white; cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: #c8102e;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   margin-top: -6px;
 }
-#year-slider-wrap input[type="range"]::-moz-range-thumb {
+.year-range-filter input[type="range"]::-moz-range-thumb {
   pointer-events: auto;
-  height: 18px; width: 18px; border-radius: 50%;
-  background: #c8102e; border: 2px solid white; cursor: pointer;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: #c8102e;
+  border: 2px solid white;
+  cursor: pointer;
 }
-#year-slider-wrap input[type="range"]::-webkit-slider-runnable-track {
-  height: 4px; background: transparent; border-radius: 2px;
-}
-#year-slider-wrap input[type="range"]::-moz-range-track {
-  height: 4px; background: transparent; border-radius: 2px;
+/* Give the year column header filter a bit more vertical breathing room */
+#table-container-playboy .tabulator-col[tabulator-field="year"] .tabulator-header-filter {
+  padding: 4px 2px;
+  height: auto;
 }
 #playboy-table-status { font-size: 0.85em; color: #666; margin-top: 0.5em; }
 </style>
@@ -348,11 +396,71 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
     });
   }
 
+  // Custom header filter editor: dual-handle range slider for the year column.
+  // success(value) is called with {min, max}; the matching headerFilterFunc
+  // below decides whether each row passes.
+  function yearRangeFilterEditor(cell, onRendered, success, cancel, editorParams) {
+    var wrap = document.createElement('div');
+    wrap.className = 'year-range-filter';
+    wrap.innerHTML =
+      '<div class="yrf-label"><span class="yrf-lo">' + YEAR_MIN + '</span> – <span class="yrf-hi">' + YEAR_MAX + '</span></div>' +
+      '<div class="yrf-track-wrap">' +
+        '<div class="yrf-track"></div>' +
+        '<div class="yrf-range"></div>' +
+        '<input type="range" class="yrf-min" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" value="' + YEAR_MIN + '" step="1">' +
+        '<input type="range" class="yrf-max" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" value="' + YEAR_MAX + '" step="1">' +
+      '</div>';
+    var minIn = wrap.querySelector('.yrf-min');
+    var maxIn = wrap.querySelector('.yrf-max');
+    var loLabel = wrap.querySelector('.yrf-lo');
+    var hiLabel = wrap.querySelector('.yrf-hi');
+    var rangeBar = wrap.querySelector('.yrf-range');
+
+    function paint(lo, hi) {
+      var span = YEAR_MAX - YEAR_MIN;
+      rangeBar.style.left = ((lo - YEAR_MIN) / span * 100) + '%';
+      rangeBar.style.right = ((YEAR_MAX - hi) / span * 100) + '%';
+      loLabel.textContent = lo;
+      hiLabel.textContent = hi;
+    }
+
+    function fire(e) {
+      var lo = parseInt(minIn.value, 10);
+      var hi = parseInt(maxIn.value, 10);
+      // Prevent thumbs from crossing — push the other one along
+      if (e && e.target === minIn && lo > hi) { hi = lo; maxIn.value = hi; }
+      if (e && e.target === maxIn && hi < lo) { lo = hi; minIn.value = lo; }
+      paint(lo, hi);
+      success({ min: lo, max: hi });
+    }
+
+    minIn.addEventListener('input', fire);
+    maxIn.addEventListener('input', fire);
+    // Don't let click/mousedown bubble up to Tabulator (which would trigger sort)
+    wrap.addEventListener('mousedown', function(e) { e.stopPropagation(); });
+    wrap.addEventListener('click', function(e) { e.stopPropagation(); });
+
+    paint(YEAR_MIN, YEAR_MAX);
+    return wrap;
+  }
+
+  function yearRangeFilterFunc(headerValue, rowValue, rowData, filterParams) {
+    if (!headerValue) return true;
+    var y = parseInt(rowValue, 10);
+    if (isNaN(y)) return false;
+    return y >= headerValue.min && y <= headerValue.max;
+  }
+
   function buildTable(data) {
     var COLS = [
       { title: "unique_id",         field: "unique_id",         headerFilter: "input", sorter: "number", width: 100 },
       { title: "publication_date",  field: "publication_date",  headerFilter: "input", width: 130 },
-      { title: "year",              field: "year",              headerFilter: "input", sorter: "number", width: 80 },
+      {
+        title: "year", field: "year", sorter: "number", width: 220, minWidth: 220,
+        headerFilter: yearRangeFilterEditor,
+        headerFilterFunc: yearRangeFilterFunc,
+        headerFilterLiveFilter: false,
+      },
       { title: "title",             field: "title",             headerFilter: "input", widthGrow: 2 },
       { title: "section",           field: "section",           headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 130 },
       { title: "author_name",       field: "author_name",       headerFilter: "input" },
@@ -377,37 +485,6 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
       initialSort: [{ column: "unique_id", dir: "asc" }],
     });
     return table;
-  }
-
-  function setupSlider(table) {
-    var minSlider = document.getElementById('year-slider-min');
-    var maxSlider = document.getElementById('year-slider-max');
-    var label = document.getElementById('year-slider-label');
-    var rangeBar = document.getElementById('year-slider-range');
-    if (!minSlider || !maxSlider) return;
-
-    function clamp(v) { return Math.max(YEAR_MIN, Math.min(YEAR_MAX, v)); }
-    function paintRange(lo, hi) {
-      var span = YEAR_MAX - YEAR_MIN;
-      var leftPct = ((lo - YEAR_MIN) / span) * 100;
-      var rightPct = ((YEAR_MAX - hi) / span) * 100;
-      rangeBar.style.left = leftPct + '%';
-      rangeBar.style.right = rightPct + '%';
-    }
-    function applyFilter() {
-      var lo = clamp(parseInt(minSlider.value, 10));
-      var hi = clamp(parseInt(maxSlider.value, 10));
-      if (lo > hi) { if (this === minSlider) { hi = lo; maxSlider.value = hi; } else { lo = hi; minSlider.value = lo; } }
-      label.textContent = lo + ' – ' + hi;
-      paintRange(lo, hi);
-      table.setFilter([
-        { field: "year", type: ">=", value: lo },
-        { field: "year", type: "<=", value: hi },
-      ]);
-    }
-    minSlider.addEventListener('input', applyFilter);
-    maxSlider.addEventListener('input', applyFilter);
-    paintRange(YEAR_MIN, YEAR_MAX);
   }
 
   function setupDownloads(table) {
@@ -448,11 +525,10 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
         status.textContent = data.length + ' stories loaded.';
         var table = buildTable(data);
         table.on('tableBuilt', function() {
-          setupSlider(table);
           setupDownloads(table);
         });
         // Fallback in case tableBuilt has already fired.
-        setTimeout(function() { setupSlider(table); setupDownloads(table); }, 800);
+        setTimeout(function() { setupDownloads(table); }, 800);
       })
       .catch(function(err) {
         status.textContent = 'Failed to load data: ' + err;
