@@ -19,8 +19,12 @@ website:
   
   navbar:
     right:
-      - our-data.qmd
-      - our-tools.qmd
+      - text: "Data"
+        href: our-data.qmd
+      - text: "Tools"
+        href: our-tools.qmd
+      - text: "Style Guide"
+        href: style-guide.qmd
       - submissions.qmd
       - people.qmd
       - about.qmd

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nora Shaalan">
-<meta name="dcterms.date" content="2026-04-29">
+<meta name="dcterms.date" content="2026-05-11">
 
 <title>The Playboy Fiction Index – Post45 Data Collective</title>
 <style>
@@ -152,10 +152,10 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <meta name="citation_editor" content="Alexander Manshel">
 <meta name="citation_editor" content="J.D. Porter">
 <meta name="citation_editor" content="Melanie Walsh">
-<meta name="citation_publication_date" content="2026-04-29">
-<meta name="citation_cover_date" content="2026-04-29">
+<meta name="citation_publication_date" content="2026-05-11">
+<meta name="citation_cover_date" content="2026-05-11">
 <meta name="citation_year" content="2026">
-<meta name="citation_online_date" content="2026-04-29">
+<meta name="citation_online_date" content="2026-05-11">
 <meta name="citation_fulltext_html_url" content="https://data.post45.org/posts/playboy-fiction-index">
 <meta name="citation_doi" content="10.18737/552627">
 <meta name="citation_language" content="en">
@@ -187,11 +187,15 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../our-data.html"> 
-<span class="menu-text">Our Data</span></a>
+<span class="menu-text">Data</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../our-tools.html"> 
-<span class="menu-text">Our Tools</span></a>
+<span class="menu-text">Tools</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../style-guide.html"> 
+<span class="menu-text">Style Guide</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../submissions.html"> 
@@ -230,6 +234,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
    
   <ul>
   <li><a href="#data-table" id="toc-data-table" class="nav-link active" data-scroll-target="#data-table">Data Table</a></li>
+  <li><a href="#top-authors" id="toc-top-authors" class="nav-link" data-scroll-target="#top-authors">Top Authors</a></li>
   <li><a href="#significance-context" id="toc-significance-context" class="nav-link" data-scroll-target="#significance-context"><strong>Significance &amp; Context</strong></a></li>
   <li><a href="#collection-and-creation" id="toc-collection-and-creation" class="nav-link" data-scroll-target="#collection-and-creation"><strong>Collection and Creation</strong></a></li>
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description"><strong>Description</strong></a></li>
@@ -273,7 +278,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 29, 2026</p>
+      <p class="date">May 11, 2026</p>
     </div>
   </div>
   
@@ -302,7 +307,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a8/PlayboyLogo.svg/500px-PlayboyLogo.svg.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption>Playboy logo c1960s-70s.</figcaption>
+<figcaption>Playboy logo.</figcaption>
 </figure>
 </div>
 <!-- Include brief introduction to/description of data essay  -->
@@ -382,6 +387,99 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 
 </div>
 </div>
+</section>
+<section id="top-authors" class="level1">
+<h1>Top Authors</h1>
+<div id="top-authors-controls" style="margin: 0.75em 0; display: flex; align-items: center; gap: 1em;">
+  <label for="top-authors-n" style="font-weight: 600;">Number of authors to show:</label>
+  <input id="top-authors-n" type="range" min="5" max="50" value="25" step="1" style="flex: 1; max-width: 360px;">
+  <span id="top-authors-n-display" style="font-variant-numeric: tabular-nums; min-width: 2em;">25</span>
+</div>
+
+<div id="top-authors-chart" style="margin: 0.5em 0;"></div>
+
+<script>
+(function() {
+  const DATA_URL = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv";
+
+  function parseCSV(text) {
+    const rows = [];
+    let row = [], field = "", inQuotes = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (inQuotes) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { field += '"'; i++; } else { inQuotes = false; }
+        } else { field += c; }
+      } else {
+        if (c === '"') inQuotes = true;
+        else if (c === ',') { row.push(field); field = ""; }
+        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ""; }
+        else if (c !== '\r') { field += c; }
+      }
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    const header = rows.shift();
+    return rows.filter(r => r.length === header.length).map(r => {
+      const o = {};
+      header.forEach((h, idx) => o[h] = r[idx]);
+      return o;
+    });
+  }
+
+  function tally(data) {
+    const counts = new Map();
+    for (const d of data) {
+      const a = d.author_name;
+      if (!a || a === "N/A") continue;
+      counts.set(a, (counts.get(a) || 0) + 1);
+    }
+    return Array.from(counts.entries())
+      .map(([author, n]) => ({ author, count: n }))
+      .sort((a, b) => b.count - a.count);
+  }
+
+  function render(top) {
+    const wrap = document.getElementById("top-authors-chart");
+    if (!wrap) return;
+    const max = top.length ? top[0].count : 0;
+    const labelW = 220;
+    const html = top.map(d => {
+      const w = max ? (d.count / max) * 100 : 0;
+      return `
+        <div style="display:flex; align-items:center; gap:8px; padding:2px 0; font-size:13px;">
+          <div style="flex:0 0 ${labelW}px; text-align:right; padding-right:8px; color:#222; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${d.author}">${d.author}</div>
+          <div style="flex:1; background:#f0f0f0; height:14px; position:relative;">
+            <div style="position:absolute; left:0; top:0; bottom:0; width:${w}%; background:gold;"></div>
+          </div>
+          <div style="flex:0 0 50px; font-variant-numeric:tabular-nums; color:#444;">${d.count.toLocaleString()}</div>
+        </div>`;
+    }).join("");
+    wrap.innerHTML = html + `<div style="margin-top:0.5em; color:#888; font-size:12px;">x-axis: number of stories</div>`;
+  }
+
+  let cached = null;
+  function update() {
+    if (!cached) return;
+    const n = parseInt(document.getElementById("top-authors-n").value, 10);
+    document.getElementById("top-authors-n-display").textContent = n;
+    render(cached.slice(0, n));
+  }
+
+  fetch(DATA_URL)
+    .then(r => r.text())
+    .then(text => {
+      cached = tally(parseCSV(text));
+      const slider = document.getElementById("top-authors-n");
+      if (slider) slider.addEventListener("input", update);
+      update();
+    })
+    .catch(err => {
+      const wrap = document.getElementById("top-authors-chart");
+      if (wrap) wrap.textContent = "Failed to load data: " + err;
+    });
+})();
+</script>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -504,7 +602,7 @@ Turner, Alice K., and Bob Shacochis. <span>“An <span>Interview</span> with <sp
   editor = {Manshel, Alexander and Porter, J.D. and Walsh, Melanie},
   title = {The {*Playboy*} {Fiction} {Index}},
   journal = {Post45 Data Collective},
-  date = {2026-04-29},
+  date = {2026-05-11},
   url = {https://data.post45.org/posts/playboy-fiction-index},
   doi = {10.18737/552627},
   langid = {en},
@@ -514,7 +612,7 @@ Turner, Alice K., and Bob Shacochis. <span>“An <span>Interview</span> with <sp
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-shaalan2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Shaalan, Nora. <span>“The *Playboy* Fiction Index.”</span> <em>Post45
-Data Collective</em>, edited by Alexander Manshel et al., Apr. 2026, <a href="https://doi.org/10.18737/552627">https://doi.org/10.18737/552627</a>.
+Data Collective</em>, edited by Alexander Manshel et al., May 2026, <a href="https://doi.org/10.18737/552627">https://doi.org/10.18737/552627</a>.
 </div></div></section></div></main> <!-- /main -->
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7dmlld29mIGRhdGFTdW1tYXJ5VmlldywgVGFidWxhdG9yLCB2aWV3b2Ygc2VsZWN0ZWRDb2x1bW5zLCB2aWV3b2YgZGF0YVNldCwgdGFibGVDb250YWluZXIsIGZldGNoRGF0YSwgZ2VuZXJhdGVUYWJ1bGF0b3JUYWJsZUZyb21DU1YsIHByb2dyZXNzLCBwcm9ncmVzc2Jhcn0gZnJvbSBcIjhiYjYzYTZjZGU5YWRkZmZcIlxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoicmF3X2RhdGEgPSBmZXRjaERhdGEoXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vUG9zdDQ1LURhdGEtQ29sbGVjdGl2ZS9kYXRhL3JlZnMvaGVhZHMvbWFpbi9wbGF5Ym95X2ZpY3Rpb25faW5kZXgvcGxheWJveS1maWN0aW9uLWluZGV4LW1ldGFkYXRhXzIwMjYwNDE1LmNzdlwiKVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG5nZW5lcmF0ZVRhYnVsYXRvclRhYmxlRnJvbUNTVihcbiAgXCIjdGFibGUtY29udGFpbmVyLXBsYXlib3lcIixcbiAgXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vUG9zdDQ1LURhdGEtQ29sbGVjdGl2ZS9kYXRhL3JlZnMvaGVhZHMvbWFpbi9wbGF5Ym95X2ZpY3Rpb25faW5kZXgvcGxheWJveS1maWN0aW9uLWluZGV4LW1ldGFkYXRhXzIwMjYwNDE1LmNzdlwiLFxuICB7XG4gICAgZGlzcGxheWVkQ29sdW1uczogW1widW5pcXVlX2lkXCIsIFwicHVibGljYXRpb25fZGF0ZVwiLCBcInllYXJcIiwgXCJhdXRob3JfbmFtZVwiLFxuICAgICAgICAgICAgICAgICAgICAgICBcInRpdGxlXCIsIFwic2VjdGlvblwiLCBcImxhc3RfbmFtZVwiLCBcImZpcnN0X25hbWVcIiwgXCJhdXRob3JfZ2VuZGVyXCIsXG4gICAgICAgICAgICAgICAgICAgICAgIFwiYXV0aG9yX25lYVwiLCBcImF1dGhvcl9iZXN0c2VsbGVyXCIsIFwiYXV0aG9yX3ByaXplXCIsIFwiYXV0aG9yX2lvd2FcIl0sXG4gICAgY29sdW1uUG9wdXBzOiBbXG4gICAgICBcIlVuaXF1ZSBpZGVudGlmaWVyIGZvciBlYWNoIHNob3J0IHN0b3J5IGluIHRoZSBpbmRleFwiLFxuICAgICAgXCJNYWdhemluZSBpc3N1ZSBkYXRlIChNTS9ERC9ZWVlZKVwiLFxuICAgICAgXCJZZWFyIG9mIHRoZSBtYWdhemluZSBpc3N1ZSAoZXh0cmFjdGVkIGZyb20gcHVibGljYXRpb25fZGF0ZSlcIixcbiAgICAgIFwiQXV0aG9yIG5hbWU7IHN0YW5kYXJkaXplZCBzcGVsbGluZyBhbmQgbWlkZGxlIGluaXRpYWxzXCIsXG4gICAgICBcIlN0b3J5IHRpdGxlOyB0aXRsZSBjYXNlIGFwcGxpZWRcIixcbiAgICAgIFwiU2VjdGlvbiBvZiB0aGUgbWFnYXppbmUgaW4gd2hpY2ggdGhlIHN0b3J5IGFwcGVhcmVkXCIsXG4gICAgICBcIkF1dGhvciBsYXN0IG5hbWVcIixcbiAgICAgIFwiQXV0aG9yIGZpcnN0IG5hbWUgKGluY2x1ZGluZyBtaWRkbGUgbmFtZSlcIixcbiAgICAgIFwiQXV0aG9yIGdlbmRlciAoTS9GKTsgTi9BIGZvciBjby1hdXRob3JlZCBvciB1bnZlcmlmaWVkXCIsXG4gICAgICBcIk5FQSBDcmVhdGl2ZSBXcml0aW5nIEZlbGxvd3NoaXAgcmVjaXBpZW50ICh5ZXMvbm8pXCIsXG4gICAgICBcIk5ldyBZb3JrIFRpbWVzIGJlc3RzZWxsZXIgbGlzdCBhdXRob3IgKHllcy9ubylcIixcbiAgICAgIFwiTWFqb3IgbGl0ZXJhcnkgcHJpemUgcmVjaXBpZW50ICh5ZXMvbm8pXCIsXG4gICAgICBcIklvd2EgV3JpdGVycycgV29ya3Nob3AgTUZBIGhvbGRlciAoeWVzL25vKVwiXG4gICAgXSxcbiAgICByYW5nZVNsaWRlckNvbHVtbnM6IFtcInllYXJcIl0sXG4gICAgZGF0ZVNsaWRlckNvbHVtbnM6IFtcInB1YmxpY2F0aW9uX2RhdGVcIl0sXG4gICAgY2F0ZWdvcnlDb2x1bW5zOiBbXCJzZWN0aW9uXCIsIFwiYXV0aG9yX2dlbmRlclwiLCBcImF1dGhvcl9uZWFcIiwgXCJhdXRob3JfYmVzdHNlbGxlclwiLCBcImF1dGhvcl9wcml6ZVwiLCBcImF1dGhvcl9pb3dhXCJdLFxuICAgIHNvcnRDb2x1bW5zOiBbXCJ1bmlxdWVfaWRcIl0sXG4gICAgc29ydE9yZGVyczogW1wiYXNjXCJdLFxuICAgIGJ1dHRvbkNvbnRhaW5lcklkOiBcIiNidXR0b24tY29udGFpbmVyLXBsYXlib3lcIixcbiAgICByYXdCdXR0b25JZDogXCIjZG93bmxvYWQtcmF3LXBsYXlib3lcIixcbiAgICB1cmxDb3B5QnV0dG9uSWQ6IFwiI2NvcHktdXJsLXBsYXlib3lcIixcbiAgfVxuKTtcbiJ9XX0=
