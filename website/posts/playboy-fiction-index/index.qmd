@@ -133,97 +133,39 @@ Download Table Data (including filtered options)
 
 # Top Authors
 
-```{=html}
-<div id="top-authors-controls" style="margin: 0.75em 0; display: flex; align-items: center; gap: 1em;">
-  <label for="top-authors-n" style="font-weight: 600;">Number of authors to show:</label>
-  <input id="top-authors-n" type="range" min="5" max="50" value="25" step="1" style="flex: 1; max-width: 360px;">
-  <span id="top-authors-n-display" style="font-variant-numeric: tabular-nums; min-width: 2em;">25</span>
-</div>
+```{ojs}
+//| echo: false
+viewof topN = Inputs.range([5, 50], { value: 25, step: 1, label: "Number of authors to show:" })
+```
 
-<div id="top-authors-chart" style="margin: 0.5em 0;"></div>
-
-<script>
-(function() {
-  const DATA_URL = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv";
-
-  function parseCSV(text) {
-    const rows = [];
-    let row = [], field = "", inQuotes = false;
-    for (let i = 0; i < text.length; i++) {
-      const c = text[i];
-      if (inQuotes) {
-        if (c === '"') {
-          if (text[i + 1] === '"') { field += '"'; i++; } else { inQuotes = false; }
-        } else { field += c; }
-      } else {
-        if (c === '"') inQuotes = true;
-        else if (c === ',') { row.push(field); field = ""; }
-        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ""; }
-        else if (c !== '\r') { field += c; }
-      }
-    }
-    if (field.length || row.length) { row.push(field); rows.push(row); }
-    const header = rows.shift();
-    return rows.filter(r => r.length === header.length).map(r => {
-      const o = {};
-      header.forEach((h, idx) => o[h] = r[idx]);
-      return o;
-    });
-  }
-
-  function tally(data) {
-    const counts = new Map();
-    for (const d of data) {
-      const a = d.author_name;
-      if (!a || a === "N/A") continue;
-      counts.set(a, (counts.get(a) || 0) + 1);
-    }
-    return Array.from(counts.entries())
-      .map(([author, n]) => ({ author, count: n }))
-      .sort((a, b) => b.count - a.count);
-  }
-
-  function render(top) {
-    const wrap = document.getElementById("top-authors-chart");
-    if (!wrap) return;
-    const max = top.length ? top[0].count : 0;
-    const labelW = 220;
-    const html = top.map(d => {
-      const w = max ? (d.count / max) * 100 : 0;
-      return `
-        <div style="display:flex; align-items:center; gap:8px; padding:2px 0; font-size:13px;">
-          <div style="flex:0 0 ${labelW}px; text-align:right; padding-right:8px; color:#222; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${d.author}">${d.author}</div>
-          <div style="flex:1; background:#f0f0f0; height:14px; position:relative;">
-            <div style="position:absolute; left:0; top:0; bottom:0; width:${w}%; background:gold;"></div>
-          </div>
-          <div style="flex:0 0 50px; font-variant-numeric:tabular-nums; color:#444;">${d.count.toLocaleString()}</div>
-        </div>`;
-    }).join("");
-    wrap.innerHTML = html + `<div style="margin-top:0.5em; color:#888; font-size:12px;">x-axis: number of stories</div>`;
-  }
-
-  let cached = null;
-  function update() {
-    if (!cached) return;
-    const n = parseInt(document.getElementById("top-authors-n").value, 10);
-    document.getElementById("top-authors-n-display").textContent = n;
-    render(cached.slice(0, n));
-  }
-
-  fetch(DATA_URL)
-    .then(r => r.text())
-    .then(text => {
-      cached = tally(parseCSV(text));
-      const slider = document.getElementById("top-authors-n");
-      if (slider) slider.addEventListener("input", update);
-      update();
-    })
-    .catch(err => {
-      const wrap = document.getElementById("top-authors-chart");
-      if (wrap) wrap.textContent = "Failed to load data: " + err;
-    });
-})();
-</script>
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 220,
+  height: topN * 20 + 60,
+  x: { label: "Number of stories" },
+  y: { label: null },
+  marks: [
+    Plot.barX(
+      raw_data.filter(
+        (d) =>
+          d.author_name != null &&
+          d.author_name !== "" &&
+          d.author_name !== "N/A"
+      ),
+      Plot.groupY(
+        { x: "count" },
+        {
+          y: "author_name",
+          tip: true,
+          fill: "gold",
+          sort: { y: "x", reverse: true, limit: topN }
+        }
+      )
+    ),
+    Plot.ruleX([0])
+  ]
+})
 ```
 
 ::: {.callout-tip icon="false"}
