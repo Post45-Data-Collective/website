@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -82,10 +117,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </script>
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">
-<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>
-<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -256,292 +290,78 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <!-- # 1. Title of dataset 1 -->
 <section id="data-table" class="level1">
 <h1>Data Table</h1>
-<style>
-.year-range-filter {
-  position: relative;
-  width: 100%;
-  padding: 0 10px;
-  box-sizing: border-box;
-  font-family: inherit;
-}
-.year-range-filter .yrf-label {
-  font-size: 11px;
-  color: #fff;
-  text-align: center;
-  font-weight: 600;
-  margin-bottom: 4px;
-  letter-spacing: 0;
-}
-.year-range-filter .yrf-track-wrap {
-  position: relative;
-  height: 18px;
-}
-.year-range-filter .yrf-track {
-  position: absolute;
-  top: 8px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: #ccc;
-  border-radius: 2px;
-}
-.year-range-filter .yrf-range {
-  position: absolute;
-  top: 8px;
-  height: 3px;
-  background: #c8102e;
-  border-radius: 2px;
-}
-.year-range-filter input[type="range"] {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 18px;
-  background: transparent;
-  -webkit-appearance: none;
-  appearance: none;
-  pointer-events: none;
-  margin: 0;
-}
-.year-range-filter input[type="range"]::-webkit-slider-runnable-track {
-  height: 3px;
-  background: transparent;
-}
-.year-range-filter input[type="range"]::-moz-range-track {
-  height: 3px;
-  background: transparent;
-}
-.year-range-filter input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  pointer-events: auto;
-  height: 14px;
-  width: 14px;
-  border-radius: 50%;
-  background: #c8102e;
-  border: 2px solid white;
-  cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  margin-top: -6px;
-}
-.year-range-filter input[type="range"]::-moz-range-thumb {
-  pointer-events: auto;
-  height: 14px;
-  width: 14px;
-  border-radius: 50%;
-  background: #c8102e;
-  border: 2px solid white;
-  cursor: pointer;
-}
-/* Give the year column header filter a bit more vertical breathing room */
-#table-container-playboy .tabulator-col[tabulator-field="year"] .tabulator-header-filter {
-  padding: 4px 2px;
-  height: auto;
-}
-#playboy-table-status { font-size: 0.85em; color: #666; margin-top: 0.5em; }
-</style>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="63" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof dataSummaryView<span class="op">,</span> Tabulator<span class="op">,</span> viewof selectedColumns<span class="op">,</span> viewof dataSet<span class="op">,</span> tableContainer<span class="op">,</span> fetchData<span class="op">,</span> generateTabulatorTableFromCSV<span class="op">,</span> progress<span class="op">,</span> progressbar} <span class="im">from</span> <span class="st">"8bb63a6cde9addff"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-1" data-nodetype="declaration">
 
-<div id="table-container-playboy" style="height: 600px"></div>
-<div id="playboy-table-status">Loading data…</div>
-
-<div style="margin-top: 1em;">
-  <strong>Download Full Data (including hidden columns)</strong>
-  <div style="margin: 0.25em 0;">
-    <button id="download-raw-playboy"><i class="fas fa-download"></i> Download Full Data</button>
-    <button id="copy-url-playboy"><i class="fas fa-copy"></i> Copy Full Data URL</button>
-  </div>
-  <strong>Download Table Data (currently filtered rows / visible columns)</strong>
-  <div id="button-container-playboy" style="margin: 0.25em 0;">
-    <button id="download-csv-playboy"><i class="fas fa-download"></i> Download CSV</button>
-    <button id="download-json-playboy"><i class="fas fa-download"></i> Download JSON</button>
-    <button id="download-xlsx-playboy"><i class="fas fa-download"></i> Download Excel</button>
-  </div>
 </div>
+</div>
+</div>
+<div class="cell hidden">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="69" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 68;"><span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> <span class="fu">fetchData</span>(<span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display hidden">
+<div id="ojs-cell-2" data-nodetype="declaration">
 
-<script>
-(function() {
-  var DATA_URL = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv";
-  var YEAR_MIN = 1953;
-  var YEAR_MAX = 2020;
+</div>
+</div>
+</div>
+<div class="cell hidden">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="75" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 74;"><span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="fu">generateTabulatorTableFromCSV</span>(</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#table-container-playboy"</span><span class="op">,</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv"</span><span class="op">,</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    <span class="dt">displayedColumns</span><span class="op">:</span> [<span class="st">"unique_id"</span><span class="op">,</span> <span class="st">"publication_date"</span><span class="op">,</span> <span class="st">"year"</span><span class="op">,</span> <span class="st">"title"</span><span class="op">,</span> <span class="st">"section"</span><span class="op">,</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"author_name"</span><span class="op">,</span> <span class="st">"last_name"</span><span class="op">,</span> <span class="st">"first_name"</span><span class="op">,</span> <span class="st">"author_gender"</span><span class="op">,</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"author_nea"</span><span class="op">,</span> <span class="st">"author_bestseller"</span><span class="op">,</span> <span class="st">"author_prize"</span><span class="op">,</span> <span class="st">"author_iowa"</span>]<span class="op">,</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnPopups</span><span class="op">:</span> [</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Unique identifier for each short story in the index"</span><span class="op">,</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Magazine issue date (MM/DD/YYYY)"</span><span class="op">,</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Year of the magazine issue (extracted from publication_date)"</span><span class="op">,</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Story title; title case applied"</span><span class="op">,</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Section of the magazine in which the story appeared"</span><span class="op">,</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Author name; standardized spelling and middle initials"</span><span class="op">,</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Author last name"</span><span class="op">,</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Author first name (including middle name)"</span><span class="op">,</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Author gender (M/F); N/A for co-authored or unverified"</span><span class="op">,</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>      <span class="st">"NEA Creative Writing Fellowship recipient (yes/no)"</span><span class="op">,</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>      <span class="st">"New York Times bestseller list author (yes/no)"</span><span class="op">,</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Major literary prize recipient (yes/no)"</span><span class="op">,</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Iowa Writers' Workshop MFA holder (yes/no)"</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rangeSliderColumns</span><span class="op">:</span> [<span class="st">"year"</span>]<span class="op">,</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>    <span class="dt">dateSliderColumns</span><span class="op">:</span> [<span class="st">"publication_date"</span>]<span class="op">,</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>    <span class="dt">categoryColumns</span><span class="op">:</span> [<span class="st">"section"</span><span class="op">,</span> <span class="st">"author_gender"</span><span class="op">,</span> <span class="st">"author_nea"</span><span class="op">,</span> <span class="st">"author_bestseller"</span><span class="op">,</span> <span class="st">"author_prize"</span><span class="op">,</span> <span class="st">"author_iowa"</span>]<span class="op">,</span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortColumns</span><span class="op">:</span> [<span class="st">"unique_id"</span>]<span class="op">,</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortOrders</span><span class="op">:</span> [<span class="st">"asc"</span>]<span class="op">,</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>    <span class="dt">buttonContainerId</span><span class="op">:</span> <span class="st">"#button-container-playboy"</span><span class="op">,</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rawButtonId</span><span class="op">:</span> <span class="st">"#download-raw-playboy"</span><span class="op">,</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>    <span class="dt">urlCopyButtonId</span><span class="op">:</span> <span class="st">"#copy-url-playboy"</span><span class="op">,</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display hidden">
+<div id="ojs-cell-3" data-nodetype="expression">
 
-  // Lightweight CSV parser handling quoted values + commas in quotes.
-  function parseCSV(text) {
-    var rows = [];
-    var row = [];
-    var field = '';
-    var inQuotes = false;
-    for (var i = 0; i < text.length; i++) {
-      var c = text[i];
-      if (inQuotes) {
-        if (c === '"') {
-          if (text[i+1] === '"') { field += '"'; i++; } else { inQuotes = false; }
-        } else {
-          field += c;
-        }
-      } else {
-        if (c === '"') { inQuotes = true; }
-        else if (c === ',') { row.push(field); field = ''; }
-        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
-        else if (c === '\r') { /* skip */ }
-        else { field += c; }
-      }
-    }
-    if (field.length || row.length) { row.push(field); rows.push(row); }
-    var header = rows.shift();
-    return rows.filter(function(r) { return r.length === header.length; }).map(function(r) {
-      var obj = {};
-      header.forEach(function(h, idx) { obj[h] = r[idx]; });
-      return obj;
-    });
-  }
+</div>
+</div>
+</div>
+<div id="table-container-playboy" style="height: 600px">
 
-  // Custom header filter editor: dual-handle range slider for the year column.
-  // success(value) is called with {min, max}; the matching headerFilterFunc
-  // below decides whether each row passes.
-  function yearRangeFilterEditor(cell, onRendered, success, cancel, editorParams) {
-    var wrap = document.createElement('div');
-    wrap.className = 'year-range-filter';
-    wrap.innerHTML =
-      '<div class="yrf-label"><span class="yrf-lo">' + YEAR_MIN + '</span> – <span class="yrf-hi">' + YEAR_MAX + '</span></div>' +
-      '<div class="yrf-track-wrap">' +
-        '<div class="yrf-track"></div>' +
-        '<div class="yrf-range"></div>' +
-        '<input type="range" class="yrf-min" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" value="' + YEAR_MIN + '" step="1">' +
-        '<input type="range" class="yrf-max" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" value="' + YEAR_MAX + '" step="1">' +
-      '</div>';
-    var minIn = wrap.querySelector('.yrf-min');
-    var maxIn = wrap.querySelector('.yrf-max');
-    var loLabel = wrap.querySelector('.yrf-lo');
-    var hiLabel = wrap.querySelector('.yrf-hi');
-    var rangeBar = wrap.querySelector('.yrf-range');
+</div>
+<p>Download Full Data (including hidden columns)</p>
+<div id="button-container">
+<p><button id="download-raw-playboy"><i class="fas fa-download"></i> Download Full Data</button> <button id="copy-url-playboy"><i class="fas fa-copy"></i> Copy Full Data URL</button></p>
+</div>
+<p>Download Table Data (including filtered options)</p>
+<div id="button-container-playboy">
+<p><button id="download-csv"><i class="fas fa-download"></i> Download CSV</button> <button id="download-json"><i class="fas fa-download"></i> Download JSON</button> <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button></p>
+</div>
+<div id="progress-container" style="width: 100%; display: block;">
+<progress id="progress-bar" style="width: 100%;" max="100" value="0"></progress>
+<div id="progress-text" style="text-align: center; margin-top: 5px;">
 
-    function paint(lo, hi) {
-      var span = YEAR_MAX - YEAR_MIN;
-      rangeBar.style.left = ((lo - YEAR_MIN) / span * 100) + '%';
-      rangeBar.style.right = ((YEAR_MAX - hi) / span * 100) + '%';
-      loLabel.textContent = lo;
-      hiLabel.textContent = hi;
-    }
-
-    function fire(e) {
-      var lo = parseInt(minIn.value, 10);
-      var hi = parseInt(maxIn.value, 10);
-      // Prevent thumbs from crossing — push the other one along
-      if (e && e.target === minIn && lo > hi) { hi = lo; maxIn.value = hi; }
-      if (e && e.target === maxIn && hi < lo) { lo = hi; minIn.value = lo; }
-      paint(lo, hi);
-      success({ min: lo, max: hi });
-    }
-
-    minIn.addEventListener('input', fire);
-    maxIn.addEventListener('input', fire);
-    // Don't let click/mousedown bubble up to Tabulator (which would trigger sort)
-    wrap.addEventListener('mousedown', function(e) { e.stopPropagation(); });
-    wrap.addEventListener('click', function(e) { e.stopPropagation(); });
-
-    paint(YEAR_MIN, YEAR_MAX);
-    return wrap;
-  }
-
-  function yearRangeFilterFunc(headerValue, rowValue, rowData, filterParams) {
-    if (!headerValue) return true;
-    var y = parseInt(rowValue, 10);
-    if (isNaN(y)) return false;
-    return y >= headerValue.min && y <= headerValue.max;
-  }
-
-  function buildTable(data) {
-    var COLS = [
-      { title: "unique_id",         field: "unique_id",         headerFilter: "input", sorter: "number", width: 100 },
-      { title: "publication_date",  field: "publication_date",  headerFilter: "input", width: 130 },
-      {
-        title: "year", field: "year", sorter: "number", width: 220, minWidth: 220,
-        headerFilter: yearRangeFilterEditor,
-        headerFilterFunc: yearRangeFilterFunc,
-        headerFilterLiveFilter: false,
-      },
-      { title: "title",             field: "title",             headerFilter: "input", widthGrow: 2 },
-      { title: "section",           field: "section",           headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 130 },
-      { title: "author_name",       field: "author_name",       headerFilter: "input" },
-      { title: "last_name",         field: "last_name",         headerFilter: "input" },
-      { title: "first_name",        field: "first_name",        headerFilter: "input" },
-      { title: "author_gender",     field: "author_gender",     headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
-      { title: "author_nea",        field: "author_nea",        headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
-      { title: "author_bestseller", field: "author_bestseller", headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 130 },
-      { title: "author_prize",      field: "author_prize",      headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
-      { title: "author_iowa",       field: "author_iowa",       headerFilter: "list", headerFilterParams: { valuesLookup: true, clearable: true }, width: 110 },
-    ];
-
-    var table = new Tabulator("#table-container-playboy", {
-      data: data,
-      columns: COLS,
-      height: 600,
-      layout: "fitDataStretch",
-      pagination: true,
-      paginationSize: 100,
-      paginationSizeSelector: [10, 25, 50, 100, 1000],
-      paginationCounter: "rows",
-      initialSort: [{ column: "unique_id", dir: "asc" }],
-    });
-    return table;
-  }
-
-  function setupDownloads(table) {
-    document.getElementById('download-csv-playboy').addEventListener('click', function() {
-      table.download('csv', 'playboy-fiction-index.csv');
-    });
-    document.getElementById('download-json-playboy').addEventListener('click', function() {
-      table.download('json', 'playboy-fiction-index.json');
-    });
-    document.getElementById('download-xlsx-playboy').addEventListener('click', function() {
-      table.download('xlsx', 'playboy-fiction-index.xlsx', { sheetName: 'Playboy Fiction Index' });
-    });
-    document.getElementById('download-raw-playboy').addEventListener('click', function() {
-      var a = document.createElement('a');
-      a.href = DATA_URL;
-      a.download = 'playboy-fiction-index-metadata_20260415.csv';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    });
-    document.getElementById('copy-url-playboy').addEventListener('click', function() {
-      navigator.clipboard ? navigator.clipboard.writeText(DATA_URL) : (function() {
-        var ti = document.createElement('input'); ti.value = DATA_URL; document.body.appendChild(ti);
-        ti.select(); document.execCommand('copy'); document.body.removeChild(ti);
-      })();
-      alert('URL copied to clipboard: ' + DATA_URL);
-    });
-  }
-
-  function init() {
-    var status = document.getElementById('playboy-table-status');
-    if (typeof Tabulator === 'undefined') {
-      // Tabulator script not loaded yet; retry.
-      return setTimeout(init, 200);
-    }
-    fetch(DATA_URL)
-      .then(function(r) { return r.text(); })
-      .then(function(text) {
-        var data = parseCSV(text);
-        status.textContent = data.length + ' stories loaded.';
-        var table = buildTable(data);
-        table.on('tableBuilt', function() {
-          setupDownloads(table);
-        });
-        // Fallback in case tableBuilt has already fired.
-        setTimeout(function() { setupDownloads(table); }, 800);
-      })
-      .catch(function(err) {
-        status.textContent = 'Failed to load data: ' + err;
-      });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-</script>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -633,6 +453,10 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <section id="licensing" class="level1">
 <h1><strong>Licensing</strong></h1>
 <p>CC by 4.0</p>
+<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">
+<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>
+<!-- Excel script -->
+<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 
 
 </section>
@@ -654,6 +478,17 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 Shaalan, Nora. 2026. <span>“The *Playboy* Fiction Index.”</span>
 <em>Post45 Data Collective</em>, accepted, April 29. <a href="https://doi.org/10.18737/552627">https://doi.org/10.18737/552627</a>.
 </div></div></section></div></main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7dmlld29mIGRhdGFTdW1tYXJ5VmlldywgVGFidWxhdG9yLCB2aWV3b2Ygc2VsZWN0ZWRDb2x1bW5zLCB2aWV3b2YgZGF0YVNldCwgdGFibGVDb250YWluZXIsIGZldGNoRGF0YSwgZ2VuZXJhdGVUYWJ1bGF0b3JUYWJsZUZyb21DU1YsIHByb2dyZXNzLCBwcm9ncmVzc2Jhcn0gZnJvbSBcIjhiYjYzYTZjZGU5YWRkZmZcIlxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoicmF3X2RhdGEgPSBmZXRjaERhdGEoXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vUG9zdDQ1LURhdGEtQ29sbGVjdGl2ZS9kYXRhL3JlZnMvaGVhZHMvbWFpbi9wbGF5Ym95X2ZpY3Rpb25faW5kZXgvcGxheWJveS1maWN0aW9uLWluZGV4LW1ldGFkYXRhXzIwMjYwNDE1LmNzdlwiKVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG5nZW5lcmF0ZVRhYnVsYXRvclRhYmxlRnJvbUNTVihcbiAgXCIjdGFibGUtY29udGFpbmVyLXBsYXlib3lcIixcbiAgXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vUG9zdDQ1LURhdGEtQ29sbGVjdGl2ZS9kYXRhL3JlZnMvaGVhZHMvbWFpbi9wbGF5Ym95X2ZpY3Rpb25faW5kZXgvcGxheWJveS1maWN0aW9uLWluZGV4LW1ldGFkYXRhXzIwMjYwNDE1LmNzdlwiLFxuICB7XG4gICAgZGlzcGxheWVkQ29sdW1uczogW1widW5pcXVlX2lkXCIsIFwicHVibGljYXRpb25fZGF0ZVwiLCBcInllYXJcIiwgXCJ0aXRsZVwiLCBcInNlY3Rpb25cIixcbiAgICAgICAgICAgICAgICAgICAgICAgXCJhdXRob3JfbmFtZVwiLCBcImxhc3RfbmFtZVwiLCBcImZpcnN0X25hbWVcIiwgXCJhdXRob3JfZ2VuZGVyXCIsXG4gICAgICAgICAgICAgICAgICAgICAgIFwiYXV0aG9yX25lYVwiLCBcImF1dGhvcl9iZXN0c2VsbGVyXCIsIFwiYXV0aG9yX3ByaXplXCIsIFwiYXV0aG9yX2lvd2FcIl0sXG4gICAgY29sdW1uUG9wdXBzOiBbXG4gICAgICBcIlVuaXF1ZSBpZGVudGlmaWVyIGZvciBlYWNoIHNob3J0IHN0b3J5IGluIHRoZSBpbmRleFwiLFxuICAgICAgXCJNYWdhemluZSBpc3N1ZSBkYXRlIChNTS9ERC9ZWVlZKVwiLFxuICAgICAgXCJZZWFyIG9mIHRoZSBtYWdhemluZSBpc3N1ZSAoZXh0cmFjdGVkIGZyb20gcHVibGljYXRpb25fZGF0ZSlcIixcbiAgICAgIFwiU3RvcnkgdGl0bGU7IHRpdGxlIGNhc2UgYXBwbGllZFwiLFxuICAgICAgXCJTZWN0aW9uIG9mIHRoZSBtYWdhemluZSBpbiB3aGljaCB0aGUgc3RvcnkgYXBwZWFyZWRcIixcbiAgICAgIFwiQXV0aG9yIG5hbWU7IHN0YW5kYXJkaXplZCBzcGVsbGluZyBhbmQgbWlkZGxlIGluaXRpYWxzXCIsXG4gICAgICBcIkF1dGhvciBsYXN0IG5hbWVcIixcbiAgICAgIFwiQXV0aG9yIGZpcnN0IG5hbWUgKGluY2x1ZGluZyBtaWRkbGUgbmFtZSlcIixcbiAgICAgIFwiQXV0aG9yIGdlbmRlciAoTS9GKTsgTi9BIGZvciBjby1hdXRob3JlZCBvciB1bnZlcmlmaWVkXCIsXG4gICAgICBcIk5FQSBDcmVhdGl2ZSBXcml0aW5nIEZlbGxvd3NoaXAgcmVjaXBpZW50ICh5ZXMvbm8pXCIsXG4gICAgICBcIk5ldyBZb3JrIFRpbWVzIGJlc3RzZWxsZXIgbGlzdCBhdXRob3IgKHllcy9ubylcIixcbiAgICAgIFwiTWFqb3IgbGl0ZXJhcnkgcHJpemUgcmVjaXBpZW50ICh5ZXMvbm8pXCIsXG4gICAgICBcIklvd2EgV3JpdGVycycgV29ya3Nob3AgTUZBIGhvbGRlciAoeWVzL25vKVwiXG4gICAgXSxcbiAgICByYW5nZVNsaWRlckNvbHVtbnM6IFtcInllYXJcIl0sXG4gICAgZGF0ZVNsaWRlckNvbHVtbnM6IFtcInB1YmxpY2F0aW9uX2RhdGVcIl0sXG4gICAgY2F0ZWdvcnlDb2x1bW5zOiBbXCJzZWN0aW9uXCIsIFwiYXV0aG9yX2dlbmRlclwiLCBcImF1dGhvcl9uZWFcIiwgXCJhdXRob3JfYmVzdHNlbGxlclwiLCBcImF1dGhvcl9wcml6ZVwiLCBcImF1dGhvcl9pb3dhXCJdLFxuICAgIHNvcnRDb2x1bW5zOiBbXCJ1bmlxdWVfaWRcIl0sXG4gICAgc29ydE9yZGVyczogW1wiYXNjXCJdLFxuICAgIGJ1dHRvbkNvbnRhaW5lcklkOiBcIiNidXR0b24tY29udGFpbmVyLXBsYXlib3lcIixcbiAgICByYXdCdXR0b25JZDogXCIjZG93bmxvYWQtcmF3LXBsYXlib3lcIixcbiAgICB1cmxDb3B5QnV0dG9uSWQ6IFwiI2NvcHktdXJsLXBsYXlib3lcIixcbiAgfVxuKTtcbiJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../posts/playboy-fiction-index";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
