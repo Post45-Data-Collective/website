@@ -15,6 +15,12 @@ aliases:
 
 The Post45 Data Collective peer reviews and houses literary and cultural data from 1945 to the present.
 
+**Data Tables**: All datasets on the Post45 Data Collective website are displayed as interactive data tables, which enables users to filter, explore, and download them. The creation of the data tables is handled by the Post45 Data Collective editorial team. Contributors need only submit a spreadsheet file(s), such as an Excel or CSV file.
+
+**Data Essays**: All datasets are accompanied by a contextual statement or “data essay” that addresses (in 4,000 words or less) the significance of the data; the social and historical context of the data; how the data was collected, cleaned, and organized; and possible ethical concerns or misuses of the data. This essay will be prepared by the contributors.
+
+**Visualizations**: We sometimes feature visualizations alongside the data tables, such as those featured in ["The Canon of Asian American Literature."](https://data.post45.org/posts/asian-american-literature/#explore-the-asian-american-literary-canon) We use [Quarto](https://quarto.org/) to host our website, and we can display visualizations created with Python, R, and JavaScript [Observable notebooks](https://quarto.org/docs/interactive/ojs/). If you'd like to prepare your own visualization or discuss the creation of one, please get in touch.
+
 Before you submit, please consult our two main resources for preparing data:
 
 ::: {.callout-tip appearance="default"}
@@ -26,12 +32,6 @@ The [**Post45 Data Collective Tabular Data Style Guide**](style-guide.qmd) walks
 ## **BookReconciler 📘💎**
 [**BookReconciler**](our-tools.qmd) is the Post45 Data Collective's free, open-source tool for adding persistent identifiers to bibliographic data. Given a spreadsheet of book titles and authors, it queries the **Library of Congress, VIAF, Wikidata, HathiTrust, OCLC,** and **Google Books** in bulk and matches your records to their canonical IDs — and it can cluster different editions of the same Work together. See the [BookReconciler page](our-tools.qmd) for setup instructions and a video walkthrough. If you can't run it yourself, we may be able to collaborate with you to add identifiers.
 :::
-
-**Data Tables**: All datasets on the Post45 Data Collective website are displayed as interactive data tables, which enables users to filter, explore, and download them. The creation of the data tables is handled by the Post45 Data Collective editorial team. Contributors need only submit a spreadsheet file(s), such as an Excel or CSV file.
-
-**Data Essays**: All datasets are accompanied by a contextual statement or “data essay” that addresses (in 4,000 words or less) the significance of the data; the social and historical context of the data; how the data was collected, cleaned, and organized; and possible ethical concerns or misuses of the data. This essay will be prepared by the contributors.
-
-**Visualizations**: We sometimes feature visualizations alongside the data tables, such as those featured in ["The Canon of Asian American Literature."](https://data.post45.org/posts/asian-american-literature/#explore-the-asian-american-literary-canon) We use [Quarto](https://quarto.org/) to host our website, and we can display visualizations created with Python, R, and JavaScript [Observable notebooks](https://quarto.org/docs/interactive/ojs/). If you'd like to prepare your own visualization or discuss the creation of one, please get in touch.
 
 # Interested in Submitting?
 
