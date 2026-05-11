@@ -3,6 +3,11 @@ title: "Post45 Data Collective Tabular Data Style Guide"
 author:
   - name: Em Nordling
 date: "2026-05-11"
+citation:
+  type: webpage
+  container-title: "Post45 Data Collective"
+  url: "https://data.post45.org/style-guide.html"
+google-scholar: true
 lightbox: true
 format:
   html:
@@ -656,22 +661,6 @@ This project was originally funded and then defunded by the [National Endowment 
 ---
 
 # **Citation**{#citation}
-
-For attribution, please cite this work as:
-
-Nordling, Em. 2026. “Post45 Data Collective Tabular Data Style Guide.” *Post45 Data Collective*. <https://data.post45.org/style-guide.html>.
-
-**BibTeX:**
-
-```bibtex
-@online{nordling2026,
-  author    = {Nordling, Em},
-  title     = {Post45 {Data} {Collective} {Tabular} {Data} {Style} {Guide}},
-  date      = {2026-05-11},
-  url       = {https://data.post45.org/style-guide.html},
-  langid    = {en}
-}
-```
 
 
 [styleguide1]: /images/styleguide1.png

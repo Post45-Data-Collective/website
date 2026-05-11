@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -130,6 +96,15 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <meta name="twitter:image-height" content="494">
 <meta name="twitter:image-width" content="1999">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="Post45 Data Collective Tabular Data Style Guide">
+<meta name="citation_author" content="Em Nordling">
+<meta name="citation_publication_date" content="2026-05-11">
+<meta name="citation_cover_date" content="2026-05-11">
+<meta name="citation_year" content="2026">
+<meta name="citation_online_date" content="2026-05-11">
+<meta name="citation_fulltext_html_url" content="https://data.post45.org/style-guide.html">
+<meta name="citation_language" content="en">
+<meta name="citation_journal_title" content="Post45 Data Collective">
 </head>
 
 <body class="nav-fixed">
@@ -165,14 +140,25 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
     <a class="nav-link" href="./submissions.html"> 
 <span class="menu-text">Submissions</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./people.html"> 
-<span class="menu-text">People</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="./about.html">
+ <span class="dropdown-text">About</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+        <li>
+    <a class="dropdown-item" href="./people.html">
+ <span class="dropdown-text">People</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./how-we-made-this.html">
+ <span class="dropdown-text">How We Made This</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
     <a class="nav-link" href="./news.html"> 
 <span class="menu-text">News</span></a>
@@ -1454,21 +1440,21 @@ Selected Resources
 </section>
 <section id="citation" class="level1">
 <h1><strong>Citation</strong></h1>
-<p>For attribution, please cite this work as:</p>
-<p>Nordling, Em. 2026. “Post45 Data Collective Tabular Data Style Guide.” <em>Post45 Data Collective</em>. <a href="https://data.post45.org/style-guide.html" class="uri">https://data.post45.org/style-guide.html</a>.</p>
-<p><strong>BibTeX:</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">@online</span>{<span class="ot">nordling2026</span>,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>    = {Nordling, Em},</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>     = {Post45 {Data} {Collective} {Tabular} {Data} {Style} {Guide}},</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">date</span>      = {2026-05-11},</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">url</span>       = {https://data.post45.org/style-guide.html},</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">langid</span>    = {en}</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{nordling2026,
+  author = {Nordling, Em},
+  title = {Post45 {Data} {Collective} {Tabular} {Data} {Style} {Guide}},
+  date = {2026-05-11},
+  url = {https://data.post45.org/style-guide.html},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-nordling2026" class="csl-entry quarto-appendix-citeas" role="listitem">
+Nordling, Em. 2026. <span>“Post45 Data Collective Tabular Data Style
+Guide.”</span> Post45 Data Collective. May 11, 2026. <a href="https://data.post45.org/style-guide.html">https://data.post45.org/style-guide.html</a>.
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
