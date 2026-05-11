@@ -33,6 +33,9 @@ citation:
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 aliases:
 - /the-index-of-major-literary-prizes-in-the-us/
 ---
@@ -50,30 +53,78 @@ This dataset includes information about the winners and judges of literary prize
 
 ## Data Table
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-createDataTable(
-  data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/major_literary_prizes/major_literary_prizes-winners_judges.csv",
-
-  displayed_columns = c("full_name", "gender",
-   "mfa_degree", "role", "prize_year", "prize_name", "prize_amount", "prize_institution", "prize_type", "prize_genre", "author_wikidata", "author_viaf", "author_lccn", "elite_institution", "graduate_degree", "stegner", "title_of_winning_book"),
-
-   column_widths = c("gender" = "100px", "role" = "75px", "mfa_degree" = "100px", "prize_name" = "100px"),
-
-  currency_columns = c("prize_amount"),
-
-  category_columns = c("gender", "role", "prize_name", "prize_institution", "prize_type", "prize_genre", "elite_institution", "mfa_degree", "stegner", "graduate_degree", "elite_institution"),
-
-  sort_columns = c("prize_year"),
-  sort_orders = c("desc")
-)
+```{ojs}
+//| echo: false
+import {viewof dataSummaryView, Tabulator, viewof selectedColumns, viewof dataSet, tableContainer, fetchData, generateTabulatorTableFromCSV, progress, progressbar} from "8bb63a6cde9addff"
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+major_prizes_winners_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/major_literary_prizes/major_literary_prizes-winners_judges.csv")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-major-prizes-winners",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/major_literary_prizes/major_literary_prizes-winners_judges.csv",
+  {
+    displayedColumns: ["full_name", "gender", "mfa_degree", "role", "prize_year",
+                       "prize_name", "prize_amount", "prize_institution", "prize_type",
+                       "prize_genre", "elite_institution", "graduate_degree", "stegner",
+                       "title_of_winning_book",
+                       "author_wikidata", "author_viaf", "author_lccn"],
+    columnPopups: [
+      "Author's full name (pen names used; most recent name if changed)",
+      "Provisionally labeled by the research team based on pronouns used in biographical notes: male, female, nonbinary/he, nonbinary/they, unknown, or No Winner",
+      "Name of MFA program institution if individual attended an MFA program; blank or 'No Winner' otherwise",
+      "Either 'winner' or 'judge'",
+      "Year the prize was awarded",
+      "Name of the prize",
+      "Prize amount in 2022 dollars (amounts change over time and are not tracked historically)",
+      "Nonprofit organization that oversees the prize",
+      "'career' (prize awarded for overall career) or 'book' (prize awarded for a specific book)",
+      "'poetry,' 'prose,' or 'no genre' (prize has no genre requirement, e.g., MacArthur)",
+      "If individual attended one of 12 listed elite institutions (Barnard, Brown, Columbia, Cornell, Dartmouth, Harvard, Princeton, Radcliffe, Stanford, UChicago, UPenn, Yale); blank or 'No Winner' otherwise",
+      "'graduate' if individual attended a graduate program (masters, PhD, JD, or medical); blank or 'No Winner' otherwise",
+      "'Stegner' if individual received a Wallace Stegner Fellowship at Stanford; blank or 'No Winner' otherwise",
+      "Title of the awarded book if prize_type is 'book'; if jury awarded more than one book in the same year, both are listed",
+      "Author's Wikidata Q number",
+      "Author's VIAF cluster number",
+      "Author's LCCN from id.loc.gov"
+    ],
+    columnWidths: { "gender": "100px", "role": "75px", "mfa_degree": "100px", "prize_name": "100px" },
+    currencyColumns: ["prize_amount"],
+    rangeSliderColumns: ["prize_year"],
+    categoryColumns: ["gender", "role", "prize_name", "prize_institution", "prize_type",
+                      "prize_genre", "elite_institution", "mfa_degree", "stegner", "graduate_degree"],
+    sortColumns: ["prize_year"],
+    sortOrders: ["desc"],
+    buttonContainerId: "#button-container-major-prizes-winners",
+    rawButtonId: "#download-raw-major-prizes-winners",
+    urlCopyButtonId: "#copy-url-major-prizes-winners",
+  }
+);
+```
+
+<div id="table-container-major-prizes-winners" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-major-prizes-winners"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-major-prizes-winners"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-major-prizes-winners'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ::: {.callout-tip icon="false"}
 ## Creative Commons License
@@ -159,28 +210,69 @@ The HathiTrust identifiers included here can be used to extract words per page f
 
 ## Data Table
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-createDataTable(
-  data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/major_literary_prizes/major_literary_prizes-hathitrust_metadata.csv",
-
-  displayed_columns = c("shorttitle",  "oclc_holdings",  "inferreddate",  'author',  'gender',  "hathi_id",  "hathi_rights",  "oclc_eholdings", "author_authorized_heading", "author_lccn", "author_viaf",  "author_wikidata_qid",  "imprintdate",   "oclc",  "oclc_owi",  "person_id"),
-
-  # currency_columns = c("prize_amount"),
-
-  category_columns = c("gender", "hathi_rights"),
-
-  sort_columns = c("oclc_holdings"),
-
-  sort_orders = c("desc")
-)
+```{ojs}
+//| echo: false
+//| output: false
+major_prizes_hathi_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/major_literary_prizes/major_literary_prizes-hathitrust_metadata.csv")
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-major-prizes-hathi",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/major_literary_prizes/major_literary_prizes-hathitrust_metadata.csv",
+  {
+    displayedColumns: ["shorttitle", "author", "gender", "inferreddate", "imprintdate",
+                       "hathi_id", "hathi_rights", "oclc_holdings", "oclc_eholdings",
+                       "author_authorized_heading", "author_lccn", "author_viaf",
+                       "author_wikidata_qid", "oclc", "oclc_owi", "person_id"],
+    columnPopups: [
+      "Short title of the work as listed in HathiTrust",
+      "Name of the author of the work as recorded in HathiTrust",
+      "Provisionally labeled by the research team based on pronouns used in biographical notes: male, female, nonbinary/he, nonbinary/they, unknown, or No Winner",
+      "Earliest publication date for this volume",
+      "Date of this specific edition of the text",
+      "HathiTrust item (volume) identifier number",
+      "HathiTrust rights code — see the description below for the full list of codes",
+      "OCLC Classify total holdings count (number of libraries that hold this work)",
+      "OCLC Classify electronic holdings count",
+      "Author's NACO authorized heading (Name Authority Cooperative)",
+      "Author's LCCN from id.loc.gov",
+      "Author's VIAF cluster number",
+      "Author's Wikidata Q number",
+      "OCLC unique identifier for this volume in WorldCat",
+      "OCLC Classify work identifier (groups together different editions of the same work)",
+      "Unique numeric identifier for the author (matches the winners/judges dataset)"
+    ],
+    rangeSliderColumns: ["inferreddate", "imprintdate"],
+    numericColumns: ["oclc_holdings", "oclc_eholdings"],
+    categoryColumns: ["gender", "hathi_rights"],
+    sortColumns: ["oclc_holdings"],
+    sortOrders: ["desc"],
+    buttonContainerId: "#button-container-major-prizes-hathi",
+    rawButtonId: "#download-raw-major-prizes-hathi",
+    urlCopyButtonId: "#copy-url-major-prizes-hathi",
+  }
+);
+```
+
+<div id="table-container-major-prizes-hathi" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-major-prizes-hathi"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-major-prizes-hathi"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-major-prizes-hathi'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 *Note: You can* *also explore and export this data via  [GitHub’s Flat Viewer](https://flatgithub.com/Post45-Data-Collective/data/blob/main/?filename=major_literary_prizes%2Fmajor_literary_prizes-winners_judges.tsv), which includes some additional data visualizations and filtering options.*
 
