@@ -355,3 +355,10 @@ border {
   border: 3px solid #747474;
   padding: 5px;
 }
+
+/* Hide the auto-generated "Citation" heading in the Quarto appendix.
+   Data pages add a manual `# Citation` heading above so it appears in the
+   right-sidebar TOC; the auto heading would otherwise duplicate it. */
+#quarto-citation > h2.quarto-appendix-heading {
+  display: none;
+}
