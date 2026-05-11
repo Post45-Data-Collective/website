@@ -27,7 +27,12 @@ website:
         href: style-guide.qmd
       - submissions.qmd
       - people.qmd
-      - about.qmd
+      - text: "About"
+        menu:
+          - text: "About"
+            href: about.qmd
+          - text: "How We Made This"
+            href: how-we-made-this.qmd
       - news.qmd
       - icon: github
         href: https://github.com/Post45-Data-Collective/website

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://data.post45.org/submissions.html</loc>
-    <lastmod>2025-11-26T19:57:59.811Z</lastmod>
+    <lastmod>2026-05-11T20:21:35.926Z</lastmod>
   </url>
   <url>
     <loc>https://data.post45.org/people.html</loc>
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://data.post45.org/style-guide.html</loc>
-    <lastmod>2026-05-11T18:35:07.628Z</lastmod>
+    <lastmod>2026-05-11T20:38:19.422Z</lastmod>
   </url>
   <url>
     <loc>https://data.post45.org/our-tools.html</loc>
@@ -66,7 +66,7 @@
   </url>
   <url>
     <loc>https://data.post45.org/posts/feminist-bookstore-news/index.html</loc>
-    <lastmod>2026-05-11T20:06:12.749Z</lastmod>
+    <lastmod>2026-05-11T20:15:47.370Z</lastmod>
   </url>
   <url>
     <loc>https://data.post45.org/posts/futuristic-fiction/index.html</loc>
@@ -111,5 +111,9 @@
   <url>
     <loc>https://data.post45.org/our-data.html</loc>
     <lastmod>2025-03-28T19:17:19.370Z</lastmod>
+  </url>
+  <url>
+    <loc>https://data.post45.org/how-we-made-this.html</loc>
+    <lastmod>2026-05-11T20:45:08.200Z</lastmod>
   </url>
 </urlset>
