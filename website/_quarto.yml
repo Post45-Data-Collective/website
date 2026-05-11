@@ -37,6 +37,9 @@ website:
       - news.qmd
       - icon: github
         href: https://github.com/Post45-Data-Collective/website
+      - icon: bluesky
+        href: https://bsky.app/profile/post45data.bsky.social
+        aria-label: Bluesky
       # - icon: twitter
       #   href: https://twitter.com
 format:
