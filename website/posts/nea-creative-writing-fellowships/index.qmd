@@ -28,6 +28,9 @@ citation:
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 bibliography: references.bib
 appendix-stlye: none
 license: CC BY
@@ -43,38 +46,74 @@ This dataset contains a comprehensive list of the writers sponsored by National 
 
 # Data Table
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nea_writing_fellowships/nea_fellowships.csv"
-
-createDataTable(
-    data_path = data_path,
-    style = "bootstrap", # Bootstrap DataTables style
-    bootstrap_classes = "table-condensed", # Add extra classes
-
-    displayed_columns = c("nea_grant_year", "full_name_firstlast", "given_name_middle", "family_name", "gender", "race_ethnicity", "birth_year", "country", "us_state", "hometown", "ba", "ba2", "ma", "ma2", "phd", "mfa", "mfa2", "post45_hathi_entry", "nea_person_id"),
-    column_widths = c("gender" = "100px", "race" = "100px", "country" = "100px", "author" = "100px"),
-
-    # date_columns = c("week"),
-
-    # currency_columns = c("prize_amount"),
-
-    category_columns = c("gender", "race_ethnicity", "country", "us_state"),
-    sort_columns = c("nea_grant_year"),
-    sort_orders = c("desc"),
-)
-
-# Print out column names to make it easier to customize above
-# df <- read.csv(data_path)
-# cat(paste(shQuote(colnames(df), type = "cmd"), collapse = ", "))
-
+```{ojs}
+//| echo: false
+import {generateTabulatorTableFromCSV as makeTabTable} from "8bb63a6cde9addff"
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+makeTabTable(
+  "#table-container-nea",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nea_writing_fellowships/nea_fellowships.csv",
+  {
+    displayedColumns: ["nea_grant_year", "full_name_firstlast", "given_name_middle",
+                       "family_name", "gender", "race_ethnicity", "birth_year",
+                       "country", "us_state", "hometown",
+                       "ba", "ba2", "ma", "ma2", "phd", "mfa", "mfa2",
+                       "post45_hathi_entry", "nea_person_id"],
+    columnPopups: [
+      "Year the NEA Creative Writing Fellowship was awarded",
+      "Full name in First-Last order",
+      "Given (first) name plus middle name",
+      "Family (last) name",
+      "Gender as identified by the research team",
+      "Race / ethnicity as identified by the research team",
+      "Birth year of the fellow",
+      "Country of residence",
+      "US state of residence (when applicable)",
+      "Hometown",
+      "Institution where the fellow received a BA",
+      "Second BA institution, if applicable",
+      "Institution where the fellow received an MA",
+      "Second MA institution, if applicable",
+      "Institution where the fellow received a PhD",
+      "Institution where the fellow received an MFA",
+      "Second MFA institution, if applicable",
+      "Whether the fellow has a corresponding entry in the Post45 HathiTrust dataset",
+      "Unique numeric identifier for the fellow within this dataset"
+    ],
+    columnWidths: { "nea_grant_year": 130, "gender": 130, "race_ethnicity": 160,
+                    "birth_year": 130, "country": 130, "us_state": 120 },
+    rangeSliderColumns: ["nea_grant_year", "birth_year"],
+    categoryColumns: ["gender", "race_ethnicity", "country", "us_state",
+                      "ba", "ma", "phd", "mfa", "post45_hathi_entry"],
+    sortColumns: ["nea_grant_year"],
+    sortOrders: ["desc"],
+    buttonContainerId: "#button-container-nea",
+    rawButtonId: "#download-raw-nea",
+    urlCopyButtonId: "#copy-url-nea",
+  }
+);
+```
+
+<div id="table-container-nea" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-nea"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-nea"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-nea'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ::: {.callout-tip icon="false"}
 ## Creative Commons License

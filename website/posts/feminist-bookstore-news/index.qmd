@@ -37,6 +37,9 @@ page-layout: full
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 aliases:
   - /feminist-bookstore-news/
 ---
@@ -75,55 +78,68 @@ Then, find the raw GitHub URL for that dataset and insert it below, customizing 
 
 Areas that need to be edited are marked with MAKE EDITS HERE -->
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# data <- read.csv("https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/feminist-bookstore-news/FINAL%20Descriptive%20Database%20of%20Articles%20Rev.csv")
-# print(names(data))
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-# MAKE EDITS HERE: Plug in the raw GitHub URL to the dataset below
-createDataTable(
-    data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-descriptive.csv",
-
-    # MAKE EDITS HERE: Select the columns that will be displayed in the data table, and the order
-    displayed_columns = c(
-        "vol", "no", "vol.no", "article_title",
-        "author", "category", "year", "month", "notes", "volunteer", "total_pages", "unique_id"
-    ),
-
-    # MAKE EDITS HERE: Customize any column widths
-    # If none, comment out
-    column_widths = c(
-        "vol" = "50px", "no" = "50px", "author" = "100px", "category" = "120px", "year" = "100px"
-        # "prize_name" = "100px"
-    ),
-
-    # MAKE EDITS HERE: Select any columns that should be formatted with a dollar sign
-    # If none, comment out
-    # currency_columns = c("prize_amount"),
-
-    # MAKE EDITS HERE: Select any columns that should be filterable as a category
-    # If none, comment out
-
-    category_columns = c(
-        "category", "no",
-        # "Author",
-        # "Year",
-        "vol"
-        # "Month"
-    ),
-
-    # Select column to sort by, and order
-    sort_columns = c("vol"),
-    sort_orders = c("asc")
-)
-
+```{ojs}
+//| echo: false
+import {viewof dataSummaryView, Tabulator, viewof selectedColumns, viewof dataSet, tableContainer, fetchData, generateTabulatorTableFromCSV, progress, progressbar} from "8bb63a6cde9addff"
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+fbn_descriptive_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-descriptive.csv")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-fbn-articles",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-descriptive.csv",
+  {
+    displayedColumns: ["vol", "no", "vol.no", "article_title", "author", "category",
+                       "year", "month", "notes", "volunteer", "total_pages", "unique_id"],
+    columnPopups: [
+      "FBN volume number (1–23)",
+      "FBN issue number; combined issues shown as e.g. '9.10'; SP marks special/supplemental issues",
+      "Volume and issue number combined as x.y (useful for sorting)",
+      "Article title (variability in titles and conventions is preserved; not standardized)",
+      "Article author when attributed; many unattributed articles are presumed to be by Carol Seajay",
+      "Article category — see the description below for definitions",
+      "Year the issue was published",
+      "Month the issue was published (early issues sometimes inferred from a mail cancellation)",
+      "Notes — summaries, subheadings, descriptions of graphics, or other context",
+      "Volunteer who indexed this row",
+      "Number of pages of article content in the issue",
+      "Unique identifier appended for citation purposes"
+    ],
+    columnWidths: { "vol": 80, "no": 80, "vol.no": 100, "category": 160, "year": 100, "month": 110 },
+    rangeSliderColumns: ["year"],
+    categoryColumns: ["vol", "no", "category", "month"],
+    sortColumns: ["vol", "no"],
+    sortOrders: ["asc", "asc"],
+    buttonContainerId: "#button-container-fbn-articles",
+    rawButtonId: "#download-raw-fbn-articles",
+    urlCopyButtonId: "#copy-url-fbn-articles",
+  }
+);
+```
+
+<div id="table-container-fbn-articles" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-fbn-articles"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-fbn-articles"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-fbn-articles'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ::: {.callout-tip icon="false"}
 ## Creative Commons License
@@ -282,50 +298,58 @@ Then, find the raw GitHub URL for that dataset and insert it below, customizing 
 
 Areas that need to be edited are marked with MAKE EDITS HERE -->
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# data <- read.csv("https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/feminist-bookstore-news/feminist-bookstore-news-issue-list_2024-12-23.csv")
-# print(names(data))
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-createDataTable(
-    data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-issue_list.csv",
-
-    # MAKE EDITS HERE: Select the columns that will be displayed in the data table, and the order
-    displayed_columns = c(
-        "volume", "number", "year_published", "number_of_pages",
-        "format", "notes"
-    ),
-
-    # MAKE EDITS HERE: Customize any column widths
-    # If none, comment out
-    # column_widths = c("volume" = "50px", "number" = "50px", "notes" = "140px"),
-
-    # MAKE EDITS HERE: Select any columns that should be formatted with a dollar sign
-    # If none, comment out
-    # currency_columns = c("prize_amount"),
-
-    # MAKE EDITS HERE: Select any columns that should be filterable as a category
-    # If none, comment out
-
-    category_columns = c(
-        "number",
-        # "Author",
-        "format",
-        "volume"
-        # "Month"
-    ),
-
-    # Select column to sort by, and order
-    sort_columns = c("volume"),
-    sort_orders = c("asc")
-)
+```{ojs}
+//| echo: false
+//| output: false
+fbn_issues_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-issue_list.csv")
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-fbn-issues",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-issue_list.csv",
+  {
+    displayedColumns: ["volume", "number", "year_published", "number_of_pages",
+                       "format", "notes"],
+    columnPopups: [
+      "FBN volume number (1–23)",
+      "FBN issue number (numeric, or 'SP' for special/supplemental issues)",
+      "Year the issue was published",
+      "Number of pages in the archived PDF",
+      "Format: Newsletter, Magazine, Supplement, or Electronic",
+      "Highlights particular themes of issues of interest to readers"
+    ],
+    columnWidths: { "volume": 100, "number": 100, "year_published": 140, "number_of_pages": 140, "format": 130 },
+    rangeSliderColumns: ["year_published"],
+    numericColumns: ["number_of_pages"],
+    categoryColumns: ["volume", "number", "format"],
+    sortColumns: ["volume", "number"],
+    sortOrders: ["asc", "asc"],
+    buttonContainerId: "#button-container-fbn-issues",
+    rawButtonId: "#download-raw-fbn-issues",
+    urlCopyButtonId: "#copy-url-fbn-issues",
+  }
+);
+```
+
+<div id="table-container-fbn-issues" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-fbn-issues"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-fbn-issues"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-fbn-issues'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ## Description
 
