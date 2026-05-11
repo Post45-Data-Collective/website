@@ -6,7 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Created by Em Nordling, August 2025; Updated December 2025">
+<meta name="author" content="Em Nordling">
+<meta name="dcterms.date" content="2026-05-11">
 
 <title>Post45 Data Collective Tabular Data Style Guide – Post45 Data Collective</title>
 <style>
@@ -20,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -84,12 +119,16 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Post45 Data Collective Tabular Data Style Guide – Post45 Data Collective">
-<meta property="og:description" content="Created by Em Nordling, August 2025; Updated December 2025">
-<meta property="og:image" content="https://data.post45.org/URL or filepath">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://data.post45.org/images/styleguide4.png">
 <meta property="og:site_name" content="Post45 Data Collective">
+<meta property="og:image:height" content="494">
+<meta property="og:image:width" content="1999">
 <meta name="twitter:title" content="Post45 Data Collective Tabular Data Style Guide – Post45 Data Collective">
-<meta name="twitter:description" content="Created by Em Nordling, August 2025; Updated December 2025">
-<meta name="twitter:image" content="https://data.post45.org/URL or filepath">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://data.post45.org/images/styleguide4.png">
+<meta name="twitter:image-height" content="494">
+<meta name="twitter:image-width" content="1999">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -159,7 +198,10 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><strong>Introduction</strong></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><strong>Introduction</strong></a>
+  <ul class="collapse">
+  <li><a href="#on-this-page" id="toc-on-this-page" class="nav-link" data-scroll-target="#on-this-page">On This Page</a></li>
+  </ul></li>
   <li><a href="#general-tips-suggestions" id="toc-general-tips-suggestions" class="nav-link" data-scroll-target="#general-tips-suggestions"><strong>General Tips &amp; Suggestions</strong></a>
   <ul class="collapse">
   <li><a href="#consider-digital-legibility" id="toc-consider-digital-legibility" class="nav-link" data-scroll-target="#consider-digital-legibility">1. Consider Digital Legibility</a></li>
@@ -198,7 +240,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
   </ul></li>
   <li><a href="#publication-data" id="toc-publication-data" class="nav-link" data-scroll-target="#publication-data">Publication Data</a>
   <ul class="collapse">
-  <li><a href="#contributers" id="toc-contributers" class="nav-link" data-scroll-target="#contributers">Contributors</a></li>
+  <li><a href="#contributors" id="toc-contributors" class="nav-link" data-scroll-target="#contributors">Contributors</a></li>
   <li><a href="#editions" id="toc-editions" class="nav-link" data-scroll-target="#editions">Editions</a></li>
   <li><a href="#serials-series" id="toc-serials-series" class="nav-link" data-scroll-target="#serials-series">Serials / Series</a></li>
   <li><a href="#isbn-issn" id="toc-isbn-issn" class="nav-link" data-scroll-target="#isbn-issn">ISBN/ISSN</a></li>
@@ -211,6 +253,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
   <li><a href="#other-descriptive-data" id="toc-other-descriptive-data" class="nav-link" data-scroll-target="#other-descriptive-data">Other Descriptive Data</a></li>
   </ul></li>
   <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><strong>Acknowledgements</strong></a></li>
+  <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation"><strong>Citation</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -222,16 +265,23 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <h1 class="title">Post45 Data Collective Tabular Data Style Guide</h1>
 </div>
 
-<div>
-  <div class="description">
-    <em>Created by Em Nordling, August 2025; Updated December 2025</em>
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Em Nordling </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 11, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -240,71 +290,42 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 
 </header>
 
-<nav id="TOC-body" role="doc-toc">
-    <h2 id="toc-title">Table of Contents</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction"><strong>Introduction</strong></a></li>
-  <li><a href="#general-tips-suggestions" id="toc-general-tips-suggestions"><strong>General Tips &amp; Suggestions</strong></a>
-  <ul>
-  <li><a href="#consider-digital-legibility" id="toc-consider-digital-legibility">1. Consider Digital Legibility</a></li>
-  <li><a href="#consider-use-cases" id="toc-consider-use-cases">2. Consider Use Cases</a></li>
-  <li><a href="#use-appropriate-software" id="toc-use-appropriate-software">3. Use Appropriate Software</a></li>
-  <li><a href="#consider-institutional-policies" id="toc-consider-institutional-policies">4. Consider Institutional Policies</a></li>
-  <li><a href="#document-decision-making" id="toc-document-decision-making">5. Document Decision-Making</a></li>
-  </ul></li>
-  <li><a href="#files-file-organization" id="toc-files-file-organization"><strong>Files &amp; File Organization</strong></a>
-  <ul>
-  <li><a href="#file-formats" id="toc-file-formats">File Formats</a></li>
-  <li><a href="#representing-multiple-values" id="toc-representing-multiple-values">Representing Multiple Values</a></li>
-  <li><a href="#character-encoding" id="toc-character-encoding">Character Encoding</a></li>
-  <li><a href="#linked-datasets" id="toc-linked-datasets">Linked Datasets</a></li>
-  </ul></li>
-  <li><a href="#data-structure" id="toc-data-structure"><strong>Data Structure</strong></a>
-  <ul>
-  <li><a href="#scope" id="toc-scope">Scope</a></li>
-  <li><a href="#rows-columns" id="toc-rows-columns">Rows &amp; Columns</a></li>
-  <li><a href="#missing-unknown-values" id="toc-missing-unknown-values">Missing &amp; Unknown Values</a></li>
-  <li><a href="#external-vocabularies-authorities" id="toc-external-vocabularies-authorities">External Vocabularies &amp; Authorities</a></li>
-  </ul></li>
-  <li><a href="#data-types" id="toc-data-types"><strong>Data Types</strong></a>
-  <ul>
-  <li><a href="#names-places-IDs" id="toc-names-places-IDs">Names, Places, and IDs</a>
-  <ul>
-  <li><a href="#personal-names" id="toc-personal-names">Personal Names</a></li>
-  <li><a href="#institutional-names" id="toc-institutional-names">Institutional Names</a></li>
-  <li><a href="#geographical-names" id="toc-geographical-names">Geographical Names</a></li>
-  <li><a href="#unique-IDs" id="toc-unique-IDs">Unique IDs</a></li>
-  </ul></li>
-  <li><a href="#numbers" id="toc-numbers">Numbers</a>
-  <ul>
-  <li><a href="#dates" id="toc-dates">Dates</a></li>
-  <li><a href="#integers" id="toc-integers">Integers</a></li>
-  </ul></li>
-  <li><a href="#publication-data" id="toc-publication-data">Publication Data</a>
-  <ul>
-  <li><a href="#contributers" id="toc-contributers">Contributors</a></li>
-  <li><a href="#editions" id="toc-editions">Editions</a></li>
-  <li><a href="#serials-series" id="toc-serials-series">Serials / Series</a></li>
-  <li><a href="#isbn-issn" id="toc-isbn-issn">ISBN/ISSN</a></li>
-  <li><a href="#pagination" id="toc-pagination">Pagination</a></li>
-  <li><a href="#language" id="toc-language">Language</a></li>
-  <li><a href="#copyright" id="toc-copyright">Copyright</a></li>
-  </ul></li>
-  <li><a href="#subjects-keywords" id="toc-subjects-keywords">Subjects &amp; Keywords</a></li>
-  <li><a href="#categories" id="toc-categories">Categories</a></li>
-  <li><a href="#other-descriptive-data" id="toc-other-descriptive-data">Other Descriptive Data</a></li>
-  </ul></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements"><strong>Acknowledgements</strong></a></li>
-  </ul>
-</nav>
+
 <section id="introduction" class="level1">
 <h1><strong>Introduction</strong></h1>
-<p>In the <strong>Post45 Data Collective Tabular Data Style Guide</strong>, you will find what it says on the tin: a cheatsheet for how to present and submit your tabular data to P45DC. This guide provides support at multiple points throughout your data journey, whether you are actively making data decisions or have already collected, curated, and documented your data. Though our guidelines are targeted to the latter-end of the dataset lifecycle (specifically storage, publication, and reusability), they will also be helpful for making critical decisions well in advance of submitting to P45DC.</p>
+<p>In the <strong>Post45 Data Collective Tabular Data Style Guide</strong>, you will find what it says on the tin: a cheatsheet for how to present and submit your tabular data to P45DC. This guide provides support at multiple points throughout your data journey, whether you are actively making data decisions or have already collected, curated, and documented your data. Though our guidelines are targeted to the latter-end of the dataset lifecycle (specifically storage, publication, and reusability), they will also be helpful for making critical decisions well in advance of submitting to P45DC. We hope this guide will also be a useful general-purpose reference for anyone working with tabular humanities data — whether or not you are submitting to P45DC — including researchers, students, librarians, and instructors thinking through how to clean, structure, and document a dataset.</p>
+<section id="on-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="on-this-page">On This Page</h2>
+<div class="on-this-page">
+<ul>
+<li><a href="#general-tips-suggestions"><strong>General Tips &amp; Suggestions</strong></a>
+<ul>
+<li><a href="#consider-digital-legibility">Consider Digital Legibility</a> · <a href="#consider-use-cases">Consider Use Cases</a> · <a href="#use-appropriate-software">Use Appropriate Software</a> · <a href="#consider-institutional-policies">Consider Institutional Policies</a> · <a href="#document-decision-making">Document Decision-Making</a></li>
+</ul></li>
+<li><a href="#files-file-organization"><strong>Files &amp; File Organization</strong></a>
+<ul>
+<li><a href="#file-formats">File Formats</a> · <a href="#representing-multiple-values">Representing Multiple Values</a> · <a href="#character-encoding">Character Encoding</a> · <a href="#linked-datasets">Linked Datasets</a></li>
+</ul></li>
+<li><a href="#data-structure"><strong>Data Structure</strong></a>
+<ul>
+<li><a href="#scope">Scope</a> · <a href="#rows-columns">Rows &amp; Columns</a> · <a href="#missing-unknown-values">Missing &amp; Unknown Values</a> · <a href="#external-vocabularies-authorities">External Vocabularies &amp; Authorities</a></li>
+</ul></li>
+<li><a href="#data-types"><strong>Data Types</strong></a>
+<ul>
+<li><a href="#names-places-IDs">Names, Places, and IDs</a> · <a href="#numbers">Numbers</a> · <a href="#publication-data">Publication Data</a> · <a href="#subjects-keywords">Subjects &amp; Keywords</a> · <a href="#categories">Categories</a> · <a href="#other-descriptive-data">Other Descriptive Data</a></li>
+</ul></li>
+<li><a href="#acknowledgements"><strong>Acknowledgements</strong></a></li>
+<li><a href="#citation"><strong>Citation</strong></a></li>
+</ul>
+</div>
+<style>
+.on-this-page a, .on-this-page a:visited { color: #000; }
+.on-this-page a:hover { color: #000; text-decoration: underline; }
+</style>
 <p>Every dataset is different and will require different decision-making processes. If you are working with data compiled by an external source, for instance, rather than compiling it independently, you might choose to keep the data as-is without standardizing entries per our suggestions in <a href="#data-types">Data Types</a>. Your dataset will not necessarily be rejected for not meeting every recommendation, nor do you need to make every appropriate change before submitting. Our editorial team will work with you to determine what changes are necessary long-term. However, we strongly encourage you to read this style guide well in advance of submission and to use it to guide your decisions.</p>
 <p>Is your dataset not tabular (e.g.&nbsp;TEI, visual)? Please reach out to our editorial team before submitting to discuss format and style recommendations.</p>
 <p>At the Post45 Data Collective, we aim to make humanities research data accessible, usable, and responsible to its affiliated communities. Our style guide therefore looks to the <a href="https://www.go-fair.org/fair-principles/" class="external" target="_blank">FAIR</a> (Findability, Accessibility, Interoperability, Reuse) and <a href="https://www.gida-global.org/care" class="external" target="_blank">CARE</a> (Collective Benefit, Authority to Control, Responsibility, Ethics) Principles for data management and governance to guide our recommendations.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -356,6 +377,7 @@ Selected Resources
 </div>
 <hr>
 </section>
+</section>
 <section id="general-tips-suggestions" class="level1">
 <h1><strong>General Tips &amp; Suggestions</strong></h1>
 <p>We recommend the following basic best practices for preparing your dataset.</p>
@@ -365,7 +387,7 @@ Selected Resources
 <ul>
 <li><p>Check for unintentional <strong>duplicate entries</strong>, such as the same author name with slight variations in spelling. To do so, you might use the <a href="https://openrefine.org/docs/manual/cellediting#cluster-and-edit" class="external" target="_blank">“Cluster” function</a> in OpenRefine, or a programming approach where you display unique values or value counts.</p></li>
 <li><p>Remove <strong>unnecessary punctuation or trailing white space</strong>. Again, this is a task you could complete in OpenRefine (see <a href="https://openrefine.org/docs/manual/cellediting#transform" class="external" target="_blank">“Common Transforms”</a>) or with a <a href="https://www.geeksforgeeks.org/python/python-remove-spaces-from-a-string/" class="external" target="_blank">programming language</a>.</p></li>
-<li><p>Keep each field as distinct as possible. Ideally, each cell should only contain a <strong>single value</strong> (though there are exceptions).</p></li>
+<li><p>Keep each field as distinct as possible. Ideally, each cell should only contain a <strong>single value</strong> (though there are <a href="#representing-multiple-values">exceptions</a>).</p></li>
 </ul>
 </section>
 <section id="consider-use-cases" class="level2">
@@ -375,7 +397,7 @@ Selected Resources
 <ul>
 <li>Prioritize <strong>sortability</strong>
 <ul>
-<li>For example, using ISO 8601 for dates (1794-07-27) allows computers to easily sort them numerically, as compared to other variations (July 27, 1794; 7/27/1294; 27 July ’94) (See <a href="#data-types">Data Types</a>)</li>
+<li>For example, using ISO 8601 for dates (1794-07-27) allows computers to easily sort them numerically, as compared to other variations (July 27, 1794; 7/27/1794; 27 July ’94) (See <a href="#data-types">Data Types</a>)</li>
 </ul></li>
 <li>Prioritize <strong>consistency and standardization</strong>
 <ul>
@@ -404,8 +426,8 @@ Selected Resources
 </section>
 <section id="use-appropriate-software" class="level2">
 <h2 class="anchored" data-anchor-id="use-appropriate-software">3. Use Appropriate Software</h2>
-<p>CSV files can theoretically be viewed and edited in many different programs and softwares; however, not all of them will enforce appropriate formatting upon export (see <a href="#character-encoding">Character Encoding</a>). Avoid working with your data in text editors like Word, and instead stick to <strong>programs designed for data work</strong> specifically, like Excel , Google Sheets, R and RStudio, or Python and libraries like Pandas.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<p>CSV files can theoretically be viewed and edited in many different programs and software packages; however, not all of them will enforce appropriate formatting upon export (see <a href="#character-encoding">Character Encoding</a>). Avoid working with your data in text editors like Word, and instead stick to <strong>programs designed for data work</strong> specifically, like Excel, Google Sheets, R and RStudio, or Python and libraries like Pandas.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -433,7 +455,7 @@ Selected Resources
 <h1><strong>Files &amp; File Organization</strong></h1>
 <section id="file-formats" class="level2">
 <h2 class="anchored" data-anchor-id="file-formats">File Formats</h2>
-<p>Ensure that your data files are formatted for <strong>sustainable, non-proprietary use</strong>. What does it mean for a file format to be sustainable and non-proprietary? Well, a popular file format for working with spreadsheets is the Excel default that ends with the extension .xlsx. This is the default format when saving data in Excel. While .xlsx files can be very useful, they’re technically proprietary and owned by Microsoft, meaning that we can’t rely on them to be accessible forever outside of Microsoft’s ecosystem.</p>
+<p>Ensure that your data files are formatted for <strong>sustainable, non-proprietary use</strong>. What does it mean for a file format to be sustainable and non-proprietary? A popular file format for working with spreadsheets is the Excel default that ends with the extension .xlsx. This is the default format when saving data in Excel. While .xlsx files can be very useful, they’re technically proprietary and owned by Microsoft, meaning that we can’t rely on them to be accessible forever outside of Microsoft’s ecosystem.</p>
 <p>By contrast, a non-proprietary format for spreadsheet files is .csv, which stands for comma separated values. You can open a .csv file with virtually any software package or tool, and they have a better chance of being accessible in the future. You can easily save your spreadsheet in this format, even if using Excel, by clicking “Save as…,” browsing the “File Format” drop-down, and selecting “CSV UTF-8.” One of the only drawbacks here is that you will lose any bells-and-whistles added with Excel, like colors added to cells or special filters.</p>
 <table class="caption-top table">
 <colgroup>
@@ -479,7 +501,7 @@ Selected Resources
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>A small selection of proprietary file formats and their non-proprietary counterparts</em></p>
 </blockquote>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -495,7 +517,7 @@ Selected Resources
 </section>
 <section id="representing-multiple-values" class="level2">
 <h2 class="anchored" data-anchor-id="representing-multiple-values">Representing Multiple Values</h2>
-<p>Ideally, each cell of your CSV file should only contain a single value. However, if you are including multiple data points in one cell (e.g.&nbsp;a list of names), make sure to use a unique delimiter (not a comma) between each datapoint to ensure future users can split columns easily as needed. We recommend <strong>semi-colons (;)</strong> or <strong>pipes (|).</strong></p>
+<p>Ideally, each cell of your CSV file should only contain a single value. However, if you are including multiple data points in one cell (e.g.&nbsp;a list of names), make sure to use a unique delimiter (not a comma) between each datapoint to ensure future users can split columns easily as needed. We recommend <strong>semi-colons (<code>;</code>)</strong> or <strong>pipes (<code>|</code>)</strong>.</p>
 <p>For example, if you format your name fields as “Last Name, First Name” and include multiple entries in the same cell, you will have the following results when using software like Open Refine or Excel to split a column into multiple columns for analysis.</p>
 <table class="caption-top table">
 <colgroup>
@@ -507,24 +529,29 @@ Selected Resources
 <tr class="header">
 <th style="text-align: left;">Internal Delimiter</th>
 <th style="text-align: left;">Original Entry</th>
-<th style="text-align: left;">Split Entries</th>
+<th style="text-align: left;">Resulting Cells After Splitting</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>Comma-separated</strong></td>
-<td style="text-align: left;">“Du Bois, W.E.B., Mayhew, Henry”</td>
-<td style="text-align: left;">“Du Bois”“W.E.B.”“Mayhew”“Henry”</td>
+<td style="text-align: left;"><strong>Comma</strong> ✗</td>
+<td style="text-align: left;"><code>Du Bois, W.E.B., Mayhew, Henry</code></td>
+<td style="text-align: left;"><code>Du Bois</code> · <code>W.E.B.</code> · <code>Mayhew</code> · <code>Henry</code><br><small>4 cells — names accidentally broken apart</small></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Semicolon-separated</strong></td>
-<td style="text-align: left;">“Du Bois, W.E.B.; Mayhew, Henry”</td>
-<td style="text-align: left;">“Du Bois, W.E.B”“Mayhew, Henry”</td>
+<td style="text-align: left;"><strong>Semicolon (<code>;</code>)</strong> ✓</td>
+<td style="text-align: left;"><code>Du Bois, W.E.B.; Mayhew, Henry</code></td>
+<td style="text-align: left;"><code>Du Bois, W.E.B.</code> · <code>Mayhew, Henry</code><br><small>2 cells — each name kept intact</small></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Pipe (<code>\|</code>)</strong> ✓</td>
+<td style="text-align: left;"><code>Du Bois, W.E.B. \| Mayhew, Henry</code></td>
+<td style="text-align: left;"><code>Du Bois, W.E.B.</code> · <code>Mayhew, Henry</code><br><small>2 cells — each name kept intact</small></td>
 </tr>
 </tbody>
 </table>
 <blockquote class="blockquote">
-<p><strong>Example</strong>: <em>this is what split columns may look like if you use comma or semicolon-separated internal delimiters. Note how the comma-separated option unintentionally splits the names by first name / last name and not just by individual</em></p>
+<p><strong>Example</strong>: <em>what split columns look like depending on the internal delimiter you use. The comma option fails because the names themselves contain commas; semicolons and pipes (the recommended options) preserve each full name as a single cell.</em></p>
 </blockquote>
 </section>
 <section id="character-encoding" class="level2">
@@ -553,7 +580,7 @@ Selected Resources
 </blockquote>
 <p>This is a common “character encoding” issue. Character encoding refers to systems that enable computers to represent, you guessed it, characters: individual letters like “a” and “á”; emojis like 💩and 🦭; or symbols like ¡, £, and €. We used to rely on many different encoding systems, but today <strong>UTF-8 (Unicode Transformation Format)</strong> is the most widely used. It can represent almost any character in most of the world’s languages.</p>
 <p>When compiling or working with data, it’s important to save your data in a UTF-8 format and to ensure that diacritics and other special characters are preserved.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -577,14 +604,96 @@ Selected Resources
 </li>
 <li>… unique IDs <strong>do not duplicate</strong> across datasets (e.g.&nbsp;same ID for both a line of author data and a line of publication data)</li>
 </ul>
-<p><a href="./images/styleguide1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./images/styleguide1.png" class="border img-fluid"></a></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">full_name</th>
+<th style="text-align: left;">prize_year</th>
+<th style="text-align: left;">prize_name</th>
+<th style="text-align: left;">author_viaf</th>
+<th style="text-align: left;">author_lccn</th>
+<th style="text-align: left;">title_of_winning_book</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Toni Morrison</td>
+<td style="text-align: left;">2016</td>
+<td style="text-align: left;">Saul Bellow Award For Achievement In American Fiction</td>
+<td style="text-align: left;"><mark>109406177</mark></td>
+<td style="text-align: left;"><mark>n80131379</mark></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Toni Morrison</td>
+<td style="text-align: left;">1988</td>
+<td style="text-align: left;">Pulitzer Prize</td>
+<td style="text-align: left;"><mark>109406177</mark></td>
+<td style="text-align: left;"><mark>n80131379</mark></td>
+<td style="text-align: left;">Beloved</td>
+</tr>
+</tbody>
+</table>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>First two entries for Toni Morrison in “<a href="https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table" class="external" target="_blank">Major Literary Prize Winners and Judges</a>”</em></p>
 </blockquote>
-<p><a href="./images/styleguide3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./images/styleguide3.png" class="border img-fluid"></a></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">shorttitle</th>
+<th style="text-align: left;">author</th>
+<th style="text-align: left;">hathi_id</th>
+<th style="text-align: left;">author_lccn</th>
+<th style="text-align: left;">author_viaf</th>
+<th style="text-align: left;">oclc</th>
+<th style="text-align: left;">oclc_owi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Beloved : a novel</td>
+<td style="text-align: left;">Morrison, Toni</td>
+<td style="text-align: left;">mdp.49015003142743</td>
+<td style="text-align: left;"><mark>n80131379</mark></td>
+<td style="text-align: left;"><mark>109406177</mark></td>
+<td style="text-align: left;">15284982</td>
+<td style="text-align: left;">989794</td>
+</tr>
+</tbody>
+</table>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>Entry for Toni Morrison’s</em> Beloved <em>in “<a href="https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table-1" class="external" target="_blank">Prize-Winning Authors’ Books</a>,” a dataset linked to the one above. Though the author and full_name formats differ, the datasets are still easily linked using the LCCN and VIAF ID fields.</em></p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Tip: BookReconciler can add the linking IDs for you</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If your datasets cover books and authors, you don’t have to look up LCCN, VIAF, Wikidata, or HathiTrust IDs by hand. <a href="https://data.post45.org/our-tools.html" class="external" target="_blank"><strong>BookReconciler 📘💎</strong></a>, the Post45 Data Collective’s free OpenRefine extension, will match your records against these authorities in bulk and add the identifiers as new columns — the same IDs that make cross-dataset linking possible. See <a href="#external-vocabularies-authorities">External Vocabularies &amp; Authorities</a> for setup details.</p>
+</div>
+</div>
 <hr>
 </section>
 </section>
@@ -607,7 +716,32 @@ Selected Resources
 </ul></li>
 <li><p><strong>Standardize the <em>type</em> of information</strong> included in each field. This is especially important to consider for freeform fields such as “notes” or “description” that rely on a researcher’s subjective interpretation. Instead of putting every piece of information into one field (e.g.&nbsp;notes), split and categorize the types of information being gathered to make them more legible (e.g.&nbsp;physical_description, image_description, advertisements, summary, related_texts) (see <a href="#other-descriptive-data">Other Descriptive Data</a>).</p></li>
 </ul>
-<p><a href="./images/styleguide2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./images/styleguide2.png" class="border img-fluid"></a></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">title</th>
+<th style="text-align: left;">creator</th>
+<th style="text-align: left;">released</th>
+<th style="text-align: left;">year_set</th>
+<th style="text-align: left;">wikipedia_pg</th>
+<th style="text-align: left;">notes</th>
+<th style="text-align: left;">predictions</th>
+<th style="text-align: left;">source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Metal Gear Solid 2: Sons of Liberty</td>
+<td style="text-align: left;">Hideo Kojima</td>
+<td style="text-align: left;">2001</td>
+<td style="text-align: left;">2008</td>
+<td style="text-align: left;"><a href="https://en.wikipedia.org/wiki/Metal_Gear_Solid_2" class="external" target="_blank">Metal_Gear_Solid_2</a></td>
+<td style="text-align: left;">Median of the years depicted.</td>
+<td style="text-align: left;">The introduction mission is set in 2007, but the re…</td>
+<td style="text-align: left;">wikipast</td>
+</tr>
+</tbody>
+</table>
 <blockquote class="blockquote">
 <p><strong>Example</strong>: <em>Note how the “<a href="https://data.post45.org/posts/futuristic-fiction/" class="external" target="_blank">Time Horizons of Futuristic Fiction</a>” dataset separates freeform fields like “notes” and “predictions” based on the types of information they contain</em></p>
 </blockquote>
@@ -629,8 +763,8 @@ Selected Resources
 </section>
 <section id="missing-unknown-values" class="level2">
 <h2 class="anchored" data-anchor-id="missing-unknown-values">Missing &amp; Unknown Values</h2>
-<p>Datasets will always contain gaps, whether in missing/unknown information, or in fields non-applicable to a given subject. It’s important to <strong>delineate between all of these slight variations</strong> to ensure that none of them are conflated with one another.</p>
-<p>For instance, you might use the following schema to decide which missing or unknown value format is best for you:</p>
+<p>Datasets will always contain gaps — sometimes because information is genuinely unknown, sometimes because a field doesn’t apply to a given subject, and sometimes because a researcher simply hasn’t filled it in. Where possible, it’s useful to <strong>delineate between these different kinds of gap</strong> rather than collapsing them into a single empty cell.</p>
+<p>We recommend choosing <strong>plain-English markers</strong> that are explicit about <em>why</em> the cell is empty. For example:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -655,27 +789,120 @@ Selected Resources
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>title_of_winning_book</strong></td>
-<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">not applicable</td>
 <td style="text-align: left;">Not Applicable to Subject</td>
-<td style="text-align: left;">An author won the award for their career rather than individual book</td>
+<td style="text-align: left;">An author won the award for their career rather than for an individual book</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>notes</strong></td>
-<td style="text-align: left;">NaN*</td>
+<td style="text-align: left;">missing</td>
 <td style="text-align: left;">Missing Information</td>
-<td style="text-align: left;">No applicable notes included by researcher</td>
+<td style="text-align: left;">No applicable notes recorded by researcher</td>
 </tr>
 </tbody>
 </table>
-<blockquote class="blockquote">
-<p>**“NaN” stands for “Not a Number,” and can be translated from coding language into “this space intentionally left blank.”*</p>
-</blockquote>
+<p>Whatever set of markers you choose, <strong>use them consistently</strong> across the dataset and <strong>document what each one means</strong> in your data essay.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Why we recommend plain-English markers</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may have seen datasets that use <code>NA</code>, <code>N/A</code>, <code>NaN</code>, <code>null</code>, or simply leave cells blank to indicate gaps. These conventions cause trouble in two directions:</p>
+<ol type="1">
+<li><strong>Tools collapse them together.</strong> Python’s pandas, for example, will automatically read <code>NA</code>, <code>N/A</code>, <code>NaN</code>, <code>null</code>, <code>NULL</code>, <code>None</code>, and empty cells as the same missing-value sentinel (<code>NaN</code>) by default. If you use <code>N/A</code> to mean <em>not applicable</em> and <code>NaN</code> to mean <em>missing</em>, that distinction disappears the moment someone loads the CSV in pandas (unless they pass <code>keep_default_na=False</code>).</li>
+<li><strong>Different programs treat blank cells differently.</strong> Excel may render an empty cell as visually identical to a cell containing the string <code>"NaN"</code> or a single space. Without an explicit marker, it’s hard to tell what a blank cell was meant to communicate — or whether it was a data-entry oversight.</li>
+</ol>
+<p>Plain-English values like <code>unknown</code>, <code>not applicable</code>, and <code>missing</code> are not in pandas’s default NA list, so they survive a CSV import as strings. That lets a downstream user decide for themselves which categories should be treated as missing and which should be preserved — and it makes the distinctions legible to a human skimming the spreadsheet.</p>
+</div>
+</div>
 <p>Be sure to also check for <strong>outliers and inconsistencies</strong> across data. If a large chunk of data is missing (e.g.&nbsp;a specific date range), ensure that this is not due to a research gap on your end. Whatever the reason for a large data gap, your data essay provides a useful space to provide an explanation (and, if necessary, a reflection on its potential impact on analysis).</p>
 </section>
 <section id="external-vocabularies-authorities" class="level2">
 <h2 class="anchored" data-anchor-id="external-vocabularies-authorities">External Vocabularies &amp; Authorities</h2>
-<p>External vocabularies and authorities provide accessible language, curated by experts, that help to <strong>standardize and link data across platforms, datasets, and institutions</strong>. For instance, a Library of Congress name authority for “Prince” will help users not only to differentiate him from titled royals, but also to ensure that, even when he is listed in three different entries as “Prince,” “Artist Formerly Known as Prince,” and “Prince Rogers Nelson,” these names will all still be linked back to the same person.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<p>External vocabularies and authorities provide accessible language, curated by experts, that help to <strong>standardize and link data across platforms, datasets, and institutions</strong>.</p>
+<p>For instance, a Library of Congress name authority for “Prince” (below right) will help users not only to differentiate him from titled royals, but also to ensure that, even when he is listed in three different entries as “Prince,” “Artist Formerly Known as Prince,” and “Prince Rogers Nelson,” these names will all still be linked back to the same person. A <a href="https://www.wikidata.org/wiki/Q7542" class="external" target="_blank">Wikidata</a> entry for Prince (below left) does similar work, gathering his aliases under a single Q-number. Each authority assigns its own persistent identifier — <strong>Q7542</strong> in Wikidata, <strong>n84079379</strong> in the Library of Congress — that you can include in your dataset to unambiguously link a record back to that authority.</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p><a href="./images/styleguide4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./images/styleguide4.png" class="img-fluid"></a></p>
+<blockquote class="blockquote">
+<p><strong>Example</strong>: <em>Wikidata entry for Prince</em></p>
+</blockquote>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<p><a href="./images/styleguide5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./images/styleguide5.png" class="img-fluid"></a></p>
+<blockquote class="blockquote">
+<p><strong>Example</strong>: <em>Library of Congress name authority for Prince</em></p>
+</blockquote>
+</div>
+</div>
+<p>The same logic lets you link records <em>across</em> datasets. Because both of the linked datasets in “The Index of Major Literary Prizes in the US” use the same LCCN and VIAF IDs for Toni Morrison, a researcher can connect her prize-winning record to the metadata for <em>Beloved</em> — even though the name is formatted differently in each table:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">full_name</th>
+<th style="text-align: left;">prize_year</th>
+<th style="text-align: left;">prize_name</th>
+<th style="text-align: left;">author_viaf</th>
+<th style="text-align: left;">author_lccn</th>
+<th style="text-align: left;">title_of_winning_book</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Toni Morrison</td>
+<td style="text-align: left;">1988</td>
+<td style="text-align: left;">Pulitzer Prize</td>
+<td style="text-align: left;"><mark>109406177</mark></td>
+<td style="text-align: left;"><mark>n80131379</mark></td>
+<td style="text-align: left;">Beloved</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">shorttitle</th>
+<th style="text-align: left;">author</th>
+<th style="text-align: left;">hathi_id</th>
+<th style="text-align: left;">author_lccn</th>
+<th style="text-align: left;">author_viaf</th>
+<th style="text-align: left;">oclc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Beloved : a novel</td>
+<td style="text-align: left;">Morrison, Toni</td>
+<td style="text-align: left;">mdp.49015003142743</td>
+<td style="text-align: left;"><mark>n80131379</mark></td>
+<td style="text-align: left;"><mark>109406177</mark></td>
+<td style="text-align: left;">15284982</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -697,14 +924,6 @@ Selected Resources
 </ul>
 </div>
 </div>
-<p><a href="./images/styleguide4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="./images/styleguide4.png" class="img-fluid"></a></p>
-<blockquote class="blockquote">
-<p><strong>Example</strong>: <em>Library of Congress name authority for Prince</em></p>
-</blockquote>
-<p><a href="./images/styleguide5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="./images/styleguide5.png" class="img-fluid"></a></p>
-<blockquote class="blockquote">
-<p><strong>Example</strong>: <em>Wikidata entry for Prince</em></p>
-</blockquote>
 <p>When incorporating an external vocabulary entry, make sure to include <strong>BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution</strong> (“n84079379” in the LoC example above or “Q7542” for Wikidata). You can look these up manually, one record at a time, by searching each authority’s website — or, if you have more than a handful of records, you can let our own tool, <strong>BookReconciler</strong>, match them automatically in bulk.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -727,7 +946,8 @@ Selected Resources
 <p>A short <a href="https://www.youtube.com/watch?v=V9ZJoFowRJM" class="external" target="_blank">video tutorial on YouTube</a> walks through the workflow, and the <a href="https://github.com/Post45-Data-Collective/openrefine-reconciliation-service?tab=readme-ov-file#bookreconciler--02--metadata-enrichment-and-work-level-clustering" class="external" target="_blank">GitHub repository</a> has additional documentation. If you cannot install BookReconciler yourself, please reach out to the editorial team — we may be able to help run reconciliation on your dataset before publication.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<p>For a worked example of how HathiTrust volume IDs unlock computational text analysis — including in-copyright books — see <a href="https://melaniewalsh.github.io/Intro-Cultural-Analytics/05-Text-Analysis/02-TF-IDF-HathiTrust.html" class="external" target="_blank">“TF-IDF with HathiTrust Data”</a> in <em>Introduction to Cultural Analytics &amp; Python</em>, which walks through using a HathiTrust volume ID to download word-frequency data for Edward P. Jones’s <em>Lost in the City</em> and run tf-idf analysis on it.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -737,7 +957,7 @@ Selected Resources
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>At the Post45 Data Collective, we particularly encourage the inclusion of HathiTrust volume IDs for book-related data. These IDs enable researchers to computationally access full text or “bags of words” (unordered text amenable for large-scale analysis) for books that are available in the HathiTrust Digital Library (see the <a href="https://github.com/htrc/htrc-feature-reader" class="external" target="_blank">HTRC Feature Reader GitHub repository</a> for more information). You can find a volume ID in the URL for a specific title. For example, the specific volume of <em>Pride and Prejudice</em> found at <a href="https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&amp;seq=1" class="external" target="_blank">https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&amp;seq=1</a> has the volume ID hvd.32044013656053. You can use our <a href="https://data.post45.org/our-tools.html" class="external" target="_blank">OpenRefine tool</a> to automatically add HathiTrust volume IDs for relevant records.</p>
+<p>At the Post45 Data Collective, we particularly encourage the inclusion of HathiTrust volume IDs for book-related data. These IDs enable researchers to computationally access full text or “bags of words” (unordered text amenable for large-scale analysis) for books that are available in the HathiTrust Digital Library (see the <a href="https://github.com/htrc/htrc-feature-reader" class="external" target="_blank">HTRC Feature Reader GitHub repository</a> for more information). You can find a volume ID in the URL for a specific title. For example, the specific volume of <em>Pride and Prejudice</em> found at <a href="https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&amp;seq=1" class="external" target="_blank">https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&amp;seq=1</a> has the volume ID hvd.32044013656053. You can use our <a href="https://data.post45.org/our-tools.html" class="external" target="_blank">BookReconciler</a> tool to automatically add HathiTrust volume IDs for relevant records.</p>
 <p>Keep in mind that HathiTrust IDs represent <strong>specific volumes</strong> that have been digitized by specific institutions, rather than <strong>title-level</strong> data. A single title like <em>Pride and Prejudice</em> is likely to have multiple IDs referring to different editions or digitizations of the same title. If your dataset includes title-level data rather than volume-level data, you will need to standardize and document how you selected which ID(s) to include. For example, you might include:</p>
 <ul>
 <li>IDs for ALL matching volumes</li>
@@ -765,7 +985,7 @@ Selected Resources
 <li>Entries can be formatted as either “First Name Last Name” OR “Last name, First name,” though consistency across entries is encouraged<br>
 </li>
 </ul></li>
-<li>1 or more columns as defined by external vocabulary, including authority name in heading (e.g.&nbsp;“loc_name,” “wiki_name”, “VIAF”)</li>
+<li>1 or more columns as defined by external vocabulary, including authority name in heading (e.g.&nbsp;“loc_name,” “wiki_name,” “VIAF”)</li>
 </ul>
 <table class="caption-top table">
 <colgroup>
@@ -855,7 +1075,7 @@ Selected Resources
 <p><strong>In all cases</strong>:</p>
 <ul>
 <li>Use headings that include type and authority name, and ID indicator (e.g.&nbsp;“viaf_name_url,” “tk_family_id”)</li>
-<li>EITHER use the ID on its own or the URL version of the ID (e.g.&nbsp;“n84079379” or “https://lccn.loc.gov/n84079379.” Be consistent.</li>
+<li>EITHER use the ID on its own or the URL version of the ID (e.g.&nbsp;“n84079379” or “https://lccn.loc.gov/n84079379”). Be consistent.</li>
 </ul>
 <table class="caption-top table">
 <colgroup>
@@ -977,8 +1197,8 @@ Selected Resources
 </section>
 <section id="publication-data" class="level2">
 <h2 class="anchored" data-anchor-id="publication-data">Publication Data</h2>
-<section id="contributers" class="level3">
-<h3 class="anchored" data-anchor-id="contributers">Contributors</h3>
+<section id="contributors" class="level3">
+<h3 class="anchored" data-anchor-id="contributors">Contributors</h3>
 <p>If the publications in your dataset include multiple types of contribution (e.g.&nbsp;edited collections as well as monographs), consider a standardized way to document contributors.</p>
 <p><strong>Use 1 or more of the following to identify multiple types and numbers of contributors</strong>:</p>
 <ul>
@@ -1035,8 +1255,24 @@ Selected Resources
 </section>
 <section id="isbn-issn" class="level3">
 <h3 class="anchored" data-anchor-id="isbn-issn">ISBN/ISSN</h3>
-<p>Including the ISBN or ISSN for a publication can make specific bibliographic information more accessible. Tools like our <a href="https://data.post45.org/our-tools.html" class="external" target="_blank">OpenRefine script</a> or citation managers like <a href="https://www.zotero.org/" class="external" target="_blank">Zotero</a> can easily automate searches for this information.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<p>An <strong>ISBN</strong> (International Standard Book Number) is a unique 10- or 13-digit identifier assigned to a specific edition of a book; an <strong>ISSN</strong> (International Standard Serial Number) is the equivalent 8-digit identifier for a serial publication like a journal or magazine. Both make it easy to look up bibliographic metadata, check holdings across libraries, and disambiguate similarly titled works.</p>
+<p>Including an ISBN or ISSN for each publication makes this metadata more accessible, and <strong>we prefer to have one rather than none</strong>. You don’t have to track these down manually: our <a href="https://data.post45.org/our-tools.html" class="external" target="_blank">BookReconciler</a> tool can return ISBNs for the books in your dataset alongside other identifiers, and citation managers like <a href="https://www.zotero.org/" class="external" target="_blank">Zotero</a> can also automate the lookup.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>A note on ISBNs and “Works”</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ISBNs identify <strong>a specific edition</strong> of a book — a hardcover, a paperback, a translation, and a reissue will each have their own ISBN. They do not, on their own, tell you that those editions are all the <em>same book</em>.</p>
+<p>In bibliographic terminology (specifically the <a href="https://www.loc.gov/cds/downloads/FRBR.PDF" class="external" target="_blank">FRBR</a> model used by the Library of Congress and other authorities), the abstract concept that unites every edition, translation, and reprint is called a <strong>Work</strong>. <em>The Book of Salt</em> by Monique Truong is one Work; its hardcover, paperback, Kindle edition, and French translation are different <em>Manifestations</em> of that Work, each with its own ISBN.</p>
+<p>For humanities datasets, this distinction matters. If you’re analyzing prize-winning novels, you usually care about the Work, not whether a researcher happened to record the 2003 hardcover or the 2004 paperback. <strong>BookReconciler</strong> handles this for you by clustering different ISBNs, OCLC numbers, and HathiTrust IDs into a single Work-level group — so you can include multiple identifiers for the same book without losing the link between them. For the full methodology, see Miller, Sinykin, and Walsh, <a href="https://arxiv.org/abs/2512.10165" class="external" target="_blank">“BookReconciler📘💎: An Open-Source Tool for Metadata Enrichment and Work-Level Clustering”</a> (<em>Joint Conference on Digital Libraries</em>, 2025).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1211,9 +1447,24 @@ Selected Resources
 </section>
 <section id="acknowledgements" class="level1">
 <h1><strong>Acknowledgements</strong></h1>
-<p>This data style guide draws language, information, and inspiration from the <a href="https://c19datacollective.com/criteria/data-documentation/" class="external" target="_blank">C19 Data Collective Data Documentation guide</a> and <a href="https://doi.org/10.17605/OSF.IO/C9N5K" class="external" target="_blank">Humanities Data Preparation Guide</a>, as well as the <a href="https://datacuration.network/" class="external" target="_blank">Digital Curation Network</a>. Enormous thanks in particular to Sarah E. Reiff Conell, Research Data Management Specialist at Princeton University Library, for her gracious guidance, support, and permissions.</p>
+<p>This data style guide was written by Em Nordling, with contributions from Melanie Walsh and Dan Sinykin.</p>
+<p>It draws language, information, and inspiration from the <a href="https://c19datacollective.com/criteria/data-documentation/" class="external" target="_blank">C19 Data Collective Data Documentation guide</a> and <a href="https://doi.org/10.17605/OSF.IO/C9N5K" class="external" target="_blank">Humanities Data Preparation Guide</a>, as well as the <a href="https://datacuration.network/" class="external" target="_blank">Digital Curation Network</a>. Enormous thanks in particular to Sarah E. Reiff Conell, Research Data Management Specialist at Princeton University Library, for her gracious guidance, support, and permissions.</p>
 <p>Thank you to the following parties for their generous feedback on this document: Karl Berglund, Julie Enszer, Long Le-Khac, Jordan Pruett, Lindsay Thomas, Ted Underwood, and Grant Wythoff.</p>
 <p>This project was originally funded and then defunded by the <a href="https://www.neh.gov/" class="external" target="_blank">National Endowment for the Humanities</a>. Thank you to <a href="https://college.emory.edu/" class="external" target="_blank">Emory University College of Arts and Sciences</a> for their timely and generous support.</p>
+<hr>
+</section>
+<section id="citation" class="level1">
+<h1><strong>Citation</strong></h1>
+<p>For attribution, please cite this work as:</p>
+<p>Nordling, Em. 2026. “Post45 Data Collective Tabular Data Style Guide.” <em>Post45 Data Collective</em>. <a href="https://data.post45.org/style-guide.html" class="uri">https://data.post45.org/style-guide.html</a>.</p>
+<p><strong>BibTeX:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">@online</span>{<span class="ot">nordling2026</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">author</span>    = {Nordling, Em},</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span>     = {Post45 {Data} {Collective} {Tabular} {Data} {Style} {Guide}},</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">date</span>      = {2026-05-11},</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">url</span>       = {https://data.post45.org/style-guide.html},</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">langid</span>    = {en}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
