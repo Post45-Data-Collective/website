@@ -203,6 +203,33 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <p><strong>Data Tables</strong>: All datasets on the Post45 Data Collective website are displayed as interactive data tables, which enables users to filter, explore, and download them. The creation of the data tables is handled by the Post45 Data Collective editorial team. Contributors need only submit a spreadsheet file(s), such as an Excel or CSV file.</p>
 <p><strong>Data Essays</strong>: All datasets are accompanied by a contextual statement or “data essay” that addresses (in 4,000 words or less) the significance of the data; the social and historical context of the data; how the data was collected, cleaned, and organized; and possible ethical concerns or misuses of the data. This essay will be prepared by the contributors.</p>
 <p><strong>Visualizations</strong>: We sometimes feature visualizations alongside the data tables, such as those featured in <a href="https://data.post45.org/posts/asian-american-literature/#explore-the-asian-american-literary-canon">“The Canon of Asian American Literature.”</a> We use <a href="https://quarto.org/">Quarto</a> to host our website, and we can display visualizations created with Python, R, and JavaScript <a href="https://quarto.org/docs/interactive/ojs/">Observable notebooks</a>. If you’d like to prepare your own visualization or discuss the creation of one, please get in touch.</p>
+<p>Before you submit, please consult our two main resources for preparing data:</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>Tabular Data Style Guide</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <a href="./style-guide.html"><strong>Post45 Data Collective Tabular Data Style Guide</strong></a> walks through how to format and document tabular humanities data for submission — from file formats and character encoding to column naming, missing values, dates, and persistent identifiers. It’s the place to start if you’re cleaning, structuring, or documenting a dataset for P45DC (or for any tabular humanities project).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><strong>BookReconciler 📘💎</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="./our-tools.html"><strong>BookReconciler</strong></a> is the Post45 Data Collective’s free, open-source tool for adding persistent identifiers to bibliographic data. Given a spreadsheet of book titles and authors, it queries the <strong>Library of Congress, VIAF, Wikidata, HathiTrust, OCLC,</strong> and <strong>Google Books</strong> in bulk and matches your records to their canonical IDs — and it can cluster different editions of the same Work together. See the <a href="./our-tools.html">BookReconciler page</a> for setup instructions and a video walkthrough. If you can’t run it yourself, we may be able to collaborate with you to add identifiers.</p>
+</div>
+</div>
 <section id="interested-in-submitting" class="level1">
 <h1>Interested in Submitting?</h1>
 <p>If you’re interested in submitting to the Post45 Data Collective, please consult our <a href="#dataset-criteria-preparing-formatting">“data formatting”</a> guidelines below, and prepare a data essay with <a href="https://docs.google.com/document/d/1Xm2ikqir-JceGoHwq1dI9qkVcXPTHWTGBAt0R3gN6S8/edit?usp=sharing">this Google Doc/Word template</a>.</p>
@@ -271,33 +298,6 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </section>
 <section id="dataset-criteria-preparing-formatting" class="level1">
 <h1>Dataset Criteria: Preparing + Formatting</h1>
-<p>Before submitting, please consult our two main resources for preparing data:</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Tabular Data Style Guide</strong>
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The <a href="./style-guide.html"><strong>Post45 Data Collective Tabular Data Style Guide</strong></a> walks through how to format and document tabular humanities data for submission — from file formats and character encoding to column naming, missing values, dates, and persistent identifiers. It’s the place to start if you’re cleaning, structuring, or documenting a dataset for P45DC (or for any tabular humanities project).</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>BookReconciler 📘💎</strong>
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="./our-tools.html"><strong>BookReconciler</strong></a> is the Post45 Data Collective’s free, open-source tool for adding persistent identifiers to bibliographic data. Given a spreadsheet of book titles and authors, it queries the <strong>Library of Congress, VIAF, Wikidata, HathiTrust, OCLC,</strong> and <strong>Google Books</strong> in bulk and matches your records to their canonical IDs — and it can cluster different editions of the same Work together. See the <a href="./our-tools.html">BookReconciler page</a> for setup instructions and a video walkthrough. If you can’t run it yourself, we may be able to collaborate with you to add identifiers.</p>
-</div>
-</div>
 <p>The Post45 Data Collective aims to maximize the reusability and interoperability of our datasets. To that end, we have worked to include unique identifiers, such as&nbsp;<a href="https://en.wikipedia.org/wiki/OCLC#Identifiers_and_linked_data">OCLC numbers</a>, <a href="https://en.wikipedia.org/wiki/ISBN">ISBNs</a>, <a href="https://www.hathitrust.org/hathifiles_description">HathiTrust ids</a>, and <a href="https://en.wikipedia.org/wiki/Virtual_International_Authority_File">VIAF records</a>, for data related to books and authors whenever possible.</p>
 <p>When curating your own datasets, we ask that you use similar unique identifiers.</p>
 <p>To aid in this process, we’ve been developing a new tool called BookReconciler, which can help automatically add persistent identifiers to spreadsheets with book title and author information. You can learn more about installing and using BookReconciler on <a href="https://github.com/Post45-Data-Collective/openrefine-reconciliation-service?tab=readme-ov-file#bookreconciler--02--metadata-enrichment-and-work-level-clustering">our GitHub page</a>. We also published a <a href="https://www.youtube.com/watch?v=V9ZJoFowRJM">tutorial on YouTube</a>.</p>
