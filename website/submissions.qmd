@@ -15,6 +15,18 @@ aliases:
 
 The Post45 Data Collective peer reviews and houses literary and cultural data from 1945 to the present.
 
+Before you submit, please consult our two main resources for preparing data:
+
+::: {.callout-tip appearance="default"}
+## **Tabular Data Style Guide**
+The [**Post45 Data Collective Tabular Data Style Guide**](style-guide.qmd) walks through how to format and document tabular humanities data for submission — from file formats and character encoding to column naming, missing values, dates, and persistent identifiers. It's the place to start if you're cleaning, structuring, or documenting a dataset for P45DC (or for any tabular humanities project).
+:::
+
+::: {.callout-tip appearance="default"}
+## **BookReconciler 📘💎**
+[**BookReconciler**](our-tools.qmd) is the Post45 Data Collective's free, open-source tool for adding persistent identifiers to bibliographic data. Given a spreadsheet of book titles and authors, it queries the **Library of Congress, VIAF, Wikidata, HathiTrust, OCLC,** and **Google Books** in bulk and matches your records to their canonical IDs — and it can cluster different editions of the same Work together. See the [BookReconciler page](our-tools.qmd) for setup instructions and a video walkthrough. If you can't run it yourself, we may be able to collaborate with you to add identifiers.
+:::
+
 **Data Tables**: All datasets on the Post45 Data Collective website are displayed as interactive data tables, which enables users to filter, explore, and download them. The creation of the data tables is handled by the Post45 Data Collective editorial team. Contributors need only submit a spreadsheet file(s), such as an Excel or CSV file.
 
 **Data Essays**: All datasets are accompanied by a contextual statement or “data essay” that addresses (in 4,000 words or less) the significance of the data; the social and historical context of the data; how the data was collected, cleaned, and organized; and possible ethical concerns or misuses of the data. This essay will be prepared by the contributors.
@@ -79,18 +91,6 @@ Provide sufficient detail such that readers understand how the dataset was creat
 
 
 # Dataset Criteria: Preparing + Formatting
-
-Before submitting, please consult our two main resources for preparing data:
-
-::: {.callout-tip appearance="default"}
-## **Tabular Data Style Guide**
-The [**Post45 Data Collective Tabular Data Style Guide**](style-guide.qmd) walks through how to format and document tabular humanities data for submission — from file formats and character encoding to column naming, missing values, dates, and persistent identifiers. It's the place to start if you're cleaning, structuring, or documenting a dataset for P45DC (or for any tabular humanities project).
-:::
-
-::: {.callout-tip appearance="default"}
-## **BookReconciler 📘💎**
-[**BookReconciler**](our-tools.qmd) is the Post45 Data Collective's free, open-source tool for adding persistent identifiers to bibliographic data. Given a spreadsheet of book titles and authors, it queries the **Library of Congress, VIAF, Wikidata, HathiTrust, OCLC,** and **Google Books** in bulk and matches your records to their canonical IDs — and it can cluster different editions of the same Work together. See the [BookReconciler page](our-tools.qmd) for setup instructions and a video walkthrough. If you can't run it yourself, we may be able to collaborate with you to add identifiers.
-:::
 
 The Post45 Data Collective aims to maximize the reusability and interoperability of our datasets. To that end, we have worked to include unique identifiers, such as [OCLC numbers](https://en.wikipedia.org/wiki/OCLC#Identifiers_and_linked_data), [ISBNs](https://en.wikipedia.org/wiki/ISBN), [HathiTrust ids](https://www.hathitrust.org/hathifiles_description), and [VIAF records](https://en.wikipedia.org/wiki/Virtual_International_Authority_File), for data related to books and authors whenever possible.
 
