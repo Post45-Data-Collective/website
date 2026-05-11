@@ -439,3 +439,5 @@ This dataset also includes various persistent identifiers and information from O
 Our IRB board has determined that none of our information violates the privacy or confidentiality of anybody listed in the database, although we are willing to partially or totally remove information about anyone upon their request. Other than gender, we have not tagged any of our entries with demographic data that might be considered sensitive or subjective.
 
 The gender information for authors in this data was collected by researching biographical information available on authors included in our database. When no biographical information on an author was available, the PEP team attempted to infer (when possible) the author’s most likely gender based on name. While there are instances where an individual author’s gender identity information may not be discernable, our data does allow for a reliable aggregate examination of gender trends in the IWW over time.
+
+# Citation

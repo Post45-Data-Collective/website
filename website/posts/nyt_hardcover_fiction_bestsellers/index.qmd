@@ -411,3 +411,5 @@ The *Times* only expanded its coverage to include nationwide bestsellers in Sept
 
 ::: {#refs}
 :::
+
+# Citation

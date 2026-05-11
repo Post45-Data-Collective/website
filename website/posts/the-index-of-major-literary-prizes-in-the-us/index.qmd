@@ -95,11 +95,13 @@ generateTabulatorTableFromCSV(
       "Author's VIAF cluster number",
       "Author's LCCN from id.loc.gov"
     ],
-    columnWidths: { "gender": 100, "role": 85, "prize_year": 100, "prize_type": 100,
-                    "prize_genre": 110, "stegner": 100, "graduate_degree": 120 },
+    columnWidths: { "gender": 140, "role": 110, "prize_year": 100, "prize_type": 110,
+                    "prize_genre": 120, "stegner": 110, "graduate_degree": 130,
+                    "prize_name": 220, "prize_institution": 240, "elite_institution": 220 },
     currencyColumns: ["prize_amount"],
-    rangeSliderColumns: ["prize_year"],
-    categoryColumns: ["gender", "role", "prize_type", "prize_genre", "graduate_degree", "stegner"],
+    rangeSliderColumns: ["prize_year", "prize_amount"],
+    categoryColumns: ["gender", "role", "prize_type", "prize_genre", "graduate_degree", "stegner",
+                      "prize_name", "prize_institution", "elite_institution"],
     sortColumns: ["prize_year"],
     sortOrders: ["desc"],
     buttonContainerId: "#button-container-major-prizes-winners",
@@ -360,3 +362,5 @@ This dataset also includes various persistent identifiers and information from O
 -   **oclc_eholdings**– from OCLC Classify – the electronic holdings count
 -   **oclc_holdings** – from OCLC Classify – the total holdings count
 -   **oclc_owi** – from OCLC Classify – the Classify work identifier
+
+# Citation
