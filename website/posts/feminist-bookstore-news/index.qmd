@@ -96,12 +96,11 @@ generateTabulatorTableFromCSV(
   "#table-container-fbn-articles",
   "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-descriptive.csv",
   {
-    displayedColumns: ["vol", "no", "vol.no", "article_title", "author", "category",
+    displayedColumns: ["vol", "no", "article_title", "author", "category",
                        "year", "month", "notes", "volunteer", "total_pages", "unique_id"],
     columnPopups: [
       "FBN volume number (1–23)",
       "FBN issue number; combined issues shown as e.g. '9.10'; SP marks special/supplemental issues",
-      "Volume and issue number combined as x.y (useful for sorting)",
       "Article title (variability in titles and conventions is preserved; not standardized)",
       "Article author when attributed; many unattributed articles are presumed to be by Carol Seajay",
       "Article category — see the description below for definitions",
@@ -112,7 +111,7 @@ generateTabulatorTableFromCSV(
       "Number of pages of article content in the issue",
       "Unique identifier appended for citation purposes"
     ],
-    columnWidths: { "vol": 80, "no": 80, "vol.no": 100, "category": 160, "year": 100, "month": 110 },
+    columnWidths: { "vol": 80, "no": 80, "category": 160, "year": 100, "month": 110 },
     rangeSliderColumns: ["year"],
     categoryColumns: ["vol", "no", "category", "month"],
     sortColumns: ["vol", "no"],
@@ -321,7 +320,7 @@ generateTabulatorTableFromCSV(
       "Format: Newsletter, Magazine, Supplement, or Electronic",
       "Highlights particular themes of issues of interest to readers"
     ],
-    columnWidths: { "volume": 100, "number": 100, "year_published": 140, "number_of_pages": 140, "format": 130 },
+    columnWidths: { "volume": 130, "number": 130, "year_published": 150, "number_of_pages": 180, "format": 130 },
     rangeSliderColumns: ["year_published"],
     numericColumns: ["number_of_pages"],
     categoryColumns: ["volume", "number", "format"],
