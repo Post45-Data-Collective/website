@@ -162,10 +162,6 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
     <a class="nav-link" href="./submissions.html"> 
 <span class="menu-text">Submissions</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./people.html"> 
-<span class="menu-text">People</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">About</span>
@@ -174,6 +170,10 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
         <li>
     <a class="dropdown-item" href="./about.html">
  <span class="dropdown-text">About</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./people.html">
+ <span class="dropdown-text">People</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./how-we-made-this.html">
@@ -247,7 +247,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <section id="observable-notebooks-the-post45-data-viewer" class="level2">
 <h2 class="anchored" data-anchor-id="observable-notebooks-the-post45-data-viewer">Observable Notebooks &amp; the Post45 Data Viewer</h2>
 <p>The interactive data tables on this site are powered by <a href="http://tabulator.info/">Tabulator</a> and <a href="https://observablehq.com/">Observable</a> notebooks, built on top of the <a href="https://observablehq.com/d/8bb63a6cde9addff">Post45 Data Viewer</a>. The Post45 Data Viewer was developed by Melanie Walsh and Juan Carlos Garcia with support from the <a href="https://data.post45.org/">Post45 Data Collective</a> and <a href="https://foundation.mozilla.org/en/what-we-fund/awards/responsible-computing-challenge/">Mozilla’s Responsible Computing Challenge</a>.</p>
-<p>These tables allow users to filter, sort, search, and download data; view tooltips with additional context; and customize which columns are displayed. Here’s an example using the U.S. National Park visit data:</p>
+<p>These tables allow users to filter, sort, search, and download data; view tooltips with additional context; and customize which columns are displayed. Here’s an example using the <a href="posts/futuristic-fiction/">“Time Horizons of Futuristic Fiction”</a> dataset:</p>
 <div class="cell">
 <div class="sourceCode cell-code hidden" id="cb1" data-startfrom="25" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 24;"><span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {generateTabulatorTableFromCSV} <span class="im">from</span> <span class="st">"8bb63a6cde9addff"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -259,32 +259,34 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <div class="cell hidden">
 <div class="sourceCode cell-code hidden" id="cb2" data-startfrom="31" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 30;"><span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">generateTabulatorTableFromCSV</span>(</span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#table-container-example"</span><span class="op">,</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/melaniewalsh/responsible-datasets-in-context/main/datasets/national-parks/US-National-Parks_RecreationVisits_1979-2024.csv"</span><span class="op">,</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/futuristic_fiction/futuristic_fiction.csv"</span><span class="op">,</span></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  {</span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">displayedColumns</span><span class="op">:</span> [</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">"ParkName"</span><span class="op">,</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Region"</span><span class="op">,</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>      <span class="st">"State"</span><span class="op">,</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Year"</span><span class="op">,</span></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>      <span class="st">"RecreationVisits"</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnPopups</span><span class="op">:</span> [</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Name of the National Park."</span><span class="op">,</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>      <span class="st">"NPS region the park belongs to."</span><span class="op">,</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>      <span class="st">"U.S. state where the park is located."</span><span class="op">,</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Calendar year of the visit count."</span><span class="op">,</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Total recreation visits for that year."</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="dt">numericColumns</span><span class="op">:</span> [<span class="st">"Year"</span><span class="op">,</span> <span class="st">"RecreationVisits"</span>]<span class="op">,</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="dt">categoryColumns</span><span class="op">:</span> [</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>      <span class="st">"ParkName"</span><span class="op">,</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Region"</span><span class="op">,</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>      <span class="st">"State"</span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortColumns</span><span class="op">:</span> [<span class="st">"ParkName"</span><span class="op">,</span> <span class="st">"Year"</span>]<span class="op">,</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortOrders</span><span class="op">:</span> [<span class="st">"asc"</span><span class="op">,</span> <span class="st">"desc"</span>]</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">"title"</span><span class="op">,</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      <span class="st">"creator"</span><span class="op">,</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>      <span class="st">"year_set"</span><span class="op">,</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>      <span class="st">"released"</span><span class="op">,</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>      <span class="st">"years_distant"</span><span class="op">,</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>      <span class="st">"medium"</span><span class="op">,</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>      <span class="st">"genre"</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnPopups</span><span class="op">:</span> [</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Title of the work."</span><span class="op">,</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Creator (author, director, etc.) of the work."</span><span class="op">,</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Future year in which the work takes place."</span><span class="op">,</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Year the work was originally released."</span><span class="op">,</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>      <span class="st">"How far in the future the work is set (year_set minus released)."</span><span class="op">,</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Medium: fiction, film, television, video game, radio, comics, etc."</span><span class="op">,</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Genre from Wikidata (e.g., science fiction, cyberpunk, crime, etc.)."</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnWidths</span><span class="op">:</span> { <span class="st">"medium"</span><span class="op">:</span> <span class="dv">130</span><span class="op">,</span> <span class="st">"genre"</span><span class="op">:</span> <span class="dv">160</span> }<span class="op">,</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rangeSliderColumns</span><span class="op">:</span> [<span class="st">"year_set"</span><span class="op">,</span> <span class="st">"released"</span>]<span class="op">,</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="dt">numericColumns</span><span class="op">:</span> [<span class="st">"years_distant"</span>]<span class="op">,</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="dt">categoryColumns</span><span class="op">:</span> [<span class="st">"medium"</span><span class="op">,</span> <span class="st">"genre"</span>]<span class="op">,</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortColumns</span><span class="op">:</span> [<span class="st">"year_set"</span>]<span class="op">,</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortOrders</span><span class="op">:</span> [<span class="st">"desc"</span>]</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-2" data-nodetype="expression">
 
@@ -362,7 +364,7 @@ Example Code
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7Z2VuZXJhdGVUYWJ1bGF0b3JUYWJsZUZyb21DU1Z9IGZyb20gXCI4YmI2M2E2Y2RlOWFkZGZmXCJcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImdlbmVyYXRlVGFidWxhdG9yVGFibGVGcm9tQ1NWKFxuICBcIiN0YWJsZS1jb250YWluZXItZXhhbXBsZVwiLFxuICBcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9tZWxhbmlld2Fsc2gvcmVzcG9uc2libGUtZGF0YXNldHMtaW4tY29udGV4dC9tYWluL2RhdGFzZXRzL25hdGlvbmFsLXBhcmtzL1VTLU5hdGlvbmFsLVBhcmtzX1JlY3JlYXRpb25WaXNpdHNfMTk3OS0yMDI0LmNzdlwiLFxuICB7XG4gICAgZGlzcGxheWVkQ29sdW1uczogW1xuICAgICAgXCJQYXJrTmFtZVwiLFxuICAgICAgXCJSZWdpb25cIixcbiAgICAgIFwiU3RhdGVcIixcbiAgICAgIFwiWWVhclwiLFxuICAgICAgXCJSZWNyZWF0aW9uVmlzaXRzXCJcbiAgICBdLFxuICAgIGNvbHVtblBvcHVwczogW1xuICAgICAgXCJOYW1lIG9mIHRoZSBOYXRpb25hbCBQYXJrLlwiLFxuICAgICAgXCJOUFMgcmVnaW9uIHRoZSBwYXJrIGJlbG9uZ3MgdG8uXCIsXG4gICAgICBcIlUuUy4gc3RhdGUgd2hlcmUgdGhlIHBhcmsgaXMgbG9jYXRlZC5cIixcbiAgICAgIFwiQ2FsZW5kYXIgeWVhciBvZiB0aGUgdmlzaXQgY291bnQuXCIsXG4gICAgICBcIlRvdGFsIHJlY3JlYXRpb24gdmlzaXRzIGZvciB0aGF0IHllYXIuXCJcbiAgICBdLFxuICAgIG51bWVyaWNDb2x1bW5zOiBbXCJZZWFyXCIsIFwiUmVjcmVhdGlvblZpc2l0c1wiXSxcbiAgICBjYXRlZ29yeUNvbHVtbnM6IFtcbiAgICAgIFwiUGFya05hbWVcIixcbiAgICAgIFwiUmVnaW9uXCIsXG4gICAgICBcIlN0YXRlXCJcbiAgICBdLFxuICAgIHNvcnRDb2x1bW5zOiBbXCJQYXJrTmFtZVwiLCBcIlllYXJcIl0sXG4gICAgc29ydE9yZGVyczogW1wiYXNjXCIsIFwiZGVzY1wiXVxuICB9XG4pO1xuIn1dfQ==
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7Z2VuZXJhdGVUYWJ1bGF0b3JUYWJsZUZyb21DU1Z9IGZyb20gXCI4YmI2M2E2Y2RlOWFkZGZmXCJcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImdlbmVyYXRlVGFidWxhdG9yVGFibGVGcm9tQ1NWKFxuICBcIiN0YWJsZS1jb250YWluZXItZXhhbXBsZVwiLFxuICBcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9Qb3N0NDUtRGF0YS1Db2xsZWN0aXZlL2RhdGEvcmVmcy9oZWFkcy9tYWluL2Z1dHVyaXN0aWNfZmljdGlvbi9mdXR1cmlzdGljX2ZpY3Rpb24uY3N2XCIsXG4gIHtcbiAgICBkaXNwbGF5ZWRDb2x1bW5zOiBbXG4gICAgICBcInRpdGxlXCIsXG4gICAgICBcImNyZWF0b3JcIixcbiAgICAgIFwieWVhcl9zZXRcIixcbiAgICAgIFwicmVsZWFzZWRcIixcbiAgICAgIFwieWVhcnNfZGlzdGFudFwiLFxuICAgICAgXCJtZWRpdW1cIixcbiAgICAgIFwiZ2VucmVcIlxuICAgIF0sXG4gICAgY29sdW1uUG9wdXBzOiBbXG4gICAgICBcIlRpdGxlIG9mIHRoZSB3b3JrLlwiLFxuICAgICAgXCJDcmVhdG9yIChhdXRob3IsIGRpcmVjdG9yLCBldGMuKSBvZiB0aGUgd29yay5cIixcbiAgICAgIFwiRnV0dXJlIHllYXIgaW4gd2hpY2ggdGhlIHdvcmsgdGFrZXMgcGxhY2UuXCIsXG4gICAgICBcIlllYXIgdGhlIHdvcmsgd2FzIG9yaWdpbmFsbHkgcmVsZWFzZWQuXCIsXG4gICAgICBcIkhvdyBmYXIgaW4gdGhlIGZ1dHVyZSB0aGUgd29yayBpcyBzZXQgKHllYXJfc2V0IG1pbnVzIHJlbGVhc2VkKS5cIixcbiAgICAgIFwiTWVkaXVtOiBmaWN0aW9uLCBmaWxtLCB0ZWxldmlzaW9uLCB2aWRlbyBnYW1lLCByYWRpbywgY29taWNzLCBldGMuXCIsXG4gICAgICBcIkdlbnJlIGZyb20gV2lraWRhdGEgKGUuZy4sIHNjaWVuY2UgZmljdGlvbiwgY3liZXJwdW5rLCBjcmltZSwgZXRjLikuXCJcbiAgICBdLFxuICAgIGNvbHVtbldpZHRoczogeyBcIm1lZGl1bVwiOiAxMzAsIFwiZ2VucmVcIjogMTYwIH0sXG4gICAgcmFuZ2VTbGlkZXJDb2x1bW5zOiBbXCJ5ZWFyX3NldFwiLCBcInJlbGVhc2VkXCJdLFxuICAgIG51bWVyaWNDb2x1bW5zOiBbXCJ5ZWFyc19kaXN0YW50XCJdLFxuICAgIGNhdGVnb3J5Q29sdW1uczogW1wibWVkaXVtXCIsIFwiZ2VucmVcIl0sXG4gICAgc29ydENvbHVtbnM6IFtcInllYXJfc2V0XCJdLFxuICAgIHNvcnRPcmRlcnM6IFtcImRlc2NcIl1cbiAgfVxuKTtcbiJ9XX0=
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }

@@ -26,11 +26,12 @@ website:
       - text: "Style Guide"
         href: style-guide.qmd
       - submissions.qmd
-      - people.qmd
       - text: "About"
         menu:
           - text: "About"
             href: about.qmd
+          - text: "People"
+            href: people.qmd
           - text: "How We Made This"
             href: how-we-made-this.qmd
       - news.qmd
