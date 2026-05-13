@@ -12,11 +12,11 @@ abstract: "The *Playboy* Fiction Index (1953–2020) contains metadata for over 
 # Add keywords/categories — should always include "dataset"
 categories: [metadata, fiction, print, dataset, draft]
 # Provide link to an image that will show up in "Our Datasets" aggregation
-image: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a8/PlayboyLogo.svg/500px-PlayboyLogo.svg.png"
+image: "images/oates-what-i-lived-for.jpg"
 # Insert DOI for this data essay
 doi: "10.18737/552627"
 # date of publication
-date: "2026-05-11"
+date: "2026-05-14"
 # Citation details for this data essay
 citation:
   type: article-journal
@@ -52,7 +52,7 @@ header-includes:
 # - /the-index-of-major-literary-prizes-in-the-us/
 ---
 
- ![Playboy logo.](https://upload.wikimedia.org/wikipedia/en/thumb/a/a8/PlayboyLogo.svg/500px-PlayboyLogo.svg.png){width=40% fig-align="center"}
+ ![Joyce Carol Oates, "What I Lived For," *Playboy* spread.](images/oates-what-i-lived-for.jpg){width=70% fig-align="center"}
 
 <!-- Include brief introduction to/description of data essay  -->
 
