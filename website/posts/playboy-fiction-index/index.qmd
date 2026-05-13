@@ -81,11 +81,10 @@ generateTabulatorTableFromCSV(
   "#table-container-playboy",
   "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/playboy_fiction_index/playboy-fiction-index-metadata_20260415.csv",
   {
-    displayedColumns: ["unique_id", "publication_date", "year", "author_name",
+    displayedColumns: ["publication_date", "year", "author_name",
                        "title", "section", "last_name", "first_name", "author_gender",
                        "author_nea", "author_bestseller", "author_prize", "author_iowa"],
     columnPopups: [
-      "Unique identifier for each short story in the index",
       "Magazine issue date (MM/DD/YYYY)",
       "Year of the magazine issue (extracted from publication_date)",
       "Author name; standardized spelling and middle initials",
@@ -102,7 +101,7 @@ generateTabulatorTableFromCSV(
     rangeSliderColumns: ["year"],
     dateSliderColumns: ["publication_date"],
     categoryColumns: ["section", "author_gender", "author_nea", "author_bestseller", "author_prize", "author_iowa"],
-    sortColumns: ["unique_id"],
+    sortColumns: ["publication_date"],
     sortOrders: ["asc"],
     buttonContainerId: "#button-container-playboy",
     rawButtonId: "#download-raw-playboy",
