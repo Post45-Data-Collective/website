@@ -10,7 +10,7 @@ author:
   #- name: More Authors
 abstract: "The *Playboy* Fiction Index (1953–2020) contains metadata for over one thousand works of fiction published by *Playboy* between 1953 and the end of its print run in 2020."
 # Add keywords/categories — should always include "dataset"
-categories: [metadata, fiction, print, dataset, draft]
+categories: [metadata, fiction, print, dataset]
 # Provide link to an image that will show up in "Our Datasets" aggregation
 image: "images/oates-what-i-lived-for.jpg"
 # Insert DOI for this data essay
