@@ -292,13 +292,9 @@ We recommend choosing **plain-English markers** that are explicit about *why* th
 Whatever set of markers you choose, **use them consistently** across the dataset and **document what each one means** in your data essay.
 
 ::: {.callout-tip appearance="default"}
-## **Why we recommend plain-English markers**
-You may have seen datasets that use `NA`, `N/A`, `NaN`, `null`, or simply leave cells blank to indicate gaps. These conventions cause trouble in two directions:
-
-1. **Tools collapse them together.** Python’s pandas, for example, will automatically read `NA`, `N/A`, `NaN`, `null`, `NULL`, `None`, and empty cells as the same missing-value sentinel (`NaN`) by default. If you use `N/A` to mean *not applicable* and `NaN` to mean *missing*, that distinction disappears the moment someone loads the CSV in pandas (unless they pass `keep_default_na=False`).
-2. **Different programs treat blank cells differently.** Excel may render an empty cell as visually identical to a cell containing the string `"NaN"` or a single space. Without an explicit marker, it’s hard to tell what a blank cell was meant to communicate — or whether it was a data-entry oversight.
-
-Plain-English values like `unknown`, `not applicable`, and `missing` are not in pandas’s default NA list, so they survive a CSV import as strings. That lets a downstream user decide for themselves which categories should be treated as missing and which should be preserved — and it makes the distinctions legible to a human skimming the spreadsheet.
+## **NA vs. N/A vs. NaN**
+For reference, computational tools like Pandas will automatically read values like `NA`, `N/A`, `NaN`, `null`, `NULL`, `None`, and empty cells as the same missing-value (`NaN`) by default. If you use `N/A` to mean *not applicable* and `NaN` to mean *missing*, that distinction may disappear when someone loads the CSV in pandas (unless they use `keep_default_na=False`).
+It's important to remember that different programs treat blank cells differently. Excel may render an empty cell as visually identical to a cell containing the string `"NaN"` or a single space. Without an explicit marker, it’s hard to tell what a blank cell was meant to communicate.
 :::
 
 Be sure to also check for **outliers and inconsistencies** across data. If a large chunk of data is missing (e.g. a specific date range), ensure that this is not due to a research gap on your end. Whatever the reason for a large data gap, your data essay provides a useful space to provide an explanation (and, if necessary, a reflection on its potential impact on analysis).
@@ -541,17 +537,17 @@ Depending on the scope and use cases of your dataset, it may be useful to includ
 
 ### ISBN/ISSN{#isbn-issn}
 
-An **ISBN** (International Standard Book Number) is a unique 10- or 13-digit identifier assigned to a specific edition of a book; an **ISSN** (International Standard Serial Number) is the equivalent 8-digit identifier for a serial publication like a journal or magazine. Both make it easy to look up bibliographic metadata, check holdings across libraries, and disambiguate similarly titled works.
+An **ISBN** (International Standard Book Number) is a unique 10- or 13-digit identifier assigned to a specific edition of a book. An **ISSN** (International Standard Serial Number) is the equivalent 8-digit identifier for a serial publication like a journal or magazine. 
 
-Including an ISBN or ISSN for each publication makes this metadata more accessible, and **we prefer to have one rather than none**. You don’t have to track these down manually: our [BookReconciler](https://data.post45.org/our-tools.html){.external target="_blank"} tool can return ISBNs for the books in your dataset alongside other identifiers, and citation managers like [Zotero](https://www.zotero.org/){.external target="_blank"} can also automate the lookup.
+Including an ISBN or ISSN for each publication makes this metadata more accessible. If you can, **we prefer to include at least one rather than none**. Our [BookReconciler](https://data.post45.org/our-tools.html){.external target="_blank"} tool can help fetch related ISBNs for the books in your dataset alongside other identifiers.
 
 ::: {.callout-tip appearance="default"}
 ## **A note on ISBNs and “Works”**
-ISBNs identify **a specific edition** of a book — a hardcover, a paperback, a translation, and a reissue will each have their own ISBN. They do not, on their own, tell you that those editions are all the *same book*.
+ISBNs identify **a specific edition** of a book—hardcover or paperback, a translation or a reissue will each have their own ISBN. There's currently no single identifier that indicates whether these ISBNs refer to the same "Work."
 
-In bibliographic terminology (specifically the [FRBR](https://www.loc.gov/cds/downloads/FRBR.PDF){.external target="_blank"} model used by the Library of Congress and other authorities), the abstract concept that unites every edition, translation, and reprint is called a **Work**. *The Book of Salt* by Monique Truong is one Work; its hardcover, paperback, Kindle edition, and French translation are different *Manifestations* of that Work, each with its own ISBN.
+"Work" is the abstract concept that unites every edition, translation, and reprint in bibliographic terminology (specifically the [FRBR](https://www.loc.gov/cds/downloads/FRBR.PDF){.external target="_blank"} model).
 
-For humanities datasets, this distinction matters. If you’re analyzing prize-winning novels, you usually care about the Work, not whether a researcher happened to record the 2003 hardcover or the 2004 paperback. **BookReconciler** handles this for you by clustering different ISBNs, OCLC numbers, and HathiTrust IDs into a single Work-level group — so you can include multiple identifiers for the same book without losing the link between them. For the full methodology, see Miller, Sinykin, and Walsh, [“BookReconciler📘💎: An Open-Source Tool for Metadata Enrichment and Work-Level Clustering”](https://arxiv.org/abs/2512.10165){.external target="_blank"} (*Joint Conference on Digital Libraries*, 2025).
+For more on this issue, see Matt Miller, Dan Sinykin, and Melanie Walsh, [“BookReconciler📘💎: An Open-Source Tool for Metadata Enrichment and Work-Level Clustering”](https://arxiv.org/abs/2512.10165){.external target="_blank"} (*Joint Conference on Digital Libraries*, 2025).
 ::: 
 
 ::: {.callout-tip appearance="default"}
