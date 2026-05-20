@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8bbafd564fe08333eff25c4c70bb640a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-883be122185c26d2f7a98e22d40dccfc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -803,16 +803,11 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span><strong>Why we recommend plain-English markers</strong>
+<span class="screen-reader-only">Tip</span><strong>NA vs.&nbsp;N/A vs.&nbsp;NaN</strong>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You may have seen datasets that use <code>NA</code>, <code>N/A</code>, <code>NaN</code>, <code>null</code>, or simply leave cells blank to indicate gaps. These conventions cause trouble in two directions:</p>
-<ol type="1">
-<li><strong>Tools collapse them together.</strong> Python’s pandas, for example, will automatically read <code>NA</code>, <code>N/A</code>, <code>NaN</code>, <code>null</code>, <code>NULL</code>, <code>None</code>, and empty cells as the same missing-value sentinel (<code>NaN</code>) by default. If you use <code>N/A</code> to mean <em>not applicable</em> and <code>NaN</code> to mean <em>missing</em>, that distinction disappears the moment someone loads the CSV in pandas (unless they pass <code>keep_default_na=False</code>).</li>
-<li><strong>Different programs treat blank cells differently.</strong> Excel may render an empty cell as visually identical to a cell containing the string <code>"NaN"</code> or a single space. Without an explicit marker, it’s hard to tell what a blank cell was meant to communicate — or whether it was a data-entry oversight.</li>
-</ol>
-<p>Plain-English values like <code>unknown</code>, <code>not applicable</code>, and <code>missing</code> are not in pandas’s default NA list, so they survive a CSV import as strings. That lets a downstream user decide for themselves which categories should be treated as missing and which should be preserved — and it makes the distinctions legible to a human skimming the spreadsheet.</p>
+<p>For reference, computational tools like Pandas will automatically read values like <code>NA</code>, <code>N/A</code>, <code>NaN</code>, <code>null</code>, <code>NULL</code>, <code>None</code>, and empty cells as the same missing-value (<code>NaN</code>) by default. If you use <code>N/A</code> to mean <em>not applicable</em> and <code>NaN</code> to mean <em>missing</em>, that distinction may disappear when someone loads the CSV in pandas (unless they use <code>keep_default_na=False</code>). It’s important to remember that different programs treat blank cells differently. Excel may render an empty cell as visually identical to a cell containing the string <code>"NaN"</code> or a single space. Without an explicit marker, it’s hard to tell what a blank cell was meant to communicate.</p>
 </div>
 </div>
 <p>Be sure to also check for <strong>outliers and inconsistencies</strong> across data. If a large chunk of data is missing (e.g.&nbsp;a specific date range), ensure that this is not due to a research gap on your end. Whatever the reason for a large data gap, your data essay provides a useful space to provide an explanation (and, if necessary, a reflection on its potential impact on analysis).</p>
@@ -1249,8 +1244,8 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </section>
 <section id="isbn-issn" class="level3">
 <h3 class="anchored" data-anchor-id="isbn-issn">ISBN/ISSN</h3>
-<p>An <strong>ISBN</strong> (International Standard Book Number) is a unique 10- or 13-digit identifier assigned to a specific edition of a book; an <strong>ISSN</strong> (International Standard Serial Number) is the equivalent 8-digit identifier for a serial publication like a journal or magazine. Both make it easy to look up bibliographic metadata, check holdings across libraries, and disambiguate similarly titled works.</p>
-<p>Including an ISBN or ISSN for each publication makes this metadata more accessible, and <strong>we prefer to have one rather than none</strong>. You don’t have to track these down manually: our <a href="https://data.post45.org/our-tools.html" class="external" target="_blank">BookReconciler</a> tool can return ISBNs for the books in your dataset alongside other identifiers, and citation managers like <a href="https://www.zotero.org/" class="external" target="_blank">Zotero</a> can also automate the lookup.</p>
+<p>An <strong>ISBN</strong> (International Standard Book Number) is a unique 10- or 13-digit identifier assigned to a specific edition of a book. An <strong>ISSN</strong> (International Standard Serial Number) is the equivalent 8-digit identifier for a serial publication like a journal or magazine.</p>
+<p>Including an ISBN or ISSN for each publication makes this metadata more accessible. If you can, <strong>we prefer to include at least one rather than none</strong>. Our <a href="https://data.post45.org/our-tools.html" class="external" target="_blank">BookReconciler</a> tool can help fetch related ISBNs for the books in your dataset alongside other identifiers.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1261,9 +1256,9 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>ISBNs identify <strong>a specific edition</strong> of a book — a hardcover, a paperback, a translation, and a reissue will each have their own ISBN. They do not, on their own, tell you that those editions are all the <em>same book</em>.</p>
-<p>In bibliographic terminology (specifically the <a href="https://www.loc.gov/cds/downloads/FRBR.PDF" class="external" target="_blank">FRBR</a> model used by the Library of Congress and other authorities), the abstract concept that unites every edition, translation, and reprint is called a <strong>Work</strong>. <em>The Book of Salt</em> by Monique Truong is one Work; its hardcover, paperback, Kindle edition, and French translation are different <em>Manifestations</em> of that Work, each with its own ISBN.</p>
-<p>For humanities datasets, this distinction matters. If you’re analyzing prize-winning novels, you usually care about the Work, not whether a researcher happened to record the 2003 hardcover or the 2004 paperback. <strong>BookReconciler</strong> handles this for you by clustering different ISBNs, OCLC numbers, and HathiTrust IDs into a single Work-level group — so you can include multiple identifiers for the same book without losing the link between them. For the full methodology, see Miller, Sinykin, and Walsh, <a href="https://arxiv.org/abs/2512.10165" class="external" target="_blank">“BookReconciler📘💎: An Open-Source Tool for Metadata Enrichment and Work-Level Clustering”</a> (<em>Joint Conference on Digital Libraries</em>, 2025).</p>
+<p>ISBNs identify <strong>a specific edition</strong> of a book—hardcover or paperback, a translation or a reissue will each have their own ISBN. There’s currently no single identifier that indicates whether these ISBNs refer to the same “Work.”</p>
+<p>“Work” is the abstract concept that unites every edition, translation, and reprint in bibliographic terminology (specifically the <a href="https://www.loc.gov/cds/downloads/FRBR.PDF" class="external" target="_blank">FRBR</a> model).</p>
+<p>For more on this issue, see Matt Miller, Dan Sinykin, and Melanie Walsh, <a href="https://arxiv.org/abs/2512.10165" class="external" target="_blank">“BookReconciler📘💎: An Open-Source Tool for Metadata Enrichment and Work-Level Clustering”</a> (<em>Joint Conference on Digital Libraries</em>, 2025).</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
