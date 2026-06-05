@@ -1,5 +1,17 @@
 [
   {
+    "listing": "/news.html",
+    "items": [
+      "/news/intl-bestsellers-dataset-featured.html",
+      "/news/grad-workshop.html",
+      "/news/editor-news.html",
+      "/news/data-analyst-summer-2023.html",
+      "/news/ddp-recap.html",
+      "/news/ddp-rfp-2021.html",
+      "/news/awash-in-data.html"
+    ]
+  },
+  {
     "listing": "/our-data.html",
     "items": [
       "/posts/playboy-fiction-index/index.html",
@@ -32,18 +44,6 @@
       "/posts/hathitrust_post45_fiction/index.html",
       "/posts/iowa_writers_workshop/index.html",
       "/news/intl-bestsellers-dataset-featured.html"
-    ]
-  },
-  {
-    "listing": "/news.html",
-    "items": [
-      "/news/intl-bestsellers-dataset-featured.html",
-      "/news/grad-workshop.html",
-      "/news/editor-news.html",
-      "/news/data-analyst-summer-2023.html",
-      "/news/ddp-recap.html",
-      "/news/ddp-rfp-2021.html",
-      "/news/awash-in-data.html"
     ]
   }
 ]
