@@ -295,6 +295,8 @@ CC by 4.0
 <!-- Excel script -->
 <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 
-# Citation
+# **Correction**
 
-**Correction:** A previous version of this essay listed Don DeLillo among the contemporary authors published in *Playboy*; his name has since been removed.
+A previous version of this essay listed Don DeLillo among the contemporary authors published in *Playboy*; his name has since been removed.
+
+# Citation
