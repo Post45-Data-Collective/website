@@ -1,0 +1,192 @@
+---
+# EDITORIAL TEAM: add data essay details here
+ title: "Small Press Distribution Bestseller Lists 2006-2023"
+ author:
+  - name: Sera-Ann Hargrove
+    orcid: 0009-0005-3454-7578
+  # url: https://academicwebsite.com/
+  # email: ns3486@columbia.edu
+  - name: Micah Bateman
+    orcid: 0000-0003-3575-2432
+    url: https://sites.google.com/view/micah-bateman/home
+    email: micah-bateman@uiowa.edu
+  #- name: More Authors
+ abstract: "This dataset documents the bestselling authors and titles distributed by Small Press Distribution (SPD) between 2006-2023, including American poetry, short and experimental fiction, and hybrid nonfiction and essay."
+# Add keywords/categories — should always include "dataset"
+ categories: [fiction, poetry, nonfiction, bestsellers, publishing, dataset, draft]
+# Provide link to an image that will show up in "Our Datasets" aggregation
+ image: "https://bpb-us-w2.wpmucdn.com/web.sas.upenn.edu/dist/2/456/files/2018/11/Small-Press-Distribution-2llnxlb.jpg"
+# Insert DOI for this data essay
+ doi: "10.18737/857371"
+# date of publication
+ date: "2026-06-12"
+# Citation details for this data essay
+ citation:
+  type: article-journal
+  container-title: "Post45 Data Collective"
+  doi: "10.18737/857371"
+  url: https://data.post45.org/posts/small-press-distribution-bestsellers
+  editor:
+   - Alexander Manshel
+   - J.D. Porter
+   - Melanie Walsh
+# if author/editor is including a .bib bibliography (such as one created from Zotero) for cited sources, uncomment and provide the correct reference here
+#bibliography: references.bib
+
+# NO NEED TO EDIT BELOW THIS LINE
+ title-block-style: default
+ format-links: [ipynb, pdf, docx]
+ code-tools: false
+ format: 
+  html:
+    toc: true
+    toc-title: Table of Contents
+    toc-location: left
+    toc-depth: 3
+    toc-expand: 3
+ page-layout: full
+ google-scholar: true 
+ header-includes:
+  - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+# aliases:
+# - /the-index-of-major-literary-prizes-in-the-us/
+---
+
+ ![](https://bpb-us-w2.wpmucdn.com/web.sas.upenn.edu/dist/2/456/files/2018/11/Small-Press-Distribution-2llnxlb.jpg){fig-align="center"}
+
+<!-- Include brief introduction to/description of data essay  -->
+
+<!-- If there are multiple datasets, please provide a title for each dataset with its own description  -->
+
+<!-- # 1. Title of dataset 1 -->
+
+# Data Table
+
+<!-- FOR EDITORIAL TEAM:
+
+To create a data table, first add the dataset to the datasets/ directory in the GitHub repo. 
+
+Then, find the raw GitHub URL for that dataset and insert it below, customizing columns as needed.
+
+Areas that need to be edited are marked with MAKE EDITS HERE -->
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Load the function
+source("../../scripts/createDataTable.R")
+
+# MAKE EDITS HERE: Plug in the raw GitHub URL to the dataset below
+createDataTable(
+  data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/small_press_distribution_bestsellers/small-press-distribution-bestsellers_2006-2023.csv",
+
+  # MAKE EDITS HERE: Select the columns that will be displayed in the data table, and the order
+  displayed_columns = c("ranking","title","author","publisher","date","genre","publication_date","publication_location","viaf_permalink","source_link","unique_id"),
+
+   # MAKE EDITS HERE: Customize any column widths 
+  # If none, comment out
+   #column_widths = c("gender" = "100px", "role" = "75px", "mfa_degree" = "100px", "prize_name" = "100px"),
+
+   # MAKE EDITS HERE: Select any columns that should be formatted with a dollar sign
+   # If none, comment out
+  #currency_columns = c("prize_amount"),
+
+   # MAKE EDITS HERE: Select any columns that should be filterable as a category
+  # If none, comment out
+
+  category_columns = c("author","publisher","date","genre","publication_date","publication_location"),
+
+    # Select column to sort by, and order
+  sort_columns = c("ranking"),
+  sort_orders = c("desc")
+)
+```
+
+::: {.callout-tip icon="false"}
+## Creative Commons License
+
+<p xmlns:cc="http://creativecommons.org/ns#">
+
+This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"/><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"/></a>
+
+</p>
+:::
+
+# **Significance & Context**
+
+This dataset bears out narratives of the emergence, reach, and sometimes decline of many small presses, authors, and titles that have often become central figures in American poetry, short and experimental fiction, and hybrid nonfiction and essay. Independent publishing houses used Small Press Distribution (SPD) to distribute their publications to booksellers from 1969 until March 2024, when the company abruptly shuttered. More than a logistical middleman, SPD functioned as a central piece of cultural infrastructure for U.S. literary small presses. For many small publishers, SPD meant the difference between visibility and obscurity, providing the primary means of circulation and distribution, bookstore access, and institutional legitimacy. SPD aided presses producing often groundbreaking, prize-winning, and experimental poetry, fiction, and nonfiction. In May of 2006, SPD began posting monthly features highlighting their bestselling titles in fiction, poetry, and nonfiction to their website, with lists from the 2010s and 2020s featured and still accessible on their now inactive Instagram and Facebook accounts and lists from before 2010 available through the Internet Archive’s Wayback Machine. These bestseller lists index a distinctive economy of literary value shaped by nonprofit distribution, independent bookstores, aesthetic formation, curricular adoption, and long-tail backlist circulation. Spanning the rise of social media–mediated literary publicity and the decline of brick-and-mortar distribution infrastructure, the dataset captures a crucial, transitional period in U.S. small-press literary culture. With SPD now defunct and its web presence inactive, the need to preserve information about SPD’s operations is urgent. Collecting and preserving SPD’s bestselling titles can support the searchability of these works, the authors who created them, and the independent publishers who relied on SPD to bring these books to market.   
+
+The data in this project tells the story of emergent authors and presses, new prize winners, forgotten independent presses, and frequent bestsellers. One illustrative case is Renee Gladman, who appears as a new author at the start of SPD’s bestseller lists and becomes the most frequently appearing fiction author, with 41 appearances. Gladman’s first book, *Juice*, appeared in the August 2006 Poetry Bestseller List, with following lists marking nine more books throughout Gladman’s career. The most frequent fiction book to appear in this data is Garielle Lutz’s first book, *Stories in the Worst Way,* with fifteen appearances. Originally published in 1996, Lutz’s debut appears on the bestseller lists from 2006 to 2011 with new editions from 3rd Bed and Calamari Press. The most frequently mentioned fiction publisher is Dorothy, a publishing project begun in 2009, appearing a total of 121 times with 22 titles.  
+
+As for nonfiction, the most frequently mentioned book is *Plants and Landscapes for Summer Dry Climates of the San Francisco Bay Region* by East Bay M.U.D. Water Conservation Staff. Three authors, Lyn Hejinian, Ron Silliman, and Rae Armantrout, were tied for the most frequent nonfiction author appearances on the list, with a total of 15 entries each (13 of which came from *The Grand Piano* parts 1-10). The top nonfiction publisher by number of appearances is Essay Press, appearing 40 times. For poetry, the most listed book is Tao Lin’s debut, *You Are a Little Bit Happier Than I Am*, published by Action Books in 2006 and appearing on the bestseller lists 21 times until 2010\. The poetry publishing press appearing the most on the lists is Flood Editions with a total mention count of 164\. The most frequent poet in the data is Sherman Alexie with a total of 48 appearances across seven books. (Counts reflect appearances as recorded in SPD’s genre-specific lists, even where individual titles appear across multiple genres.)  
+
+As SPD noted in its publicity, many of these titles and authors have won literary awards. Some of these winners have appeared frequently and not so frequently on SPD’s bestseller lists. One prize winner that SPD names on their website is National Book Award in Poetry winner, *Punks: New & Selected Poems* by John Keene, which appears on the bestseller lists sixteen times. However, Pulitzer Prize in Poetry winner, *Olio* by Tyehimba Jess, only appears once on the bestseller lists. With this in mind, the frequency of repeated titles in this data does not always correlate to critical acclaim. Repeated appearances often indicate sustained backlist circulation rather than moments of sudden popularity, offering a view of how small-press titles remain economically viable over long periods through course adoption, independent bookstore loyalty, and niche readerships. These lists also offer insight into the lifespans, phases, and vulnerabilities of small presses. The second most frequent poetry publishing press in this dataset, Ahsahta Press, closed down at the end of 2019, while the Song Cave, a press that began appearing on bestseller lists in the early 2010s, dominated the lists by the end of SPD’s run. Taken together, these patterns enable press-level analysis of longevity, aesthetic coherence, and institutional durability within the U.S. small-press ecosystem. 
+
+# **Collection and Creation**
+
+To create this dataset, we documented the SPD bestsellers posts from Instagram (June 2021-December 2023\) through screen captures, transferred to text, and compiled. From there, the title, author, publisher, ranking, genre, date, and Instagram post link were used as starting points for the dataset. Using the Library of Congress Catalog and WorldCat, the entries were checked for accuracy, and fields were added for earliest publication date and publication location. Lists from May 2006 to May 2021 were accessible through the Internet Archive’s Wayback Machine’s captures of the Small Press Distribution website. Using these lists, a full document was made of the combined total of lists from Instagram and the Wayback Machine, creating a total of 7,820 rows in the final dataset.   
+
+The authors then extracted the data from the master list of bestseller lists and put it into Google Sheets. They used REGEXTRACT to separate the title, author(s), and publishers, and put them into their own columns, and CONCATENATE to format the author names as “last name, first name.” Fields were then added for ISBN number, OCLC number, and author VIAF permalink and ID number. The authors used WorldCat to ensure correct titles, authors, publisher, and publication date, as well as to pull the ISBN and OCLC numbers. Critical researcher judgment was used to identify the edition, with consideration of the date of the bestseller list and the specific publisher, with earliest publication date selected in most cases. Using the Virtual International Authority File (VIAF), author names were checked and changed to the preferred name listed for the author according to the Library of Congress/NACO (Name Authority Cooperative Program). Metadata were manually added to the additional fields with additional help from the Post45 Collective’s BookReconciler Service on OpenRefine. Reconciling the title and author fields through the BookReconciler Service, ISBN numbers, OCLC numbers, and VIAF links were extracted from Library of Congress, Google Books, WorldCat, and VIAF. Any missing metadata that could not be reconciled through OpenRefine were finally manually added. Where inconsistencies in naming or classification appeared, metadata fields were standardized while preserving the structure and genre designations of the original lists.  
+
+This dataset includes the bestseller lists published on the Small Press Distribution website from the years 2006 to 2021 and the SPD Instagram account from the year 2021 until their close in 2024\. Excluded from this dataset are the annual bestseller lists SPD posted in 2006 for poetry and fiction, the 2000-2009 poetry bestsellers list, and the top 100 poetry books of the 2010s list.  
+
+In some cases, an ISBN number, OCLC number, and VIAF link were unavailable for listings. This was due to the format and publication of some items; for example, the listing, “Tomas Tranströmer Broadside of His Poem ‘Vermeer,’” does not have an ISBN and OCLC number because it is a broadside. As for missing VIAF links, some authors were not listed when searching.
+
+# **Dataset Description**
+
+The first six fields (ranking, title, author, publisher, date, genre) in the dataset are taken directly from the bestseller lists as posted to SPD’s Instagram and website, with edits made by the researchers to account for accuracy and searchability. SPD released their bestseller lists by genre each month for poetry and every other month for fiction and nonfiction, so there were individually generic lists each for poetry titles, fiction, and nonfiction. An “appearance” is defined as a single instance of a title on a monthly or bimonthly bestseller list. Counts therefore reflect repeated list inclusion rather than distinct works, and multi-author or serial works (such as *The Grand Piano*) contribute to each listed author’s total. This approach preserves the structure of SPD’s reporting while enabling comparison across titles, authors, and presses.
+
+* **ranking:** the original ranking of the title as it was listed on the bestseller list  <br>
+* **title:** the name of the book  
+* **author:** the name of the author(s), editor(s), artist(s), and/or translator(s) of the given text formatted as last name, first name, with specifications for editor, artist, or translator in parentheses  
+* **publisher:** the name of the publishing press who published the book  
+* **publisher\_variants:** alternate names the publishing presses use or variant of the name listed on the original bestseller list  
+* **date:** the month and year of the bestseller list the book is listed on  
+* **genre:** which bestseller list the book appears on (fiction, poetry, or nonfiction); also the genre of the book  
+* **publication\_date:** earliest found year the book was published as indicated by the Library of Congress Catalog and WorldCat  
+* **publication\_location:** geographic location of the publishing press, found through the Library of Congress Catalog, WorldCat, and when needed, publisher websites or CLMP  
+* **marc\_country\_code:** Two-letter country code and three-letter state code as listed from the MARC Code List for Countries  
+* **isbn\_number:** ISBN number of the title taken from WorldCat  
+* **oclc\_number:** OCLC number of the title taken from WorldCat  
+* **viaf\_permalink:** permalink to the VIAF listing of the author  
+* **viaf\_id:** ID number for the author’s VIAF listing  
+* **source\_link:** a link to the originating Instagram post or Wayback Machine link to the SPD website  
+* **unique\_id:** ID number given to each entry by the researchers following the template “SPD0000”
+
+# **Ethical Considerations**
+
+Because SPD’s distribution network reflected particular aesthetic, institutional, and geographic concentrations within U.S. literary culture, this dataset should not be understood as a comprehensive map of all small-press activity during this period. Rather, it documents the circulation patterns of presses and authors operating within SPD’s specific infrastructural and curatorial ambit. Additionally, there is not much information about SPD’s own methodology for devising bestseller lists, so the rankings contained in this dataset may not reflect actual sales or readership numbers for each given month as listed. This dataset serves as a recording of the lists that were posted by SPD as they were. SPD’s bestseller lists were published as is, with no other information indicating sales figures, copies sold, etc. In SPD’s “Top 100 Poetry Books of the 2010s” list, they indicate that the list is a result of the total SPD sales from January 2010 to August 2013\. This may or may not be the same methodology they used for creating their bestseller lists.   
+
+There was also not much information given on the exact edition for some of the titles, so the publication date and ISBN numbers reflect what was found in WorldCat with researcher judgment based on the time the bestseller list was published. Multiple editions of the same book are even included in the dataset due to the wide date range of publications. For example, *Borderlands/La Frontera: The New Mestiza* by Gloria Anzaldúa published by Aunt Lute Books is on the list a total of 21 times spanning from 2007 to 2023 and from both nonfiction and poetry bestseller lists, representing four separate editions accounted for by researcher judgment. In most cases, however, earliest publication date is used.
+
+# **Bibliography**
+
+About the Closure of Small Press Distribution: FAQ. (n.d.). *Community of Literary Magazines*   
+*and Presses*. Retrieved May 15, 2025, from [https://www.clmp.org/about-the-closure-of-small-press-distribution-faqs/](https://www.clmp.org/about-the-closure-of-small-press-distribution-faqs/)  
+
+Bourne, M. (2024, June 12). *The End of Small Press Distribution*. Poets & Writers.   
+[https://www.pw.org/content/the\_end\_of\_small\_press\_distribution](https://www.pw.org/content/the_end_of_small_press_distribution)  
+
+Morgan, A. (2024, April 3). “The Small Press World is About to Fall Apart.” On the Collapse of   
+Small Press Distribution. *Literary Hub*. [https://lithub.com/the-small-press-world-is-about-to-fall-apart-on-the-collapse-of-small-press-distribution/](https://lithub.com/the-small-press-world-is-about-to-fall-apart-on-the-collapse-of-small-press-distribution/)  
+
+Presses Previously Distributed by SPD. (2024, March 29). *Community of Literary Magazines*   
+*and Presses*. [https://www.clmp.org/news/presses-previously-distributed-by-spd/](https://www.clmp.org/news/presses-previously-distributed-by-spd/)
+
+# **Resources used to make the dataset:**  
+*Small Press Distribution (@spdbooks) • Instagram photos and videos*. (n.d.). Retrieved May 15,   
+2025, from [https://www.instagram.com/spdbooks/](https://www.instagram.com/spdbooks/)  
+
+*LC Catalog—Browse*. (n.d.). Retrieved May 15, 2025, from   
+[https://catalog.loc.gov/vwebv/searchBrowse](https://catalog.loc.gov/vwebv/searchBrowse)  
+
+*Wayback Machine*. (n.d.). Retrieved May 15, 2025, from [https://web.archive.org/](https://web.archive.org/)  
+
+*WorldCat.org*. (n.d.). Retrieved May 15, 2025, from [https://search.worldcat.org](https://search.worldcat.org)
+
+# **Licensing**  
+[https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
+
+Authors should be listed with Hargrove, Sera-Ann first and Bateman, Micah second.
