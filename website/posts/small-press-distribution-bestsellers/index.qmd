@@ -83,22 +83,22 @@ createDataTable(
   data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/small_press_distribution_bestsellers/small-press-distribution-bestsellers_2006-2023.csv",
 
   # MAKE EDITS HERE: Select the columns that will be displayed in the data table, and the order
-  displayed_columns = c("ranking","title","author","publisher","date","genre","publication_date","publication_location","viaf_permalink","source_link","unique_id"),
+  displayed_columns = c("ranking", "title", "author", "publisher", "date", "genre", "publication_date", "publication_location", "viaf_permalink", "source_link", "unique_id"),
 
-   # MAKE EDITS HERE: Customize any column widths 
+  # MAKE EDITS HERE: Customize any column widths
   # If none, comment out
-   #column_widths = c("gender" = "100px", "role" = "75px", "mfa_degree" = "100px", "prize_name" = "100px"),
+  #column_widths = c("gender" = "100px", "role" = "75px", "mfa_degree" = "100px", "prize_name" = "100px"),
 
-   # MAKE EDITS HERE: Select any columns that should be formatted with a dollar sign
-   # If none, comment out
+  # MAKE EDITS HERE: Select any columns that should be formatted with a dollar sign
+  # If none, comment out
   #currency_columns = c("prize_amount"),
 
-   # MAKE EDITS HERE: Select any columns that should be filterable as a category
+  # MAKE EDITS HERE: Select any columns that should be filterable as a category
   # If none, comment out
 
-  category_columns = c("author","publisher","date","genre","publication_date","publication_location"),
+  category_columns = c("author", "publisher", "date", "genre", "publication_date", "publication_location"),
 
-    # Select column to sort by, and order
+  # Select column to sort by, and order
   sort_columns = c("ranking"),
   sort_orders = c("desc")
 )
