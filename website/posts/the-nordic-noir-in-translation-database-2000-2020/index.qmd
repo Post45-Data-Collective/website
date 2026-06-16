@@ -36,6 +36,9 @@ citation:
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 bibliography: references.bib
 appendix-stlye: none
 license: CC BY
@@ -54,37 +57,66 @@ This dataset contains bibliographic records of (in theory) all translations of N
 
 ## Data Table
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nordic_noir_translation_database/nordic_noir_translation_database.csv"
-
-createDataTable(
-    data_path = data_path,
-    style = "bootstrap", # Bootstrap DataTables style
-    bootstrap_classes = "table-condensed", # Add extra classes
-
-    displayed_columns = c("author", "author_gender", "original_title", "original_language", "original_publication_year", "translated_title", "translated_language", "translated_publication_year", "translator"),
-    column_widths = c("author" = "100px", "rank" = "75px", "year" = "75px", "author" = "100px"),
-    date_columns = c("week"),
-
-    # currency_columns = c("prize_amount"),
-
-    category_columns = c("original_language", "translated_language"),
-    sort_columns = c("original_publication_year"),
-    sort_orders = c("desc"),
-)
-
-# Print out column names to make it easier to customize above
-# df <- read.csv(data_path)
-# cat(paste(shQuote(colnames(df), type = "cmd"), collapse = ", "))
-
+```{ojs}
+//| echo: false
+import {viewof dataSummaryView, Tabulator, viewof selectedColumns, viewof dataSet, tableContainer, fetchData, generateTabulatorTableFromCSV, progress, progressbar} from "8bb63a6cde9addff"
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+nnitd_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nordic_noir_translation_database/nordic_noir_translation_database.csv")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-nnitd",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/nordic_noir_translation_database/nordic_noir_translation_database.csv",
+  {
+    displayedColumns: ["author", "author_gender", "original_title", "original_language",
+                       "original_publication_year", "translated_title", "translated_language",
+                       "translated_publication_year", "translator"],
+    columnPopups: [
+      "The author of the translated book",
+      "Gender of the author. m = male; f = female; mm = two male authors; ff = two female authors; fm = one female + one male; unknown = unidentified",
+      "Title of the book in its original source language",
+      "Source language of the original book",
+      "Year of first publication in the source language",
+      "Main title of the translated book",
+      "Target language of the translation",
+      "Year the book was published in translation",
+      "The translator of the book"
+    ],
+    columnWidths: { "author_gender": 130, "original_language": 150, "translated_language": 150 },
+    rangeSliderColumns: ["original_publication_year", "translated_publication_year"],
+    categoryColumns: ["author_gender", "original_language", "translated_language"],
+    sortColumns: ["original_publication_year"],
+    sortOrders: ["desc"],
+    buttonContainerId: "#button-container-nnitd",
+    rawButtonId: "#download-raw-nnitd",
+    urlCopyButtonId: "#copy-url-nnitd",
+  }
+);
+```
+
+<div id="table-container-nnitd" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-nnitd"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-nnitd"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-nnitd'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ::: {.callout-tip icon="false"}
 ## Creative Commons License
@@ -218,3 +250,5 @@ Svedjedal, Johan. (2012). “Svensk litteratur som världslitteratur: Litteratur
 
 ::: {#refs}
 :::
+
+# Citation

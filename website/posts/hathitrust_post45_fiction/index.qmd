@@ -136,6 +136,7 @@ generateTabulatorTableFromCSV(
 ],
     // columnWidths: { "gender": "50px", "role": "75px", "mfa_degree": "100px", "prize_name": "100px" },
     currencyColumns: ["prize_amount"],
+    rangeSliderColumns: ["inferreddate"],
     categoryColumns: ["hathi_rights",  "genres","geographics"],
     // sortColumns: ["prize_year"],
     // sortOrders: ["desc"]
@@ -181,3 +182,5 @@ Download Table Data (including filtered options)
 <!-- Excel script -->
 <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 
+
+# Citation

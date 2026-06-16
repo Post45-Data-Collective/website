@@ -37,6 +37,9 @@ citation:
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 bibliography: references.bib
 aliases:
   - /iowa-writers-workshop-data/
@@ -74,34 +77,68 @@ The first dataset includes full, given, middle, family, pen names, gender, and c
 
 ## Data Table
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-people.csv"
-
-createDataTable(
-    data_path = data_path,
-
-    # displayed_columns = c("full_name", "gender",
-    #  "mfa_degree", "role", "prize_year", "prize_name", "prize_amount", "prize_institution", "prize_type", "prize_genre", "author_wikidata", "author_viaf", "author_lccn", "elite_institution", "graduate_degree", "stegner", "title_of_winning_book"),
-
-    # currency_columns = c("prize_amount"),
-
-    column_widths = c("gender" = "100px", "country" = "100px"),
-    category_columns = c("gender", "country"),
-    sort_columns = c("full_name"),
-    sort_orders = c("desc")
-)
-# Print out column names to make it easier to customize above
-# df <- read.csv(data_path)
-
-# cat(paste(shQuote(colnames(df), type = "cmd"), collapse = ", "))
+```{ojs}
+//| echo: false
+import {viewof dataSummaryView, Tabulator, viewof selectedColumns, viewof dataSet, tableContainer, fetchData, generateTabulatorTableFromCSV, progress, progressbar} from "8bb63a6cde9addff"
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+iww_people_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-people.csv")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-iww-people",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-people.csv",
+  {
+    displayedColumns: ["full_name", "given_name", "middle_name", "family_name", "pen_name",
+                       "gender", "country", "person_id",
+                       "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata"],
+    columnPopups: [
+      "Name in 'Lastname, Firstname Middlename' format as listed in University of Iowa records",
+      "First name",
+      "Middle name (if used)",
+      "Last name",
+      "Preferred pen name, if different from full name",
+      "Provisionally labeled by the PEP team based on name (Male, Female, Gender Nonconforming, Unknown)",
+      "Country of origin",
+      "Numeric id in the Program Era database",
+      "Author's NACO authorized heading",
+      "Author's LCCN from id.loc.gov",
+      "Author's VIAF cluster number",
+      "Author's Wikidata Q number"
+    ],
+    columnWidths: { "gender": 130, "country": 150 },
+    categoryColumns: ["gender", "country"],
+    sortColumns: ["full_name"],
+    sortOrders: ["asc"],
+    buttonContainerId: "#button-container-iww-people",
+    rawButtonId: "#download-raw-iww-people",
+    urlCopyButtonId: "#copy-url-iww-people",
+  }
+);
+```
+
+<div id="table-container-iww-people" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-iww-people"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-iww-people"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-iww-people'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ::: {.callout-tip icon="false"}
 ## Creative Commons License
@@ -150,34 +187,68 @@ This dataset also includes various persistent identifiers for matching authors:
 
 The second dataset includes thesis and matriculation records for Iowa graduates between 1931 and Spring 2014, including graduate name, advisor name, year of matriculation, program, degree, thesis title, and literary genre.
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-graduations.csv"
-
-createDataTable(
-    data_path = data_path,
-    displayed_columns = c("year", "graduate_name", "advisor_name", "genre", "thesis_title", "degree", "program", "institution", "record_id", "graduate_id", "advisor_id", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata"),
-
-    # currency_columns = c("prize_amount"),
-
-    category_columns = c("genre", "program", "institution", "degree"),
-    column_widths = c("thesis_title" = "100px", "year" = "75px", "genre" = "90px", "program" = "100px", "institution" = "100px"),
-
-
-    # sort_columns = c("prize_year"),
-    # sort_orders = c("desc")
-)
-
-# df <- read.csv(data_path)
-
-# cat(paste(shQuote(colnames(df), type = "cmd"), collapse = ", "))
+```{ojs}
+//| echo: false
+//| output: false
+iww_grads_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-graduations.csv")
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-iww-grads",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-graduations.csv",
+  {
+    displayedColumns: ["year", "graduate_name", "advisor_name", "genre", "thesis_title",
+                       "degree", "program", "institution",
+                       "record_id", "graduate_id", "advisor_id",
+                       "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata"],
+    columnPopups: [
+      "Year of matriculation (range 1920–2014)",
+      "Full name of the graduating student",
+      "Full name of the student's thesis advisor",
+      "Literary genre of the thesis (Poetry, Fiction, Literary Translation, etc.)",
+      "Title of the thesis where applicable",
+      "Degree awarded (e.g. MFA)",
+      "Program (e.g. Writers' Workshop) or major when no specific program applies",
+      "Name of degree-granting institution",
+      "Numeric id of the graduation record",
+      "Foreign key referring to person_id of the graduating student",
+      "Foreign key referring to person_id of the thesis advisor",
+      "Author's NACO authorized heading",
+      "Author's LCCN from id.loc.gov",
+      "Author's VIAF cluster number",
+      "Author's Wikidata Q number"
+    ],
+    columnWidths: { "year": 100, "genre": 130, "degree": 110, "program": 180, "institution": 200 },
+    rangeSliderColumns: ["year"],
+    categoryColumns: ["genre", "program", "institution", "degree"],
+    sortColumns: ["year"],
+    sortOrders: ["desc"],
+    buttonContainerId: "#button-container-iww-grads",
+    rawButtonId: "#download-raw-iww-grads",
+    urlCopyButtonId: "#copy-url-iww-grads",
+  }
+);
+```
+
+<div id="table-container-iww-grads" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-iww-grads"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-iww-grads"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-iww-grads'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ## Collection and Creation
 
@@ -218,36 +289,80 @@ This dataset also includes various persistent identifiers:
 
 The third dataset includes works by notable Iowa Writers’ Workshop authors that are held by the HathiTrust Digital Library, as well as HathiTrust IDs for each title.
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-data_path <- "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-hathitrust_metadata.csv"
-
-createDataTable(
-    data_path = data_path,
-    displayed_columns = c(
-        "author1", "author1_normalized", "title", "date", "htid", "hathi_rights", "oclc_holdings", "oclc_eholdings", "place", "publisher_marc", "imprint", "isbn", "isbn_most_common_edition", "lccn", "oclc", "oclc_owi", "person_id",
-        "id", "author2", "author3", "author4", "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata_qid"
-    ),
-    column_widths = c("title" = "100px", "date" = "75px"),
-
-    # currency_columns = c("prize_amount"),
-
-    category_columns = c("hathi_rights"),
-
-    # sort_columns = c("prize_year"),
-    # sort_orders = c("desc")
-)
-
-# df <- read.csv(data_path)
-
-# cat(paste(shQuote(colnames(df), type = "cmd"), collapse = ", "))
+```{ojs}
+//| echo: false
+//| output: false
+iww_hathi_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-hathitrust_metadata.csv")
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-iww-hathi",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/iowa_writers_workshop/iowa_writers_workshop-hathitrust_metadata.csv",
+  {
+    displayedColumns: ["author1", "author1_normalized", "title", "date", "htid", "hathi_rights",
+                       "oclc_holdings", "oclc_eholdings", "place", "publisher_marc", "imprint",
+                       "isbn", "isbn_most_common_edition", "lccn", "oclc", "oclc_owi", "person_id",
+                       "id", "author2", "author3", "author4",
+                       "author_authorized_heading", "author_lccn", "author_viaf", "author_wikidata_qid"],
+    columnPopups: [
+      "Primary author of the work as recorded in HathiTrust",
+      "Normalized form of the primary author's name",
+      "Short title of the work",
+      "Publication date",
+      "HathiTrust item (volume) identifier",
+      "HathiTrust rights code — see the description below for the full list",
+      "OCLC Classify total holdings count",
+      "OCLC Classify electronic holdings count",
+      "Place of publication (from MARC metadata)",
+      "Publisher as recorded in MARC metadata",
+      "Full imprint string",
+      "ISBN for this volume",
+      "ISBN of the most common edition",
+      "Library of Congress Control Number for the work",
+      "Unique OCLC identifier for this volume in WorldCat",
+      "OCLC Classify work identifier",
+      "Numeric id of the author in the IWW people dataset",
+      "Internal record id",
+      "Second author (if applicable)",
+      "Third author (if applicable)",
+      "Fourth author (if applicable)",
+      "Author's NACO authorized heading",
+      "Author's LCCN from id.loc.gov",
+      "Author's VIAF cluster number",
+      "Author's Wikidata Q number"
+    ],
+    columnWidths: { "date": 110, "hathi_rights": 130 },
+    rangeSliderColumns: ["date"],
+    numericColumns: ["oclc_holdings", "oclc_eholdings"],
+    categoryColumns: ["hathi_rights"],
+    sortColumns: ["oclc_holdings"],
+    sortOrders: ["desc"],
+    buttonContainerId: "#button-container-iww-hathi",
+    rawButtonId: "#download-raw-iww-hathi",
+    urlCopyButtonId: "#copy-url-iww-hathi",
+  }
+);
+```
+
+<div id="table-container-iww-hathi" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-iww-hathi"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-iww-hathi"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-iww-hathi'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ## Collection and Creation
 
@@ -324,3 +439,5 @@ This dataset also includes various persistent identifiers and information from O
 Our IRB board has determined that none of our information violates the privacy or confidentiality of anybody listed in the database, although we are willing to partially or totally remove information about anyone upon their request. Other than gender, we have not tagged any of our entries with demographic data that might be considered sensitive or subjective.
 
 The gender information for authors in this data was collected by researching biographical information available on authors included in our database. When no biographical information on an author was available, the PEP team attempted to infer (when possible) the author’s most likely gender based on name. While there are instances where an individual author’s gender identity information may not be discernable, our data does allow for a reliable aggregate examination of gender trends in the IWW over time.
+
+# Citation

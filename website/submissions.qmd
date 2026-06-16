@@ -21,6 +21,18 @@ The Post45 Data Collective peer reviews and houses literary and cultural data fr
 
 **Visualizations**: We sometimes feature visualizations alongside the data tables, such as those featured in ["The Canon of Asian American Literature."](https://data.post45.org/posts/asian-american-literature/#explore-the-asian-american-literary-canon) We use [Quarto](https://quarto.org/) to host our website, and we can display visualizations created with Python, R, and JavaScript [Observable notebooks](https://quarto.org/docs/interactive/ojs/). If you'd like to prepare your own visualization or discuss the creation of one, please get in touch.
 
+Before you submit, please consult our two main resources for preparing data:
+
+::: {.callout-tip appearance="default"}
+## **Tabular Data Style Guide**
+The [**Post45 Data Collective Tabular Data Style Guide**](style-guide.qmd) walks through how to format and document tabular humanities data for submission — from file formats and character encoding to column naming, missing values, dates, and persistent identifiers. It's the place to start if you're cleaning, structuring, or documenting a dataset for P45DC (or for any tabular humanities project).
+:::
+
+::: {.callout-tip appearance="default"}
+## **BookReconciler 📘💎**
+[**BookReconciler**](our-tools.qmd) is the Post45 Data Collective's free, open-source tool for adding persistent identifiers to bibliographic data. Given a spreadsheet of book titles and authors, it queries the **Library of Congress, VIAF, Wikidata, HathiTrust, OCLC,** and **Google Books** in bulk and matches your records to their canonical IDs — and it can cluster different editions of the same Work together. See the [BookReconciler page](our-tools.qmd) for setup instructions and a video walkthrough. If you can't run it yourself, we may be able to collaborate with you to add identifiers.
+:::
+
 # Interested in Submitting?
 
 If you’re interested in submitting to the Post45 Data Collective, please consult our ["data formatting"](#dataset-criteria-preparing-formatting) guidelines below, and prepare a data essay with [this Google Doc/Word template](https://docs.google.com/document/d/1Xm2ikqir-JceGoHwq1dI9qkVcXPTHWTGBAt0R3gN6S8/edit?usp=sharing).

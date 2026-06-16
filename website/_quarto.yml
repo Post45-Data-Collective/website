@@ -19,14 +19,27 @@ website:
   
   navbar:
     right:
-      - our-data.qmd
-      - our-tools.qmd
+      - text: "Data"
+        href: our-data.qmd
+      - text: "Tools"
+        href: our-tools.qmd
+      - text: "Style Guide"
+        href: style-guide.qmd
       - submissions.qmd
-      - people.qmd
-      - about.qmd
+      - text: "About"
+        menu:
+          - text: "About"
+            href: about.qmd
+          - text: "People"
+            href: people.qmd
+          - text: "How We Made This"
+            href: how-we-made-this.qmd
       - news.qmd
       - icon: github
         href: https://github.com/Post45-Data-Collective/website
+      - icon: bluesky
+        href: https://bsky.app/profile/post45data.bsky.social
+        aria-label: Bluesky
       # - icon: twitter
       #   href: https://twitter.com
 format:

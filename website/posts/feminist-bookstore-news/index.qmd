@@ -37,6 +37,9 @@ page-layout: full
 google-scholar: true 
 header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 aliases:
   - /feminist-bookstore-news/
 ---
@@ -75,55 +78,67 @@ Then, find the raw GitHub URL for that dataset and insert it below, customizing 
 
 Areas that need to be edited are marked with MAKE EDITS HERE -->
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# data <- read.csv("https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/feminist-bookstore-news/FINAL%20Descriptive%20Database%20of%20Articles%20Rev.csv")
-# print(names(data))
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-# MAKE EDITS HERE: Plug in the raw GitHub URL to the dataset below
-createDataTable(
-    data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-descriptive.csv",
-
-    # MAKE EDITS HERE: Select the columns that will be displayed in the data table, and the order
-    displayed_columns = c(
-        "vol", "no", "vol.no", "article_title",
-        "author", "category", "year", "month", "notes", "volunteer", "total_pages", "unique_id"
-    ),
-
-    # MAKE EDITS HERE: Customize any column widths
-    # If none, comment out
-    column_widths = c(
-        "vol" = "50px", "no" = "50px", "author" = "100px", "category" = "120px", "year" = "100px"
-        # "prize_name" = "100px"
-    ),
-
-    # MAKE EDITS HERE: Select any columns that should be formatted with a dollar sign
-    # If none, comment out
-    # currency_columns = c("prize_amount"),
-
-    # MAKE EDITS HERE: Select any columns that should be filterable as a category
-    # If none, comment out
-
-    category_columns = c(
-        "category", "no",
-        # "Author",
-        # "Year",
-        "vol"
-        # "Month"
-    ),
-
-    # Select column to sort by, and order
-    sort_columns = c("vol"),
-    sort_orders = c("asc")
-)
-
+```{ojs}
+//| echo: false
+import {viewof dataSummaryView, Tabulator, viewof selectedColumns, viewof dataSet, tableContainer, fetchData, generateTabulatorTableFromCSV, progress, progressbar} from "8bb63a6cde9addff"
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+fbn_descriptive_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-descriptive.csv")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-fbn-articles",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-descriptive.csv",
+  {
+    displayedColumns: ["vol", "no", "article_title", "author", "category",
+                       "year", "month", "notes", "volunteer", "total_pages", "unique_id"],
+    columnPopups: [
+      "FBN volume number (1–23)",
+      "FBN issue number; combined issues shown as e.g. '9.10'; SP marks special/supplemental issues",
+      "Article title (variability in titles and conventions is preserved; not standardized)",
+      "Article author when attributed; many unattributed articles are presumed to be by Carol Seajay",
+      "Article category — see the description below for definitions",
+      "Year the issue was published",
+      "Month the issue was published (early issues sometimes inferred from a mail cancellation)",
+      "Notes — summaries, subheadings, descriptions of graphics, or other context",
+      "Volunteer who indexed this row",
+      "Number of pages of article content in the issue",
+      "Unique identifier appended for citation purposes"
+    ],
+    columnWidths: { "vol": 80, "no": 80, "category": 160, "year": 100, "month": 110 },
+    rangeSliderColumns: ["year"],
+    categoryColumns: ["vol", "no", "category", "month"],
+    sortColumns: ["vol", "no"],
+    sortOrders: ["asc", "asc"],
+    buttonContainerId: "#button-container-fbn-articles",
+    rawButtonId: "#download-raw-fbn-articles",
+    urlCopyButtonId: "#copy-url-fbn-articles",
+  }
+);
+```
+
+<div id="table-container-fbn-articles" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-fbn-articles"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-fbn-articles"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-fbn-articles'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ::: {.callout-tip icon="false"}
 ## Creative Commons License
@@ -282,50 +297,58 @@ Then, find the raw GitHub URL for that dataset and insert it below, customizing 
 
 Areas that need to be edited are marked with MAKE EDITS HERE -->
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# data <- read.csv("https://raw.githubusercontent.com/Post45-Data-Collective/website/refs/heads/main/datasets/feminist-bookstore-news/feminist-bookstore-news-issue-list_2024-12-23.csv")
-# print(names(data))
-
-# Load the function
-source("../../scripts/createDataTable.R")
-
-createDataTable(
-    data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-issue_list.csv",
-
-    # MAKE EDITS HERE: Select the columns that will be displayed in the data table, and the order
-    displayed_columns = c(
-        "volume", "number", "year_published", "number_of_pages",
-        "format", "notes"
-    ),
-
-    # MAKE EDITS HERE: Customize any column widths
-    # If none, comment out
-    # column_widths = c("volume" = "50px", "number" = "50px", "notes" = "140px"),
-
-    # MAKE EDITS HERE: Select any columns that should be formatted with a dollar sign
-    # If none, comment out
-    # currency_columns = c("prize_amount"),
-
-    # MAKE EDITS HERE: Select any columns that should be filterable as a category
-    # If none, comment out
-
-    category_columns = c(
-        "number",
-        # "Author",
-        "format",
-        "volume"
-        # "Month"
-    ),
-
-    # Select column to sort by, and order
-    sort_columns = c("volume"),
-    sort_orders = c("asc")
-)
+```{ojs}
+//| echo: false
+//| output: false
+fbn_issues_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-issue_list.csv")
 ```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-fbn-issues",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/feminist_bookstore_news/feminist_bookstore_news-issue_list.csv",
+  {
+    displayedColumns: ["volume", "number", "year_published", "number_of_pages",
+                       "format", "notes"],
+    columnPopups: [
+      "FBN volume number (1–23)",
+      "FBN issue number (numeric, or 'SP' for special/supplemental issues)",
+      "Year the issue was published",
+      "Number of pages in the archived PDF",
+      "Format: Newsletter, Magazine, Supplement, or Electronic",
+      "Highlights particular themes of issues of interest to readers"
+    ],
+    columnWidths: { "volume": 130, "number": 130, "year_published": 150, "number_of_pages": 180, "format": 130 },
+    rangeSliderColumns: ["year_published"],
+    numericColumns: ["number_of_pages"],
+    categoryColumns: ["volume", "number", "format"],
+    sortColumns: ["volume", "number"],
+    sortOrders: ["asc", "asc"],
+    buttonContainerId: "#button-container-fbn-issues",
+    rawButtonId: "#download-raw-fbn-issues",
+    urlCopyButtonId: "#copy-url-fbn-issues",
+  }
+);
+```
+
+<div id="table-container-fbn-issues" style="height: 600px"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-fbn-issues"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-fbn-issues"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-fbn-issues'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ## Description
 
@@ -457,3 +480,5 @@ Theo Baker
 [^11]:  Kristen Hogan’s *The Feminist Bookstore Movement: Lesbian Antiracism and Feminist Accountability* (Durham: Duke University Press, 2016\) draws from the published *_FBN_* issues and explores their significance to feminist booksellers.
 
 [image1]: <data:image/png;base64,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>
+
+# Citation

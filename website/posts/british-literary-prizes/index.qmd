@@ -133,6 +133,7 @@ generateTabulatorTableFromCSV(
 ],
     columnWidths: { "prize_name": "30px", "prize_alias": "30px" },
     //currencyColumns: ["prize_amount"],
+    rangeSliderColumns: ["prize_year"],
     categoryColumns: [ "prize_genre", "prize_alias", "prize_name", "gender", "sexuality", "uk_residence",
         "ethnicity_macro", "ethnicity", "highest_degree", "degree_field_category", "person_role"],
      sortColumns: ["prize_year", "prize_name"],
@@ -467,3 +468,5 @@ Gov.uk. “Writing about Ethnicity.” (2024). [https://www.ethnicity-facts-figu
 <!-- Excel script -->
 <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 
+
+# Citation

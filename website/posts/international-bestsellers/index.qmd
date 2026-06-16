@@ -165,6 +165,7 @@ generateTabulatorTableFromCSV(
     },
 
     numericColumns: ["rank"],
+    dateSliderColumns: ["date"],
     categoryColumns: ["country", "gender", "nationality", "publication_country"],
 
     // No linkColumns needed unless you add URLs
@@ -314,3 +315,5 @@ Author gender and nationality data could be considered sensitive, especially in 
 # Versioning
 
 We had intended to update the dataset annually using the same methodology described here. In 2023, Nina Sabak left *Publishing Trends*, and in September, the international bestseller section of the periodical was paused with no indication of being resumed. Without a consistent data source, expanding the dataset may be impossible, but we are working to identify possible solutions. 
+
+# Citation

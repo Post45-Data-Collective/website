@@ -1,23 +1,51 @@
 ---
 title: "Post45 Data Collective Tabular Data Style Guide"
-description: "*Created by Em Nordling, August 2025; Updated December 2025*"
+author:
+  - name: Em Nordling
+date: "2026-05-11"
+citation:
+  type: webpage
+  container-title: "Post45 Data Collective"
+  url: "https://data.post45.org/style-guide.html"
+google-scholar: true
 lightbox: true
-image: URL or filepath
 format:
   html:
     toc: true
-    toc-location: right-body   # or left-body
+    toc-location: right
     toc-title: "Table of Contents"
     toc-depth: 3
-  
+
 
 ---
 
 
 
-# <font color="midnightblue">**Introduction**</font>{#introduction}
+# **Introduction**{#introduction}
 
-In the **Post45 Data Collective Tabular Data Style Guide**, you will find what it says on the tin: a cheatsheet for how to present and submit your tabular data to P45DC. This guide provides support at multiple points throughout your data journey, whether you are actively making data decisions or have already collected, curated, and documented your data. Though our guidelines are targeted to the latter-end of the dataset lifecycle (specifically storage, publication, and reusability), they will also be helpful for making critical decisions well in advance of submitting to P45DC.
+In the **Post45 Data Collective Tabular Data Style Guide**, you will find what it says on the tin: a cheatsheet for how to present and submit your tabular data to P45DC. This guide provides support at multiple points throughout your data journey, whether you are actively making data decisions or have already collected, curated, and documented your data. Though our guidelines are targeted to the latter-end of the dataset lifecycle (specifically storage, publication, and reusability), they will also be helpful for making critical decisions well in advance of submitting to P45DC. We hope this guide will also be a useful general-purpose reference for anyone working with tabular humanities data — whether or not you are submitting to P45DC — including researchers, students, librarians, and instructors thinking through how to clean, structure, and document a dataset.
+
+## On This Page
+
+::: {.on-this-page}
+* [**General Tips & Suggestions**](#general-tips-suggestions)
+  * [Consider Digital Legibility](#consider-digital-legibility) · [Consider Use Cases](#consider-use-cases) · [Use Appropriate Software](#use-appropriate-software) · [Consider Institutional Policies](#consider-institutional-policies) · [Document Decision-Making](#document-decision-making)
+* [**Files & File Organization**](#files-file-organization)
+  * [File Formats](#file-formats) · [Representing Multiple Values](#representing-multiple-values) · [Character Encoding](#character-encoding) · [Linked Datasets](#linked-datasets)
+* [**Data Structure**](#data-structure)
+  * [Scope](#scope) · [Rows & Columns](#rows-columns) · [Missing & Unknown Values](#missing-unknown-values) · [External Vocabularies & Authorities](#external-vocabularies-authorities)
+* [**Data Types**](#data-types)
+  * [Names, Places, and IDs](#names-places-IDs) · [Numbers](#numbers) · [Publication Data](#publication-data) · [Subjects & Keywords](#subjects-keywords) · [Categories](#categories) · [Other Descriptive Data](#other-descriptive-data)
+* [**Acknowledgements**](#acknowledgements)
+* [**Citation**](#citation)
+:::
+
+```{=html}
+<style>
+.on-this-page a, .on-this-page a:visited { color: #000; }
+.on-this-page a:hover { color: #000; text-decoration: underline; }
+</style>
+```
 
 Every dataset is different and will require different decision-making processes. If you are working with data compiled by an external source, for instance, rather than compiling it independently, you might choose to keep the data as-is without standardizing entries per our suggestions in [Data Types](#data-types). Your dataset will not necessarily be rejected for not meeting every recommendation, nor do you need to make every appropriate change before submitting. Our editorial team will work with you to determine what changes are necessary long-term. However, we strongly encourage you to read this style guide well in advance of submission and to use it to guide your decisions. 
 
@@ -27,7 +55,7 @@ At the Post45 Data Collective, we aim to make humanities research data accessibl
 
 
 
-::: {.callout-note appearance="default"}
+::: {.callout-tip appearance="default"}
 ## Selected Resources
 
 **Getting Started**
@@ -51,7 +79,7 @@ At the Post45 Data Collective, we aim to make humanities research data accessibl
 
 * [OpenRefine](https://openrefine.org/){.external target="_blank"} 
   * [“Cleaning Data with Open Refine"](https://programminghistorian.org/en/lessons/cleaning-data-with-openrefine){.external target="_blank"} 
-  * [Post45DC OpenRefine Reconciliation Service](https://data.post45.org/our-tools.html){.external target="_blank"} 
+  * [BookReconciler 📘💎](https://data.post45.org/our-tools.html){.external target="_blank"}
 * [Breve](https://hdlab.stanford.edu/breve/){.external target="_blank"} 
 * [Tidyr](https://tidyr.tidyverse.org/articles/tidy-data.html){.external target="_blank"} (tidyverse suite of tools for R) 
 * [Visidata](https://www.visidata.org/){.external target="_blank"} 
@@ -68,7 +96,7 @@ At the Post45 Data Collective, we aim to make humanities research data accessibl
 
 ---
 
-# <font color="midnightblue">**General Tips & Suggestions** </font>{#general-tips-suggestions}
+# **General Tips & Suggestions**{#general-tips-suggestions}
 
 We recommend the following basic best practices for preparing your dataset.
 
@@ -80,7 +108,7 @@ Clean your data not just for human readability, but for digital legibility.
 
 * Remove **unnecessary punctuation or trailing white space**. Again, this is a task you could complete in OpenRefine (see [“Common Transforms”](https://openrefine.org/docs/manual/cellediting#transform){.external target="_blank"}) or with a [programming language](https://www.geeksforgeeks.org/python/python-remove-spaces-from-a-string/){.external target="_blank"}.
 
-* Keep each field as distinct as possible. Ideally, each cell should only contain a **single value** (though there are exceptions).
+* Keep each field as distinct as possible. Ideally, each cell should only contain a **single value** (though there are [exceptions](#representing-multiple-values)).
 
 ## 2. Consider Use Cases{#consider-use-cases}
 
@@ -89,7 +117,7 @@ Clean your data not just for human readability, but for digital legibility.
 If they will use it to generate **data visualizations**…
 
 * Prioritize **sortability**  
-  * For example, using ISO 8601 for dates (1794-07-27) allows computers to easily sort them numerically, as compared to other variations (July 27, 1794; 7/27/1294; 27 July ‘94) (See [Data Types](#data-types))
+  * For example, using ISO 8601 for dates (1794-07-27) allows computers to easily sort them numerically, as compared to other variations (July 27, 1794; 7/27/1794; 27 July ‘94) (See [Data Types](#data-types))
 * Prioritize **consistency and standardization**  
   * For example, data compiled and curated by an external source might include variations in name spelling, formatting, etc. To enable easier and more accurate computational analysis, you will need to standardize the data drawn from these sources (see [Data Types](#data-types)).
 
@@ -109,9 +137,9 @@ Be attentive to **licensing requirements** that might vary based on the accessib
 
 ## 3. Use Appropriate Software{#use-appropriate-software}
 
-   CSV files can theoretically be viewed and edited in many different programs and softwares; however, not all of them will enforce appropriate formatting upon export (see [Character Encoding](#character-encoding)). Avoid working with your data in text editors like Word, and instead stick to **programs designed for data work** specifically, like Excel , Google Sheets, R and RStudio, or Python and libraries like Pandas.
+   CSV files can theoretically be viewed and edited in many different programs and software packages; however, not all of them will enforce appropriate formatting upon export (see [Character Encoding](#character-encoding)). Avoid working with your data in text editors like Word, and instead stick to **programs designed for data work** specifically, like Excel, Google Sheets, R and RStudio, or Python and libraries like Pandas.
 
-::: {.callout-note appearance="default"} 
+::: {.callout-tip appearance="default"} 
 ## **What is a CSV File?** 
 
 **CSV** (Comma-Separated Values) is a non-proprietary format, meaning that you do not need a special piece of software to open it (see [File Formats](#file-formats)). Rather than saving as a structured spreadsheet, CSV files are plain text files wherein each value is separated by a comma.  Learn more about CSV [here](https://www.geeksforgeeks.org/data-analysis/csv-file-format/){.external target="_blank"}. 
@@ -127,11 +155,11 @@ Be attentive to **licensing requirements** that might vary based on the accessib
 
 ---
 
-# <font color="midnightblue">**Files & File Organization**</font>{#files-file-organization}
+# **Files & File Organization**{#files-file-organization}
 
 ## File Formats{#file-formats}
 
-Ensure that your data files are formatted for **sustainable, non-proprietary use**. What does it mean for a file format to be sustainable and non-proprietary? Well, a popular file format for working with spreadsheets is the Excel default that ends with the extension .xlsx. This is the default format when saving data in Excel. While .xlsx files can be very useful, they’re technically proprietary and owned by Microsoft, meaning that we can’t rely on them to be accessible forever outside of Microsoft’s ecosystem.
+Ensure that your data files are formatted for **sustainable, non-proprietary use**. What does it mean for a file format to be sustainable and non-proprietary? A popular file format for working with spreadsheets is the Excel default that ends with the extension .xlsx. This is the default format when saving data in Excel. While .xlsx files can be very useful, they’re technically proprietary and owned by Microsoft, meaning that we can’t rely on them to be accessible forever outside of Microsoft’s ecosystem.
 
 By contrast, a non-proprietary format for spreadsheet files is .csv, which stands for comma separated values. You can open a .csv file with virtually any software package or tool, and they have a better chance of being accessible in the future. You can easily save your spreadsheet in this format, even if using Excel, by clicking “Save as…,” browsing the “File Format” drop-down, and selecting “CSV UTF-8.” One of the only drawbacks here is that you will lose any bells-and-whistles added with Excel, like colors added to cells or special filters.  
 
@@ -145,7 +173,7 @@ By contrast, a non-proprietary format for spreadsheet files is .csv, which stand
 
 > **Example**: *A small selection of proprietary file formats and their non-proprietary counterparts*
 
-::: {.callout-note appearance="default"}
+::: {.callout-tip appearance="default"}
 ## **Quick Note** 
 
 The data tables hosted by the Post45 Data Collective provide options to download datasets as a CSV, Excel file, or JSON file. We provide these options for convenience and because we know some users prefer Excel files. We are able to create these three derivative file formats—CSV, Excel, JSON—from a single CSV file, so prospective authors can simply submit a CSV file when ready (if submitting tabular data).  If your dataset is not tabular (e.g. TEI, visual), please reach out to our editors before submitting to discuss format, organization, and naming recommendations. The [Data Curation Network](https://datacuration.network/outputs/data-curation-primers/){.external target="_blank"} provides additional information about file formats.
@@ -153,16 +181,17 @@ The data tables hosted by the Post45 Data Collective provide options to download
 
 ## Representing Multiple Values{#representing-multiple-values}
 
-Ideally, each cell of your CSV file should only contain a single value. However, if you are including multiple data points in one cell (e.g. a list of names), make sure to use a unique delimiter (not a comma) between each datapoint to ensure future users can split columns easily as needed. We recommend **semi-colons (;)** or **pipes (|).** 
+Ideally, each cell of your CSV file should only contain a single value. However, if you are including multiple data points in one cell (e.g. a list of names), make sure to use a unique delimiter (not a comma) between each datapoint to ensure future users can split columns easily as needed. We recommend **semi-colons (`;`)** or **pipes (`|`)**.
 
 For example, if you format your name fields as “Last Name, First Name” and include multiple entries in the same cell, you will have the following results when using software like Open Refine or Excel to split a column into multiple columns for analysis. 
 
-| Internal Delimiter | Original Entry | Split Entries |
+| Internal Delimiter | Original Entry | Resulting Cells After Splitting |
 | :---- | :---- | :---- |
-| **Comma-separated** | “Du Bois, W.E.B., Mayhew, Henry” | “Du Bois”“W.E.B.”“Mayhew”“Henry” |
-| **Semicolon-separated** | “Du Bois, W.E.B.; Mayhew, Henry” | “Du Bois, W.E.B”“Mayhew, Henry” |
+| **Comma** ✗ | `Du Bois, W.E.B., Mayhew, Henry` | <code>Du Bois</code> · <code>W.E.B.</code> · <code>Mayhew</code> · <code>Henry</code><br><small>4 cells — names accidentally broken apart</small> |
+| **Semicolon (`;`)** ✓ | `Du Bois, W.E.B.; Mayhew, Henry` | <code>Du Bois, W.E.B.</code> · <code>Mayhew, Henry</code><br><small>2 cells — each name kept intact</small> |
+| **Pipe (`\|`)** ✓ | `Du Bois, W.E.B. \| Mayhew, Henry` | <code>Du Bois, W.E.B.</code> · <code>Mayhew, Henry</code><br><small>2 cells — each name kept intact</small> |
 
-> **Example**: *this is what split columns may look like if you use comma or semicolon-separated internal delimiters. Note how the comma-separated option unintentionally splits the names by first name / last name and not just by individual*
+> **Example**: *what split columns look like depending on the internal delimiter you use. The comma option fails because the names themselves contain commas; semicolons and pipes (the recommended options) preserve each full name as a single cell.*
 
 ## Character Encoding{#character-encoding}
 
@@ -179,7 +208,7 @@ This is a common “character encoding” issue. Character encoding refers to sy
 
 When compiling or working with data, it’s important to save your data in a UTF-8 format and to ensure that diacritics and other special characters are preserved.
 
-::: {.callout-note appearance="default"}
+::: {.callout-tip appearance="default"}
 ## **Important Note**
 
 It’s very easy for character encodings to get messed up, especially when using Excel. For example, even if a file is correctly saved in a UTF-8 format, if you open it in Excel, the file often will *not* open as UTF-8 by default. So even if you or someone else correctly preserved special characters upon an initial “save,” if you re-open that file in Excel, the special characters may look garbled, and you may accidentally overwrite the data in this garbled format.
@@ -196,17 +225,27 @@ Does your submission include multiple linked datasets? For instance, “[The Ind
 * … cross-listed data like author names are **consistent across datasets** (or that intentional variations are explained in your data essay)  
 * … unique IDs **do not duplicate** across datasets (e.g. same ID for both a line of author data and a line of publication data)
 
-![][styleguide1]{.border}
+| full_name | prize_year | prize_name | author_viaf | author_lccn | title_of_winning_book |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Toni Morrison | 2016 | Saul Bellow Award For Achievement In American Fiction | <mark>109406177</mark> | <mark>n80131379</mark> |  |
+| Toni Morrison | 1988 | Pulitzer Prize | <mark>109406177</mark> | <mark>n80131379</mark> | Beloved |
 
 > **Example**: *First two entries for Toni Morrison in “[Major Literary Prize Winners and Judges](https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table){.external target="_blank"}"*
 
-![][styleguide3]{.border}
+| shorttitle | author | hathi_id | author_lccn | author_viaf | oclc | oclc_owi |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| Beloved : a novel | Morrison, Toni | mdp.49015003142743 | <mark>n80131379</mark> | <mark>109406177</mark> | 15284982 | 989794 |
 
 > **Example**: *Entry for Toni Morrison’s* Beloved *in “[Prize-Winning Authors’ Books](https://data.post45.org/posts/the-index-of-major-literary-prizes-in-the-us/#data-table-1){.external target="_blank"},” a dataset linked to the one above. Though the author and full_name formats differ, the datasets are still easily linked using the LCCN and VIAF ID fields.*
 
+::: {.callout-tip appearance="default"}
+## **Tip: BookReconciler can add the linking IDs for you**
+If your datasets cover books and authors, you don’t have to look up LCCN, VIAF, Wikidata, or HathiTrust IDs by hand. [**BookReconciler 📘💎**](https://data.post45.org/our-tools.html){.external target="_blank"}, the Post45 Data Collective’s free OpenRefine extension, will match your records against these authorities in bulk and add the identifiers as new columns — the same IDs that make cross-dataset linking possible. See [External Vocabularies & Authorities](#external-vocabularies-authorities) for setup details.
+:::
+
 ---
 
-# <font color="midnightblue">**Data Structure**</font>{#data-structure}
+# **Data Structure**{#data-structure}
 
 ## Scope{#scope}
 
@@ -221,7 +260,9 @@ To make your data usable for future researchers, we recommend limiting your scop
 
 * **Standardize the *type* of information** included in each field. This is especially important to consider for freeform fields such as “notes” or “description” that rely on a researcher’s subjective interpretation. Instead of putting every piece of information into one field (e.g. notes), split and categorize the types of information being gathered to make them more legible (e.g. physical\_description, image\_description, advertisements, summary, related\_texts) (see [Other Descriptive Data](#other-descriptive-data)).
 
-![][styleguide2]{.border}
+| title | creator | released | year_set | wikipedia_pg | notes | predictions | source |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| Metal Gear Solid 2: Sons of Liberty | Hideo Kojima | 2001 | 2008 | [Metal_Gear_Solid_2](https://en.wikipedia.org/wiki/Metal_Gear_Solid_2){.external target="_blank"} | Median of the years depicted. | The introduction mission is set in 2007, but the re… | wikipast |
 
 > **Example**: *Note how the “[Time Horizons of Futuristic Fiction](https://data.post45.org/posts/futuristic-fiction/){.external target="_blank"}” dataset separates freeform fields like “notes” and “predictions” based on the types of information they contain*
 
@@ -238,49 +279,90 @@ The columns of your dataset should reflect the categories of data you have colle
 
 ## Missing & Unknown Values{#missing-unknown-values}
 
-Datasets will always contain gaps, whether in missing/unknown information, or in fields non-applicable to a given subject. It’s important to **delineate between all of these slight variations** to ensure that none of them are conflated with one another.
+Datasets will always contain gaps — sometimes because information is genuinely unknown, sometimes because a field doesn’t apply to a given subject, and sometimes because a researcher simply hasn’t filled it in. Where possible, it’s useful to **delineate between these different kinds of gap** rather than collapsing them into a single empty cell.
 
-For instance, you might use the following schema to decide which missing or unknown value format is best for you:
+We recommend choosing **plain-English markers** that are explicit about *why* the cell is empty. For example:
 
 | Example Column | Example Entry | Value Type | Context |
 | :---- | :---- | :---- | :---- |
 | **birth\_date** | unknown | Unknown Information | An author’s exact birth date is undocumented |
-| **title\_of\_winning\_book** | N/A | Not Applicable to Subject | An author won the award for their career rather than individual book |
-| **notes** | NaN\* | Missing Information | No applicable notes included by researcher |
+| **title\_of\_winning\_book** | not applicable | Not Applicable to Subject | An author won the award for their career rather than for an individual book |
+| **notes** | missing | Missing Information | No applicable notes recorded by researcher |
 
-> **“NaN” stands for “Not a Number,” and can be translated from coding language into “this space intentionally left blank.”*
+Whatever set of markers you choose, **use them consistently** across the dataset and **document what each one means** in your data essay.
+
+::: {.callout-tip appearance="default"}
+## **NA vs. N/A vs. NaN**
+For reference, computational tools like Pandas will automatically read values like `NA`, `N/A`, `NaN`, `null`, `NULL`, `None`, and empty cells as the same missing-value (`NaN`) by default. If you use `N/A` to mean *not applicable* and `NaN` to mean *missing*, that distinction may disappear when someone loads the CSV in pandas (unless they use `keep_default_na=False`).
+It's important to remember that different programs treat blank cells differently. Excel may render an empty cell as visually identical to a cell containing the string `"NaN"` or a single space. Without an explicit marker, it’s hard to tell what a blank cell was meant to communicate.
+:::
 
 Be sure to also check for **outliers and inconsistencies** across data. If a large chunk of data is missing (e.g. a specific date range), ensure that this is not due to a research gap on your end. Whatever the reason for a large data gap, your data essay provides a useful space to provide an explanation (and, if necessary, a reflection on its potential impact on analysis).
 
 ## External Vocabularies & Authorities{#external-vocabularies-authorities}
 
-External vocabularies and authorities provide accessible language, curated by experts, that help to **standardize and link data across platforms, datasets, and institutions**. For instance, a Library of Congress name authority for “Prince” will help users not only to differentiate him from titled royals, but also to ensure that, even when he is listed in three different entries as “Prince,” “Artist Formerly Known as Prince,” and “Prince Rogers Nelson,” these names will all still be linked back to the same person.
+External vocabularies and authorities provide accessible language, curated by experts, that help to **standardize and link data across platforms, datasets, and institutions**.
 
-::: {.callout-note appearance="default"}
+For instance, a Library of Congress name authority for “Prince” (below right) will help users not only to differentiate him from titled royals, but also to ensure that, even when he is listed in three different entries as “Prince,” “Artist Formerly Known as Prince,” and “Prince Rogers Nelson,” these names will all still be linked back to the same person. A [Wikidata](https://www.wikidata.org/wiki/Q7542){.external target="_blank"} entry for Prince (below left) does similar work, gathering his aliases under a single Q-number. Each authority assigns its own persistent identifier — **Q7542** in Wikidata, **n84079379** in the Library of Congress — that you can include in your dataset to unambiguously link a record back to that authority.
+
+:::: {.columns}
+::: {.column width="49%"}
+![][styleguide4]
+
+> **Example**: *Wikidata entry for Prince*
+:::
+::: {.column width="2%"}
+:::
+::: {.column width="49%"}
+![][styleguide5]
+
+> **Example**: *Library of Congress name authority for Prince*
+:::
+::::
+
+The same logic lets you link records *across* datasets. Because both of the linked datasets in “The Index of Major Literary Prizes in the US” use the same LCCN and VIAF IDs for Toni Morrison, a researcher can connect her prize-winning record to the metadata for *Beloved* — even though the name is formatted differently in each table:
+
+| full_name | prize_year | prize_name | author_viaf | author_lccn | title_of_winning_book |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Toni Morrison | 1988 | Pulitzer Prize | <mark>109406177</mark> | <mark>n80131379</mark> | Beloved |
+
+| shorttitle | author | hathi_id | author_lccn | author_viaf | oclc |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Beloved : a novel | Morrison, Toni | mdp.49015003142743 | <mark>n80131379</mark> | <mark>109406177</mark> | 15284982 |
+
+::: {.callout-tip appearance="default"}
 ## **Example Vocabularies & Authorities**
-* [Library of Congress](https://authorities.loc.gov/webvoy.htm){.external target="_blank"}  Names, Subjects/Keywords 
-* [Wikidata](https://www.wikidata.org/){.external target="_blank"} Names, Books, and Media 
-* [HathiTrust](https://www.hathitrust.org/member-libraries/resources-for-librarians/data-resources/hathifiles/hathifiles-description/){.external target="_blank"} Books 
-* [VIAF](https://viaf.org/en){.external target="_blank"} Names, Geography 
-* [Getty](https://www.getty.edu/research/tools/vocabularies/index.html){.external target="_blank"} Art & architecture terms, Artist names, Geography 
-* [ORCID](https://orcid.org/){.external target="_blank"}  Researcher names 
+* [Library of Congress](https://authorities.loc.gov/webvoy.htm){.external target="_blank"}  Names, Subjects/Keywords
+* [Wikidata](https://www.wikidata.org/){.external target="_blank"} Names, Books, and Media
+* [HathiTrust](https://www.hathitrust.org/member-libraries/resources-for-librarians/data-resources/hathifiles/hathifiles-description/){.external target="_blank"} Books
+* [VIAF](https://viaf.org/en){.external target="_blank"} Names, Geography
+* [Getty](https://www.getty.edu/research/tools/vocabularies/index.html){.external target="_blank"} Art & architecture terms, Artist names, Geography
+* [ORCID](https://orcid.org/){.external target="_blank"}  Researcher names
 * [Traditional Knowledge (TK) Labels](https://localcontexts.org/labels/traditional-knowledge-labels/){.external target="_blank"} Keywords for indigenous cultures
 * [Research Organization Registry (ROR)](https://ror.org/) Research and funding organizations
 :::
 
-![][styleguide4] 
+When incorporating an external vocabulary entry, make sure to include **BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution** (“n84079379” in the LoC example above or “Q7542” for Wikidata). You can look these up manually, one record at a time, by searching each authority's website — or, if you have more than a handful of records, you can let our own tool, **BookReconciler**, match them automatically in bulk.
 
-> **Example**: *Library of Congress name authority for Prince* 
+::: {.callout-tip appearance="default"}
+## **Recommended: Use BookReconciler to add identifiers**
+[**BookReconciler 📘💎**](https://data.post45.org/our-tools.html){.external target="_blank"} is a free, open-source desktop app built by the Post45 Data Collective for adding persistent identifiers to bibliographic data. Given a spreadsheet of book titles and authors, BookReconciler queries multiple authority sources at once — including the **Library of Congress (LCCN)**, **VIAF**, **Wikidata (Q-numbers)**, **HathiTrust (volume IDs)**, **OCLC**, **ISBNs**, and **Google Books** — and matches your records to their canonical identifiers. It also performs work-level clustering, which groups together different editions or volumes of the same title under a single work ID.
 
-![][styleguide5] 
+BookReconciler runs locally on macOS or Windows and integrates with **OpenRefine**, an open-source tool for cleaning and reconciling messy tabular data. To get started:
 
-> **Example**: *Wikidata entry for Prince*
+1. Install [OpenRefine](https://openrefine.org/){.external target="_blank"}.
+2. Download and install BookReconciler from [data.post45.org/our-tools](https://data.post45.org/our-tools.html){.external target="_blank"} (full step-by-step setup is available there).
+3. Load your dataset into OpenRefine, point its reconciliation service at BookReconciler's local URL, and let it match your titles and authors against the connected authorities.
+4. Add new columns to your dataset for any identifiers you want to keep (LCCN, VIAF, Wikidata Q, HathiTrust ID, ISBN, etc.).
 
-When incorporating an external vocabulary entry, make sure to include **BOTH the name or word(s) exactly as written in the database AND the ID provided by the organizing institution** (“n84079379” in the LoC example above or “Q7542” for Wikidata). No need to look these up manually: digital tools like our [OpenRefine script](https://data.post45.org/our-tools.html){.external target="_blank"} will help to automatically match many vocabularies to their IDs.
+A short [video tutorial on YouTube](https://www.youtube.com/watch?v=V9ZJoFowRJM){.external target="_blank"} walks through the workflow, and the [GitHub repository](https://github.com/Post45-Data-Collective/openrefine-reconciliation-service?tab=readme-ov-file#bookreconciler--02--metadata-enrichment-and-work-level-clustering){.external target="_blank"} has additional documentation. If you cannot install BookReconciler yourself, please reach out to the editorial team — we may be able to help run reconciliation on your dataset before publication.
+:::
 
-::: {.callout-note appearance="default"}
+For a worked example of how HathiTrust volume IDs unlock computational text analysis — including in-copyright books — see [“TF-IDF with HathiTrust Data”](https://melaniewalsh.github.io/Intro-Cultural-Analytics/05-Text-Analysis/02-TF-IDF-HathiTrust.html){.external target="_blank"} in *Introduction to Cultural Analytics & Python*, which walks through using a HathiTrust volume ID to download word-frequency data for Edward P. Jones’s *Lost in the City* and run tf-idf analysis on it.
+
+::: {.callout-tip appearance="default"}
 ## **Important Note on HathiTrust IDs**
-At the Post45 Data Collective, we particularly encourage the inclusion of HathiTrust volume IDs for book-related data. These IDs enable researchers to computationally access full text or “bags of words” (unordered text amenable for large-scale analysis) for books that are available in the HathiTrust Digital Library (see the [HTRC Feature Reader GitHub repository](https://github.com/htrc/htrc-feature-reader){.external target="_blank"} for more information). You can find a volume ID in the URL for a specific title. For example, the specific volume of *Pride and Prejudice* found at [https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053\&seq=1](https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&seq=1){.external target="_blank"} has the volume ID hvd.32044013656053. You can use our [OpenRefine tool](https://data.post45.org/our-tools.html){.external target="_blank"} to automatically add HathiTrust volume IDs for relevant records. 
+At the Post45 Data Collective, we particularly encourage the inclusion of HathiTrust volume IDs for book-related data. These IDs enable researchers to computationally access full text or “bags of words” (unordered text amenable for large-scale analysis) for books that are available in the HathiTrust Digital Library (see the [HTRC Feature Reader GitHub repository](https://github.com/htrc/htrc-feature-reader){.external target="_blank"} for more information). You can find a volume ID in the URL for a specific title. For example, the specific volume of *Pride and Prejudice* found at [https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053\&seq=1](https://babel.hathitrust.org/cgi/pt?id=hvd.32044013656053&seq=1){.external target="_blank"} has the volume ID hvd.32044013656053. You can use our [BookReconciler](https://data.post45.org/our-tools.html){.external target="_blank"} tool to automatically add HathiTrust volume IDs for relevant records. 
 
 Keep in mind that HathiTrust IDs represent **specific volumes** that have been digitized by specific institutions, rather than **title-level** data. A single title like *Pride and Prejudice* is likely to have multiple IDs referring to different editions or digitizations of the same title. If your dataset includes title-level data rather than volume-level data, you will need to standardize and document how you selected which ID(s) to include. For example, you might include: 
 
@@ -292,7 +374,7 @@ For clarity, you may also consider supplementing your volume-level HathiTrust da
 
 ---
 
-# <font color="midnightblue">**Data Types**</font>{#data-types}
+# **Data Types**{#data-types}
 
 The following standards for formatting entries in your dataset will ensure that your data is sortable, machine-readable, and easily parsable for human readers. In all cases, column names may be duplicated serially for the purposes of multiple entries (e.g. genre1, genre 2, genre3) (see: [Data Structure](#data-structure)).
 
@@ -306,13 +388,13 @@ The following standards for formatting entries in your dataset will ensure that 
 
 * 2 columns with headings “first\_name” and “last\_name” 
 * 1 column with heading “full\_name” or with descriptor by type (e.g. “author\_name”) 
-  - Entries can be formatted as either “First Name Last Name” OR “Last name, First name,” though consistency across entries is encouraged  
-* 1 or more columns as defined by external vocabulary, including authority name in heading (e.g. “loc\_name,” “wiki\_name”, “VIAF”)
+  - We prefer entries be formatted as **“First Name Last Name”** (e.g., *Ursula K. Le Guin*) — this reads more naturally in tables and avoids comma-related CSV issues. The “Last name, First name” format is also accepted (it matches LoC/NACO conventions and is useful for archival or bibliographic datasets), but should be used consistently across entries.
+* 1 or more columns as defined by external vocabulary, including authority name in heading (e.g. “loc\_name,” “wiki\_name,” “VIAF”)
 
 
 | first_name | last_name | author_name | loc_name |
 | :---- | :---- | :---- | :---- |
-| Ursula K. | Le Guin | Le Guin, Ursula K. | Le Guin, Ursula K. 1929-2018 | 
+| Ursula K. | Le Guin | Ursula K. Le Guin | Le Guin, Ursula K. 1929-2018 |
 > **Example**: *The level of granularity you use will vary by use case*  
 
 **In all cases**: 
@@ -358,11 +440,11 @@ Include IDs for ALL external vocabulary or authority terms used in your dataset 
 **In all cases**: 
 
 * Use headings that include type and authority name, and ID indicator (e.g. “viaf_name_url,” “tk_family_id”) 
-* EITHER use the ID on its own or the URL version of the ID (e.g. “n84079379” or “https://lccn.loc.gov/n84079379.” Be consistent. 
+* EITHER use the ID on its own or the URL version of the ID (e.g. “n84079379” or “https://lccn.loc.gov/n84079379”). Be consistent.
 
-|loc_name | loc_name_id | TGN_place | TGN_place_url | 
+| loc_name | loc_name_id | TGN_place | TGN_place_url |
 | :---- | :---- | :---- | :---- |
-Le Guin, Ursula K., 1929-2018 | n78095474 | Cincinnati (inhabited place) | http://vocab.getty.edu/page/tgn/2007971 |
+| Le Guin, Ursula K., 1929-2018 | n78095474 | Cincinnati (inhabited place) | http://vocab.getty.edu/page/tgn/2007971 |
 > **Example**: *Library of Congress & Getty identifiers*
 
 ## Numbers{#numbers}
@@ -419,7 +501,7 @@ For additional variations, including information on formatting intervals, durati
 
 ## Publication Data{#publication-data}
 
-### Contributors{#contributers}
+### Contributors{#contributors}
 
 If the publications in your dataset include multiple types of contribution (e.g. edited collections as well as monographs), consider a standardized way to document contributors. 
 
@@ -445,19 +527,30 @@ Depending on the scope and use cases of your dataset, it may be useful to includ
 * A “serial” title column in addition to the main title entry to account for titles of special issues, title changes across time, episodes of a series, etc.  
 * 1 or more fields for unit release information (e.g. “volume,” “number,” “season\_no,” “episode\_no”) 
   - Though publications themselves may use multiple formats for this information (e.g. “vol. II” followed by “vol. 3”), standardize your own formatting as much as possible 
-* 1 or more “contributors” columns and/or 1  or more “editor” columns (see above) 
+* 1 or more “contributors” columns and/or 1 or more “editor” columns (see above)
 * If academic journal, include a column for DOI 
 
-| ep_title | series_title | season_no | episode_no|
-| :---- | :---- | :---- |:---- |
-Amok Time | Star Trek: The Original Series | “2” | “1” |
+| ep_title | series_title | season_no | episode_no |
+| :---- | :---- | :---- | :---- |
+| Amok Time | Star Trek: The Original Series | “2” | “1” |
 > **Example**: *entries for a serial publication*
 
 ### ISBN/ISSN{#isbn-issn}
 
-Including the ISBN or ISSN for a publication can make specific bibliographic information more accessible. Tools like our [OpenRefine script](https://data.post45.org/our-tools.html){.external target="_blank"} or citation managers like [Zotero](https://www.zotero.org/){.external target="_blank"} can easily automate searches for this information. 
+An **ISBN** (International Standard Book Number) is a unique 10- or 13-digit identifier assigned to a specific edition of a book. An **ISSN** (International Standard Serial Number) is the equivalent 8-digit identifier for a serial publication like a journal or magazine. 
 
-::: {.callout-note appearance="default"}
+Including an ISBN or ISSN for each publication makes this metadata more accessible. If you can, **we prefer to include at least one rather than none**. Our [BookReconciler](https://data.post45.org/our-tools.html){.external target="_blank"} tool can help fetch related ISBNs for the books in your dataset alongside other identifiers.
+
+::: {.callout-tip appearance="default"}
+## **A note on ISBNs and “Works”**
+ISBNs identify **a specific edition** of a book—hardcover or paperback, a translation or a reissue will each have their own ISBN. There's currently no single identifier that indicates whether these ISBNs refer to the same "Work."
+
+"Work" is the abstract concept that unites every edition, translation, and reprint in bibliographic terminology (specifically the [FRBR](https://www.loc.gov/cds/downloads/FRBR.PDF){.external target="_blank"} model).
+
+For more on this issue, see Matt Miller, Dan Sinykin, and Melanie Walsh, [“BookReconciler📘💎: An Open-Source Tool for Metadata Enrichment and Work-Level Clustering”](https://arxiv.org/abs/2512.10165){.external target="_blank"} (*Joint Conference on Digital Libraries*, 2025).
+::: 
+
+::: {.callout-tip appearance="default"}
 ## **Quick Note** 
 When importing this data from other sources, extraneous information is often included to indicate edition information (e.g. “0670030074 (alk. paper)”). For sorting purposes, we recommend trimming this to just the number.
 :::
@@ -551,13 +644,19 @@ Depending on the scope and type of data in your dataset, you may require some fi
 
 ---
 
-# <font color="midnightblue">**Acknowledgements**</font>
+# **Acknowledgements**
 
-This data style guide draws language, information, and inspiration from the [C19 Data Collective Data Documentation guide](https://c19datacollective.com/criteria/data-documentation/){.external target="_blank"} and [Humanities Data Preparation Guide](https://doi.org/10.17605/OSF.IO/C9N5K){.external target="_blank"}, as well as the [Digital Curation Network](https://datacuration.network/){.external target="_blank"}. Enormous thanks in particular to Sarah E. Reiff Conell, Research Data Management Specialist at Princeton University Library, for her gracious guidance, support, and permissions.
+This data style guide was written by Em Nordling, with contributions from Melanie Walsh and Dan Sinykin.
+
+It draws language, information, and inspiration from the [C19 Data Collective Data Documentation guide](https://c19datacollective.com/criteria/data-documentation/){.external target="_blank"} and [Humanities Data Preparation Guide](https://doi.org/10.17605/OSF.IO/C9N5K){.external target="_blank"}, as well as the [Digital Curation Network](https://datacuration.network/){.external target="_blank"}. Enormous thanks in particular to Sarah E. Reiff Conell, Research Data Management Specialist at Princeton University Library, for her gracious guidance, support, and permissions.
 
 Thank you to the following parties for their generous feedback on this document: Karl Berglund, Julie Enszer, Long Le-Khac, Jordan Pruett, Lindsay Thomas, Ted Underwood, and Grant Wythoff.
 
 This project was originally funded and then defunded by the [National Endowment for the Humanities](https://www.neh.gov/){.external target="_blank"}. Thank you to [Emory University College of Arts and Sciences](https://college.emory.edu/){.external target="_blank"} for their timely and generous support.
+
+---
+
+# **Citation**{#citation}
 
 
 [styleguide1]: /images/styleguide1.png
