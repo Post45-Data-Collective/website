@@ -1,19 +1,8 @@
 [
   {
-    "listing": "/news.html",
-    "items": [
-      "/news/intl-bestsellers-dataset-featured.html",
-      "/news/grad-workshop.html",
-      "/news/editor-news.html",
-      "/news/data-analyst-summer-2023.html",
-      "/news/ddp-recap.html",
-      "/news/ddp-rfp-2021.html",
-      "/news/awash-in-data.html"
-    ]
-  },
-  {
     "listing": "/index.html",
     "items": [
+      "/posts/playboy-fiction-index/index.html",
       "/posts/asian-american-literature/index.html",
       "/posts/international-bestsellers/index.html",
       "/posts/futuristic-fiction/index.html",
@@ -29,8 +18,21 @@
     ]
   },
   {
+    "listing": "/news.html",
+    "items": [
+      "/news/intl-bestsellers-dataset-featured.html",
+      "/news/grad-workshop.html",
+      "/news/editor-news.html",
+      "/news/data-analyst-summer-2023.html",
+      "/news/ddp-recap.html",
+      "/news/ddp-rfp-2021.html",
+      "/news/awash-in-data.html"
+    ]
+  },
+  {
     "listing": "/our-data.html",
     "items": [
+      "/posts/playboy-fiction-index/index.html",
       "/posts/asian-american-literature/index.html",
       "/posts/international-bestsellers/index.html",
       "/posts/futuristic-fiction/index.html",

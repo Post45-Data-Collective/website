@@ -19,7 +19,7 @@
 # Insert DOI for this data essay
  doi: "10.18737/857371"
 # date of publication
- date: "2026-06-12"
+ date: "2026-07-09"
 # Citation details for this data essay
  citation:
   type: article-journal
@@ -48,6 +48,9 @@
  google-scholar: true 
  header-includes:
   - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
 # aliases:
 # - /the-index-of-major-literary-prizes-in-the-us/
 ---
@@ -60,49 +63,383 @@
 
 <!-- # 1. Title of dataset 1 -->
 
-# Data Table
+```{ojs}
+//| echo: false
+import {viewof dataSummaryView, Tabulator, viewof selectedColumns, viewof dataSet, tableContainer, fetchData, generateTabulatorTableFromCSV, progress, progressbar} from "8bb63a6cde9addff"
+```
 
-<!-- FOR EDITORIAL TEAM:
+```{ojs}
+//| echo: false
+//| output: false
+raw_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/small_press_distribution_bestsellers/small-press-distribution-bestsellers_2006-2023.csv")
+```
 
-To create a data table, first add the dataset to the datasets/ directory in the GitHub repo. 
+# Explore Bestsellers by Genre
 
-Then, find the raw GitHub URL for that dataset and insert it below, customizing columns as needed.
+```{ojs}
+//| echo: false
+//| output: false
 
-Areas that need to be edited are marked with MAKE EDITS HERE -->
+// Build lookup: for each genre, the sorted list of available year-month pairs.
+// Use the clean date_sortable column (YYYY-MM) rather than parsing the human
+// date label, which comes as ranges for bimonthly/quarterly lists
+// (e.g. "January-March 2013", "September/October 2007") that a single-month
+// parser silently drops. The month NAME is derived from date_sortable's month
+// number (the first month of each range) so it still matches the .includes()
+// filter and appears in the month dropdown.
+monthNames = ["January","February","March","April","May","June","July",
+              "August","September","October","November","December"]
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
+// Normalize date_sortable to a "YYYY-MM" key. The CSV stores clean strings,
+// but the loader auto-types them into Date objects, so handle both.
+spdSortableKey = function (v) {
+  if (v == null) return null;
+  if (v instanceof Date) {
+    return `${v.getUTCFullYear()}-${String(v.getUTCMonth() + 1).padStart(2, "0")}`;
+  }
+  const m = String(v).trim().match(/^(\d{4})-(\d{2})/);
+  return m ? `${m[1]}-${m[2]}` : null;
+}
 
-# Load the function
-source("../../scripts/createDataTable.R")
+pairsByGenre = {
+  const result = {};
+  for (const d of raw_data) {
+    if (!d.genre) continue;
+    const key = spdSortableKey(d.date_sortable);
+    if (!key) continue;
+    const [year, mm] = key.split("-");
+    const monthNum = +mm;
+    if (monthNum < 1 || monthNum > 12) continue;
+    if (!result[d.genre]) result[d.genre] = new Map();
+    // Map keyed by sortable key dedups repeated dates within a genre
+    result[d.genre].set(key, { year, month: monthNames[monthNum - 1] });
+  }
+  const out = {};
+  for (const [genre, map] of Object.entries(result)) {
+    out[genre] = [...map.entries()]
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([, v]) => v);
+  }
+  return out;
+}
 
-# MAKE EDITS HERE: Plug in the raw GitHub URL to the dataset below
-createDataTable(
-  data_path = "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/small_press_distribution_bestsellers/small-press-distribution-bestsellers_2006-2023.csv",
+// Find earliest Fiction pair for default
+firstFiction = pairsByGenre["Fiction"]?.[0] ?? { year: "2006", month: "August" }
+```
 
-  # MAKE EDITS HERE: Select the columns that will be displayed in the data table, and the order
-  displayed_columns = c("ranking", "title", "author", "publisher", "date", "genre", "publication_date", "publication_location", "viaf_permalink", "source_link", "unique_id"),
+```{ojs}
+//| echo: false
 
-  # MAKE EDITS HERE: Customize any column widths
-  # If none, comment out
-  #column_widths = c("gender" = "100px", "role" = "75px", "mfa_degree" = "100px", "prize_name" = "100px"),
-
-  # MAKE EDITS HERE: Select any columns that should be formatted with a dollar sign
-  # If none, comment out
-  #currency_columns = c("prize_amount"),
-
-  # MAKE EDITS HERE: Select any columns that should be filterable as a category
-  # If none, comment out
-
-  category_columns = c("author", "publisher", "date", "genre", "publication_date", "publication_location"),
-
-  # Select column to sort by, and order
-  sort_columns = c("ranking"),
-  sort_orders = c("desc")
+viewof selectedGenre = Inputs.select(
+  [...new Set(raw_data.map(d => d.genre).filter(d => d))].sort(),
+  { label: "Genre", value: "Fiction" }
 )
 ```
+
+```{ojs}
+//| echo: false
+
+spd_years = [...new Set(raw_data.map(d => d.date?.match(/\d{4}/)?.[0]).filter(d => d))].sort()
+
+viewof selectedSpdYear = Inputs.select(
+  spd_years,
+  { label: "Year", value: firstFiction.year }
+)
+```
+
+```{ojs}
+//| echo: false
+
+spd_months_list = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+
+viewof selectedSpdMonth = Inputs.select(
+  spd_months_list,
+  { label: "Month", value: firstFiction.month }
+)
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+
+// When the genre changes, jump to the first available year-month for that
+// genre if the currently selected date has no data for it. Depends ONLY on
+// selectedGenre (year/month are read off the view elements, not the values)
+// so manual year/month changes and the prev/next buttons aren't overridden.
+genreJump = {
+  selectedGenre;
+  const pairs = pairsByGenre[selectedGenre] ?? [];
+  if (pairs.length === 0) return;
+
+  const curYear = viewof selectedSpdYear.value;
+  const curMonth = viewof selectedSpdMonth.value;
+  const available = pairs.some(
+    p => p.year === curYear && p.month.toLowerCase() === curMonth.toLowerCase()
+  );
+
+  if (!available) {
+    const first = pairs[0];
+    viewof selectedSpdYear.value = first.year;
+    viewof selectedSpdYear.dispatchEvent(new Event("input"));
+    viewof selectedSpdMonth.value = first.month;
+    viewof selectedSpdMonth.dispatchEvent(new Event("input"));
+  }
+}
+```
+
+```{ojs}
+//| echo: false
+
+// Get available pairs for current genre
+currentPairs = pairsByGenre[selectedGenre] ?? []
+
+// Match on date_sortable (YYYY-MM) rather than string-searching the human
+// label, so range labels and source typos (e.g. "Janaury-March 2011") still
+// resolve to the right rows. Consistent with how pairsByGenre is built.
+filtered_spd = {
+  const monthNum = monthNames.indexOf(selectedSpdMonth) + 1;
+  const targetKey = `${selectedSpdYear}-${String(monthNum).padStart(2, "0")}`;
+  return raw_data.filter(d =>
+    d.genre === selectedGenre && spdSortableKey(d.date_sortable) === targetKey
+  );
+}
+
+{
+  // Prefer the actual list label (e.g. "January-March 2013") over the derived
+  // single month/year, which can misrepresent bimonthly/quarterly lists.
+  const dateLabel = filtered_spd[0]?.date ?? `${selectedSpdMonth} ${selectedSpdYear}`;
+  const heading = html`<h3>Bestsellers in ${selectedGenre} — ${dateLabel}</h3>`;
+
+  const table = Inputs.table(filtered_spd, {
+    columns: ["ranking", "title", "author", "publisher"],
+    header: {
+      ranking: "Rank",
+      title: "Title",
+      author: "Author",
+      publisher: "Publisher"
+    },
+    format: {
+      title: (d) => html`<em>${d}</em>`,
+      ranking: (d) => +d
+    },
+    width: {
+      ranking: 60,
+      title: 420
+    },
+    rows: 15
+  });
+
+  // Force fixed table layout so columns don't expand with content
+  const tableEl = table.querySelector("table");
+  if (tableEl) {
+    tableEl.style.tableLayout = "fixed";
+    tableEl.style.width = "100%";
+    // Make cells truncate overflow and left-justify text
+    for (const td of tableEl.querySelectorAll("td, th")) {
+      td.style.overflow = "hidden";
+      td.style.textOverflow = "ellipsis";
+      td.style.whiteSpace = "nowrap";
+      td.style.textAlign = "left";
+    }
+  }
+
+  const wrapper = html`<div class="spd-genre-table-wrapper" style="width: 100%;"></div>`;
+  // Style block keeps text left-justified even after Inputs.table re-renders on sort
+  const style = html`<style>
+    .spd-genre-table-wrapper table td,
+    .spd-genre-table-wrapper table th { text-align: left !important; }
+  </style>`;
+  wrapper.append(style, heading, table);
+  return wrapper;
+}
+```
+
+```{ojs}
+//| echo: false
+
+viewof yearMonthNav = {
+  const prevButton = html`<button class="ib-buttons">← Previous Available</button>`;
+  const nextButton = html`<button class="ib-buttons">Next Available →</button>`;
+
+  // const container = html`<div style="display: flex; gap: 1em; justify-content: center;"></div>`;
+  const container = html`<div style="display: flex; gap: 1em; justify-content: center; margin-top: 1.5em;"></div>`;
+  container.append(prevButton, nextButton);
+
+  function currentIndex() {
+    return currentPairs.findIndex(
+      p => p.year === selectedSpdYear && p.month.toLowerCase() === selectedSpdMonth.toLowerCase()
+    );
+  }
+
+  function goTo(idx) {
+    const next = currentPairs[idx];
+    viewof selectedSpdYear.value = next.year;
+    viewof selectedSpdYear.dispatchEvent(new Event("input"));
+    viewof selectedSpdMonth.value = next.month;
+    viewof selectedSpdMonth.dispatchEvent(new Event("input"));
+    updateDisabled();
+  }
+
+  function update(direction) {
+    const idx = currentIndex();
+    if (idx < 0) {
+      // Current year-month has no data for this genre — jump to nearest
+      goTo(direction === 1 ? 0 : currentPairs.length - 1);
+    } else {
+      const nextIdx = idx + direction;
+      if (nextIdx < 0 || nextIdx >= currentPairs.length) return;
+      goTo(nextIdx);
+    }
+  }
+
+  function updateDisabled() {
+    const idx = currentIndex();
+    prevButton.disabled = idx === 0;
+    nextButton.disabled = idx === currentPairs.length - 1;
+  }
+
+  prevButton.onclick = () => update(-1);
+  nextButton.onclick = () => update(1);
+
+  updateDisabled();
+
+  return container;
+}
+```
+
+# Explore Top Authors
+
+```{ojs}
+//| echo: false
+
+viewof vizGenre = Inputs.select(
+  ["All", ...[...new Set(raw_data.map(d => d.genre).filter(d => d))].sort()],
+  { label: "Genre", value: "All" }
+)
+```
+
+```{ojs}
+//| echo: false
+
+viewof vizTopN = Inputs.range([5, 30], { label: "Number of authors", step: 1, value: 15 })
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+
+// Count appearances per author (each row = one appearance on a monthly list),
+// optionally filtered by genre, and keep the top N.
+topAuthors = {
+  const rows = raw_data.filter(d => d.author && (vizGenre === "All" || d.genre === vizGenre));
+  const counts = new Map();
+  for (const d of rows) {
+    const a = d.author.trim();
+    if (!a) continue;
+    counts.set(a, (counts.get(a) || 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([author, count]) => ({ author, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, Math.round(vizTopN));
+}
+```
+
+```{ojs}
+//| echo: false
+
+html`<h3>Top ${topAuthors.length} Authors${vizGenre === "All" ? "" : " in " + vizGenre} by Appearances</h3>`
+```
+
+```{ojs}
+//| echo: false
+
+Plot.plot({
+  marginLeft: 240,
+  marginRight: 40,
+  width: 900,
+  height: topAuthors.length * 26 + 50,
+  x: { label: "Appearances on bestseller lists", grid: true },
+  y: { label: null },
+  marks: [
+    Plot.barX(topAuthors, {
+      x: "count",
+      y: "author",
+      sort: { y: "x", reverse: true },
+      fill: "#4a6da7"
+    }),
+    Plot.text(topAuthors, {
+      x: "count",
+      y: "author",
+      text: d => d.count,
+      dx: 12,
+      textAnchor: "start"
+    }),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+# Data Table
+
+```{ojs}
+//| echo: false
+//| output: false
+
+generateTabulatorTableFromCSV(
+  "#table-container-spd",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/small_press_distribution_bestsellers/small-press-distribution-bestsellers_2006-2023.csv",
+  {
+    displayedColumns: ["ranking", "genre", "date_sortable", "title", "author", "publisher",  "date", "publication_date", "publication_location", "isbn_number", "oclc_number", "viaf_permalink", "source_link"],
+    columnPopups: [
+      "Original ranking of the title on the bestseller list",
+       "Sortable date (YYYY-MM); for bimonthly/range lists the earliest month is used, so this column sorts chronologically",
+
+      "Which bestseller list the book appears on (fiction, poetry, or nonfiction)",
+      "Name of the book",
+      "Author(s), editor(s), artist(s), and/or translator(s); formatted as last name, first name",
+      "Name of the publishing press",
+      "Month and year of the bestseller list",
+      "Earliest found year the book was published (Library of Congress / WorldCat)",
+      "Geographic location of the publishing press",
+      "ISBN number of the title taken from WorldCat",
+      "OCLC number of the title taken from WorldCat",
+      "Permalink to the VIAF listing of the author",
+      "Link to the originating Instagram post or Wayback Machine link to the SPD website"
+    ],
+    columnWidths: { "ranking": 110, "date": 200, author: 110, "date_sortable": 100, "genre": 100, "publication_date": 130, "publication_location": 180, "isbn_number": 150, "oclc_number": 130, "viaf_permalink": 220, "source_link": 220 },
+    categoryColumns: ["publisher", "genre", "publication_location"],
+    linkColumns: ["source_link", "viaf_permalink"],
+    rangeSliderColumns: ["publication_date", "ranking"],
+    // numericColumns: ["ranking"],
+    // This helper treats the LAST sortColumn as the primary sort, so
+    // date_sortable goes last: primary = date (newest first),
+    // secondary = ranking (1, 2, 3… within each month).
+    sortColumns: [ "date_sortable", "genre"],
+    sortOrders: ["desc", "asc"],
+    buttonContainerId: "#button-container-spd",
+    rawButtonId: "#download-raw-spd",
+    urlCopyButtonId: "#copy-url-spd",
+  }
+);
+```
+
+<div id="table-container-spd" style="height: 600px;"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-spd"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-spd"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (filtered rows / visible columns)
+
+<div id='button-container-spd'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
 
 ::: {.callout-tip icon="false"}
 ## Creative Commons License
@@ -116,7 +453,9 @@ This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0
 
 # **Significance & Context**
 
-This dataset bears out narratives of the emergence, reach, and sometimes decline of many small presses, authors, and titles that have often become central figures in American poetry, short and experimental fiction, and hybrid nonfiction and essay. Independent publishing houses used Small Press Distribution (SPD) to distribute their publications to booksellers from 1969 until March 2024, when the company abruptly shuttered. More than a logistical middleman, SPD functioned as a central piece of cultural infrastructure for U.S. literary small presses. For many small publishers, SPD meant the difference between visibility and obscurity, providing the primary means of circulation and distribution, bookstore access, and institutional legitimacy. SPD aided presses producing often groundbreaking, prize-winning, and experimental poetry, fiction, and nonfiction. In May of 2006, SPD began posting monthly features highlighting their bestselling titles in fiction, poetry, and nonfiction to their website, with lists from the 2010s and 2020s featured and still accessible on their now inactive Instagram and Facebook accounts and lists from before 2010 available through the Internet Archive’s Wayback Machine. These bestseller lists index a distinctive economy of literary value shaped by nonprofit distribution, independent bookstores, aesthetic formation, curricular adoption, and long-tail backlist circulation. Spanning the rise of social media–mediated literary publicity and the decline of brick-and-mortar distribution infrastructure, the dataset captures a crucial, transitional period in U.S. small-press literary culture. With SPD now defunct and its web presence inactive, the need to preserve information about SPD’s operations is urgent. Collecting and preserving SPD’s bestselling titles can support the searchability of these works, the authors who created them, and the independent publishers who relied on SPD to bring these books to market.   
+Independent publishing houses used Small Press Distribution (SPD)—a nonprofit book distributor—to distribute their publications to booksellers from 1969 until March 2024, when the company abruptly shuttered. More than a logistical middleman, SPD functioned as a central piece of cultural infrastructure for U.S. literary small presses. For many small publishers, SPD meant the difference between visibility and obscurity, providing the primary means of circulation and distribution, bookstore access, and institutional legitimacy. SPD aided presses producing often groundbreaking, prize-winning, and experimental poetry, fiction, and nonfiction. 
+
+This dataset includes information about the bestselling authors and titles distributed by SPD. In May of 2006, SPD began posting monthly features highlighting their bestselling titles in fiction, poetry, and nonfiction to their website, with lists from the 2010s and 2020s featured and still accessible on their now inactive Instagram and Facebook accounts and lists from before 2010 available through the Internet Archive’s Wayback Machine. These bestseller lists index a distinctive economy of literary value shaped by nonprofit distribution, independent bookstores, aesthetic formation, curricular adoption, and long-tail backlist circulation. Spanning the rise of social media–mediated literary publicity and the decline of brick-and-mortar distribution infrastructure, the dataset captures a crucial, transitional period in U.S. small-press literary culture. With SPD now defunct and its web presence inactive, the need to preserve information about SPD’s operations is urgent. Collecting and preserving SPD’s bestselling titles can support the searchability of these works, the authors who created them, and the independent publishers who relied on SPD to bring these books to market.   
 
 The data in this project tells the story of emergent authors and presses, new prize winners, forgotten independent presses, and frequent bestsellers. One illustrative case is Renee Gladman, who appears as a new author at the start of SPD’s bestseller lists and becomes the most frequently appearing fiction author, with 41 appearances. Gladman’s first book, *Juice*, appeared in the August 2006 Poetry Bestseller List, with following lists marking nine more books throughout Gladman’s career. The most frequent fiction book to appear in this data is Garielle Lutz’s first book, *Stories in the Worst Way,* with fifteen appearances. Originally published in 1996, Lutz’s debut appears on the bestseller lists from 2006 to 2011 with new editions from 3rd Bed and Calamari Press. The most frequently mentioned fiction publisher is Dorothy, a publishing project begun in 2009, appearing a total of 121 times with 22 titles.  
 
