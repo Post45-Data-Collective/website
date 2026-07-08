@@ -13,7 +13,7 @@
   #- name: More Authors
  abstract: "This dataset documents the bestselling authors and titles distributed by Small Press Distribution (SPD) between 2006-2023, including American poetry, short and experimental fiction, and hybrid nonfiction and essay."
 # Add keywords/categories — should always include "dataset"
- categories: [fiction, poetry, nonfiction, bestsellers, publishing, dataset, draft]
+ categories: [fiction, poetry, nonfiction, bestsellers, publishing, dataset]
 # Provide link to an image that will show up in "Our Datasets" aggregation
  image: "https://bpb-us-w2.wpmucdn.com/web.sas.upenn.edu/dist/2/456/files/2018/11/Small-Press-Distribution-2llnxlb.jpg"
 # Insert DOI for this data essay
