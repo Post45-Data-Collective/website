@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -76,10 +79,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-66dc5ed2406f178b6e97df58635d32ca.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e5cb1ed99fe8f5a3eef2186fa969780a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -452,59 +455,59 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="quarto-ojs-syntax-error">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-startfrom="166" data-syntax-error-position="1356" data-source-offset="9"><pre class="sourceCode numberSource numberLines java code-with-copy"><code class="sourceCode java" style="counter-reset: source-line 165;"><span id="cb5-166"><a href="#cb5-166"></a>```<span class="op">{</span>ojs<span class="op">}</span></span>
-<span id="cb5-167"><a href="#cb5-167"></a><span class="co">// Add fullscreen event listener</span></span>
-<span id="cb5-168"><a href="#cb5-168"></a>      document<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"fullscreenchange"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb5-169"><a href="#cb5-169"></a>        <span class="cf">if</span> <span class="op">(</span>document<span class="op">.</span><span class="fu">fullscreenElement</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-170"><a href="#cb5-170"></a>          <span class="co">// Fullscreen mode: adjust table height</span></span>
-<span id="cb5-171"><a href="#cb5-171"></a>          table<span class="op">.</span><span class="fu">setHeight</span><span class="op">(</span>window<span class="op">.</span><span class="fu">innerHeight</span> <span class="op">-</span> <span class="dv">50</span><span class="op">);</span> <span class="co">// Adjust for padding/margins</span></span>
-<span id="cb5-172"><a href="#cb5-172"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb5-173"><a href="#cb5-173"></a>          <span class="co">// Exit fullscreen: reset table height</span></span>
-<span id="cb5-174"><a href="#cb5-174"></a>          table<span class="op">.</span><span class="fu">setHeight</span><span class="op">(</span><span class="dv">645</span><span class="op">);</span></span>
-<span id="cb5-175"><a href="#cb5-175"></a>        <span class="op">}</span></span>
-<span id="cb5-176"><a href="#cb5-176"></a>      <span class="op">});</span></span>
-<span id="cb5-177"><a href="#cb5-177"></a></span>
-<span id="cb5-178"><a href="#cb5-178"></a>      <span class="co">// Add download buttons</span></span>
-<span id="cb5-179"><a href="#cb5-179"></a>      document</span>
-<span id="cb5-180"><a href="#cb5-180"></a>        <span class="op">.</span><span class="fu">querySelectorAll</span><span class="op">(</span><span class="st">"#button-container button"</span><span class="op">)</span></span>
-<span id="cb5-181"><a href="#cb5-181"></a>        <span class="op">.</span><span class="fu">forEach</span><span class="op">((</span>button<span class="op">)</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb5-182"><a href="#cb5-182"></a>          button<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"click"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb5-183"><a href="#cb5-183"></a>            <span class="dt">const</span> type <span class="op">=</span> button<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">"id"</span><span class="op">).</span><span class="fu">replace</span><span class="op">(</span><span class="st">"download-"</span><span class="op">,</span> <span class="st">""</span><span class="op">);</span></span>
-<span id="cb5-184"><a href="#cb5-184"></a>            <span class="dt">const</span> downloadFilename <span class="op">=</span> `$<span class="op">{</span>filename<span class="op">}.</span>$<span class="op">{</span>type<span class="op">}</span>`<span class="op">;</span></span>
-<span id="cb5-185"><a href="#cb5-185"></a></span>
-<span id="cb5-186"><a href="#cb5-186"></a>            <span class="cf">if</span> <span class="op">(</span>type <span class="op">===</span> <span class="st">"xlsx"</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-187"><a href="#cb5-187"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span><span class="st">"xlsx"</span><span class="op">,</span> downloadFilename<span class="op">,</span> <span class="op">{</span> sheetName<span class="op">:</span> <span class="st">"Sheet1"</span> <span class="op">});</span></span>
-<span id="cb5-188"><a href="#cb5-188"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>type <span class="op">===</span> <span class="st">"pdf"</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-189"><a href="#cb5-189"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span><span class="st">"pdf"</span><span class="op">,</span> downloadFilename<span class="op">,</span> <span class="op">{</span></span>
-<span id="cb5-190"><a href="#cb5-190"></a>                orientation<span class="op">:</span> <span class="st">"portrait"</span><span class="op">,</span></span>
-<span id="cb5-191"><a href="#cb5-191"></a>                title<span class="op">:</span> <span class="st">"Table Data"</span></span>
-<span id="cb5-192"><a href="#cb5-192"></a>              <span class="op">});</span></span>
-<span id="cb5-193"><a href="#cb5-193"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>type <span class="op">===</span> <span class="st">"html"</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-194"><a href="#cb5-194"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span><span class="st">"html"</span><span class="op">,</span> downloadFilename<span class="op">,</span> <span class="op">{</span> style<span class="op">:</span> <span class="kw">true</span> <span class="op">});</span></span>
-<span id="cb5-195"><a href="#cb5-195"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb5-196"><a href="#cb5-196"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span>type<span class="op">,</span> downloadFilename<span class="op">);</span></span>
-<span id="cb5-197"><a href="#cb5-197"></a>            <span class="op">}</span></span>
-<span id="cb5-198"><a href="#cb5-198"></a>          <span class="op">});</span></span>
-<span id="cb5-199"><a href="#cb5-199"></a>        <span class="op">});</span></span>
-<span id="cb5-200"><a href="#cb5-200"></a></span>
-<span id="cb5-201"><a href="#cb5-201"></a>      <span class="co">// Update raw data download button dynamically</span></span>
-<span id="cb5-202"><a href="#cb5-202"></a>      <span class="co">// Raw data download using `download` function</span></span>
-<span id="cb5-203"><a href="#cb5-203"></a>      <span class="dt">const</span> rawDownloadButton <span class="op">=</span> document<span class="op">.</span><span class="fu">getElementById</span><span class="op">(</span><span class="st">"download-raw"</span><span class="op">);</span></span>
-<span id="cb5-204"><a href="#cb5-204"></a>      rawDownloadButton<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"click"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb5-205"><a href="#cb5-205"></a>        <span class="fu">download</span><span class="op">(</span>dataPath<span class="op">,</span> `$<span class="op">{</span>filename<span class="op">}.</span><span class="fu">csv</span>`<span class="op">);</span></span>
-<span id="cb5-206"><a href="#cb5-206"></a>      <span class="op">});</span></span>
-<span id="cb5-207"><a href="#cb5-207"></a></span>
-<span id="cb5-208"><a href="#cb5-208"></a>      <span class="co">// Copy URL button</span></span>
-<span id="cb5-209"><a href="#cb5-209"></a>      document<span class="op">.</span><span class="fu">getElementById</span><span class="op">(</span><span class="st">"copy-url"</span><span class="op">).</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"click"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
-<span id="cb5-210"><a href="#cb5-210"></a>        <span class="dt">const</span> tempInput <span class="op">=</span> document<span class="op">.</span><span class="fu">createElement</span><span class="op">(</span><span class="st">"input"</span><span class="op">);</span></span>
-<span id="cb5-211"><a href="#cb5-211"></a>        tempInput<span class="op">.</span><span class="fu">value</span> <span class="op">=</span> dataPath<span class="op">;</span></span>
-<span id="cb5-212"><a href="#cb5-212"></a>        document<span class="op">.</span><span class="fu">body</span><span class="op">.</span><span class="fu">appendChild</span><span class="op">(</span>tempInput<span class="op">);</span></span>
-<span id="cb5-213"><a href="#cb5-213"></a>        tempInput<span class="op">.</span><span class="fu">select</span><span class="op">();</span></span>
-<span id="cb5-214"><a href="#cb5-214"></a>        document<span class="op">.</span><span class="fu">execCommand</span><span class="op">(</span><span class="st">"copy"</span><span class="op">);</span></span>
-<span id="cb5-215"><a href="#cb5-215"></a>        document<span class="op">.</span><span class="fu">body</span><span class="op">.</span><span class="fu">removeChild</span><span class="op">(</span>tempInput<span class="op">);</span></span>
-<span id="cb5-216"><a href="#cb5-216"></a>        <span class="fu">alert</span><span class="op">(</span><span class="st">"URL copied to clipboard: "</span> <span class="op">+</span> dataPath<span class="op">);</span></span>
-<span id="cb5-217"><a href="#cb5-217"></a>      <span class="op">});</span></span>
-<span id="cb5-218"><a href="#cb5-218"></a>```</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-startfrom="166" data-syntax-error-position="1356" data-source-offset="9"><pre class="sourceCode numberSource numberLines java code-with-copy"><code class="sourceCode java" style="counter-reset: source-line 165;"><span id="cb5-166"><a href="#cb5-166" aria-label="166"></a>```<span class="op">{</span>ojs<span class="op">}</span></span>
+<span id="cb5-167"><a href="#cb5-167" aria-label="167"></a><span class="co">// Add fullscreen event listener</span></span>
+<span id="cb5-168"><a href="#cb5-168" aria-label="168"></a>      document<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"fullscreenchange"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-169"><a href="#cb5-169" aria-label="169"></a>        <span class="cf">if</span> <span class="op">(</span>document<span class="op">.</span><span class="fu">fullscreenElement</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-170"><a href="#cb5-170" aria-label="170"></a>          <span class="co">// Fullscreen mode: adjust table height</span></span>
+<span id="cb5-171"><a href="#cb5-171" aria-label="171"></a>          table<span class="op">.</span><span class="fu">setHeight</span><span class="op">(</span>window<span class="op">.</span><span class="fu">innerHeight</span> <span class="op">-</span> <span class="dv">50</span><span class="op">);</span> <span class="co">// Adjust for padding/margins</span></span>
+<span id="cb5-172"><a href="#cb5-172" aria-label="172"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-173"><a href="#cb5-173" aria-label="173"></a>          <span class="co">// Exit fullscreen: reset table height</span></span>
+<span id="cb5-174"><a href="#cb5-174" aria-label="174"></a>          table<span class="op">.</span><span class="fu">setHeight</span><span class="op">(</span><span class="dv">645</span><span class="op">);</span></span>
+<span id="cb5-175"><a href="#cb5-175" aria-label="175"></a>        <span class="op">}</span></span>
+<span id="cb5-176"><a href="#cb5-176" aria-label="176"></a>      <span class="op">});</span></span>
+<span id="cb5-177"><a href="#cb5-177" aria-label="177"></a></span>
+<span id="cb5-178"><a href="#cb5-178" aria-label="178"></a>      <span class="co">// Add download buttons</span></span>
+<span id="cb5-179"><a href="#cb5-179" aria-label="179"></a>      document</span>
+<span id="cb5-180"><a href="#cb5-180" aria-label="180"></a>        <span class="op">.</span><span class="fu">querySelectorAll</span><span class="op">(</span><span class="st">"#button-container button"</span><span class="op">)</span></span>
+<span id="cb5-181"><a href="#cb5-181" aria-label="181"></a>        <span class="op">.</span><span class="fu">forEach</span><span class="op">((</span>button<span class="op">)</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-182"><a href="#cb5-182" aria-label="182"></a>          button<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"click"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-183"><a href="#cb5-183" aria-label="183"></a>            <span class="dt">const</span> type <span class="op">=</span> button<span class="op">.</span><span class="fu">getAttribute</span><span class="op">(</span><span class="st">"id"</span><span class="op">).</span><span class="fu">replace</span><span class="op">(</span><span class="st">"download-"</span><span class="op">,</span> <span class="st">""</span><span class="op">);</span></span>
+<span id="cb5-184"><a href="#cb5-184" aria-label="184"></a>            <span class="dt">const</span> downloadFilename <span class="op">=</span> `$<span class="op">{</span>filename<span class="op">}.</span>$<span class="op">{</span>type<span class="op">}</span>`<span class="op">;</span></span>
+<span id="cb5-185"><a href="#cb5-185" aria-label="185"></a></span>
+<span id="cb5-186"><a href="#cb5-186" aria-label="186"></a>            <span class="cf">if</span> <span class="op">(</span>type <span class="op">===</span> <span class="st">"xlsx"</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-187"><a href="#cb5-187" aria-label="187"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span><span class="st">"xlsx"</span><span class="op">,</span> downloadFilename<span class="op">,</span> <span class="op">{</span> sheetName<span class="op">:</span> <span class="st">"Sheet1"</span> <span class="op">});</span></span>
+<span id="cb5-188"><a href="#cb5-188" aria-label="188"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>type <span class="op">===</span> <span class="st">"pdf"</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-189"><a href="#cb5-189" aria-label="189"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span><span class="st">"pdf"</span><span class="op">,</span> downloadFilename<span class="op">,</span> <span class="op">{</span></span>
+<span id="cb5-190"><a href="#cb5-190" aria-label="190"></a>                orientation<span class="op">:</span> <span class="st">"portrait"</span><span class="op">,</span></span>
+<span id="cb5-191"><a href="#cb5-191" aria-label="191"></a>                title<span class="op">:</span> <span class="st">"Table Data"</span></span>
+<span id="cb5-192"><a href="#cb5-192" aria-label="192"></a>              <span class="op">});</span></span>
+<span id="cb5-193"><a href="#cb5-193" aria-label="193"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>type <span class="op">===</span> <span class="st">"html"</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-194"><a href="#cb5-194" aria-label="194"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span><span class="st">"html"</span><span class="op">,</span> downloadFilename<span class="op">,</span> <span class="op">{</span> style<span class="op">:</span> <span class="kw">true</span> <span class="op">});</span></span>
+<span id="cb5-195"><a href="#cb5-195" aria-label="195"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-196"><a href="#cb5-196" aria-label="196"></a>              table<span class="op">.</span><span class="fu">download</span><span class="op">(</span>type<span class="op">,</span> downloadFilename<span class="op">);</span></span>
+<span id="cb5-197"><a href="#cb5-197" aria-label="197"></a>            <span class="op">}</span></span>
+<span id="cb5-198"><a href="#cb5-198" aria-label="198"></a>          <span class="op">});</span></span>
+<span id="cb5-199"><a href="#cb5-199" aria-label="199"></a>        <span class="op">});</span></span>
+<span id="cb5-200"><a href="#cb5-200" aria-label="200"></a></span>
+<span id="cb5-201"><a href="#cb5-201" aria-label="201"></a>      <span class="co">// Update raw data download button dynamically</span></span>
+<span id="cb5-202"><a href="#cb5-202" aria-label="202"></a>      <span class="co">// Raw data download using `download` function</span></span>
+<span id="cb5-203"><a href="#cb5-203" aria-label="203"></a>      <span class="dt">const</span> rawDownloadButton <span class="op">=</span> document<span class="op">.</span><span class="fu">getElementById</span><span class="op">(</span><span class="st">"download-raw"</span><span class="op">);</span></span>
+<span id="cb5-204"><a href="#cb5-204" aria-label="204"></a>      rawDownloadButton<span class="op">.</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"click"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-205"><a href="#cb5-205" aria-label="205"></a>        <span class="fu">download</span><span class="op">(</span>dataPath<span class="op">,</span> `$<span class="op">{</span>filename<span class="op">}.</span><span class="fu">csv</span>`<span class="op">);</span></span>
+<span id="cb5-206"><a href="#cb5-206" aria-label="206"></a>      <span class="op">});</span></span>
+<span id="cb5-207"><a href="#cb5-207" aria-label="207"></a></span>
+<span id="cb5-208"><a href="#cb5-208" aria-label="208"></a>      <span class="co">// Copy URL button</span></span>
+<span id="cb5-209"><a href="#cb5-209" aria-label="209"></a>      document<span class="op">.</span><span class="fu">getElementById</span><span class="op">(</span><span class="st">"copy-url"</span><span class="op">).</span><span class="fu">addEventListener</span><span class="op">(</span><span class="st">"click"</span><span class="op">,</span> <span class="op">()</span> <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb5-210"><a href="#cb5-210" aria-label="210"></a>        <span class="dt">const</span> tempInput <span class="op">=</span> document<span class="op">.</span><span class="fu">createElement</span><span class="op">(</span><span class="st">"input"</span><span class="op">);</span></span>
+<span id="cb5-211"><a href="#cb5-211" aria-label="211"></a>        tempInput<span class="op">.</span><span class="fu">value</span> <span class="op">=</span> dataPath<span class="op">;</span></span>
+<span id="cb5-212"><a href="#cb5-212" aria-label="212"></a>        document<span class="op">.</span><span class="fu">body</span><span class="op">.</span><span class="fu">appendChild</span><span class="op">(</span>tempInput<span class="op">);</span></span>
+<span id="cb5-213"><a href="#cb5-213" aria-label="213"></a>        tempInput<span class="op">.</span><span class="fu">select</span><span class="op">();</span></span>
+<span id="cb5-214"><a href="#cb5-214" aria-label="214"></a>        document<span class="op">.</span><span class="fu">execCommand</span><span class="op">(</span><span class="st">"copy"</span><span class="op">);</span></span>
+<span id="cb5-215"><a href="#cb5-215" aria-label="215"></a>        document<span class="op">.</span><span class="fu">body</span><span class="op">.</span><span class="fu">removeChild</span><span class="op">(</span>tempInput<span class="op">);</span></span>
+<span id="cb5-216"><a href="#cb5-216" aria-label="216"></a>        <span class="fu">alert</span><span class="op">(</span><span class="st">"URL copied to clipboard: "</span> <span class="op">+</span> dataPath<span class="op">);</span></span>
+<span id="cb5-217"><a href="#cb5-217" aria-label="217"></a>      <span class="op">});</span></span>
+<span id="cb5-218"><a href="#cb5-218" aria-label="218"></a>```</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="callout callout-style-default callout-important callout-empty-content callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -878,16 +881,16 @@ window._ojs.runtime.interpretFromScriptTags();
     }
     function toggleCodeHandler(show) {
       return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
           if (show) {
             details.open = true;
           } else {
             details.removeAttribute("open");
           }
         }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
         const fromCls = show ? "hidden" : "unhidden";
         const toCls = show ? "unhidden" : "hidden";
         for (let i=0; i<cellCodeDivs.length; i++) {
