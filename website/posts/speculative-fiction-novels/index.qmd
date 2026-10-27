@@ -1,0 +1,626 @@
+---
+# EDITORIAL TEAM: add data essay details here
+ title: "Speculative Fiction Novels in English (1800-2025): A Comprehensive Bibliography"
+ author:
+  - name: Laure Thompson
+    orcid: 0000-0001-5752-054X
+    url: https://laurejt.github.io/
+    email: laurejt@princeton.edu
+  #- name: More Authors
+ abstract: "The Speculative Fiction Novels in English (1800-2025) dataset compiles over 160,000 SF English-language novels first published from 1800 through 2025, including genres such as science fiction, fantasy, and more."
+# Add keywords/categories — should always include "dataset"
+ categories: [fiction, speculative fiction, genre fiction, literature, publishing, dataset, draft]
+# Provide link to an image that will show up in "Our Datasets" aggregation
+ image: "https://isfdb.org/IsfdbBanner3.jpg"
+# Insert DOI for this data essay
+ doi: "10.18737/657712"
+# date of publication
+ date: "2026-10-10"
+# Citation details for this data essay
+ citation:
+  type: article-journal
+  container-title: "Post45 Data Collective"
+  doi: "10.18737/657712"
+  url: https://data.post45.org/posts/speculative-fiction-novels
+  editor:
+   - Alexander Manshel
+   - J.D. Porter
+   - Melanie Walsh
+# if author/editor is including a .bib bibliography (such as one created from Zotero) for cited sources, uncomment and provide the correct reference here
+#bibliography: references.bib
+
+# NO NEED TO EDIT BELOW THIS LINE
+ title-block-style: default
+ format-links: [ipynb, pdf, docx]
+ code-tools: false
+ format: 
+  html:
+    toc: true
+    toc-title: Table of Contents
+    toc-location: left
+    toc-depth: 3
+    toc-expand: 3
+ page-layout: full
+ google-scholar: true 
+ header-includes:
+  - '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">'
+  - '<link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">'
+  - '<script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>'
+  - '<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>'
+# aliases:
+# - /the-index-of-major-literary-prizes-in-the-us/
+---
+
+ ![](https://isfdb.org/IsfdbBanner3.jpg){fig-align="center"}
+
+<!-- Include brief introduction to/description of data essay  -->
+
+<!-- If there are multiple datasets, please provide a title for each dataset with its own description  -->
+
+<!-- # 1. Title of dataset 1 -->
+
+# Interactive Visualizations
+
+```{python}
+#| echo: false
+
+# --- Settings ---------------------------------------------------------------
+
+# Path from this post's folder to the dataset (TSV or CSV both work)
+DATA_PATH = "../../../datasets/speculative-fiction-novels/speculative-fiction-novels-dataset.csv"
+SEPARATOR = ","  # use "," for a CSV
+
+BAR_COLOR = "purple"
+CHART_HEIGHT = 400
+TOP_N = 25  # rows shown in the author and series tables
+CHART_MARGINS = dict(l=80, r=20, t=70, b=100)  # room for axis labels
+
+# -----------------------------------------------------------------------------
+
+import polars as pl
+import plotly.express as px
+import plotly.io as pio
+from IPython.display import HTML, Markdown
+
+pio.templates.default = "none"
+
+
+def show_table(df):
+    """Display a polars DataFrame as a Markdown table that scrolls sideways on phones."""
+    header = "| " + " | ".join(df.columns) + " |"
+    divider = "| " + " | ".join("---" for _ in df.columns) + " |"
+    rows = [
+        "| " + " | ".join(f"{v:,}" if isinstance(v, int) else str(v) for v in row) + " |"
+        for row in df.iter_rows()
+    ]
+    table = "\n".join([header, divider] + rows)
+    return Markdown(f'::: {{style="overflow-x: auto"}}\n\n{table}\n\n:::')
+
+
+def style_bars(fig, xaxis_title, yaxis_title):
+    """Shared look for all the bar charts."""
+    return fig.update_traces(marker_color=BAR_COLOR).update_layout(
+        xaxis_title=xaxis_title,
+        yaxis_title=yaxis_title,
+        title_x=0.5,
+        title_y=0.85,
+        hoverlabel={"bgcolor": "white"},
+        margin=CHART_MARGINS,
+    )
+
+
+charts_shown = 0
+
+
+def show_chart(fig):
+    """Embed a chart, loading plotly.js only with the first one.
+    (Plain fig.show() reloads plotly.js and MathJax for every chart.)"""
+    global charts_shown
+    charts_shown += 1
+    return HTML(
+        fig.to_html(
+            full_html=False,
+            include_plotlyjs="cdn" if charts_shown == 1 else False,
+            include_mathjax=False,
+        )
+    )
+
+
+# Load the dataset
+init_df = pl.read_csv(
+    DATA_PATH,
+    separator=SEPARATOR,
+    infer_schema=False,
+    schema_overrides={"work_id": pl.Int64},
+)
+
+# Add the fields used for plotting.
+# Publication year = earliest of original year and English translation year.
+# "unpublished" becomes 9999 so it sorts last; those rows stay out of the time charts.
+novels_df = (
+    init_df.with_columns(
+        pl.col("authors").str.split(" + ").alias("author_list"),
+        pl.when(pl.col("year") == "unpublished")
+        .then(pl.lit("9999"))
+        .otherwise(pl.col("year"))
+        .alias("year_str"),
+    )
+    .with_columns(
+        pl.min_horizontal("year_str", "tr_year").str.to_integer().alias("min_year")
+    )
+    .with_columns((pl.col("min_year") // 10 * 10).alias("decade"))
+    .with_columns(
+        pl.when(pl.col("min_year") < 1900)
+        .then(pl.lit("1800s"))
+        .otherwise(pl.col("decade").cast(pl.String) + "s")
+        .alias("period")
+    )
+)
+published_df = novels_df.filter(pl.col("min_year") < 9999)
+```
+
+## Descriptive Statistics
+
+Counts for the whole dataset and for each decade. The 19th century is collected into a single period.
+
+```{python}
+#| echo: false
+#| output: asis
+
+
+def describe(df):
+    """Counts of interest for one slice of the dataset."""
+    translations = df.filter(pl.col("orig_lang") != "eng")
+    return {
+        "Novels": df.height,
+        "Novels with ISBNs": df.filter(pl.col("isbns").is_not_null()).height,
+        "English Translations": translations.height,
+        "Non-English Languages": translations.get_column("orig_lang").n_unique(),
+        "Authors": df.get_column("author_list").explode().n_unique(),
+        "Collaborations": df.filter(pl.col("authors").str.contains(r" \+ ")).height,
+        "Book Series (direct)": df.get_column("series").drop_nulls().n_unique(),
+        "Book Series (root)": df.get_column("root_series").drop_nulls().n_unique(),
+    }
+
+
+periods = sorted(published_df.get_column("period").unique().to_list())
+stats_rows = [{"Period": "1800–2025", **describe(novels_df)}] + [
+    {"Period": p, **describe(published_df.filter(pl.col("period") == p))}
+    for p in periods
+]
+print(show_table(pl.DataFrame(stats_rows)).data)
+```
+
+## Publication Year
+
+\*Publication year is the earliest known publication year of the original novel or its English translation.
+
+```{python}
+#| echo: false
+
+# Novels, authors and collaborations per decade
+time_df = (
+    published_df.group_by("period")
+    .agg(
+        pl.col("work_id").count().alias("novel_count"),
+        pl.col("author_list").list.explode(empty_as_null=False).n_unique().alias("author_count"),
+        pl.col("authors")
+        .filter(pl.col("authors").str.contains(r" \+ "))
+        .n_unique()
+        .alias("collab_count"),
+    )
+    .sort("period")
+)
+
+XAXIS_TITLE = "Publication Year*"
+
+
+def time_plot(item_type):
+    """Bar chart of novels, authors or collaborations per decade."""
+    item_name = "Collaboration" if item_type == "collab" else item_type.capitalize()
+    fig = px.bar(
+        time_df,
+        x="period",
+        y=f"{item_type}_count",
+        height=CHART_HEIGHT,
+        title=f"Distribution of {item_name}s Across Time",
+    )
+    return show_chart(style_bars(fig, XAXIS_TITLE, f"# of {item_name}s"))
+
+
+time_plot("novel")
+```
+
+```{python}
+#| echo: false
+time_plot("author")
+```
+
+```{python}
+#| echo: false
+time_plot("collab")
+```
+
+To look closely at a single decade, drag the handles on the slider under this chart.
+
+```{python}
+#| echo: false
+
+# Novels per year, with a range slider in place of the notebook's decade dropdown
+year_df = published_df.group_by("min_year").len("novel_count").sort("min_year")
+
+fig = px.bar(
+    year_df,
+    x="min_year",
+    y="novel_count",
+    height=CHART_HEIGHT + 100,
+    title="Novels per Year",
+)
+style_bars(fig, "Publication Year", "# of Novels").update_xaxes(
+    rangeslider_visible=True
+)
+show_chart(fig)
+```
+
+## English Translations
+
+```{python}
+#| echo: false
+
+translation_df = (
+    novels_df.filter(pl.col("orig_lang") != "eng")
+    .group_by("orig_lang")
+    .len("novel_count")
+    .sort("orig_lang")
+)
+
+fig = px.bar(
+    translation_df,
+    x="orig_lang",
+    y="novel_count",
+    height=CHART_HEIGHT,
+    title="English Translations by Original Language",
+    log_y=True,
+)
+show_chart(style_bars(fig, "Original Language", "# of Novels (log-scale)"))
+```
+
+## Authors
+
+```{python}
+#| echo: false
+#| output: asis
+
+# Authors with the most novels, and how many people they co-wrote with
+author_df = (
+    novels_df.with_columns(pl.col("author_list").alias("author"))
+    .explode("author")
+    .with_columns(
+        pl.col("author_list")
+        .list.set_difference(pl.concat_list("author"))
+        .alias("co_authors")
+    )
+    .group_by("author")
+    .agg(
+        pl.col("work_id").count().alias("Novels"),
+        pl.col("co_authors").list.explode(empty_as_null=False).unique().drop_nulls().alias("co_author_list"),
+    )
+    .with_columns(pl.col("co_author_list").list.len().alias("Co-authors"))
+    .sort("Novels", descending=True)
+    .rename({"author": "Author"})
+    .select("Author", "Novels", "Co-authors")
+)
+
+print(f"Top {TOP_N} of {author_df.height:,} authors by number of novels.\n")
+print(show_table(author_df.head(TOP_N)).data)
+```
+
+## Book Series
+
+```{python}
+#| echo: false
+#| output: asis
+
+series_df = (
+    novels_df.filter(pl.col("series").is_not_null())
+    .group_by("series")
+    .agg(
+        pl.col("work_id").count().alias("novel_count"),
+        pl.col("series_tree").first(),
+        pl.col("root_series").first(),
+        pl.col("author_list").list.explode(empty_as_null=False).unique().alias("author_names"),
+    )
+    .with_columns(pl.col("author_names").list.len().alias("author_count"))
+)
+
+direct_table = (
+    series_df.sort("novel_count", descending=True)
+    .select(
+        pl.col("series").alias("Series"),
+        pl.col("series_tree").alias("Series Tree"),
+        pl.col("novel_count").alias("Novels"),
+        pl.col("author_count").alias("Authors"),
+    )
+    .head(TOP_N)
+)
+
+root_table = (
+    series_df.group_by("root_series")
+    .agg(
+        pl.col("novel_count").sum().alias("Novels"),
+        pl.col("author_names").list.explode(empty_as_null=False).n_unique().alias("Authors"),
+        pl.col("series").n_unique().alias("Series"),
+    )
+    .sort("Novels", descending=True)
+    .rename({"root_series": "Root Series"})
+    .head(TOP_N)
+)
+
+print(f"**Direct series.** Top {TOP_N} series by number of novels.\n")
+print(show_table(direct_table).data)
+print(f"\n\n**Root series.** Top {TOP_N} root series by number of novels.\n")
+print(show_table(root_table).data)
+```
+
+# **Data Table**
+
+```{ojs}
+//| echo: false
+import {viewof dataSummaryView, Tabulator, viewof selectedColumns, viewof dataSet, tableContainer, fetchData, generateTabulatorTableFromCSV, progress, progressbar} from "8bb63a6cde9addff"
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+raw_data = fetchData("https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/speculative_fiction_novels/speculative-fiction-novels-dataset-CSV.csv")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+generateTabulatorTableFromCSV(
+  "#table-container-specfic",
+  "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/speculative_fiction_novels/speculative-fiction-novels-dataset-CSV.csv",
+  {
+    displayedColumns: ["work_id", "title", "authors", "author_ids", "year", "tr_year",  "orig_lang", "series", "series_no", "isbns"],
+    columnPopups: [
+      "Unique identifier for this work",
+      "Title of the work",
+      "Author(s) of the work",
+      "Unique identifier(s) for the author(s)",
+      "Year of first known publication date",
+      "Year of first known publication date for English translation",
+      "ISO 639-2 code of the work's original language",
+      "Name of the series that the work belongs to",
+      "Work’s number within its series",
+      "Comma-separated list of associated ISBNs"
+    ],
+    columnWidths: { "work_id": 100, "title": 200, "authors": 150, "author_ids": 100, "year": 100, "tr_year": 100, "orig_lang": 100, "series": 100, "series_no": 100, "isbns": 100 },
+    categoryColumns: ["authors", "author_ids", "year", "tr_year", "orig_lang", "series"],
+    linkColumns: ["author_ids", "isbns"],
+    rangeSliderColumns: ["year", "tr_year"],
+    sortColumns: ["work_id", "title", "authors", "year", "tr_year", "series"],
+    sortOrders: ["desc", "asc"],
+    buttonContainerId: "#button-container-specfic",
+    rawButtonId: "#download-raw-specfic",
+    urlCopyButtonId: "#copy-url-specfic",
+  }
+);
+```
+
+<div id="table-container-specfic" style="height: 600px;"></div>
+
+Download Full Data (including hidden columns)
+
+<div>
+  <button id="download-raw-specfic"><i class="fas fa-download"></i> Download Full Data</button>
+  <button id="copy-url-specfic"><i class="fas fa-copy"></i> Copy Full Data URL</button>
+</div>
+
+Download Table Data (including filtered options)
+
+<div id='button-container-specfic'>
+  <button id="download-csv"><i class="fas fa-download"></i> Download CSV</button>
+  <button id="download-json"><i class="fas fa-download"></i> Download JSON</button>
+  <button id="download-xlsx"><i class="fas fa-download"></i> Download Excel</button>
+</div>
+
+::: {.callout-tip icon="false"}
+## Creative Commons License
+
+<p xmlns:cc="http://creativecommons.org/ns#">
+
+This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"/><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" style="height:22px!important;margin-left:3px;vertical-align:text-bottom;"/></a>
+
+</p>
+:::
+
+# **Significance & Context**
+
+Speculative fiction (SF) is a wide-reaching and nebulous genre with multiple contradictory definitions. At times, it is a subgenre *of* science fiction or an interchangeable term *for* science fiction, and at others a distinct genre *separate from* science fiction or more expansively an umbrella genre *including* science fiction, fantasy, and more (Wolfe 1986; Oziewicz 2017). SF’s many meanings have brought into question whether it should be considered a literary category or simply written off as a commercial one (Gill 2013). And yet the term continues to be used by authors, scholars, and readers alike. How might we examine this wide-reaching and changing genre? How do the myriad of works identified as SF relate to the genre’s multiple definitions and porous boundaries? To even begin answering these questions we need to know which works are identified as SF under any definition but especially the liminal works that make SF’s variable boundaries visible. The Speculative Fiction Novels in English (1800-2025) dataset provides such a foundation by compiling over 160,000 SF English-language novels first published from 1800 through 2025\.
+
+### Defining Speculative Fiction: A History
+
+In its early use SF has typically been described as a prominent portion of science fiction. Robert A. Heinlein used the term interchangeably with his definition of “simon-pure science fiction” in which “human problems \[arise\] out of extrapolations of present science” (Heinlein 1947). Similarly, Judith Merril used the term to define a large swathe of science fiction that focuses on extrapolation but allowing both “imaginative and inventive” changes thereby incorporating stories that do not inherently focus on science and technology (Merril 1966). In contrast, Margaret Atwood has used SF as a distinct genre of possible extrapolation rather than the impossible of science fiction: “science fiction has monsters and spaceships; speculative fiction could really happen.”[^1] More recently, SF has become more widely known as a supergenre that can cover the many genres of non-mimetic fiction. The Scientific Literature Foundation (SLF) exemplifies this use by considering SF as any work “containing a fabulist or speculative element” (SLF, n.d.).
+
+### ISFDB: The Internet Speculative Fiction Database
+
+The Internet Speculative Fiction Database (ISFDB) is an invaluable resource for compiling vast bibliographies of SF. It is a longstanding community-built and moderated database that catalogs published works of SF at both the printing and work level. ISFDB uses an inclusive definition of SF similar to SLF including but not limited to science fiction, fantasy, alternate history, proto-science fiction, and the supernatural (ISFDB 2024c) and has captured more than a million printings and works.
+
+While ISFDB indexes publicly available bibliographic data, it also includes information that may not be associated with a particular publication. With its effort to track works rather than editions, ISFDB links varying titles, printings, and translations of a work. Crucially, ISFDB makes an effort to document the true authorship of a work by incorporating public information not directly given in the publications of the work in question. This includes capturing uncredited co-authors and editors, ghost writers, and the authors behind house names.
+
+ISFDB builds on a long tradition of SF bibliographies and indices which focus not only on works contemporaneous with the modern formations of SF but also project backwards to novels of fantastic voyages, utopias and dystopias, and gothic romance. Launched in 1995 by Al von Ruff and Ahaseurus, its immediate predecessors were the author bibliographies posted to the USENET newsgroup rec.arts.sf.written.[^2] It began as a closed database restricted to a small set of editors with editing being opened to the general public at the end of 2006\.
+
+While ISFDB has focused on recording data from primary sources, it also relies on the rich space of printed and digital SF bibliographies and indices. While each resource has its own focus different from ISFDB’s they provide a means of verifying the accuracy and coverage of ISFDB.[^3] ISFDB also tracks secondary verifications for its publication records using eleven major genre-focused references including *The Checklist of Science-Fiction and Supernatural Fiction* by Everett F. Bleiler, *The Encyclopedia of Science Fiction* edited by John Clute and Peter Nicholls, *The Encyclopedia of Fantasy* edited by John Clute and John Grant*,* The Locus Index of Science Fiction[^4], and the *Science Fiction, Fantasy, & Weird Fiction Magazine Index* compiled by Stephen T. Miller and William G. Contento.
+
+Overall, ISFDB has seven core record types covering: title (work-level), author, publication (printing-level), book (e.g., *Earthsea Cycle*) and publication series (e.g., *Ace Double*), publishers, and awards. Titles are the most frequent record type (2.5M records) because they include novels, collections, short stories, reviews, and more. Of these records, around 29% are short fiction whereas novels account for 11%. While ISFDB predominantly covers English works (1.9M titles), around a quarter are in another language with German and French being the most prevalent (278K, 112K). Although the majority of English titles were originally written in English, ISFDB includes over 30,000 English translations.
+
+### Speculative Fiction Novels in English (1800-2025): A Dataset
+
+The Speculative Fiction Novels in English (1800-2025) dataset leverages the millions of ISFDB records to curate a work-level collection of SF novels printed in English from 1800 through 2025\. The dataset contains 160,243 novels accompanied by their title, author(s), original publication year, and original language. When available, alternate titles and attributed authors, series information, and ISBNs associated with a novel are also included.
+
+The vast majority of novels in this dataset were first published after 1945 (96%). Publication dates heavily skew towards the most recent decades with 40% of all novels published in the 2010s and 21% in the 2020s. The dataset includes over 43,000 canonical author attributions including nearly 4,000 collaborations. It also includes over 5,000 novels translated into English. Over half of these are Japanese works which were mostly published in 2010 or later (88%). The next most frequent languages are French (over 600\) and German (over 400\) which are better spread across time.
+
+This dataset focuses on SF novels for both intentional and practical reasons. From a practical perspective, ISFDB predominately covers English works and the majority of publication records (65%) correspond to novels.[^5] Moreover, ISFDB novel data is less complex and more reliable than other forms. ISFDB record creation primarily orients around a publication (i.e., the primary source) with other records subsequently being created and linked from these submissions. Short fiction title records are created through the recording of contents for compilation and serial publications. It is very easy for non-genre short fiction to be mistakenly added into ISFDB since many collections may be predominantly but not entirely SF. Properly marking non-genre short fiction requires additional edits that cannot occur until the compilation’s publication record has been approved and added to ISFDB. In a similar vein, there can be ambiguity around whether a collection or anthology is SF since it may include both individual works that are SF and those that are not. In contrast, novels more naturally correspond to publications and are a constituent unit being judged as SF or not.
+
+Beyond practicalities, novels are notable for their prominence in the current SF publishing world. While SF magazines still exist, the typical SF reader will be exposed more to novels since these are a common staple of bookstores and libraries. While the novel has not always been the most prominent form of SF, its history is still of interest and will in many ways reflect the general SF landscape for the contemporary reader. Novels are also of interest here because their digitized forms are more readily suitable for computational analyses: generally much less segmentation (if any) is required.
+
+While this dataset is composed entirely of data available for viewing online at ISFDB, it has a remarkably different form. ISFDB presents this information for online reference, whereas this dataset is tailored for computational and data-driven projects, as well as a more distant, aggregated view. Additionally, this is a curated bibliography that leverages ISFDB’s records and limits its scope to the most relevant work-related information. Furthermore, transforming ISFDB’s data into a tabular form is not trivial and requires an intimate knowledge of how ISFDB records and stores information. This dataset makes ISFDB’s data more accessible for a different audience and intended use. While there are many SF bibliographies, to my knowledge one at this scale and in a tabular form has not been previously available.
+
+The immediate need this dataset serves—and why this dataset has come to exist at all—is as a unifying source for work-level unique identifiers for SF novels in English. This will enable researchers working with book data to work with work-level records rather than the edition-level records that researchers are often stuck with (Walsh 2023). These identifiers will make linking and cross-referencing datasets much easier, such as linking the Time Horizons of Futuristic Fiction dataset (Wythoff and Leane 2025\) with the extracted features (i.e., nonconsumptive texts) from SF Nexus (SF Nexus, n.d.) or the 20th Century English-Language Speculative Fiction HathiTrust Research Center workset (Thompson and Mimno, n.d.). Similarly, it can be used for coordinating digitization efforts as well as a complementary way to compare collection holdings. Additionally, these identifiers are already in use. The digital projects Classics of Science Fiction (Harris and Jorgensen, n.d.) and the Historical Dictionary of Science Fiction (Sheidlower 2024\) link to ISDFB title records.
+
+More generally, this dataset is of interest to anyone studying SF or genre fiction more broadly. It could also be of interest to those studying publishing practices within English-language markets. This dataset is also a great starting point for curating more specialized collections, as well as capturing important work-level metadata such as author and first publication date. Some research questions this dataset could support include:
+
+* How has collaborative authorship for SF in English changed over time within the genre? How often are these collaborations openly credited versus operating under collective pseudonyms?  
+* How has the quantity of new SF novels in English changed over time? How might author identity impact the frequency of these works?  
+* How have SF book series changed over time? Have they changed in length or prevalence?  
+* Do SF novels in English follow certain titling practices and when do particular title templates arise?  
+* What are the characteristics of SF novels translated into English and how have they changed over time?
+
+# **Collection and Creation**
+
+This dataset was compiled from the September 5, 2026 ISFDB database backup (compressed MySQL file). ISFDB releases new snapshots about once a week. From this snapshot file, I used SQL to collate author, title, and publication information that span across a number of separate tables (see ISFDB 2024a for more details) into three intermediate tabular data files. Then, using Python, I use these intermediate files to (1) create a mapping from publication records to title records, (2) assemble work-level records from the title, author, and publication information, and (3) curate these work-level records to construct the dataset of English-language novels.
+
+### Leveraging ISFDB Records
+
+ISFDB tracks printings through publication records and works through title records. Publication records include edition-level information such as medium (e.g., hardcover, ebook) and ISBN, but also capture variation within a book edition such as its cover art and pricing as well as the type of publication (e.g., novel, anthology). Each publication record is associated with one or more title records capturing the contents of the publication. This is especially valuable for tracking the appearances of short fiction within compilations, but also for tracking forewords and bonus material within printings.
+
+ISFDB title records tend to operate at a work-like level and enable the linking of a title’s appearance in various publications. At its core, a title record includes a text’s title, author, original publication date, and language as well as the type of text (e.g., novel, short story, anthology). To capture the complexities of what a work actually is, title records are separated into two classes: canonical titles and variants of canonical titles. A canonical title represents the original composition of a text but also its “true” authorship even if this authorship is not explicitly credited within any publication (e.g., pseudonyms, house names)[^6]. In contrast, variant titles capture published transformations of this original composition. This includes capturing minor variation in printed titles (e.g., *The Many-Colored Land* vs. *The Many-Coloured Land*) and credited authors (e.g., Octavia Butler vs. Octavia E. Butler), but also more substantive variation like translations, revised editions, and adaptations. In ISFDB, the name of a canonical title typically corresponds to a work’s first published title, but in some cases it may correspond to a later title that is more commonly known. Similarly, an author’s canonical name generally corresponds to their most recognized name within SF (ISFDB 2024b). So, a canonical author name may be a pseudonym rather than an author’s legal name as is the case for Cordwainer Smith and Mark Twain.[^7]  
+   
+For the purposes of this dataset, I consider an SF work (i.e., row) to correspond to an aggregated grouping of a canonical title and its associated English variant titles. The canonical title record serves as the source of the work’s title, authorship, language, and series-information, while the collective group of titles are used to gather the publication records of interest: namely standalone publications printed in English. Including variant titles is vital for gathering these publication records since a canonical record may not be associated with any publications whatsoever because a composition’s canonical title and “true” authorship may never have been used together in a publication, standalone or otherwise.
+
+### Linking Titles and Publications
+
+Although a publication record can be associated with more than one title record, the type of the publication indicates which title record best represents the publication as a whole. In the case of novels, a novel publication record is associated with a single novel title record. So, for the purposes of building this dataset, only novel publication records are gathered and linked with their corresponding novel title records.
+
+### Work Selection
+
+This dataset is intentionally limited to SF novels in the English language published as standalone printed books originally published from the 19th century through 2025\. To achieve this, work curation spans several modalities.
+
+**Language.** This dataset focuses on novels in English because ISFDB predominantly covers works and publications in English. This includes both works originally written in English as well as English translations.
+
+**Time Period.** While the term speculative fiction has only existed since the mid-twentieth century, the genres which it contains have a much longer history. The 19th century was selected as the starting point of this dataset to largely retain the Anglophone precursors to the modern genres of science fiction, fantasy, and horror (e.g., the works of Mary Wollstonecraft Shelley, Edgar Allen Poe, H. G. Wells, and Jules Verne).
+
+**Publication Medium.** This dataset largely narrows its focus to traditionally published novels to better reflect the core landscape of the genre. Ideally, this dataset would limit its focus to traditionally published novels—including large, small, and independent publishers—but unfortunately this is at odds with ISFDB’s inclusive policy for published works of speculative fiction (ISFDB 2024c) which includes both self and vanity publishing. While publication records do include publisher information, with the proliferation of print on demand publishing, it is difficult to differentiate between self-published works from those by independent publishers. So, instead of attempting to filter works by specific publishers, this dataset excludes works that are solely represented by e-books within ISFDB. This is effectively a proxy for whether the work (if published in the US) could be eligible for a Library of Congress Catalog Number (LCCN).
+
+**Publication Form.** This criteria is less a curatorial choice as opposed to a limitation of ISFDB. ISFDB title records are categorized as novels based on their length (40,000+ words; ISFDB 2024d), but these records may not be associated with any novel-type publications. This occurs when a novel-length work is only published in compilations. This will include some of the novels published as Ace Doubles which are treated as compilations since each Ace Double volume contains two books bound in a tête-bêche layout. However, this will only be true for the novels printed as Ace Doubles with no printed, standalone (i.e., novel) publication recorded within ISFDB.
+
+**ISFDB Tags.** ISFDB novels are further filtered by two tags: Non-Genre (ISFDB 2022\) and Graphic Format (ISFDB 2016). The former are excluded because non-genre novels by definition are not works of SF. The latter are excluded because novels are traditionally primarily textual and this tag indicates that the work contains inseparable graphic material, but also because ISFDB generally excludes graphic novels, comics, and manga (ISFDB 2024c).
+
+### Workflow
+
+An initial working set of title records is constructed through the following filtering process. These title records are selected if they are:
+
+1. a novel  
+2. in English  
+3. published in 2025 or earlier  
+4. not flagged as non-genre or having a graphic format  
+5. associated with at least one printed publication record
+
+A publication record is considered to be printed if it has (a) a printed format (see ISFDB 2023\) or (b) an unknown format and was published before 2000\.
+
+Then, with this working set of title records, work records are formed by grouping the variant titles with their canonical titles. These canonical title records may not be in the working set since they are not necessarily written in English or directly linked to a printed publication record. These works are then further filtered by the associated first publication date which for the purposes of this dataset corresponds to the publication date of the canonical title record. Works are filtered to those published in 1800 or later, which means these works were first published from 1800 through 2025\. In cases where the canonical title is unpublished in its original language, the work is included if the earliest known English translation was published in the 19th century or later. In cases where the canonical title’s publication date is unknown, the work is dropped.
+
+### Limitations
+
+This dataset is wholly derived from ISFDB content. ISFDB is not comprehensive and so neither is this dataset. Similarly, ISFDB’s coverage is far from neutral: works are counted only if the contributors—predominantly fans—know them and care enough to add them. Much of ISFDB’s coverage reflects the popular: Anglophone novels primarily by white, male authors.
+
+Any errors in ISFDB records will be inherited by this dataset. Inevitably, this dataset will include novels that are not SF. Similarly, first publication dates may be wrong and translations may not be properly identified since this requires ISFDB to contain a record of the original work and be properly linked to its translation. While ISFDB has a vast number of publication records it is far from complete and many ISBNs associated with a novel may be missing.
+
+There are also limitations with the dataset’s curatorial workflow since it relies on ISFDB’s capture of printed publications. Less popular novels may be recorded in ISFDB, but only through ebook publications which means that they will be excluded from this dataset. Similarly, this dataset is dependent on ISFDB’s categorization of titles which defines novels in terms of length. Due to the blurry boundary between novels and novellas, some novels may be recorded as novellas in ISFDB and vice versa. An additional edge case is the fix-up and mosaic novel; in some cases these works will be recorded as collections rather than novels and thus be excluded from this dataset.
+
+# **Dataset Description**
+
+Each row of the dataset corresponds to a single work (i.e., SF novel).
+
+**work\_id**  
+The unique identifier for this work. This is the title record ID for the canonical title record associated with this work. The specific values are not inherently meaningful, it corresponds to when the title record was added to ISFDB. An ISFDB title record may be viewed at https://www.isfdb.org/cgi-bin/title.cgi?\[work\_id\] 
+
+**title**  
+The “canonical” title of the work. This is the title name of the canonical title record. This may correspond to the first published title or the most well-known title. For translated works, the title will be the original title in its original language.
+
+**authors**  
+The “canonical” author(s) of the work. These are the authors of the canonical title record. If there are multiple authors, their names will be separated by plus signs ( \+ ). For translated works, the author’s name will be in the work’s original language. Unknown (i.e., uncredited or unknown ghostwriter) authors are represented as “\[unknown\]”.
+
+**author\_ids**  
+The unique identifier(s) for the “canonical” author(s). When there are multiple authors, the IDs are separated by commas and in the same order as the **authors** column. ISFDB requires author names to be unique, so distinct authors with the same name may include parentheticals for differentiation. These IDs are the ISFDB author record IDs for these authors. An author record may be viewed at https://www.isfdb.org/cgi-bin/ea.cgi?\[author\_id\]
+
+**year**  
+Year of first known publication date of the work. This corresponds to the publication date of the canonical title record. In cases where a work is only published in translation, this field will be marked “unpublished”.
+
+**tr\_year**  
+Year of first known publication date for an English translation of this work. This field is only used for works of translation. This corresponds to the publication date for the earliest English variant title of the canonical title record. While rare, it is possible for English translations to be published before a novel is published in its original language.
+
+**orig\_lang**  
+The ISO 639-2 code of the language in which the work was originally written in.
+
+**series**  
+The name of the series that the work belongs to. This field will be empty if the work does not belong to a series. For translations, the series name is typically in the work’s original language. ISFDB requires series names to be unique, so a series name may include a parenthetical for disambiguation.
+
+**series\_no**  
+The work’s number within its series (i.e, **series** column). This field may be empty.
+
+**series\_tree**  
+Since ISFDB allows series to nest infinitely, this field shows a work’s series tree. Each series name is separated by a right bracket ( \> ) where each series is the child of the neighbor to its right. So, the **series** column corresponds to the leftmost series and **root\_series** to the rightmost. This field will be the same as the **series** column when the work’s series has no parent series.
+
+**root\_series**  
+The name of the broadest (“root”) series to which this work belongs. This field will be the same as the **series** column when the work’s series has no parent series.
+
+**alt\_titles**  
+A list of alternate published titles for this work with titles separated by vertical bars ( | ). These titles will always correspond to English editions of the work. This field may be empty.
+
+**alt\_authors**  
+A list of alternate published authors for this work with distinct credited authorships separated by vertical bars ( | ). Similar to the **authors** column, for authorships with multiple authors, their names are separated by plus signs ( \+ ). In cases where the work was published with no credited author, the list will include “\[uncredited\]”. This field may be empty.
+
+**isbns**  
+A comma-separated list of associated ISBNs for this work. ISBNs are only included for printed publications in English. This field may be empty.
+
+# **Ethical Considerations**
+
+The underlying ISFDB database snapshots are made freely available and all ISFDB data is explicitly licensed under CC-BY 4.0. All bibliographic information collected within ISFDB is publicly available and therefore so is this dataset.
+
+# **Versioning**
+
+The dataset will be updated at least annually with new ISFDB snapshots to reflect a more recent version of ISFDB. While records can be removed or combined, work IDs are never reused. Additionally, this update will include all novels published within the previous calendar year (e.g., snapshots from 2027 will include novels published through 2026).
+
+More expanded versions of this dataset may also be created and made available. These potential datasets might include other work types such as short stories and anthologies (probably as separate tables), as well as additional metadata.
+
+While no manual corrections to novel data will be made, interventions can be made by contributing edits to ISFDB itself. An ISFDB account must be created to submit edits, but otherwise there are no restrictions. In my time working with ISFDB, I have contributed hundreds of edits to improve its data quality. Changes to ISFDB will be reflected in updated versions of the dataset through the newer database snapshots.
+
+# **Bibliography**
+
+* Gill, R. B. 2013\. “The Uses of Genre and the Classification of Speculative Fiction.” *Mosaic: a journal for the interdisciplinary study of literature* 46(2): 71-85. [https://dx.doi.org/10.1353/mos.2013.0021](https://dx.doi.org/10.1353/mos.2013.0021)  
+* Harris, Jim and Mike Jorgensen. n.d. “Classics of Science Fiction.” Accessed January 15, 2025\. [https://csfquery.com](https://csfquery.com/)  
+* Heinlein, Robert A. 1947\. “On the Writing of Speculative Fiction.” In *Of Worlds Beyond: The Science of Science-Fiction Writing*, edited by L. A. Eschbach.  
+* ISFDB (Internet Speculative Fiction Database). 2010\. “Reference:General Overview.” Last modified December 7\. [https://isfdb.org/wiki/index.php/Reference:General\_Overview](https://isfdb.org/wiki/index.php/Reference:General_Overview)  
+* ISFDB (Internet Speculative Fiction Database). 2016\. “Template:TitleFields:GraphicFormat.” Last modified November 30\. [https://www.isfdb.org/wiki/index.php?title=Template:TitleFields:GraphicFormat](https://www.isfdb.org/wiki/index.php?title=Template:TitleFields:GraphicFormat)  
+* ISFDB (Internet Speculative Fiction Database). 2022\. “Template:TitleFields:NonGenre.” Last modified April 11\. [https://isfdb.org/wiki/index.php/Template:TitleFields:NonGenre](https://isfdb.org/wiki/index.php/Template:TitleFields:NonGenre)  
+* ISFDB (Internet Speculative Fiction Database). 2023\. “Template:PublicationFields:Format.” Last modified June 9\. [https://isfdb.org/wiki/index.php/Template:PublicationFields:Format](https://isfdb.org/wiki/index.php/Template:PublicationFields:Format)  
+* ISFDB (Internet Speculative Fiction Database). 2024a. “Database Schema.” Last modified April 2024\. [https://isfdb.org/wiki/index.php/Database\_Schema](https://isfdb.org/wiki/index.php/Database_Schema)  
+* ISFDB (Internet Speculative Fiction Database). 2024b. “Help:Glossary.” Last modified March 22\.  
+* ISFDB (Internet Speculative Fiction Database). 2024c. “ISFDB: Policy.” Last modified June 10\. [https://isfdb.org/wiki/index.php/ISFDB:Policy](https://isfdb.org/wiki/index.php/ISFDB:Policy)  
+* ISFDB (Internet Speculative Fiction Database). 2024d. “Template:TitleFields:TitleType.” Last modified October 15\. [https://isfdb.org/wiki/index.php/Template:TitleFields:TitleType](https://isfdb.org/wiki/index.php/Template:TitleFields:TitleType)  
+* Merril, Judith. 1966\. “WHAT DO YOU MEAN \- SCIENCE? FICTION.” *Extrapolation* 7(2), 31-46.  
+* Oziewicz, Marek. 2017\. “Speculative Fiction.” *Oxford Research Encyclopedia of Literature.* [https://doi.org/10.1093/acrefore/9780190201098.013.78](https://doi.org/10.1093/acrefore/9780190201098.013.78)  
+* Sheidlower, Jesse. 2024\. “The Historical Dictionary of Science Fiction.” *Dictionaries: Journal of the Dictionary of North America 45(1),* 213-228.  
+* SLF (Speculative Literature Foundation). n.d. “FAQ” Accessed September 10, 2025\. [https://speculativeliterature.org/faq](https://speculativeliterature.org/faq)  
+* SF Nexus. n.d. “Data.” Accessed January 15, 2025\. [https://sfnexus.io/data/](https://sfnexus.io/data/)  
+* Thompson, Laure and David Mimno. 2020\. “Building Large-Scale Collections of Genre Fiction: Final Report.” Accessed September 12, 2025\. [https://htrc.atlassian.net/wiki/download/attachments/43290116/HTRC%20ACS%20Final%20Reportv2.pdf](https://htrc.atlassian.net/wiki/download/attachments/43290116/HTRC%20ACS%20Final%20Reportv2.pdf)  
+* Thompson, Laure and David Mimno. n.d. “20th Century English-Language Speculative Fiction” recommended workset. Accessed January 15, 2025\. [https://analytics.hathitrust.org/staticrecommendedworksets](https://analytics.hathitrust.org/staticrecommendedworksets)  
+* Walsh, Melanie. 2023\. “It’s Like 10,000 Editions When All You Need Is a Book: Why Clustering Books, or ‘Works,’ Is Key to Unlocking Collections as Data.” *Collections as Data: State of the field and future directions,* 8-10. [https://doi.org/10.5281/zenodo.7897735](https://doi.org/10.5281/zenodo.7897735)  
+* Wolfe, Gary K. 1986\. *Critical Terms for Science Fiction and Fantasy.* Greenwood.  
+* Wythoff, Grant, and Theodore Leane. 2025\. “Time Horizons of Futuristic Fiction.” *Post45 Data Collective* edited by Alexander Manshel, J.D. Porter, and Melanie Walsh. [https://doi.org/10.18737/552626](https://doi.org/10.18737/552626)
+
+[^1]:  Robert Potts, “Light in the wilderness,” *The Guardian*, April 25, 2003\.
+
+[^2]:  Many of these bibliographies are preserved in the Linköping Science Fiction & Fantasy Archive: https://www.lysator.liu.se/sf\_archive/sf-texts/authors/
+
+[^3]:  See ISFDB 2010 for more on ISFDB’s bibliographic sources.
+
+[^4]:  https://www.locusmag.com/index/
+
+[^5]:  A publication record corresponds to a single book or magazine (i.e., printing). So, novels can be the majority of publication records while being a small minority of title records (i.e., contents of a publication).
+
+[^6]:  It is ISFDB policy that all bibliographic data must come from public sources. ISFDB explicitly does not include the identities of publicly undisclosed pseudonyms (ISFDB 2024c).
+
+[^7]:  An author’s legal name is tracked as a field within an ISFDB author record.

@@ -113,5 +113,11 @@
   },
   "how-we-made-this.qmd": {
     "how-we-made-this.html": "320da813"
+  },
+  "posts/speculative-fiction-novels/index.qmd": {
+    "index.html": "b2484609"
+  },
+  "posts/speculative-fiction-novels/test-index.qmd": {
+    "test-index.html": "d781c12e"
   }
 }

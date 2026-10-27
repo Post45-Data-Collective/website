@@ -1,0 +1,11 @@
+---
+title: "Filters Example"
+filters:
+  - filters
+---
+
+## Heading
+
+This filter adds formatting to heading text.
+
+
