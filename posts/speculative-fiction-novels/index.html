@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,7 +63,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -76,14 +95,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../images/p45dc-fav-icon.jpg" rel="icon" type="image/jpeg">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1013daaa80fe128ae42073a32dbd6f48.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-2beb9d87d5bdcaa2dd3c1a043beb2465.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -130,15 +153,15 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Speculative Fiction Novels in English (1800-2025): A Comprehensive Bibliography – Post45 Data Collective">
-<meta property="og:description" content="The Speculative Fiction Novels in English (1800-2025) dataset compiles over 160,000 SF English-language novels first published from 1800 through 2025, including genres such as science fiction, fantasy, and more.">
+<meta property="og:description" content="The Speculative Fiction Novels in English (1800-2025) dataset compiles over 160,000 SF English-language novels first published from 1800 through 2025, including genres such as science fiction, fantasy, and more. It is drawn from the Internet Speculative Fiction Database (ISFDB), a crowd-sourced bibliography of speculative fiction.">
 <meta property="og:image" content="https://isfdb.org/IsfdbBanner3.jpg">
 <meta property="og:site_name" content="Post45 Data Collective">
 <meta name="twitter:title" content="Speculative Fiction Novels in English (1800-2025): A Comprehensive Bibliography – Post45 Data Collective">
-<meta name="twitter:description" content="The Speculative Fiction Novels in English (1800-2025) dataset compiles over 160,000 SF English-language novels first published from 1800 through 2025, including genres such as science fiction, fantasy, and more.">
+<meta name="twitter:description" content="The Speculative Fiction Novels in English (1800-2025) dataset compiles over 160,000 SF English-language novels first published from 1800 through 2025, including genres such as science fiction, fantasy, and more. It is drawn from the Internet Speculative Fiction Database (ISFDB), a crowd-sourced bibliography of speculative fiction.">
 <meta name="twitter:image" content="https://isfdb.org/IsfdbBanner3.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="Speculative Fiction Novels in English (1800-2025): A Comprehensive Bibliography">
-<meta name="citation_abstract" content="The Speculative Fiction Novels in English (1800-2025) dataset compiles over 160,000 SF English-language novels first published from 1800 through 2025, including genres such as science fiction, fantasy, and more.">
+<meta name="citation_abstract" content="The Speculative Fiction Novels in English (1800-2025) dataset compiles over 160,000 SF English-language novels first published from 1800 through 2025, including genres such as science fiction, fantasy, and more. It is drawn from the Internet Speculative Fiction Database (ISFDB), a crowd-sourced bibliography of speculative fiction.">
 <meta name="citation_author" content="Laure Thompson">
 <meta name="citation_editor" content="Alexander Manshel">
 <meta name="citation_editor" content="J.D. Porter">
@@ -151,21 +174,41 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <meta name="citation_doi" content="10.18737/657712">
 <meta name="citation_language" content="en">
 <meta name="citation_journal_title" content="Post45 Data Collective">
+<meta name="citation_reference" content="citation_title=The uses of genre and the classification of speculative fiction; citation_author=R. B. Gill; citation_publication_date=2013; citation_cover_date=2013; citation_year=2013; citation_issue=2; citation_doi=10.1353/mos.2013.0021; citation_volume=46; citation_firstpage=71; citation_lastpage=85; citation_journal_title=Mosaic: A Journal for the Interdisciplinary Study of Literature;">
+<meta name="citation_reference" content="citation_title=Classics of science fiction; citation_author=Jim Harris; citation_author=Mike Jorgensen; citation_fulltext_html_url=https://csfquery.com/;">
+<meta name="citation_reference" content="citation_title=On the writing of speculative fiction; citation_author=Robert A. Heinlein; citation_editor=Lloyd Arthur Eshbach; citation_publication_date=1947; citation_cover_date=1947; citation_year=1947; citation_inbook_title=Of worlds beyond: The science of science-fiction writing;">
+<meta name="citation_reference" content="citation_title=Reference:General Overview; citation_author=ISFDB; citation_publication_date=2010-12-07; citation_cover_date=2010-12-07; citation_year=2010; citation_fulltext_html_url=https://isfdb.org/wiki/index.php/Reference:General_Overview; citation_publisher=Internet Speculative Fiction Database;">
+<meta name="citation_reference" content="citation_title=Template:TitleFields:GraphicFormat; citation_author=ISFDB; citation_publication_date=2016-11-30; citation_cover_date=2016-11-30; citation_year=2016; citation_fulltext_html_url=https://www.isfdb.org/wiki/index.php?title=Template:TitleFields:GraphicFormat; citation_publisher=Internet Speculative Fiction Database;">
+<meta name="citation_reference" content="citation_title=Template:TitleFields:NonGenre; citation_author=ISFDB; citation_publication_date=2022-04-11; citation_cover_date=2022-04-11; citation_year=2022; citation_fulltext_html_url=https://isfdb.org/wiki/index.php/Template:TitleFields:NonGenre; citation_publisher=Internet Speculative Fiction Database;">
+<meta name="citation_reference" content="citation_title=Template:PublicationFields:Format; citation_author=ISFDB; citation_publication_date=2023-06-09; citation_cover_date=2023-06-09; citation_year=2023; citation_fulltext_html_url=https://isfdb.org/wiki/index.php/Template:PublicationFields:Format; citation_publisher=Internet Speculative Fiction Database;">
+<meta name="citation_reference" content="citation_title=Database schema; citation_author=ISFDB; citation_publication_date=2024-04; citation_cover_date=2024-04; citation_year=2024; citation_fulltext_html_url=https://isfdb.org/wiki/index.php/Database_Schema; citation_publisher=Internet Speculative Fiction Database;">
+<meta name="citation_reference" content="citation_title=Help:Glossary; citation_author=ISFDB; citation_publication_date=2024-03-22; citation_cover_date=2024-03-22; citation_year=2024; citation_fulltext_html_url=https://isfdb.org/wiki/index.php/Help:Glossary; citation_publisher=Internet Speculative Fiction Database;">
+<meta name="citation_reference" content="citation_title=ISFDB:Policy; citation_author=ISFDB; citation_publication_date=2024-06-10; citation_cover_date=2024-06-10; citation_year=2024; citation_fulltext_html_url=https://isfdb.org/wiki/index.php/ISFDB:Policy; citation_publisher=Internet Speculative Fiction Database;">
+<meta name="citation_reference" content="citation_title=Template:TitleFields:TitleType; citation_author=ISFDB; citation_publication_date=2024-10-15; citation_cover_date=2024-10-15; citation_year=2024; citation_fulltext_html_url=https://isfdb.org/wiki/index.php/Template:TitleFields:TitleType; citation_publisher=Internet Speculative Fiction Database;">
+<meta name="citation_reference" content="citation_title=What do you mean—science? fiction; citation_author=Judith Merril; citation_publication_date=1966; citation_cover_date=1966; citation_year=1966; citation_issue=2; citation_volume=7; citation_firstpage=31; citation_lastpage=46; citation_journal_title=Extrapolation;">
+<meta name="citation_reference" content="citation_title=Speculative fiction; citation_author=Marek Oziewicz; citation_publication_date=2017; citation_cover_date=2017; citation_year=2017; citation_doi=10.1093/acrefore/9780190201098.013.78; citation_inbook_title=Oxford research encyclopedia of literature;">
+<meta name="citation_reference" content="citation_title=The historical dictionary of science fiction; citation_author=Jesse Sheidlower; citation_publication_date=2024; citation_cover_date=2024; citation_year=2024; citation_issue=1; citation_volume=45; citation_firstpage=213; citation_lastpage=228; citation_journal_title=Dictionaries: Journal of the Dictionary Society of North America;">
+<meta name="citation_reference" content="citation_title=FAQ; citation_author=SLF; citation_fulltext_html_url=https://speculativeliterature.org/faq; citation_publisher=Speculative Literature Foundation;">
+<meta name="citation_reference" content="citation_title=Data; citation_author=SF Nexus; citation_fulltext_html_url=https://sfnexus.io/data/;">
+<meta name="citation_reference" content="citation_title=Building large-scale collections of genre fiction: Final report; citation_author=Laure Thompson; citation_author=David Mimno; citation_publication_date=2020; citation_cover_date=2020; citation_year=2020; citation_fulltext_html_url=https://htrc.atlassian.net/wiki/download/attachments/43290116/HTRC%20ACS%20Final%20Reportv2.pdf; citation_technical_report_institution=HathiTrust Research Center;">
+<meta name="citation_reference" content="citation_title=20th century english-language speculative fiction; citation_author=Laure Thompson; citation_author=David Mimno; citation_fulltext_html_url=https://analytics.hathitrust.org/staticrecommendedworksets; citation_publisher=HathiTrust Research Center;">
+<meta name="citation_reference" content="citation_title=It’s like 10,000 editions when all you need is a book: Why clustering books, or “works,” is key to unlocking collections as data; citation_author=Melanie Walsh; citation_publication_date=2023; citation_cover_date=2023; citation_year=2023; citation_doi=10.5281/zenodo.7897735; citation_firstpage=8; citation_lastpage=10; citation_inbook_title=Collections as data: State of the field and future directions;">
+<meta name="citation_reference" content="citation_title=Critical terms for science fiction and fantasy; citation_author=Gary K. Wolfe; citation_publication_date=1986; citation_cover_date=1986; citation_year=1986;">
+<meta name="citation_reference" content="citation_title=Time horizons of futuristic fiction; citation_author=Grant Wythoff; citation_author=Theodore Leane; citation_editor=Alexander Manshel; citation_editor=J. D. Porter; citation_editor=Melanie Walsh; citation_publication_date=2025; citation_cover_date=2025; citation_year=2025; citation_doi=10.18737/552626; citation_inbook_title=Post45 data collective;">
 </head>
 
-<body class="floating nav-fixed quarto-light">
+<body class="floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Post45 Data Collective</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -223,14 +266,15 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active" data-toc-expanded="3">
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
@@ -262,7 +306,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -310,7 +354,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    The Speculative Fiction Novels in English (1800-2025) dataset compiles over 160,000 SF English-language novels first published from 1800 through 2025, including genres such as science fiction, fantasy, and more.
+    The Speculative Fiction Novels in English (1800-2025) dataset compiles over 160,000 SF English-language novels first published from 1800 through 2025, including genres such as science fiction, fantasy, and more. It is drawn from the Internet Speculative Fiction Database (ISFDB), a crowd-sourced bibliography of speculative fiction.
   </div>
 </div>
 
@@ -328,11 +372,37 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 <!-- # 1. Title of dataset 1 -->
 <section id="interactive-visualizations" class="level1">
 <h1>Interactive Visualizations</h1>
+<!--
+The charts in this essay are plain {python} cells (polars + plotly).
+This first cell loads the data and builds everything; the cells placed
+through the essay just display one chart or table each, so they can be
+moved freely.
+To re-render: python -m pip install polars plotly pandas jupyter, then quarto preview.
+Commit website/_freeze/ with the post: the site's GitHub Action has no Python,
+so it uses the frozen results.
+-->
+<style>
+/* Compact, scrolling tables for the chart cells */
+.compact-table { max-height: 420px; overflow: auto; font-size: 0.85rem; margin-bottom: 1rem; }
+.compact-table table { margin-bottom: 0; }
+.compact-table th, .compact-table td { padding: 0.2rem 0.6rem !important; }
+.compact-table thead th { position: sticky; top: 0; background: var(--bs-body-bg, white); }
+/* Let long URLs in the bibliography wrap on phones */
+#refs .csl-entry { overflow-wrap: anywhere; }
+</style>
+<p>Drag the handles on the slider below the chart to zoom in on any period.</p>
+<div id="8333b596" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
+<div style="height:500px; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="ce63fd0f-412f-4611-9c00-5cc762db1e00" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("ce63fd0f-412f-4611-9c00-5cc762db1e00")) {                    Plotly.newPlot(                        "ce63fd0f-412f-4611-9c00-5cc762db1e00",                        [{"hovertemplate":"%{x}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"purple","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":{"dtype":"i2","bdata":"CAcJBwoHCwcMBw0HDgcPBxAHEQcSBxMHFAcVBxcHGAcZBxoHGwccBx0HHgcfByAHIQciByMHJAclByYHJwcoBykHKgcrBywHLQcuBy8HMAcxBzIHMwc0BzUHNgc3BzgHOQc6BzsHPAc9Bz4HPwdAB0EHQgdDB0QHRQdGB0cHSAdJB0oHSwdMB00HTgdPB1AHUQdSB1MHVAdVB1YHVwdYB1kHWgdbB1wHXQdeB18HYAdhB2IHYwdkB2UHZgdnB2gHaQdqB2sHbAdtB24HbwdwB3EHcgdzB3QHdQd2B3cHeAd5B3oHewd8B30Hfgd\u002fB4AHgQeCB4MHhAeFB4YHhweIB4kHigeLB4wHjQeOB48HkAeRB5IHkweUB5UHlgeXB5gHmQeaB5sHnAedB54HnwegB6EHogejB6QHpQemB6cHqAepB6oHqwesB60HrgevB7AHsQeyB7MHtAe1B7YHtwe4B7kHuge7B7wHvQe+B78HwAfBB8IHwwfEB8UHxgfHB8gHyQfKB8sHzAfNB84HzwfQB9EH0gfTB9QH1QfWB9cH2AfZB9oH2wfcB90H3gffB+AH4QfiB+MH5AflB+YH5wfoB+kH"},"xaxis":"x","y":{"dtype":"u4","bdata":"AwAAAAMAAAAGAAAAAQAAAAEAAAAEAAAAAwAAAAIAAAACAAAAAgAAAAEAAAAHAAAAAQAAAAUAAAAEAAAAAgAAAAIAAAACAAAAAwAAAAcAAAADAAAABAAAAAMAAAAEAAAAAgAAAAUAAAAFAAAABwAAAAIAAAACAAAAAwAAAAMAAAAFAAAABwAAAAMAAAAEAAAABgAAAAQAAAAGAAAAAQAAAAMAAAADAAAAAgAAAAYAAAADAAAABgAAAAkAAAAJAAAACQAAAAcAAAAFAAAABgAAAAQAAAACAAAABgAAAAYAAAAGAAAABAAAAAYAAAAJAAAABQAAAAgAAAAMAAAACQAAAA8AAAAJAAAABgAAAAoAAAAKAAAABQAAAA8AAAALAAAACQAAAAsAAAAKAAAACAAAAA4AAAAKAAAAEAAAAAkAAAAMAAAAFQAAABIAAAAVAAAAFwAAACcAAAAqAAAAOwAAAD0AAAA+AAAARQAAAEoAAABFAAAAOwAAAF0AAABLAAAATQAAAF4AAABJAAAAUwAAAEYAAABKAAAASgAAAFcAAABMAAAAWwAAAFAAAABzAAAAYwAAAF8AAABdAAAAYAAAAEoAAABJAAAAQwAAAD0AAAA2AAAAOgAAAEEAAABNAAAATgAAAFEAAABoAAAAegAAAHgAAAB8AAAAkAAAAH0AAACCAAAAfAAAAH8AAAB2AAAAeAAAAH8AAACjAAAAkQAAAIIAAABnAAAAcgAAAFYAAAA+AAAAPwAAAEEAAABCAAAATQAAAGkAAAB5AAAAcAAAAHAAAACOAAAAtAAAAMUAAADeAAAA4wAAAKgAAACZAAAAkQAAAKsAAACyAAAAvgAAAMMAAADdAAAA6AAAAA4BAAAVAQAAQQEAAGYBAACjAQAABAIAAAACAADWAQAAsgEAAO8BAAAYAgAAUwIAAH0CAACvAgAAwQIAAAYDAAD8AgAA8AIAAO8CAAD7AgAAVAMAALYDAADfAwAAdwQAAJkEAADABAAAkgQAALUEAAA7BAAAtgQAABMFAAC9BQAAswUAAJIFAABcBQAAqwUAAHkFAADrBQAA3wUAAHwGAABiCQAAJgoAAGcJAAA7CwAAeQsAAJsNAABKEgAADxUAAOoUAAAZFwAA5xcAAA8aAACdGwAA3BwAAJ4eAAA+HgAAzBsAAAkZAACzFgAAVxUAACwTAAAqEAAA"},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"scatter":[{"type":"scatter"}]},"layout":{"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Publication Year*"},"rangeslider":{"visible":true}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"# of Novels"}},"legend":{"tracegroupgap":0},"title":{"text":"Speculative Fiction Novels in English\u003cbr\u003e(1800\u20132025)","x":0.5},"barmode":"relative","height":500,"hoverlabel":{"bgcolor":"white"},"margin":{"l":80,"r":20,"t":70,"b":100}},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+</div>
+<p>*Publication year in these charts is the earliest known publication year of the original novel or its English translation.</p>
 </section>
 <section id="data-table" class="level1">
 <h1><strong>Data Table</strong></h1>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="68" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 67;"><span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof dataSummaryView<span class="op">,</span> Tabulator<span class="op">,</span> viewof selectedColumns<span class="op">,</span> viewof dataSet<span class="op">,</span> tableContainer<span class="op">,</span> fetchData<span class="op">,</span> generateTabulatorTableFromCSV<span class="op">,</span> progress<span class="op">,</span> progressbar} <span class="im">from</span> <span class="st">"8bb63a6cde9addff"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="357" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 356;"><span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {viewof dataSummaryView<span class="op">,</span> Tabulator<span class="op">,</span> viewof selectedColumns<span class="op">,</span> viewof dataSet<span class="op">,</span> tableContainer<span class="op">,</span> fetchData<span class="op">,</span> generateTabulatorTableFromCSV<span class="op">,</span> progress<span class="op">,</span> progressbar} <span class="im">from</span> <span class="st">"8bb63a6cde9addff"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -340,7 +410,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="cell hidden">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="74" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 73;"><span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> <span class="fu">fetchData</span>(<span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/speculative_fiction_novels/speculative-fiction-novels-dataset-CSV.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="363" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 362;"><span id="cb2-363"><a href="#cb2-363" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> <span class="fu">fetchData</span>(<span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/speculative_fiction_novels/speculative-fiction-novels-dataset-CSV.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-2" data-nodetype="declaration">
 
@@ -348,34 +418,34 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="cell hidden">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="80" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 79;"><span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="fu">generateTabulatorTableFromCSV</span>(</span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#table-container-specfic"</span><span class="op">,</span></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/speculative_fiction_novels/speculative-fiction-novels-dataset-CSV.csv"</span><span class="op">,</span></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    <span class="dt">displayedColumns</span><span class="op">:</span> [<span class="st">"work_id"</span><span class="op">,</span> <span class="st">"title"</span><span class="op">,</span> <span class="st">"authors"</span><span class="op">,</span> <span class="st">"author_ids"</span><span class="op">,</span> <span class="st">"year"</span><span class="op">,</span> <span class="st">"tr_year"</span><span class="op">,</span>  <span class="st">"orig_lang"</span><span class="op">,</span> <span class="st">"series"</span><span class="op">,</span> <span class="st">"series_no"</span><span class="op">,</span> <span class="st">"isbns"</span>]<span class="op">,</span></span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnPopups</span><span class="op">:</span> [</span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Unique identifier for this work"</span><span class="op">,</span></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Title of the work"</span><span class="op">,</span></span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Author(s) of the work"</span><span class="op">,</span></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Unique identifier(s) for the author(s)"</span><span class="op">,</span></span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Year of first known publication date"</span><span class="op">,</span></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Year of first known publication date for English translation"</span><span class="op">,</span></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>      <span class="st">"ISO 639-2 code of the work's original language"</span><span class="op">,</span></span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Name of the series that the work belongs to"</span><span class="op">,</span></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Work’s number within its series"</span><span class="op">,</span></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Comma-separated list of associated ISBNs"</span></span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnWidths</span><span class="op">:</span> { <span class="st">"work_id"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"title"</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span> <span class="st">"authors"</span><span class="op">:</span> <span class="dv">150</span><span class="op">,</span> <span class="st">"author_ids"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"year"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"tr_year"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"orig_lang"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"series"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"series_no"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"isbns"</span><span class="op">:</span> <span class="dv">100</span> }<span class="op">,</span></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>    <span class="dt">categoryColumns</span><span class="op">:</span> [<span class="st">"authors"</span><span class="op">,</span> <span class="st">"author_ids"</span><span class="op">,</span> <span class="st">"year"</span><span class="op">,</span> <span class="st">"tr_year"</span><span class="op">,</span> <span class="st">"orig_lang"</span><span class="op">,</span> <span class="st">"series"</span>]<span class="op">,</span></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>    <span class="dt">linkColumns</span><span class="op">:</span> [<span class="st">"author_ids"</span><span class="op">,</span> <span class="st">"isbns"</span>]<span class="op">,</span></span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rangeSliderColumns</span><span class="op">:</span> [<span class="st">"year"</span><span class="op">,</span> <span class="st">"tr_year"</span>]<span class="op">,</span></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortColumns</span><span class="op">:</span> [<span class="st">"work_id"</span><span class="op">,</span> <span class="st">"title"</span><span class="op">,</span> <span class="st">"authors"</span><span class="op">,</span> <span class="st">"year"</span><span class="op">,</span> <span class="st">"tr_year"</span><span class="op">,</span> <span class="st">"series"</span>]<span class="op">,</span></span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortOrders</span><span class="op">:</span> [<span class="st">"desc"</span><span class="op">,</span> <span class="st">"asc"</span>]<span class="op">,</span></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>    <span class="dt">buttonContainerId</span><span class="op">:</span> <span class="st">"#button-container-specfic"</span><span class="op">,</span></span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rawButtonId</span><span class="op">:</span> <span class="st">"#download-raw-specfic"</span><span class="op">,</span></span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>    <span class="dt">urlCopyButtonId</span><span class="op">:</span> <span class="st">"#copy-url-specfic"</span><span class="op">,</span></span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="369" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 368;"><span id="cb3-369"><a href="#cb3-369" aria-hidden="true" tabindex="-1"></a><span class="fu">generateTabulatorTableFromCSV</span>(</span>
+<span id="cb3-370"><a href="#cb3-370" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#table-container-specfic"</span><span class="op">,</span></span>
+<span id="cb3-371"><a href="#cb3-371" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/speculative_fiction_novels/speculative-fiction-novels-dataset-CSV.csv"</span><span class="op">,</span></span>
+<span id="cb3-372"><a href="#cb3-372" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb3-373"><a href="#cb3-373" aria-hidden="true" tabindex="-1"></a>    <span class="dt">displayedColumns</span><span class="op">:</span> [<span class="st">"work_id"</span><span class="op">,</span> <span class="st">"title"</span><span class="op">,</span> <span class="st">"authors"</span><span class="op">,</span> <span class="st">"author_ids"</span><span class="op">,</span> <span class="st">"year"</span><span class="op">,</span> <span class="st">"translation_year"</span><span class="op">,</span>  <span class="st">"orig_lang"</span><span class="op">,</span> <span class="st">"series"</span><span class="op">,</span> <span class="st">"series_no"</span><span class="op">,</span> <span class="st">"isbns"</span>]<span class="op">,</span></span>
+<span id="cb3-374"><a href="#cb3-374" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnPopups</span><span class="op">:</span> [</span>
+<span id="cb3-375"><a href="#cb3-375" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Unique identifier for this work from ISFDB—also known as “Title Record”"</span><span class="op">,</span></span>
+<span id="cb3-376"><a href="#cb3-376" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Title of the work"</span><span class="op">,</span></span>
+<span id="cb3-377"><a href="#cb3-377" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Author(s) of the work"</span><span class="op">,</span></span>
+<span id="cb3-378"><a href="#cb3-378" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Unique identifier(s) for the author(s)"</span><span class="op">,</span></span>
+<span id="cb3-379"><a href="#cb3-379" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Year of first known publication date"</span><span class="op">,</span></span>
+<span id="cb3-380"><a href="#cb3-380" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Year of first known publication date for English translation"</span><span class="op">,</span></span>
+<span id="cb3-381"><a href="#cb3-381" aria-hidden="true" tabindex="-1"></a>      <span class="st">"ISO 639-2 code of the work's original language"</span><span class="op">,</span></span>
+<span id="cb3-382"><a href="#cb3-382" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Name of the series that the work belongs to"</span><span class="op">,</span></span>
+<span id="cb3-383"><a href="#cb3-383" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Work’s number within its series"</span><span class="op">,</span></span>
+<span id="cb3-384"><a href="#cb3-384" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Comma-separated list of associated ISBNs"</span></span>
+<span id="cb3-385"><a href="#cb3-385" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">,</span></span>
+<span id="cb3-386"><a href="#cb3-386" aria-hidden="true" tabindex="-1"></a>    <span class="dt">columnWidths</span><span class="op">:</span> { <span class="st">"work_id"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"title"</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span> <span class="st">"authors"</span><span class="op">:</span> <span class="dv">150</span><span class="op">,</span> <span class="st">"author_ids"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"year"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"translation_year"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"orig_lang"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"series"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"series_no"</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="st">"isbns"</span><span class="op">:</span> <span class="dv">100</span> }<span class="op">,</span></span>
+<span id="cb3-387"><a href="#cb3-387" aria-hidden="true" tabindex="-1"></a>    <span class="dt">categoryColumns</span><span class="op">:</span> [<span class="st">"orig_lang"</span>]<span class="op">,</span></span>
+<span id="cb3-388"><a href="#cb3-388" aria-hidden="true" tabindex="-1"></a>    <span class="dt">linkColumns</span><span class="op">:</span> [<span class="st">"author_ids"</span><span class="op">,</span> <span class="st">"isbns"</span>]<span class="op">,</span></span>
+<span id="cb3-389"><a href="#cb3-389" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rangeSliderColumns</span><span class="op">:</span> [<span class="st">"year"</span><span class="op">,</span> <span class="st">"translation_year"</span>]<span class="op">,</span></span>
+<span id="cb3-390"><a href="#cb3-390" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortColumns</span><span class="op">:</span> [<span class="st">"work_id"</span><span class="op">,</span> <span class="st">"title"</span><span class="op">,</span> <span class="st">"authors"</span><span class="op">,</span> <span class="st">"year"</span><span class="op">,</span> <span class="st">"translation_year"</span><span class="op">,</span> <span class="st">"series"</span>]<span class="op">,</span></span>
+<span id="cb3-391"><a href="#cb3-391" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sortOrders</span><span class="op">:</span> [<span class="st">"desc"</span><span class="op">,</span> <span class="st">"asc"</span>]<span class="op">,</span></span>
+<span id="cb3-392"><a href="#cb3-392" aria-hidden="true" tabindex="-1"></a>    <span class="dt">buttonContainerId</span><span class="op">:</span> <span class="st">"#button-container-specfic"</span><span class="op">,</span></span>
+<span id="cb3-393"><a href="#cb3-393" aria-hidden="true" tabindex="-1"></a>    <span class="dt">rawButtonId</span><span class="op">:</span> <span class="st">"#download-raw-specfic"</span><span class="op">,</span></span>
+<span id="cb3-394"><a href="#cb3-394" aria-hidden="true" tabindex="-1"></a>    <span class="dt">urlCopyButtonId</span><span class="op">:</span> <span class="st">"#copy-url-specfic"</span><span class="op">,</span></span>
+<span id="cb3-395"><a href="#cb3-395" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-396"><a href="#cb3-396" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display hidden">
 <div id="ojs-cell-3" data-nodetype="expression">
 
@@ -411,27 +481,239 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </section>
 <section id="significance-context" class="level1">
 <h1><strong>Significance &amp; Context</strong></h1>
-<p>Speculative fiction (SF) is a wide-reaching and nebulous genre with multiple contradictory definitions. At times, it is a subgenre <em>of</em> science fiction or an interchangeable term <em>for</em> science fiction, and at others a distinct genre <em>separate from</em> science fiction or more expansively an umbrella genre <em>including</em> science fiction, fantasy, and more (Wolfe 1986; Oziewicz 2017). SF’s many meanings have brought into question whether it should be considered a literary category or simply written off as a commercial one (Gill 2013). And yet the term continues to be used by authors, scholars, and readers alike. How might we examine this wide-reaching and changing genre? How do the myriad of works identified as SF relate to the genre’s multiple definitions and porous boundaries? To even begin answering these questions we need to know which works are identified as SF under any definition but especially the liminal works that make SF’s variable boundaries visible. The Speculative Fiction Novels in English (1800-2025) dataset provides such a foundation by compiling over 160,000 SF English-language novels first published from 1800 through 2025.</p>
+<p>Speculative fiction (SF) is a wide-reaching and nebulous genre with multiple contradictory definitions. At times, it is a subgenre <em>of</em> science fiction or an interchangeable term <em>for</em> science fiction, and at others a distinct genre <em>separate from</em> science fiction or more expansively an umbrella genre <em>including</em> science fiction, fantasy, and more <span class="citation" data-cites="wolfe1986 oziewicz2017">(<a href="#ref-wolfe1986" role="doc-biblioref">Wolfe 1986</a>; <a href="#ref-oziewicz2017" role="doc-biblioref">Oziewicz 2017</a>)</span>. SF’s many meanings have brought into question whether it should be considered a literary category or simply written off as a commercial one <span class="citation" data-cites="gill2013">(<a href="#ref-gill2013" role="doc-biblioref">Gill 2013</a>)</span>. And yet the term continues to be used by authors, scholars, and readers alike.</p>
+<p>How might we examine this wide-reaching and changing genre? How do the myriad works identified as SF relate to the genre’s multiple definitions and porous boundaries?</p>
+<p>To even begin answering these questions, we need to know which works are identified as SF under any definition, especially the liminal works that make SF’s variable boundaries visible. The Speculative Fiction Novels in English (1800-2025) dataset provides such a foundation by compiling over 160,000 SF English-language novels first published from 1800 through 2025, drawing on the crowd-sourced <a href="https://www.isfdb.org/">Internet Speculative Fiction Database (ISFDB)</a>.</p>
 <section id="defining-speculative-fiction-a-history" class="level3">
 <h3 class="anchored" data-anchor-id="defining-speculative-fiction-a-history">Defining Speculative Fiction: A History</h3>
-<p>In its early use SF has typically been described as a prominent portion of science fiction. Robert A. Heinlein used the term interchangeably with his definition of “simon-pure science fiction” in which “human problems [arise] out of extrapolations of present science” (Heinlein 1947). Similarly, Judith Merril used the term to define a large swathe of science fiction that focuses on extrapolation but allowing both “imaginative and inventive” changes thereby incorporating stories that do not inherently focus on science and technology (Merril 1966). In contrast, Margaret Atwood has used SF as a distinct genre of possible extrapolation rather than the impossible of science fiction: “science fiction has monsters and spaceships; speculative fiction could really happen.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> More recently, SF has become more widely known as a supergenre that can cover the many genres of non-mimetic fiction. The Scientific Literature Foundation (SLF) exemplifies this use by considering SF as any work “containing a fabulist or speculative element” (SLF, n.d.).</p>
+<p>In its early use, SF was typically described as a prominent portion of science fiction. Robert A. Heinlein used the term interchangeably with his definition of “simon-pure science fiction” in which “human problems [arise] out of extrapolations of present science” <span class="citation" data-cites="heinlein1947">(<a href="#ref-heinlein1947" role="doc-biblioref">Heinlein 1947</a>)</span>. Similarly, Judith Merril used the term to define a large swathe of science fiction that focuses on extrapolation but allows both “imaginative and inventive” changes, thereby incorporating stories that do not inherently focus on science and technology <span class="citation" data-cites="merril1966">(<a href="#ref-merril1966" role="doc-biblioref">Merril 1966</a>)</span>. In contrast, Margaret Atwood has used SF for a distinct genre of possible extrapolation rather than the impossibilities of science fiction: “science fiction has monsters and spaceships; speculative fiction could really happen.”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> More recently, SF has become more widely known as a supergenre that can cover the many genres of non-mimetic fiction. The Speculative Literature Foundation (SLF) exemplifies this use by considering SF as any work “containing a fabulist or speculative element” <span class="citation" data-cites="slf">(<a href="#ref-slf" role="doc-biblioref">SLF, n.d.</a>)</span>.</p>
 </section>
 <section id="isfdb-the-internet-speculative-fiction-database" class="level3">
 <h3 class="anchored" data-anchor-id="isfdb-the-internet-speculative-fiction-database">ISFDB: The Internet Speculative Fiction Database</h3>
-<p>The Internet Speculative Fiction Database (ISFDB) is an invaluable resource for compiling vast bibliographies of SF. It is a longstanding community-built and moderated database that catalogs published works of SF at both the printing and work level. ISFDB uses an inclusive definition of SF similar to SLF including but not limited to science fiction, fantasy, alternate history, proto-science fiction, and the supernatural (ISFDB 2024c) and has captured more than a million printings and works.</p>
+<p>The Internet Speculative Fiction Database (ISFDB) is an invaluable resource for compiling vast bibliographies of SF. It is a longstanding community-built and moderated database that catalogs published works of SF at both the printing and work level. ISFDB uses an inclusive definition of SF similar to SLF’s, including but not limited to science fiction, fantasy, alternate history, proto-science fiction, and the supernatural <span class="citation" data-cites="isfdb2024policy">(<a href="#ref-isfdb2024policy" role="doc-biblioref">ISFDB 2024c</a>)</span>, and has captured more than a million printings and works.</p>
 <p>While ISFDB indexes publicly available bibliographic data, it also includes information that may not be associated with a particular publication. With its effort to track works rather than editions, ISFDB links varying titles, printings, and translations of a work. Crucially, ISFDB makes an effort to document the true authorship of a work by incorporating public information not directly given in the publications of the work in question. This includes capturing uncredited co-authors and editors, ghost writers, and the authors behind house names.</p>
-<p>ISFDB builds on a long tradition of SF bibliographies and indices which focus not only on works contemporaneous with the modern formations of SF but also project backwards to novels of fantastic voyages, utopias and dystopias, and gothic romance. Launched in 1995 by Al von Ruff and Ahaseurus, its immediate predecessors were the author bibliographies posted to the USENET newsgroup rec.arts.sf.written.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> It began as a closed database restricted to a small set of editors with editing being opened to the general public at the end of 2006.</p>
-<p>While ISFDB has focused on recording data from primary sources, it also relies on the rich space of printed and digital SF bibliographies and indices. While each resource has its own focus different from ISFDB’s they provide a means of verifying the accuracy and coverage of ISFDB.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> ISFDB also tracks secondary verifications for its publication records using eleven major genre-focused references including <em>The Checklist of Science-Fiction and Supernatural Fiction</em> by Everett F. Bleiler, <em>The Encyclopedia of Science Fiction</em> edited by John Clute and Peter Nicholls, <em>The Encyclopedia of Fantasy</em> edited by John Clute and John Grant<em>,</em> The Locus Index of Science Fiction<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, and the <em>Science Fiction, Fantasy, &amp; Weird Fiction Magazine Index</em> compiled by Stephen T. Miller and William G. Contento.</p>
-<p>Overall, ISFDB has seven core record types covering: title (work-level), author, publication (printing-level), book (e.g., <em>Earthsea Cycle</em>) and publication series (e.g., <em>Ace Double</em>), publishers, and awards. Titles are the most frequent record type (2.5M records) because they include novels, collections, short stories, reviews, and more. Of these records, around 29% are short fiction whereas novels account for 11%. While ISFDB predominantly covers English works (1.9M titles), around a quarter are in another language with German and French being the most prevalent (278K, 112K). Although the majority of English titles were originally written in English, ISFDB includes over 30,000 English translations.</p>
+<div id="fig-isfdb-butler" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-isfdb-butler-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="isfdb-butler.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Octavia E. Butler’s ISFDB page: Parable of the Sower (1993) with its translations linked to the one work (click to enlarge)."><img src="isfdb-butler.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-isfdb-butler-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Octavia E. Butler’s ISFDB page: <em>Parable of the Sower</em> (1993) with its translations linked to the one work (click to enlarge).
+</figcaption>
+</figure>
+</div>
+<p>ISFDB builds on a long tradition of SF bibliographies and indices that focus not only on works contemporaneous with the modern formations of SF but also project backwards to novels of fantastic voyages, utopias and dystopias, and gothic romance. ISFDB was launched in 1995 by Al von Ruff and Ahasuerus; its immediate predecessors were the author bibliographies posted to the USENET newsgroup rec.arts.sf.written.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> It began as a closed database restricted to a small set of editors, and editing was opened to the general public at the end of 2006.</p>
+<p>While ISFDB has focused on recording data from primary sources, it also relies on the rich space of printed and digital SF bibliographies and indices. Although each resource has its own focus, different from ISFDB’s, they provide a means of verifying the accuracy and coverage of ISFDB.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> ISFDB also tracks secondary verifications for its publication records using eleven major genre-focused references including <em>The Checklist of Science-Fiction and Supernatural Fiction</em> by Everett F. Bleiler, <em>The Encyclopedia of Science Fiction</em> edited by John Clute and Peter Nicholls, <em>The Encyclopedia of Fantasy</em> edited by John Clute and John Grant, <em>The Locus Index to Science Fiction</em>,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> and the <em>Science Fiction, Fantasy, &amp; Weird Fiction Magazine Index</em> compiled by Stephen T. Miller and William G. Contento.</p>
+<p>Overall, ISFDB has seven core record types: title (work-level), author, publication (printing-level), book series (e.g., <em>Earthsea Cycle</em>), publication series (e.g., <em>Ace Double</em>), publisher, and award. Titles are the most frequent record type (2.5M records) because they include novels, collections, short stories, reviews, and more. Of these records, around 29% are short fiction whereas novels account for 11%. While ISFDB predominantly covers English works (1.9M titles), around a quarter are in another language with German and French being the most prevalent (278K and 112K titles, respectively). Although the majority of English titles were originally written in English, ISFDB includes over 30,000 English translations.</p>
 </section>
 <section id="speculative-fiction-novels-in-english-1800-2025-a-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="speculative-fiction-novels-in-english-1800-2025-a-dataset">Speculative Fiction Novels in English (1800-2025): A Dataset</h3>
 <p>The Speculative Fiction Novels in English (1800-2025) dataset leverages the millions of ISFDB records to curate a work-level collection of SF novels printed in English from 1800 through 2025. The dataset contains 160,243 novels accompanied by their title, author(s), original publication year, and original language. When available, alternate titles and attributed authors, series information, and ISBNs associated with a novel are also included.</p>
-<p>The vast majority of novels in this dataset were first published after 1945 (96%). Publication dates heavily skew towards the most recent decades with 40% of all novels published in the 2010s and 21% in the 2020s. The dataset includes over 43,000 canonical author attributions including nearly 4,000 collaborations. It also includes over 5,000 novels translated into English. Over half of these are Japanese works which were mostly published in 2010 or later (88%). The next most frequent languages are French (over 600) and German (over 400) which are better spread across time.</p>
-<p>This dataset focuses on SF novels for both intentional and practical reasons. From a practical perspective, ISFDB predominately covers English works and the majority of publication records (65%) correspond to novels.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Moreover, ISFDB novel data is less complex and more reliable than other forms. ISFDB record creation primarily orients around a publication (i.e., the primary source) with other records subsequently being created and linked from these submissions. Short fiction title records are created through the recording of contents for compilation and serial publications. It is very easy for non-genre short fiction to be mistakenly added into ISFDB since many collections may be predominantly but not entirely SF. Properly marking non-genre short fiction requires additional edits that cannot occur until the compilation’s publication record has been approved and added to ISFDB. In a similar vein, there can be ambiguity around whether a collection or anthology is SF since it may include both individual works that are SF and those that are not. In contrast, novels more naturally correspond to publications and are a constituent unit being judged as SF or not.</p>
+<p>The vast majority of novels in this dataset were first published after 1945 (96%). Publication dates heavily skew towards the most recent decades with 40% of all novels published in the 2010s and 21% in the 2020s. The dataset includes over 43,000 canonical author attributions, including nearly 4,000 collaborations. It also includes over 5,000 novels translated into English. Over half of these are Japanese works, most of which (88%) were published in 2010 or later. The next most frequent languages are French (over 600) and German (over 400), which are spread more evenly across time.</p>
+<p>Counts for the whole dataset and for each decade (the 19th century is collected into a single period):</p>
+<div id="728416bc" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="3">
+<div class="compact-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Period</th>
+<th style="text-align: right;">Novels</th>
+<th style="text-align: right;">Novels with ISBNs</th>
+<th style="text-align: right;">English Translations</th>
+<th style="text-align: right;">Non-English Languages</th>
+<th style="text-align: right;">Authors</th>
+<th style="text-align: right;">Collaborations</th>
+<th style="text-align: right;">Book Series (direct)</th>
+<th style="text-align: right;">Book Series (root)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1800–2025</td>
+<td style="text-align: right;">160,243</td>
+<td style="text-align: right;">151,898</td>
+<td style="text-align: right;">5,192</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">43,373</td>
+<td style="text-align: right;">3,902</td>
+<td style="text-align: right;">32,917</td>
+<td style="text-align: right;">29,015</td>
+</tr>
+<tr class="even">
+<td>1800s</td>
+<td style="text-align: right;">1,494</td>
+<td style="text-align: right;">446</td>
+<td style="text-align: right;">197</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">1,053</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">87</td>
+</tr>
+<tr class="odd">
+<td>1900s</td>
+<td style="text-align: right;">849</td>
+<td style="text-align: right;">234</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">641</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">60</td>
+</tr>
+<tr class="even">
+<td>1910s</td>
+<td style="text-align: right;">736</td>
+<td style="text-align: right;">258</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">523</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">55</td>
+</tr>
+<tr class="odd">
+<td>1920s</td>
+<td style="text-align: right;">1,105</td>
+<td style="text-align: right;">339</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">804</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">95</td>
+</tr>
+<tr class="even">
+<td>1930s</td>
+<td style="text-align: right;">1,271</td>
+<td style="text-align: right;">347</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">890</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">136</td>
+<td style="text-align: right;">136</td>
+</tr>
+<tr class="odd">
+<td>1940s</td>
+<td style="text-align: right;">869</td>
+<td style="text-align: right;">288</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">652</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">121</td>
+<td style="text-align: right;">120</td>
+</tr>
+<tr class="even">
+<td>1950s</td>
+<td style="text-align: right;">1,783</td>
+<td style="text-align: right;">684</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">905</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">213</td>
+<td style="text-align: right;">208</td>
+</tr>
+<tr class="odd">
+<td>1960s</td>
+<td style="text-align: right;">2,999</td>
+<td style="text-align: right;">1,402</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">1,470</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">467</td>
+<td style="text-align: right;">443</td>
+</tr>
+<tr class="even">
+<td>1970s</td>
+<td style="text-align: right;">5,845</td>
+<td style="text-align: right;">5,032</td>
+<td style="text-align: right;">153</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">2,860</td>
+<td style="text-align: right;">204</td>
+<td style="text-align: right;">843</td>
+<td style="text-align: right;">774</td>
+</tr>
+<tr class="odd">
+<td>1980s</td>
+<td style="text-align: right;">9,359</td>
+<td style="text-align: right;">9,245</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">3,926</td>
+<td style="text-align: right;">343</td>
+<td style="text-align: right;">1,742</td>
+<td style="text-align: right;">1,577</td>
+</tr>
+<tr class="even">
+<td>1990s</td>
+<td style="text-align: right;">13,140</td>
+<td style="text-align: right;">13,015</td>
+<td style="text-align: right;">224</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">4,805</td>
+<td style="text-align: right;">478</td>
+<td style="text-align: right;">2,687</td>
+<td style="text-align: right;">2,308</td>
+</tr>
+<tr class="odd">
+<td>2000s</td>
+<td style="text-align: right;">22,781</td>
+<td style="text-align: right;">22,715</td>
+<td style="text-align: right;">545</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">9,933</td>
+<td style="text-align: right;">603</td>
+<td style="text-align: right;">5,481</td>
+<td style="text-align: right;">4,788</td>
+</tr>
+<tr class="even">
+<td>2010s</td>
+<td style="text-align: right;">64,167</td>
+<td style="text-align: right;">64,082</td>
+<td style="text-align: right;">1,951</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">19,310</td>
+<td style="text-align: right;">1,555</td>
+<td style="text-align: right;">18,202</td>
+<td style="text-align: right;">16,456</td>
+</tr>
+<tr class="odd">
+<td>2020s</td>
+<td style="text-align: right;">33,845</td>
+<td style="text-align: right;">33,811</td>
+<td style="text-align: right;">1,353</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">11,630</td>
+<td style="text-align: right;">1,023</td>
+<td style="text-align: right;">10,752</td>
+<td style="text-align: right;">9,828</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>This dataset focuses on SF novels for both intentional and practical reasons. From a practical perspective, ISFDB predominantly covers English works and the majority of publication records (65%) correspond to novels.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Moreover, ISFDB novel data is less complex and more reliable than other forms. ISFDB record creation primarily orients around a publication (i.e., the primary source) with other records subsequently being created and linked from these submissions. Short fiction title records are created through the recording of contents for compilation and serial publications. It is very easy for non-genre short fiction to be mistakenly added into ISFDB since many collections may be predominantly but not entirely SF. Properly marking non-genre short fiction requires additional edits that cannot occur until the compilation’s publication record has been approved and added to ISFDB. In a similar vein, there can be ambiguity around whether a collection or anthology is SF since it may include both individual works that are SF and those that are not. In contrast, novels more naturally correspond to publications and are a constituent unit being judged as SF or not.</p>
 <p>Beyond practicalities, novels are notable for their prominence in the current SF publishing world. While SF magazines still exist, the typical SF reader will be exposed more to novels since these are a common staple of bookstores and libraries. While the novel has not always been the most prominent form of SF, its history is still of interest and will in many ways reflect the general SF landscape for the contemporary reader. Novels are also of interest here because their digitized forms are more readily suitable for computational analyses: generally much less segmentation (if any) is required.</p>
-<p>While this dataset is composed entirely of data available for viewing online at ISFDB, it has a remarkably different form. ISFDB presents this information for online reference, whereas this dataset is tailored for computational and data-driven projects, as well as a more distant, aggregated view. Additionally, this is a curated bibliography that leverages ISFDB’s records and limits its scope to the most relevant work-related information. Furthermore, transforming ISFDB’s data into a tabular form is not trivial and requires an intimate knowledge of how ISFDB records and stores information. This dataset makes ISFDB’s data more accessible for a different audience and intended use. While there are many SF bibliographies, to my knowledge one at this scale and in a tabular form has not been previously available.</p>
-<p>The immediate need this dataset serves—and why this dataset has come to exist at all—is as a unifying source for work-level unique identifiers for SF novels in English. This will enable researchers working with book data to work with work-level records rather than the edition-level records that researchers are often stuck with (Walsh 2023). These identifiers will make linking and cross-referencing datasets much easier, such as linking the Time Horizons of Futuristic Fiction dataset (Wythoff and Leane 2025) with the extracted features (i.e., nonconsumptive texts) from SF Nexus (SF Nexus, n.d.) or the 20th Century English-Language Speculative Fiction HathiTrust Research Center workset (Thompson and Mimno, n.d.). Similarly, it can be used for coordinating digitization efforts as well as a complementary way to compare collection holdings. Additionally, these identifiers are already in use. The digital projects Classics of Science Fiction (Harris and Jorgensen, n.d.) and the Historical Dictionary of Science Fiction (Sheidlower 2024) link to ISDFB title records.</p>
+<p>While this dataset is composed entirely of data available for viewing online at ISFDB, it has a remarkably different form. ISFDB presents this information for online reference, whereas this dataset is tailored for computational and data-driven projects, as well as a more distant, aggregated view. Additionally, this is a curated bibliography that leverages ISFDB’s records and limits its scope to the most relevant work-related information. Furthermore, transforming ISFDB’s data into a tabular form is not trivial and requires an intimate knowledge of how ISFDB records and stores information. This dataset makes ISFDB’s data more accessible for a different audience and intended use. While there are many SF bibliographies, to my knowledge, none at this scale and in tabular form has previously been available.</p>
+<p>The immediate need this dataset serves—and why this dataset has come to exist at all—is to provide a unifying source of work-level unique identifiers for SF novels in English. This will enable researchers working with book data to use work-level records rather than the edition-level records they are often stuck with <span class="citation" data-cites="walsh2023">(<a href="#ref-walsh2023" role="doc-biblioref">Walsh 2023</a>)</span>. These identifiers will make linking and cross-referencing datasets much easier, such as linking the Time Horizons of Futuristic Fiction dataset <span class="citation" data-cites="wythoff2025">(<a href="#ref-wythoff2025" role="doc-biblioref">Wythoff and Leane 2025</a>)</span> with the extracted features (i.e., nonconsumptive texts) from SF Nexus <span class="citation" data-cites="sfnexus">(<a href="#ref-sfnexus" role="doc-biblioref">SF Nexus, n.d.</a>)</span> or the 20th Century English-Language Speculative Fiction HathiTrust Research Center workset <span class="citation" data-cites="thompson_workset">(<a href="#ref-thompson_workset" role="doc-biblioref">Thompson and Mimno, n.d.</a>)</span>. Similarly, it can be used for coordinating digitization efforts and as a complementary way to compare collection holdings. Additionally, these identifiers are already in use. The digital projects Classics of Science Fiction <span class="citation" data-cites="harris_classics">(<a href="#ref-harris_classics" role="doc-biblioref">Harris and Jorgensen, n.d.</a>)</span> and the Historical Dictionary of Science Fiction <span class="citation" data-cites="sheidlower2024">(<a href="#ref-sheidlower2024" role="doc-biblioref">Sheidlower 2024</a>)</span> link to ISFDB title records.</p>
 <p>More generally, this dataset is of interest to anyone studying SF or genre fiction more broadly. It could also be of interest to those studying publishing practices within English-language markets. This dataset is also a great starting point for curating more specialized collections, as well as capturing important work-level metadata such as author and first publication date. Some research questions this dataset could support include:</p>
 <ul>
 <li>How has collaborative authorship for SF in English changed over time within the genre? How often are these collaborations openly credited versus operating under collective pseudonyms?<br>
@@ -440,7 +722,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </li>
 <li>How have SF book series changed over time? Have they changed in length or prevalence?<br>
 </li>
-<li>Do SF novels in English follow certain titling practices and when do particular title templates arise?<br>
+<li>Do SF novels in English follow certain titling practices, and when do particular title templates arise?<br>
 </li>
 <li>What are the characteristics of SF novels translated into English and how have they changed over time?</li>
 </ul>
@@ -448,12 +730,22 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </section>
 <section id="collection-and-creation" class="level1">
 <h1><strong>Collection and Creation</strong></h1>
-<p>This dataset was compiled from the September 5, 2026 ISFDB database backup (compressed MySQL file). ISFDB releases new snapshots about once a week. From this snapshot file, I used SQL to collate author, title, and publication information that span across a number of separate tables (see ISFDB 2024a for more details) into three intermediate tabular data files. Then, using Python, I use these intermediate files to (1) create a mapping from publication records to title records, (2) assemble work-level records from the title, author, and publication information, and (3) curate these work-level records to construct the dataset of English-language novels.</p>
+<p>This dataset was compiled from the September 5, 2026 ISFDB database backup (compressed MySQL file). ISFDB releases new snapshots about once a week. From this snapshot file, I used SQL to collate author, title, and publication information that spans a number of separate tables <span class="citation" data-cites="isfdb2024schema">(see <a href="#ref-isfdb2024schema" role="doc-biblioref">ISFDB 2024a</a> for more details)</span> into three intermediate tabular data files. Then, using Python, I used these intermediate files to (1) create a mapping from publication records to title records, (2) assemble work-level records from the title, author, and publication information, and (3) curate these work-level records to construct the dataset of English-language novels.</p>
 <section id="leveraging-isfdb-records" class="level3">
 <h3 class="anchored" data-anchor-id="leveraging-isfdb-records">Leveraging ISFDB Records</h3>
 <p>ISFDB tracks printings through publication records and works through title records. Publication records include edition-level information such as medium (e.g., hardcover, ebook) and ISBN, but also capture variation within a book edition such as its cover art and pricing as well as the type of publication (e.g., novel, anthology). Each publication record is associated with one or more title records capturing the contents of the publication. This is especially valuable for tracking the appearances of short fiction within compilations, but also for tracking forewords and bonus material within printings.</p>
-<p>ISFDB title records tend to operate at a work-like level and enable the linking of a title’s appearance in various publications. At its core, a title record includes a text’s title, author, original publication date, and language as well as the type of text (e.g., novel, short story, anthology). To capture the complexities of what a work actually is, title records are separated into two classes: canonical titles and variants of canonical titles. A canonical title represents the original composition of a text but also its “true” authorship even if this authorship is not explicitly credited within any publication (e.g., pseudonyms, house names)<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. In contrast, variant titles capture published transformations of this original composition. This includes capturing minor variation in printed titles (e.g., <em>The Many-Colored Land</em> vs.&nbsp;<em>The Many-Coloured Land</em>) and credited authors (e.g., Octavia Butler vs.&nbsp;Octavia E. Butler), but also more substantive variation like translations, revised editions, and adaptations. In ISFDB, the name of a canonical title typically corresponds to a work’s first published title, but in some cases it may correspond to a later title that is more commonly known. Similarly, an author’s canonical name generally corresponds to their most recognized name within SF (ISFDB 2024b). So, a canonical author name may be a pseudonym rather than an author’s legal name as is the case for Cordwainer Smith and Mark Twain.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
-<p>For the purposes of this dataset, I consider an SF work (i.e., row) to correspond to an aggregated grouping of a canonical title and its associated English variant titles. The canonical title record serves as the source of the work’s title, authorship, language, and series-information, while the collective group of titles are used to gather the publication records of interest: namely standalone publications printed in English. Including variant titles is vital for gathering these publication records since a canonical record may not be associated with any publications whatsoever because a composition’s canonical title and “true” authorship may never have been used together in a publication, standalone or otherwise.</p>
+<p>ISFDB title records tend to operate at a work-like level and enable the linking of a title’s appearance in various publications. At its core, a title record includes a text’s title, author, original publication date, and language as well as the type of text (e.g., novel, short story, anthology). To capture the complexities of what a work actually is, title records are separated into two classes: canonical titles and variants of canonical titles. A canonical title represents the original composition of a text but also its “true” authorship even if this authorship is not explicitly credited within any publication (e.g., pseudonyms, house names).<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> In contrast, variant titles capture published transformations of this original composition. This includes capturing minor variation in printed titles (e.g., <em>The Many-Colored Land</em> vs.&nbsp;<em>The Many-Coloured Land</em>) and credited authors (e.g., Octavia Butler vs.&nbsp;Octavia E. Butler), but also more substantive variation like translations, revised editions, and adaptations. In ISFDB, the name of a canonical title typically corresponds to a work’s first published title, but in some cases it may correspond to a later title that is more commonly known. Similarly, an author’s canonical name generally corresponds to their most recognized name within SF <span class="citation" data-cites="isfdb2024glossary">(<a href="#ref-isfdb2024glossary" role="doc-biblioref">ISFDB 2024b</a>)</span>. So, a canonical author name may be a pseudonym rather than an author’s legal name as is the case for Cordwainer Smith and Mark Twain.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<div id="fig-isfdb-twain" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-isfdb-twain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="isfdb-twain.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Mark Twain’s ISFDB page: the canonical name is the pseudonym “Mark Twain,” with his legal name, Samuel Langhorne Clemens, recorded alongside it (click to enlarge)."><img src="isfdb-twain.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-isfdb-twain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Mark Twain’s ISFDB page: the canonical name is the pseudonym “Mark Twain,” with his legal name, Samuel Langhorne Clemens, recorded alongside it (click to enlarge).
+</figcaption>
+</figure>
+</div>
+<p>For the purposes of this dataset, I consider an SF work (i.e., row) to correspond to an aggregated grouping of a canonical title and its associated English variant titles. The canonical title record serves as the source of the work’s title, authorship, language, and series information, while the collective group of titles is used to gather the publication records of interest: namely standalone publications printed in English. Including variant titles is vital for gathering these publication records since a canonical record may not be associated with any publications whatsoever because a composition’s canonical title and “true” authorship may never have been used together in a publication, standalone or otherwise.</p>
 </section>
 <section id="linking-titles-and-publications" class="level3">
 <h3 class="anchored" data-anchor-id="linking-titles-and-publications">Linking Titles and Publications</h3>
@@ -461,12 +753,17 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </section>
 <section id="work-selection" class="level3">
 <h3 class="anchored" data-anchor-id="work-selection">Work Selection</h3>
-<p>This dataset is intentionally limited to SF novels in the English language published as standalone printed books originally published from the 19th century through 2025. To achieve this, work curation spans several modalities.</p>
+<p>This dataset is intentionally limited to SF novels in the English language that appeared as standalone printed books and were originally published from the 19th century through 2025. To achieve this, work curation spans several modalities.</p>
 <p><strong>Language.</strong> This dataset focuses on novels in English because ISFDB predominantly covers works and publications in English. This includes both works originally written in English as well as English translations.</p>
-<p><strong>Time Period.</strong> While the term speculative fiction has only existed since the mid-twentieth century, the genres which it contains have a much longer history. The 19th century was selected as the starting point of this dataset to largely retain the Anglophone precursors to the modern genres of science fiction, fantasy, and horror (e.g., the works of Mary Wollstonecraft Shelley, Edgar Allen Poe, H. G. Wells, and Jules Verne).</p>
-<p><strong>Publication Medium.</strong> This dataset largely narrows its focus to traditionally published novels to better reflect the core landscape of the genre. Ideally, this dataset would limit its focus to traditionally published novels—including large, small, and independent publishers—but unfortunately this is at odds with ISFDB’s inclusive policy for published works of speculative fiction (ISFDB 2024c) which includes both self and vanity publishing. While publication records do include publisher information, with the proliferation of print on demand publishing, it is difficult to differentiate between self-published works from those by independent publishers. So, instead of attempting to filter works by specific publishers, this dataset excludes works that are solely represented by e-books within ISFDB. This is effectively a proxy for whether the work (if published in the US) could be eligible for a Library of Congress Catalog Number (LCCN).</p>
-<p><strong>Publication Form.</strong> This criteria is less a curatorial choice as opposed to a limitation of ISFDB. ISFDB title records are categorized as novels based on their length (40,000+ words; ISFDB 2024d), but these records may not be associated with any novel-type publications. This occurs when a novel-length work is only published in compilations. This will include some of the novels published as Ace Doubles which are treated as compilations since each Ace Double volume contains two books bound in a tête-bêche layout. However, this will only be true for the novels printed as Ace Doubles with no printed, standalone (i.e., novel) publication recorded within ISFDB.</p>
-<p><strong>ISFDB Tags.</strong> ISFDB novels are further filtered by two tags: Non-Genre (ISFDB 2022) and Graphic Format (ISFDB 2016). The former are excluded because non-genre novels by definition are not works of SF. The latter are excluded because novels are traditionally primarily textual and this tag indicates that the work contains inseparable graphic material, but also because ISFDB generally excludes graphic novels, comics, and manga (ISFDB 2024c).</p>
+<p><strong>Time Period.</strong> While the term speculative fiction has only existed since the mid-twentieth century, the genres which it contains have a much longer history. The 19th century was selected as the starting point of this dataset to largely retain the Anglophone precursors to the modern genres of science fiction, fantasy, and horror (e.g., the works of Mary Wollstonecraft Shelley, Edgar Allan Poe, H. G. Wells, and Jules Verne).</p>
+<div id="7d6635f3" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="4">
+<div style="height:400px; width:100%;">                            <div id="f38373f5-dd1c-4e4c-89d8-db4d3b331f39" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("f38373f5-dd1c-4e4c-89d8-db4d3b331f39")) {                    Plotly.newPlot(                        "f38373f5-dd1c-4e4c-89d8-db4d3b331f39",                        [{"hovertemplate":"%{x}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"purple","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["1800s","1900s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],"xaxis":"x","y":{"dtype":"u4","bdata":"1gUAAFEDAADgAgAAUQQAAPcEAABlAwAA9wYAALcLAADVFgAAjyQAAFQzAAD9WAAAp\u002foAADWEAAA="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"scatter":[{"type":"scatter"}]},"layout":{"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Publication Year*"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"# of Novels"}},"legend":{"tracegroupgap":0},"title":{"text":"Novels per Decade","x":0.5},"barmode":"relative","height":400,"hoverlabel":{"bgcolor":"white"},"margin":{"l":80,"r":20,"t":70,"b":100}},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+</div>
+<p><strong>Publication Medium.</strong> This dataset largely narrows its focus to traditionally published novels to better reflect the core landscape of the genre. Ideally, this dataset would limit its focus to traditionally published novels—including large, small, and independent publishers—but unfortunately this is at odds with ISFDB’s inclusive policy for published works of speculative fiction <span class="citation" data-cites="isfdb2024policy">(<a href="#ref-isfdb2024policy" role="doc-biblioref">ISFDB 2024c</a>)</span> which includes both self and vanity publishing. While publication records do include publisher information, with the proliferation of print on demand publishing, it is difficult to differentiate self-published works from those by independent publishers. So, instead of attempting to filter works by specific publishers, this dataset excludes works that are solely represented by e-books within ISFDB. This is effectively a proxy for whether the work (if published in the US) could be eligible for a Library of Congress Catalog Number (LCCN).</p>
+<p><strong>Publication Form.</strong> This criterion is less a curatorial choice than a limitation of ISFDB. ISFDB title records are categorized as novels based on their length <span class="citation" data-cites="isfdb2024titletype">(40,000+ words, <a href="#ref-isfdb2024titletype" role="doc-biblioref">ISFDB 2024d</a>)</span>, but these records may not be associated with any novel-type publications. This occurs when a novel-length work is only published in compilations. This will include some of the novels published as Ace Doubles which are treated as compilations since each Ace Double volume contains two books bound in a tête-bêche layout. However, this will only be true for the novels printed as Ace Doubles with no printed, standalone (i.e., novel) publication recorded within ISFDB.</p>
+<p><strong>ISFDB Tags.</strong> ISFDB novels are further filtered by two tags: Non-Genre <span class="citation" data-cites="isfdb2022nongenre">(<a href="#ref-isfdb2022nongenre" role="doc-biblioref">ISFDB 2022</a>)</span> and Graphic Format <span class="citation" data-cites="isfdb2016graphic">(<a href="#ref-isfdb2016graphic" role="doc-biblioref">ISFDB 2016</a>)</span>. The former are excluded because non-genre novels by definition are not works of SF. The latter are excluded because novels are traditionally primarily textual and this tag indicates that the work contains inseparable graphic material, but also because ISFDB generally excludes graphic novels, comics, and manga <span class="citation" data-cites="isfdb2024policy">(<a href="#ref-isfdb2024policy" role="doc-biblioref">ISFDB 2024c</a>)</span>.</p>
 </section>
 <section id="workflow" class="level3">
 <h3 class="anchored" data-anchor-id="workflow">Workflow</h3>
@@ -482,7 +779,7 @@ gtag('config', 'G-H9Z8DC0X8Q', { 'anonymize_ip': true});
 </li>
 <li>associated with at least one printed publication record</li>
 </ol>
-<p>A publication record is considered to be printed if it has (a) a printed format (see ISFDB 2023) or (b) an unknown format and was published before 2000.</p>
+<p>A publication record is considered to be printed if it has (a) a printed format <span class="citation" data-cites="isfdb2023format">(see <a href="#ref-isfdb2023format" role="doc-biblioref">ISFDB 2023</a>)</span> or (b) an unknown format and was published before 2000.</p>
 <p>Then, with this working set of title records, work records are formed by grouping the variant titles with their canonical titles. These canonical title records may not be in the working set since they are not necessarily written in English or directly linked to a printed publication record. These works are then further filtered by the associated first publication date which for the purposes of this dataset corresponds to the publication date of the canonical title record. Works are filtered to those published in 1800 or later, which means these works were first published from 1800 through 2025. In cases where the canonical title is unpublished in its original language, the work is included if the earliest known English translation was published in the 19th century or later. In cases where the canonical title’s publication date is unknown, the work is dropped.</p>
 </section>
 <section id="limitations" class="level3">
@@ -501,22 +798,487 @@ The unique identifier for this work. This is the title record ID for the canonic
 The “canonical” title of the work. This is the title name of the canonical title record. This may correspond to the first published title or the most well-known title. For translated works, the title will be the original title in its original language.</p>
 <p><strong>authors</strong><br>
 The “canonical” author(s) of the work. These are the authors of the canonical title record. If there are multiple authors, their names will be separated by plus signs ( + ). For translated works, the author’s name will be in the work’s original language. Unknown (i.e., uncredited or unknown ghostwriter) authors are represented as “[unknown]”.</p>
+<div id="6b367217" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="5">
+<div style="height:400px; width:100%;">                            <div id="130aeaf3-6cae-48b1-9599-c27545c42aa3" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("130aeaf3-6cae-48b1-9599-c27545c42aa3")) {                    Plotly.newPlot(                        "130aeaf3-6cae-48b1-9599-c27545c42aa3",                        [{"hovertemplate":"%{x}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"purple","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["1800s","1900s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],"xaxis":"x","y":{"dtype":"u4","bdata":"HQQAAIECAAALAgAAJAMAAHoDAACMAgAAiQMAAL4FAAAsCwAAVg8AAMUSAADNJgAAbksAAG4tAAA="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"scatter":[{"type":"scatter"}]},"layout":{"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Publication Year*"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"# of Authors"}},"legend":{"tracegroupgap":0},"title":{"text":"Authors per Decade","x":0.5},"barmode":"relative","height":400,"hoverlabel":{"bgcolor":"white"},"margin":{"l":80,"r":20,"t":70,"b":100}},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+</div>
+<div id="ea863974" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="6">
+<div style="height:400px; width:100%;">                            <div id="e4f61ea5-5500-4f58-ad14-dbe4f63bdc96" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("e4f61ea5-5500-4f58-ad14-dbe4f63bdc96")) {                    Plotly.newPlot(                        "e4f61ea5-5500-4f58-ad14-dbe4f63bdc96",                        [{"hovertemplate":"%{x}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"purple","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["1800s","1900s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],"xaxis":"x","y":{"dtype":"u4","bdata":"JQAAACIAAAAVAAAAIQAAACEAAAAcAAAAMAAAAFYAAADMAAAAVwEAAN4BAABbAgAAEwYAAP8DAAA="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"scatter":[{"type":"scatter"}]},"layout":{"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Publication Year*"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"# of Collaborations"}},"legend":{"tracegroupgap":0},"title":{"text":"Collaborations per Decade","x":0.5},"barmode":"relative","height":400,"hoverlabel":{"bgcolor":"white"},"margin":{"l":80,"r":20,"t":70,"b":100}},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+</div>
 <p><strong>author_ids</strong><br>
 The unique identifier(s) for the “canonical” author(s). When there are multiple authors, the IDs are separated by commas and in the same order as the <strong>authors</strong> column. ISFDB requires author names to be unique, so distinct authors with the same name may include parentheticals for differentiation. These IDs are the ISFDB author record IDs for these authors. An author record may be viewed at https://www.isfdb.org/cgi-bin/ea.cgi?[author_id]</p>
+<p>The top 25 of 43,373 authors by number of novels:</p>
+<div class="compact-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Author</th>
+<th style="text-align: right;">Novels</th>
+<th style="text-align: right;">Co-authors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Michael Anderle</td>
+<td style="text-align: right;">1,307</td>
+<td style="text-align: right;">61</td>
+</tr>
+<tr class="even">
+<td>R. L. Stine</td>
+<td style="text-align: right;">361</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr class="odd">
+<td>Martha Carr</td>
+<td style="text-align: right;">342</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="even">
+<td>[unknown]</td>
+<td style="text-align: right;">320</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td>J. N. Chaney</td>
+<td style="text-align: right;">279</td>
+<td style="text-align: right;">23</td>
+</tr>
+<tr class="even">
+<td>D. K. Holmberg</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td>Eve Langlais</td>
+<td style="text-align: right;">201</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>J. R. Rain</td>
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td>Amy Cross</td>
+<td style="text-align: right;">176</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td>Milly Taiden</td>
+<td style="text-align: right;">175</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td>H. P. Mallory</td>
+<td style="text-align: right;">175</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>Bella Forrest</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td>Piers Anthony</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td>Marcus Sloss</td>
+<td style="text-align: right;">145</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="odd">
+<td>Mercedes Lackey</td>
+<td style="text-align: right;">139</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="even">
+<td>Craig Martelle</td>
+<td style="text-align: right;">138</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="odd">
+<td>Matthew S. Cox</td>
+<td style="text-align: right;">131</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td>Christopher G. Nuttall</td>
+<td style="text-align: right;">127</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td>Andre Norton</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr class="even">
+<td>Jonathan Moeller</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td>R. L. Fanthorpe</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>Amanda M. Lee</td>
+<td style="text-align: right;">121</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td>Kevin J. Anderson</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr class="even">
+<td>Christine Pope</td>
+<td style="text-align: right;">116</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td>Lindsay Buroker</td>
+<td style="text-align: right;">113</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p><strong>year</strong><br>
 Year of first known publication date of the work. This corresponds to the publication date of the canonical title record. In cases where a work is only published in translation, this field will be marked “unpublished”.</p>
-<p><strong>tr_year</strong><br>
+<p><strong>translation_year</strong><br>
 Year of first known publication date for an English translation of this work. This field is only used for works of translation. This corresponds to the publication date for the earliest English variant title of the canonical title record. While rare, it is possible for English translations to be published before a novel is published in its original language.</p>
 <p><strong>orig_lang</strong><br>
-The ISO 639-2 code of the language in which the work was originally written in.</p>
+The ISO 639-2 code of the language in which the work was originally written.</p>
+<p>Use the buttons to show more or fewer languages.</p>
+<div id="b3dd8a31" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="8">
+<div style="height:390px; width:100%;">                            <div id="9807e074-3013-4722-b0b8-0d96a087ee3b" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("9807e074-3013-4722-b0b8-0d96a087ee3b")) {                    Plotly.newPlot(                        "9807e074-3013-4722-b0b8-0d96a087ee3b",                        [{"hovertemplate":"%{y}: %{x:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"purple","pattern":{"shape":""}},"name":"","orientation":"h","showlegend":false,"text":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAhAAAAAAAAACEAAAAAAAAAIQAAAAAAAABBAAAAAAAAAEEAAAAAAAAAUQAAAAAAAABhAAAAAAAAAGEAAAAAAAAAYQAAAAAAAABhAAAAAAAAAHEAAAAAAAAAiQAAAAAAAACJAAAAAAAAAJEAAAAAAAAAmQAAAAAAAAChAAAAAAAAAMEAAAAAAAAAwQAAAAAAAADJAAAAAAAAANUAAAAAAAAA5QAAAAAAAAEdAAAAAAAAAR0AAAAAAAABIQAAAAAAAAElAAAAAAAAAU0AAAAAAAEBWQAAAAAAAQFlAAAAAAABgZEAAAAAAAGBmQAAAAAAAkHZAAAAAAACgfEAAAAAAAHCFQAAAAAAAzqRA"},"textposition":"outside","x":{"dtype":"u4","bdata":"AQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAACAAAAAgAAAAIAAAACAAAAAgAAAAIAAAADAAAAAwAAAAMAAAAEAAAABAAAAAUAAAAGAAAABgAAAAYAAAAGAAAABwAAAAkAAAAJAAAACgAAAAsAAAAMAAAAEAAAABAAAAASAAAAFQAAABkAAAAuAAAALgAAADAAAAAyAAAATAAAAFkAAABlAAAAowAAALMAAABpAQAAygEAAK4CAABnCgAA"},"xaxis":"x","y":["Croatian (old code)","Serbian (old code)","Galician","Sanskrit","Marathi","Croatian","Malay","Irish","Bosnian","Norwegian Nynorsk","Hindi","Uzbek","Yakut","Georgian","Malayalam","Basque","Estonian","Kyrgyz","Yoruba","Welsh","Bulgarian","Afrikaans","Bengali","Yiddish","Slovenian","Indonesian","Greek","Romanian","Thai","Ukrainian","Hebrew","Serbian","Catalan","Turkish","Icelandic","Hungarian","Czech","Arabic","Norwegian","Norwegian Bokm\u00e5l","Finnish","Polish","Portuguese","Danish","Korean","Chinese","Dutch","Swedish","Italian","Spanish","Russian","German","French","Japanese"],"yaxis":"y","type":"bar","cliponaxis":false}],                        {"template":{"data":{"scatter":[{"type":"scatter"}]},"layout":{"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"# of Novels (log scale)"},"type":"log"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":""},"tickfont":{"size":11},"range":[43.5,53.5]},"legend":{"tracegroupgap":0},"title":{"text":"English Translations by Original Language","x":0.5},"barmode":"relative","height":390,"updatemenus":[{"buttons":[{"args":[{"yaxis.range":[43.5,53.5],"height":390}],"label":"Top 10","method":"relayout"},{"args":[{"yaxis.range":[33.5,53.5],"height":610}],"label":"Top 20","method":"relayout"},{"args":[{"yaxis.range":[-0.5,53.5],"height":1358}],"label":"All 54","method":"relayout"}],"direction":"right","pad":{"b":8},"type":"buttons","x":0,"xanchor":"left","y":1.0,"yanchor":"bottom"}],"hoverlabel":{"bgcolor":"white"},"margin":{"l":130,"r":20,"t":110,"b":100}},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+</div>
+<p>Japanese novels make up over half of all translations, and most of them appeared in English from 2010 on; French, German and Russian translations are spread more evenly across time.</p>
+<div id="2731ceed" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="9">
+<div style="height:450px; width:100%;">                            <div id="2d495595-d16e-48b5-a353-26199069bd6c" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("2d495595-d16e-48b5-a353-26199069bd6c")) {                    Plotly.newPlot(                        "2d495595-d16e-48b5-a353-26199069bd6c",                        [{"hovertemplate":"%{x}, %{fullData.name}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Japanese","marker":{"color":"#7b2d8e","pattern":{"shape":""}},"name":"Japanese","orientation":"v","showlegend":true,"textposition":"auto","x":["1900s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],"xaxis":"x","y":{"dtype":"u4","bdata":"AgAAAAEAAAAJAAAADAAAADMAAAA7AAAAtAAAADIFAAD7AwAA"},"yaxis":"y","type":"bar"},{"hovertemplate":"%{x}, %{fullData.name}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"French","marker":{"color":"#e69f00","pattern":{"shape":""}},"name":"French","orientation":"v","showlegend":true,"textposition":"auto","x":["1800s","1900s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],"xaxis":"x","y":{"dtype":"u4","bdata":"oAAAADYAAAApAAAAOAAAAA4AAAAcAAAAIQAAACkAAAAsAAAAIAAAACwAAABCAAAANQAAABQAAAA="},"yaxis":"y","type":"bar"},{"hovertemplate":"%{x}, %{fullData.name}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"German","marker":{"color":"#009e73","pattern":{"shape":""}},"name":"German","orientation":"v","showlegend":true,"textposition":"auto","x":["1800s","1900s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],"xaxis":"x","y":{"dtype":"u4","bdata":"EQAAAAUAAAAQAAAAIgAAAA4AAAALAAAAFAAAAAcAAAAVAAAAGQAAABkAAAA3AAAAgQAAAE8AAAA="},"yaxis":"y","type":"bar"},{"hovertemplate":"%{x}, %{fullData.name}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Russian","marker":{"color":"#0072b2","pattern":{"shape":""}},"name":"Russian","orientation":"v","showlegend":true,"textposition":"auto","x":["1800s","1900s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],"xaxis":"x","y":{"dtype":"u4","bdata":"AwAAAAQAAAACAAAAFQAAAAQAAAADAAAAAQAAAA8AAAAJAAAACQAAABEAAAAeAAAAbAAAAIcAAAA="},"yaxis":"y","type":"bar"},{"hovertemplate":"%{x}, %{fullData.name}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Spanish","marker":{"color":"#d55e00","pattern":{"shape":""}},"name":"Spanish","orientation":"v","showlegend":true,"textposition":"auto","x":["1800s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],"xaxis":"x","y":{"dtype":"u4","bdata":"AQAAAAIAAAACAAAAAwAAAAQAAAAFAAAACwAAAAcAAAARAAAAFwAAACQAAAAzAAAAEQAAAA=="},"yaxis":"y","type":"bar"},{"hovertemplate":"%{x}, %{fullData.name}: %{y:,}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Other","marker":{"color":"#999999","pattern":{"shape":""}},"name":"Other","orientation":"v","showlegend":true,"textposition":"auto","x":["1800s","1900s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],"xaxis":"x","y":{"dtype":"u4","bdata":"EAAAAAkAAAAFAAAADQAAAA8AAAAQAAAAEwAAAC4AAAA8AAAAMQAAADgAAACyAAAAGAEAAFMAAAA="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"scatter":[{"type":"scatter"}]},"layout":{"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Publication Year*"},"categoryorder":"array","categoryarray":["1800s","1900s","1910s","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"# of Translated Novels"}},"legend":{"title":{"text":"Original Language"},"tracegroupgap":0,"orientation":"h","x":0.5,"xanchor":"center","y":-0.35,"yanchor":"top"},"title":{"text":"English Translations per Decade","x":0.5},"barmode":"relative","height":450,"hoverlabel":{"bgcolor":"white"},"margin":{"l":80,"r":20,"t":70,"b":170}},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+</div>
 <p><strong>series</strong><br>
 The name of the series that the work belongs to. This field will be empty if the work does not belong to a series. For translations, the series name is typically in the work’s original language. ISFDB requires series names to be unique, so a series name may include a parenthetical for disambiguation.</p>
 <p><strong>series_no</strong><br>
-The work’s number within its series (i.e, <strong>series</strong> column). This field may be empty.</p>
+The work’s number within its series (i.e., <strong>series</strong> column). This field may be empty.</p>
 <p><strong>series_tree</strong><br>
 Since ISFDB allows series to nest infinitely, this field shows a work’s series tree. Each series name is separated by a right bracket ( &gt; ) where each series is the child of the neighbor to its right. So, the <strong>series</strong> column corresponds to the leftmost series and <strong>root_series</strong> to the rightmost. This field will be the same as the <strong>series</strong> column when the work’s series has no parent series.</p>
 <p><strong>root_series</strong><br>
 The name of the broadest (“root”) series to which this work belongs. This field will be the same as the <strong>series</strong> column when the work’s series has no parent series.</p>
+<p>The top 25 series by number of novels:</p>
+<div class="compact-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Series</th>
+<th style="text-align: right;">Novels</th>
+<th style="text-align: right;">Authors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Oz</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">87</td>
+</tr>
+<tr class="even">
+<td>Doctor Who Target novelizations</td>
+<td style="text-align: right;">176</td>
+<td style="text-align: right;">57</td>
+</tr>
+<tr class="odd">
+<td>The Destroyer</td>
+<td style="text-align: right;">147</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td>Star Trek: The Original Series</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">82</td>
+</tr>
+<tr class="odd">
+<td>Deathlands</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="even">
+<td>Choose Your Own Adventure</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="odd">
+<td>A Shade of Vampire</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>Doc Savage novels</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="odd">
+<td>Doctor Who New Adventures</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td>Doctor Who BBC Past Doctors</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td>Outlanders</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td>Doctor Who BBC 8th Doctor</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td>Warhammer 40,000</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="even">
+<td>Doctor Who New Series</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="odd">
+<td>Shadowrun</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="even">
+<td>In Death</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td>Conan Pastiches</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="even">
+<td>Rogue Angel</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="odd">
+<td>Star Trek: The Next Generation Numbered</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td>Fighting Fantasy Gamebooks</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="odd">
+<td>Fear Street</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>The Kirov Saga</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td>Xanth</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>Sabrina the Teenage Witch</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="odd">
+<td>The Horus Heresy</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">15</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The top 25 root series by number of novels:</p>
+<div class="compact-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Root Series</th>
+<th style="text-align: right;">Novels</th>
+<th style="text-align: right;">Authors</th>
+<th style="text-align: right;">Series</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Doctor Who Universe</td>
+<td style="text-align: right;">729</td>
+<td style="text-align: right;">209</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td>Warhammer Universe</td>
+<td style="text-align: right;">676</td>
+<td style="text-align: right;">103</td>
+<td style="text-align: right;">139</td>
+</tr>
+<tr class="odd">
+<td>Star Trek Universe</td>
+<td style="text-align: right;">674</td>
+<td style="text-align: right;">196</td>
+<td style="text-align: right;">83</td>
+</tr>
+<tr class="even">
+<td>Star Wars Universe</td>
+<td style="text-align: right;">456</td>
+<td style="text-align: right;">119</td>
+<td style="text-align: right;">96</td>
+</tr>
+<tr class="odd">
+<td>Forgotten Realms Universe</td>
+<td style="text-align: right;">263</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">74</td>
+</tr>
+<tr class="even">
+<td>Arthuriana</td>
+<td style="text-align: right;">251</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">85</td>
+</tr>
+<tr class="odd">
+<td>Marvel metaverse</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">154</td>
+<td style="text-align: right;">61</td>
+</tr>
+<tr class="even">
+<td>Oz Universe</td>
+<td style="text-align: right;">242</td>
+<td style="text-align: right;">103</td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="odd">
+<td>The Kurtherian Gambit Universe</td>
+<td style="text-align: right;">239</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td>The Revelations of Oriceran Universe</td>
+<td style="text-align: right;">221</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">27</td>
+</tr>
+<tr class="odd">
+<td>Rainbow Magic</td>
+<td style="text-align: right;">184</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td>Dragonlance</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td>DC Comics Metaverse</td>
+<td style="text-align: right;">175</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td>The Destroyer</td>
+<td style="text-align: right;">158</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td>Fear Street Universe</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr class="even">
+<td>Choose Your Own Adventure</td>
+<td style="text-align: right;">139</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td>Minecraft Universe</td>
+<td style="text-align: right;">127</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">29</td>
+</tr>
+<tr class="even">
+<td>Goosebumps Universe</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td>Deathlands</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>Tom Swift</td>
+<td style="text-align: right;">125</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="odd">
+<td>BattleTech Universe</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td>Buffyverse</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr class="odd">
+<td>Doc Savage Universe</td>
+<td style="text-align: right;">104</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td>World of Darkness</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">29</td>
+</tr>
+<tr class="odd">
+<td>A Shade of Vampire</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p><strong>alt_titles</strong><br>
 A list of alternate published titles for this work with titles separated by vertical bars ( | ). These titles will always correspond to English editions of the work. This field may be empty.</p>
 <p><strong>alt_authors</strong><br>
@@ -526,59 +1288,81 @@ A comma-separated list of associated ISBNs for this work. ISBNs are only include
 </section>
 <section id="ethical-considerations" class="level1">
 <h1><strong>Ethical Considerations</strong></h1>
-<p>The underlying ISFDB database snapshots are made freely available and all ISFDB data is explicitly licensed under CC-BY 4.0. All bibliographic information collected within ISFDB is publicly available and therefore so is this dataset.</p>
+<p>The underlying ISFDB database snapshots are made freely available, and all ISFDB data is explicitly licensed under CC BY 4.0. All bibliographic information collected within ISFDB is publicly available and therefore so is this dataset.</p>
 </section>
 <section id="versioning" class="level1">
 <h1><strong>Versioning</strong></h1>
-<p>The dataset will be updated at least annually with new ISFDB snapshots to reflect a more recent version of ISFDB. While records can be removed or combined, work IDs are never reused. Additionally, this update will include all novels published within the previous calendar year (e.g., snapshots from 2027 will include novels published through 2026).</p>
-<p>More expanded versions of this dataset may also be created and made available. These potential datasets might include other work types such as short stories and anthologies (probably as separate tables), as well as additional metadata.</p>
+<p>The dataset will be updated at least annually with new ISFDB snapshots to reflect a more recent version of ISFDB. While records can be removed or combined, work IDs are never reused. Additionally, each update will include all novels published within the previous calendar year (e.g., snapshots from 2027 will include novels published through 2026).</p>
+<p>Expanded versions of this dataset may also be created and made available. These potential datasets might include other work types such as short stories and anthologies (probably as separate tables), as well as additional metadata.</p>
 <p>While no manual corrections to novel data will be made, interventions can be made by contributing edits to ISFDB itself. An ISFDB account must be created to submit edits, but otherwise there are no restrictions. In my time working with ISFDB, I have contributed hundreds of edits to improve its data quality. Changes to ISFDB will be reflected in updated versions of the dataset through the newer database snapshots.</p>
 </section>
 <section id="bibliography" class="level1">
 <h1><strong>Bibliography</strong></h1>
-<ul>
-<li>Gill, R. B. 2013. “The Uses of Genre and the Classification of Speculative Fiction.” <em>Mosaic: a journal for the interdisciplinary study of literature</em> 46(2): 71-85. <a href="https://dx.doi.org/10.1353/mos.2013.0021">https://dx.doi.org/10.1353/mos.2013.0021</a><br>
-</li>
-<li>Harris, Jim and Mike Jorgensen. n.d. “Classics of Science Fiction.” Accessed January 15, 2025. <a href="https://csfquery.com/">https://csfquery.com</a><br>
-</li>
-<li>Heinlein, Robert A. 1947. “On the Writing of Speculative Fiction.” In <em>Of Worlds Beyond: The Science of Science-Fiction Writing</em>, edited by L. A. Eschbach.<br>
-</li>
-<li>ISFDB (Internet Speculative Fiction Database). 2010. “Reference:General Overview.” Last modified December 7. <a href="https://isfdb.org/wiki/index.php/Reference:General_Overview">https://isfdb.org/wiki/index.php/Reference:General_Overview</a><br>
-</li>
-<li>ISFDB (Internet Speculative Fiction Database). 2016. “Template:TitleFields:GraphicFormat.” Last modified November 30. <a href="https://www.isfdb.org/wiki/index.php?title=Template:TitleFields:GraphicFormat">https://www.isfdb.org/wiki/index.php?title=Template:TitleFields:GraphicFormat</a><br>
-</li>
-<li>ISFDB (Internet Speculative Fiction Database). 2022. “Template:TitleFields:NonGenre.” Last modified April 11. <a href="https://isfdb.org/wiki/index.php/Template:TitleFields:NonGenre">https://isfdb.org/wiki/index.php/Template:TitleFields:NonGenre</a><br>
-</li>
-<li>ISFDB (Internet Speculative Fiction Database). 2023. “Template:PublicationFields:Format.” Last modified June 9. <a href="https://isfdb.org/wiki/index.php/Template:PublicationFields:Format">https://isfdb.org/wiki/index.php/Template:PublicationFields:Format</a><br>
-</li>
-<li>ISFDB (Internet Speculative Fiction Database). 2024a. “Database Schema.” Last modified April 2024. <a href="https://isfdb.org/wiki/index.php/Database_Schema">https://isfdb.org/wiki/index.php/Database_Schema</a><br>
-</li>
-<li>ISFDB (Internet Speculative Fiction Database). 2024b. “Help:Glossary.” Last modified March 22.<br>
-</li>
-<li>ISFDB (Internet Speculative Fiction Database). 2024c. “ISFDB: Policy.” Last modified June 10. <a href="https://isfdb.org/wiki/index.php/ISFDB:Policy">https://isfdb.org/wiki/index.php/ISFDB:Policy</a><br>
-</li>
-<li>ISFDB (Internet Speculative Fiction Database). 2024d. “Template:TitleFields:TitleType.” Last modified October 15. <a href="https://isfdb.org/wiki/index.php/Template:TitleFields:TitleType">https://isfdb.org/wiki/index.php/Template:TitleFields:TitleType</a><br>
-</li>
-<li>Merril, Judith. 1966. “WHAT DO YOU MEAN - SCIENCE? FICTION.” <em>Extrapolation</em> 7(2), 31-46.<br>
-</li>
-<li>Oziewicz, Marek. 2017. “Speculative Fiction.” <em>Oxford Research Encyclopedia of Literature.</em> <a href="https://doi.org/10.1093/acrefore/9780190201098.013.78">https://doi.org/10.1093/acrefore/9780190201098.013.78</a><br>
-</li>
-<li>Sheidlower, Jesse. 2024. “The Historical Dictionary of Science Fiction.” <em>Dictionaries: Journal of the Dictionary of North America 45(1),</em> 213-228.<br>
-</li>
-<li>SLF (Speculative Literature Foundation). n.d. “FAQ” Accessed September 10, 2025. <a href="https://speculativeliterature.org/faq">https://speculativeliterature.org/faq</a><br>
-</li>
-<li>SF Nexus. n.d. “Data.” Accessed January 15, 2025. <a href="https://sfnexus.io/data/">https://sfnexus.io/data/</a><br>
-</li>
-<li>Thompson, Laure and David Mimno. 2020. “Building Large-Scale Collections of Genre Fiction: Final Report.” Accessed September 12, 2025. <a href="https://htrc.atlassian.net/wiki/download/attachments/43290116/HTRC%20ACS%20Final%20Reportv2.pdf">https://htrc.atlassian.net/wiki/download/attachments/43290116/HTRC%20ACS%20Final%20Reportv2.pdf</a><br>
-</li>
-<li>Thompson, Laure and David Mimno. n.d. “20th Century English-Language Speculative Fiction” recommended workset. Accessed January 15, 2025. <a href="https://analytics.hathitrust.org/staticrecommendedworksets">https://analytics.hathitrust.org/staticrecommendedworksets</a><br>
-</li>
-<li>Walsh, Melanie. 2023. “It’s Like 10,000 Editions When All You Need Is a Book: Why Clustering Books, or ‘Works,’ Is Key to Unlocking Collections as Data.” <em>Collections as Data: State of the field and future directions,</em> 8-10. <a href="https://doi.org/10.5281/zenodo.7897735">https://doi.org/10.5281/zenodo.7897735</a><br>
-</li>
-<li>Wolfe, Gary K. 1986. <em>Critical Terms for Science Fiction and Fantasy.</em> Greenwood.<br>
-</li>
-<li>Wythoff, Grant, and Theodore Leane. 2025. “Time Horizons of Futuristic Fiction.” <em>Post45 Data Collective</em> edited by Alexander Manshel, J.D. Porter, and Melanie Walsh. <a href="https://doi.org/10.18737/552626">https://doi.org/10.18737/552626</a></li>
-</ul>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-gill2013" class="csl-entry" role="listitem">
+Gill, R. B. 2013. <span>“The Uses of Genre and the Classification of Speculative Fiction.”</span> <em>Mosaic: A Journal for the Interdisciplinary Study of Literature</em> 46 (2): 71–85. <a href="https://doi.org/10.1353/mos.2013.0021">https://doi.org/10.1353/mos.2013.0021</a>.
+</div>
+<div id="ref-harris_classics" class="csl-entry" role="listitem">
+Harris, Jim, and Mike Jorgensen. n.d. <span>“Classics of Science Fiction.”</span> Accessed January 15, 2025. <a href="https://csfquery.com/">https://csfquery.com/</a>.
+</div>
+<div id="ref-heinlein1947" class="csl-entry" role="listitem">
+Heinlein, Robert A. 1947. <span>“On the Writing of Speculative Fiction.”</span> In <em>Of Worlds Beyond: The Science of Science-Fiction Writing</em>, edited by Lloyd Arthur Eshbach.
+</div>
+<div id="ref-isfdb2010overview" class="csl-entry" role="listitem">
+ISFDB. 2010. <span>“<span>Reference:General Overview</span>.”</span> Internet Speculative Fiction Database, December 7. <a href="https://isfdb.org/wiki/index.php/Reference:General_Overview">https://isfdb.org/wiki/index.php/Reference:General_Overview</a>.
+</div>
+<div id="ref-isfdb2016graphic" class="csl-entry" role="listitem">
+ISFDB. 2016. <span>“<span>Template:TitleFields:GraphicFormat</span>.”</span> Internet Speculative Fiction Database, November 30. <a href="https://www.isfdb.org/wiki/index.php?title=Template:TitleFields:GraphicFormat">https://www.isfdb.org/wiki/index.php?title=Template:TitleFields:GraphicFormat</a>.
+</div>
+<div id="ref-isfdb2022nongenre" class="csl-entry" role="listitem">
+ISFDB. 2022. <span>“<span>Template:TitleFields:NonGenre</span>.”</span> Internet Speculative Fiction Database, April 11. <a href="https://isfdb.org/wiki/index.php/Template:TitleFields:NonGenre">https://isfdb.org/wiki/index.php/Template:TitleFields:NonGenre</a>.
+</div>
+<div id="ref-isfdb2023format" class="csl-entry" role="listitem">
+ISFDB. 2023. <span>“<span>Template:PublicationFields:Format</span>.”</span> Internet Speculative Fiction Database, June 9. <a href="https://isfdb.org/wiki/index.php/Template:PublicationFields:Format">https://isfdb.org/wiki/index.php/Template:PublicationFields:Format</a>.
+</div>
+<div id="ref-isfdb2024schema" class="csl-entry" role="listitem">
+ISFDB. 2024a. <span>“Database Schema.”</span> Internet Speculative Fiction Database, April. <a href="https://isfdb.org/wiki/index.php/Database_Schema">https://isfdb.org/wiki/index.php/Database_Schema</a>.
+</div>
+<div id="ref-isfdb2024glossary" class="csl-entry" role="listitem">
+ISFDB. 2024b. <span>“<span>Help:Glossary</span>.”</span> Internet Speculative Fiction Database, March 22. <a href="https://isfdb.org/wiki/index.php/Help:Glossary">https://isfdb.org/wiki/index.php/Help:Glossary</a>.
+</div>
+<div id="ref-isfdb2024policy" class="csl-entry" role="listitem">
+ISFDB. 2024c. <span>“<span>ISFDB:Policy</span>.”</span> Internet Speculative Fiction Database, June 10. <a href="https://isfdb.org/wiki/index.php/ISFDB:Policy">https://isfdb.org/wiki/index.php/ISFDB:Policy</a>.
+</div>
+<div id="ref-isfdb2024titletype" class="csl-entry" role="listitem">
+ISFDB. 2024d. <span>“<span>Template:TitleFields:TitleType</span>.”</span> Internet Speculative Fiction Database, October 15. <a href="https://isfdb.org/wiki/index.php/Template:TitleFields:TitleType">https://isfdb.org/wiki/index.php/Template:TitleFields:TitleType</a>.
+</div>
+<div id="ref-merril1966" class="csl-entry" role="listitem">
+Merril, Judith. 1966. <span>“What Do You Mean—Science? Fiction.”</span> <em>Extrapolation</em> 7 (2): 31–46.
+</div>
+<div id="ref-oziewicz2017" class="csl-entry" role="listitem">
+Oziewicz, Marek. 2017. <span>“Speculative Fiction.”</span> In <em>Oxford Research Encyclopedia of Literature</em>. Oxford University Press. <a href="https://doi.org/10.1093/acrefore/9780190201098.013.78">https://doi.org/10.1093/acrefore/9780190201098.013.78</a>.
+</div>
+<div id="ref-sfnexus" class="csl-entry" role="listitem">
+SF Nexus. n.d. <span>“Data.”</span> Accessed January 15, 2025. <a href="https://sfnexus.io/data/">https://sfnexus.io/data/</a>.
+</div>
+<div id="ref-sheidlower2024" class="csl-entry" role="listitem">
+Sheidlower, Jesse. 2024. <span>“The Historical Dictionary of Science Fiction.”</span> <em>Dictionaries: Journal of the Dictionary Society of North America</em> 45 (1): 213–28.
+</div>
+<div id="ref-slf" class="csl-entry" role="listitem">
+SLF. n.d. <span>“FAQ.”</span> Speculative Literature Foundation. Accessed September 10, 2025. <a href="https://speculativeliterature.org/faq">https://speculativeliterature.org/faq</a>.
+</div>
+<div id="ref-thompson2020" class="csl-entry" role="listitem">
+Thompson, Laure, and David Mimno. 2020. <em>Building Large-Scale Collections of Genre Fiction: Final Report</em>. HathiTrust Research Center. <a href="https://htrc.atlassian.net/wiki/download/attachments/43290116/HTRC%20ACS%20Final%20Reportv2.pdf">https://htrc.atlassian.net/wiki/download/attachments/43290116/HTRC%20ACS%20Final%20Reportv2.pdf</a>.
+</div>
+<div id="ref-thompson_workset" class="csl-entry" role="listitem">
+Thompson, Laure, and David Mimno. n.d. <span>“20th Century English-Language Speculative Fiction.”</span> HathiTrust Research Center. Accessed January 15, 2025. <a href="https://analytics.hathitrust.org/staticrecommendedworksets">https://analytics.hathitrust.org/staticrecommendedworksets</a>.
+</div>
+<div id="ref-walsh2023" class="csl-entry" role="listitem">
+Walsh, Melanie. 2023. <span>“It’s Like 10,000 Editions When All You Need Is a Book: Why Clustering Books, or <span>‘Works,’</span> Is Key to Unlocking Collections as Data.”</span> In <em>Collections as Data: State of the Field and Future Directions</em>. <a href="https://doi.org/10.5281/zenodo.7897735">https://doi.org/10.5281/zenodo.7897735</a>.
+</div>
+<div id="ref-wolfe1986" class="csl-entry" role="listitem">
+Wolfe, Gary K. 1986. <em>Critical Terms for Science Fiction and Fantasy</em>. Greenwood.
+</div>
+<div id="ref-wythoff2025" class="csl-entry" role="listitem">
+Wythoff, Grant, and Theodore Leane. 2025. <span>“Time Horizons of Futuristic Fiction.”</span> In <em>Post45 Data Collective</em>, edited by Alexander Manshel, J. D. Porter, and Melanie Walsh. <a href="https://doi.org/10.18737/552626">https://doi.org/10.18737/552626</a>.
+</div>
+</div>
 
 
 </section>
@@ -589,13 +1373,13 @@ A comma-separated list of associated ISBNs for this work. ISBNs are only include
 <ol>
 <li id="fn1"><p>Robert Potts, “Light in the wilderness,” <em>The Guardian</em>, April 25, 2003.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Many of these bibliographies are preserved in the Linköping Science Fiction &amp; Fantasy Archive: https://www.lysator.liu.se/sf_archive/sf-texts/authors/<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>See ISFDB 2010 for more on ISFDB’s bibliographic sources.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>See <span class="citation" data-cites="isfdb2010overview">ISFDB (<a href="#ref-isfdb2010overview" role="doc-biblioref">2010</a>)</span> for more on ISFDB’s bibliographic sources.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>https://www.locusmag.com/index/<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>A publication record corresponds to a single book or magazine (i.e., printing). So, novels can be the majority of publication records while being a small minority of title records (i.e., contents of a publication).<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>It is ISFDB policy that all bibliographic data must come from public sources. ISFDB explicitly does not include the identities of publicly undisclosed pseudonyms (ISFDB 2024c).<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>It is ISFDB policy that all bibliographic data must come from public sources. ISFDB explicitly does not include the identities of publicly undisclosed pseudonyms <span class="citation" data-cites="isfdb2024policy">(<a href="#ref-isfdb2024policy" role="doc-biblioref">ISFDB 2024c</a>)</span>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>An author’s legal name is tracked as a field within an ISFDB author record.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{thompson2026,
+</section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><div class="code-copy-outer-scaffold"><pre class="sourceCode quarto-appendix-bibtex code-with-copy"><code class="sourceCode bibtex">@article{thompson2026,
   author = {Thompson, Laure},
   editor = {Manshel, Alexander and Porter, J.D. and Walsh, Melanie},
   title = {Speculative {Fiction} {Novels} in {English} (1800-2025): {A}
@@ -608,15 +1392,17 @@ A comma-separated list of associated ISBNs for this work. ISBNs are only include
   abstract = {The Speculative Fiction Novels in English (1800-2025)
     dataset compiles over 160,000 SF English-language novels first
     published from 1800 through 2025, including genres such as science
-    fiction, fantasy, and more.}
+    fiction, fantasy, and more. It is drawn from the Internet
+    Speculative Fiction Database (ISFDB), a crowd-sourced bibliography
+    of speculative fiction.}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-thompson2026" class="csl-entry quarto-appendix-citeas" role="listitem">
+</code></pre><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-thompson2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Thompson, Laure. 2026. <span>“Speculative Fiction Novels in English
 (1800-2025): A Comprehensive Bibliography.”</span> <em>Post45 Data
 Collective</em>, accepted, October 10. <a href="https://doi.org/10.18737/657712">https://doi.org/10.18737/657712</a>.
 </div></div></section></div></main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7dmlld29mIGRhdGFTdW1tYXJ5VmlldywgVGFidWxhdG9yLCB2aWV3b2Ygc2VsZWN0ZWRDb2x1bW5zLCB2aWV3b2YgZGF0YVNldCwgdGFibGVDb250YWluZXIsIGZldGNoRGF0YSwgZ2VuZXJhdGVUYWJ1bGF0b3JUYWJsZUZyb21DU1YsIHByb2dyZXNzLCBwcm9ncmVzc2Jhcn0gZnJvbSBcIjhiYjYzYTZjZGU5YWRkZmZcIlxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoicmF3X2RhdGEgPSBmZXRjaERhdGEoXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vUG9zdDQ1LURhdGEtQ29sbGVjdGl2ZS9kYXRhL3JlZnMvaGVhZHMvbWFpbi9zcGVjdWxhdGl2ZV9maWN0aW9uX25vdmVscy9zcGVjdWxhdGl2ZS1maWN0aW9uLW5vdmVscy1kYXRhc2V0LUNTVi5jc3ZcIilcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImdlbmVyYXRlVGFidWxhdG9yVGFibGVGcm9tQ1NWKFxuICBcIiN0YWJsZS1jb250YWluZXItc3BlY2ZpY1wiLFxuICBcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9Qb3N0NDUtRGF0YS1Db2xsZWN0aXZlL2RhdGEvcmVmcy9oZWFkcy9tYWluL3NwZWN1bGF0aXZlX2ZpY3Rpb25fbm92ZWxzL3NwZWN1bGF0aXZlLWZpY3Rpb24tbm92ZWxzLWRhdGFzZXQtQ1NWLmNzdlwiLFxuICB7XG4gICAgZGlzcGxheWVkQ29sdW1uczogW1wid29ya19pZFwiLCBcInRpdGxlXCIsIFwiYXV0aG9yc1wiLCBcImF1dGhvcl9pZHNcIiwgXCJ5ZWFyXCIsIFwidHJfeWVhclwiLCAgXCJvcmlnX2xhbmdcIiwgXCJzZXJpZXNcIiwgXCJzZXJpZXNfbm9cIiwgXCJpc2Juc1wiXSxcbiAgICBjb2x1bW5Qb3B1cHM6IFtcbiAgICAgIFwiVW5pcXVlIGlkZW50aWZpZXIgZm9yIHRoaXMgd29ya1wiLFxuICAgICAgXCJUaXRsZSBvZiB0aGUgd29ya1wiLFxuICAgICAgXCJBdXRob3Iocykgb2YgdGhlIHdvcmtcIixcbiAgICAgIFwiVW5pcXVlIGlkZW50aWZpZXIocykgZm9yIHRoZSBhdXRob3IocylcIixcbiAgICAgIFwiWWVhciBvZiBmaXJzdCBrbm93biBwdWJsaWNhdGlvbiBkYXRlXCIsXG4gICAgICBcIlllYXIgb2YgZmlyc3Qga25vd24gcHVibGljYXRpb24gZGF0ZSBmb3IgRW5nbGlzaCB0cmFuc2xhdGlvblwiLFxuICAgICAgXCJJU08gNjM5LTIgY29kZSBvZiB0aGUgd29yaydzIG9yaWdpbmFsIGxhbmd1YWdlXCIsXG4gICAgICBcIk5hbWUgb2YgdGhlIHNlcmllcyB0aGF0IHRoZSB3b3JrIGJlbG9uZ3MgdG9cIixcbiAgICAgIFwiV29ya+KAmXMgbnVtYmVyIHdpdGhpbiBpdHMgc2VyaWVzXCIsXG4gICAgICBcIkNvbW1hLXNlcGFyYXRlZCBsaXN0IG9mIGFzc29jaWF0ZWQgSVNCTnNcIlxuICAgIF0sXG4gICAgY29sdW1uV2lkdGhzOiB7IFwid29ya19pZFwiOiAxMDAsIFwidGl0bGVcIjogMjAwLCBcImF1dGhvcnNcIjogMTUwLCBcImF1dGhvcl9pZHNcIjogMTAwLCBcInllYXJcIjogMTAwLCBcInRyX3llYXJcIjogMTAwLCBcIm9yaWdfbGFuZ1wiOiAxMDAsIFwic2VyaWVzXCI6IDEwMCwgXCJzZXJpZXNfbm9cIjogMTAwLCBcImlzYm5zXCI6IDEwMCB9LFxuICAgIGNhdGVnb3J5Q29sdW1uczogW1wiYXV0aG9yc1wiLCBcImF1dGhvcl9pZHNcIiwgXCJ5ZWFyXCIsIFwidHJfeWVhclwiLCBcIm9yaWdfbGFuZ1wiLCBcInNlcmllc1wiXSxcbiAgICBsaW5rQ29sdW1uczogW1wiYXV0aG9yX2lkc1wiLCBcImlzYm5zXCJdLFxuICAgIHJhbmdlU2xpZGVyQ29sdW1uczogW1wieWVhclwiLCBcInRyX3llYXJcIl0sXG4gICAgc29ydENvbHVtbnM6IFtcIndvcmtfaWRcIiwgXCJ0aXRsZVwiLCBcImF1dGhvcnNcIiwgXCJ5ZWFyXCIsIFwidHJfeWVhclwiLCBcInNlcmllc1wiXSxcbiAgICBzb3J0T3JkZXJzOiBbXCJkZXNjXCIsIFwiYXNjXCJdLFxuICAgIGJ1dHRvbkNvbnRhaW5lcklkOiBcIiNidXR0b24tY29udGFpbmVyLXNwZWNmaWNcIixcbiAgICByYXdCdXR0b25JZDogXCIjZG93bmxvYWQtcmF3LXNwZWNmaWNcIixcbiAgICB1cmxDb3B5QnV0dG9uSWQ6IFwiI2NvcHktdXJsLXNwZWNmaWNcIixcbiAgfVxuKTtcbiJ9XX0=
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImltcG9ydCB7dmlld29mIGRhdGFTdW1tYXJ5VmlldywgVGFidWxhdG9yLCB2aWV3b2Ygc2VsZWN0ZWRDb2x1bW5zLCB2aWV3b2YgZGF0YVNldCwgdGFibGVDb250YWluZXIsIGZldGNoRGF0YSwgZ2VuZXJhdGVUYWJ1bGF0b3JUYWJsZUZyb21DU1YsIHByb2dyZXNzLCBwcm9ncmVzc2Jhcn0gZnJvbSBcIjhiYjYzYTZjZGU5YWRkZmZcIlxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoicmF3X2RhdGEgPSBmZXRjaERhdGEoXCJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vUG9zdDQ1LURhdGEtQ29sbGVjdGl2ZS9kYXRhL3JlZnMvaGVhZHMvbWFpbi9zcGVjdWxhdGl2ZV9maWN0aW9uX25vdmVscy9zcGVjdWxhdGl2ZS1maWN0aW9uLW5vdmVscy1kYXRhc2V0LUNTVi5jc3ZcIilcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImdlbmVyYXRlVGFidWxhdG9yVGFibGVGcm9tQ1NWKFxuICBcIiN0YWJsZS1jb250YWluZXItc3BlY2ZpY1wiLFxuICBcImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9Qb3N0NDUtRGF0YS1Db2xsZWN0aXZlL2RhdGEvcmVmcy9oZWFkcy9tYWluL3NwZWN1bGF0aXZlX2ZpY3Rpb25fbm92ZWxzL3NwZWN1bGF0aXZlLWZpY3Rpb24tbm92ZWxzLWRhdGFzZXQtQ1NWLmNzdlwiLFxuICB7XG4gICAgZGlzcGxheWVkQ29sdW1uczogW1wid29ya19pZFwiLCBcInRpdGxlXCIsIFwiYXV0aG9yc1wiLCBcImF1dGhvcl9pZHNcIiwgXCJ5ZWFyXCIsIFwidHJhbnNsYXRpb25feWVhclwiLCAgXCJvcmlnX2xhbmdcIiwgXCJzZXJpZXNcIiwgXCJzZXJpZXNfbm9cIiwgXCJpc2Juc1wiXSxcbiAgICBjb2x1bW5Qb3B1cHM6IFtcbiAgICAgIFwiVW5pcXVlIGlkZW50aWZpZXIgZm9yIHRoaXMgd29yayBmcm9tIElTRkRC4oCUYWxzbyBrbm93biBhcyDigJxUaXRsZSBSZWNvcmTigJ1cIixcbiAgICAgIFwiVGl0bGUgb2YgdGhlIHdvcmtcIixcbiAgICAgIFwiQXV0aG9yKHMpIG9mIHRoZSB3b3JrXCIsXG4gICAgICBcIlVuaXF1ZSBpZGVudGlmaWVyKHMpIGZvciB0aGUgYXV0aG9yKHMpXCIsXG4gICAgICBcIlllYXIgb2YgZmlyc3Qga25vd24gcHVibGljYXRpb24gZGF0ZVwiLFxuICAgICAgXCJZZWFyIG9mIGZpcnN0IGtub3duIHB1YmxpY2F0aW9uIGRhdGUgZm9yIEVuZ2xpc2ggdHJhbnNsYXRpb25cIixcbiAgICAgIFwiSVNPIDYzOS0yIGNvZGUgb2YgdGhlIHdvcmsncyBvcmlnaW5hbCBsYW5ndWFnZVwiLFxuICAgICAgXCJOYW1lIG9mIHRoZSBzZXJpZXMgdGhhdCB0aGUgd29yayBiZWxvbmdzIHRvXCIsXG4gICAgICBcIldvcmvigJlzIG51bWJlciB3aXRoaW4gaXRzIHNlcmllc1wiLFxuICAgICAgXCJDb21tYS1zZXBhcmF0ZWQgbGlzdCBvZiBhc3NvY2lhdGVkIElTQk5zXCJcbiAgICBdLFxuICAgIGNvbHVtbldpZHRoczogeyBcIndvcmtfaWRcIjogMTAwLCBcInRpdGxlXCI6IDIwMCwgXCJhdXRob3JzXCI6IDE1MCwgXCJhdXRob3JfaWRzXCI6IDEwMCwgXCJ5ZWFyXCI6IDEwMCwgXCJ0cmFuc2xhdGlvbl95ZWFyXCI6IDEwMCwgXCJvcmlnX2xhbmdcIjogMTAwLCBcInNlcmllc1wiOiAxMDAsIFwic2VyaWVzX25vXCI6IDEwMCwgXCJpc2Juc1wiOiAxMDAgfSxcbiAgICBjYXRlZ29yeUNvbHVtbnM6IFtcIm9yaWdfbGFuZ1wiXSxcbiAgICBsaW5rQ29sdW1uczogW1wiYXV0aG9yX2lkc1wiLCBcImlzYm5zXCJdLFxuICAgIHJhbmdlU2xpZGVyQ29sdW1uczogW1wieWVhclwiLCBcInRyYW5zbGF0aW9uX3llYXJcIl0sXG4gICAgc29ydENvbHVtbnM6IFtcIndvcmtfaWRcIiwgXCJ0aXRsZVwiLCBcImF1dGhvcnNcIiwgXCJ5ZWFyXCIsIFwidHJhbnNsYXRpb25feWVhclwiLCBcInNlcmllc1wiXSxcbiAgICBzb3J0T3JkZXJzOiBbXCJkZXNjXCIsIFwiYXNjXCJdLFxuICAgIGJ1dHRvbkNvbnRhaW5lcklkOiBcIiNidXR0b24tY29udGFpbmVyLXNwZWNmaWNcIixcbiAgICByYXdCdXR0b25JZDogXCIjZG93bmxvYWQtcmF3LXNwZWNmaWNcIixcbiAgICB1cmxDb3B5QnV0dG9uSWQ6IFwiI2NvcHktdXJsLXNwZWNmaWNcIixcbiAgfVxuKTtcbiJ9XX0=
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
@@ -704,7 +1490,8 @@ window._ojs.runtime.interpretFromScriptTags();
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -713,8 +1500,69 @@ window._ojs.runtime.interpretFromScriptTags();
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -728,6 +1576,7 @@ window._ojs.runtime.interpretFromScriptTags();
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -890,44 +1739,54 @@ window._ojs.runtime.interpretFromScriptTags();
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1026,6 +1885,9 @@ window._ojs.runtime.interpretFromScriptTags();
     }
   });
   </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1042,6 +1904,38 @@ Supported by <a href="https://www.neh.gov"><img src="https://www.neh.gov/sites/d
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
