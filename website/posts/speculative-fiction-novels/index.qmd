@@ -121,12 +121,17 @@ LANGUAGE_NAMES = {
 
 # -----------------------------------------------------------------------------
 
+import os
+
 import polars as pl
 import plotly.express as px
 import plotly.io as pio
 from IPython.display import Markdown
 
 pio.templates.default = "none"
+
+# Set SPECFIC_DATA to a local CSV path to render from that copy instead
+DATA_URL = os.environ.get("SPECFIC_DATA", DATA_URL)
 
 
 def show_table(df):
@@ -189,7 +194,7 @@ novels_df = (
         .alias("year_str"),
     )
     .with_columns(
-        pl.min_horizontal("year_str", "tr_year").str.to_integer().alias("min_year")
+        pl.min_horizontal("year_str", "translation_year").str.to_integer().alias("min_year")
     )
     .with_columns((pl.col("min_year") // 10 * 10).alias("decade"))
     .with_columns(
@@ -366,7 +371,7 @@ generateTabulatorTableFromCSV(
   "#table-container-specfic",
   "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/speculative_fiction_novels/speculative-fiction-novels-dataset-CSV.csv",
   {
-    displayedColumns: ["work_id", "title", "authors", "author_ids", "year", "tr_year",  "orig_lang", "series", "series_no", "isbns"],
+    displayedColumns: ["work_id", "title", "authors", "author_ids", "year", "translation_year",  "orig_lang", "series", "series_no", "isbns"],
     columnPopups: [
       "Unique identifier for this work",
       "Title of the work",
@@ -379,11 +384,11 @@ generateTabulatorTableFromCSV(
       "Work’s number within its series",
       "Comma-separated list of associated ISBNs"
     ],
-    columnWidths: { "work_id": 100, "title": 200, "authors": 150, "author_ids": 100, "year": 100, "tr_year": 100, "orig_lang": 100, "series": 100, "series_no": 100, "isbns": 100 },
+    columnWidths: { "work_id": 100, "title": 200, "authors": 150, "author_ids": 100, "year": 100, "translation_year": 100, "orig_lang": 100, "series": 100, "series_no": 100, "isbns": 100 },
     categoryColumns: ["orig_lang"],
     linkColumns: ["author_ids", "isbns"],
-    rangeSliderColumns: ["year", "tr_year"],
-    sortColumns: ["work_id", "title", "authors", "year", "tr_year", "series"],
+    rangeSliderColumns: ["year", "translation_year"],
+    sortColumns: ["work_id", "title", "authors", "year", "translation_year", "series"],
     sortOrders: ["desc", "asc"],
     buttonContainerId: "#button-container-specfic",
     rawButtonId: "#download-raw-specfic",
@@ -569,7 +574,7 @@ print(show_table(author_df.head(TOP_N)).data)
 **year**  
 Year of first known publication date of the work. This corresponds to the publication date of the canonical title record. In cases where a work is only published in translation, this field will be marked “unpublished”.
 
-**tr\_year**  
+**translation\_year**  
 Year of first known publication date for an English translation of this work. This field is only used for works of translation. This corresponds to the publication date for the earliest English variant title of the canonical title record. While rare, it is possible for English translations to be published before a novel is published in its original language.
 
 **orig\_lang**  
