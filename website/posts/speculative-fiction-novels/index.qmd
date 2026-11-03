@@ -373,7 +373,7 @@ generateTabulatorTableFromCSV(
   {
     displayedColumns: ["work_id", "title", "authors", "author_ids", "year", "translation_year",  "orig_lang", "series", "series_no", "isbns"],
     columnPopups: [
-      "Unique identifier for this work",
+      "Unique identifier for this work from ISFDB—also known as “Title Record”",
       "Title of the work",
       "Author(s) of the work",
       "Unique identifier(s) for the author(s)",
