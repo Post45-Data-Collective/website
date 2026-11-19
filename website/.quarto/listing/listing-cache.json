@@ -5,7 +5,8 @@
     ],
     "index.qmd": [
       "posts",
-      "news/intl-bestsellers-dataset-featured.qmd"
+      "news/intl-bestsellers-dataset-featured.qmd",
+      "news/grad-workshop-2026.qmd"
     ],
     "our-data.qmd": [
       "posts"
