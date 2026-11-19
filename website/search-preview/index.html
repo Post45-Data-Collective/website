@@ -1480,15 +1480,22 @@ function downloadTable(table) {
     toCSV([...h, 'role', 'name_as_written', ...cols], g.rows.map(r => [...f(), r._role, r._name_as_written, ...cols.map(c => r[c])])));
 }
 function downloadAll() {
-  // Long format: one row per source row, shared summary columns + full record as JSON.
-  const [h, f] = ctxCols(), out = [];
+  // One row per source row: shared summary columns, then every source column, unpacked.
+  // Columns with the same name in different datasets share one column; a source column
+  // whose name clashes with a summary column gets "_source" appended.
+  const [h, f] = ctxCols();
+  const head = [...h, 'dataset', 'essay_url', 'table', 'role', 'name_as_written', 'title', 'year'];
+  const reserved = new Set(head), srcCols = [];
+  const colName = c => reserved.has(c) ? `${c}_source` : c;
+  for (const g of current.groups) for (const c of g.meta.columns)
+    if (!srcCols.includes(colName(c)) && g.rows.some(r => r[c] !== null && r[c] !== undefined && r[c] !== '')) srcCols.push(colName(c));
+  const out = [];
   for (const g of current.groups) for (const r of g.rows) {
-    const rec = {}; for (const c of g.meta.columns) if (r[c] !== null && r[c] !== undefined) rec[c] = r[c];
+    const rec = {}; for (const c of g.meta.columns) rec[colName(c)] = r[c];
     out.push([...f(), manifest.essays[g.meta.essay], `${SITE}${g.meta.essay}/`, g.table, r._role, r._name_as_written,
-      g.meta.title_col ? r[g.meta.title_col] : '', g.meta.year_col ? r[g.meta.year_col] : '', JSON.stringify(rec)]);
+      g.meta.title_col ? r[g.meta.title_col] : '', g.meta.year_col ? r[g.meta.year_col] : '', ...srcCols.map(c => rec[c])]);
   }
-  save(`${slugName(current.label)}__all-post45-datasets.csv`,
-    toCSV([...h, 'dataset', 'essay_url', 'table', 'role', 'name_as_written', 'title', 'year', 'record_json'], out));
+  save(`${slugName(current.label)}__all-post45-datasets.csv`, toCSV([...head, ...srcCols], out));
 }
 function bindDownloads() {
   const a = $('#dl-all'); if (a) a.onclick = downloadAll;
