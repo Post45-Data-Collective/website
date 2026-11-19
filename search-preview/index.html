@@ -1,0 +1,1502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post45 Data Search</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* Visual language of data.post45.org (Quarto "flatly" theme + site styles.css):
+   slate #455B64 navbar/footer/table headers, Lato, gold #dea202 links, outline uppercase tags. */
+:root {
+  --slate: #455B64; --slate-dark: #34474f; --gold: #dea202; --gold-bright: #FFBA00;
+  --bg: #ffffff; --panel: #ffffff; --ink: #212529; --muted: #6c757d; --line: #dee2e6; --soft: #f5f7f8;
+  --accent: #455B64; --accent-soft: #eef2f3; --ok: #2f6b3a; --ok-soft: #e7f2e9;
+  --warn: #8a5a00; --warn-soft: #fdf3dc;
+}
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 17px/1.5 Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh; display: flex; flex-direction: column; }
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+/* site navbar */
+.navbar { background: var(--slate); color: #fff; }
+.navbar .in { max-width: 1320px; margin: 0 auto; padding: 0 24px; min-height: 79px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.navbar .brand { color: #fff; font-size: 21.25px; }
+.navbar nav { margin-left: auto; display: flex; gap: 20px; flex-wrap: wrap; }
+.navbar nav a { color: #fff; font-size: 17px; }
+.navbar nav a.cur { border-bottom: 2px solid var(--gold-bright); }
+header.page { max-width: 1320px; margin: 0 auto; padding: 32px 24px 4px; width: 100%; }
+h1 { font-weight: 600; font-size: 31.7px; line-height: 1.2; margin: 0 0 10px; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 14px; }
+.tag, .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border: 1px solid var(--ink); border-radius: 4.25px;
+  text-transform: uppercase; letter-spacing: .02em; color: var(--ink); white-space: nowrap; background: none; }
+.badge.ok { border-color: var(--ok); color: var(--ok); }
+.badge.warn { border-color: var(--warn); color: var(--warn); }
+.sub { margin: 0 0 18px; max-width: 820px; }
+.meta-h { font-size: 13.6px; text-transform: uppercase; color: var(--ink); margin: 0 0 2px; }
+main { max-width: 1320px; margin: 0 auto; padding: 0 24px 80px; width: 100%; flex: 1; }
+.searchbar { display: flex; gap: 8px; flex-wrap: wrap; }
+.searchbar select, .searchbar input { font: inherit; padding: 8px 12px; border: 1px solid #ced4da; border-radius: 4.25px; background: #fff; color: var(--ink); }
+.acwrap { position: relative; flex: 1; min-width: 200px; display: flex; }
+.acwrap input { flex: 1; width: 100%; }
+#ac { position: absolute; left: 0; right: 0; top: calc(100% + 2px); z-index: 50; margin: 0; padding: 4px 0; list-style: none; background: #fff;
+  border: 1px solid #ced4da; border-radius: 4.25px; box-shadow: 0 6px 18px rgba(0,0,0,.12); max-height: 380px; overflow-y: auto; }
+#ac li { padding: 7px 12px; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+#ac li.sel, #ac li:hover { background: var(--accent-soft); }
+#ac .ac-main b { font-weight: 700; color: var(--slate); }
+#ac .ac-sub { color: var(--muted); font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.searchbar input:focus, .searchbar select:focus { outline: 0; border-color: var(--slate); box-shadow: 0 0 0 .2rem rgba(69,91,100,.2); }
+button { font: inherit; font-size: 15px; cursor: pointer; border: 1px solid var(--slate); background: #fff;
+  color: var(--slate); border-radius: 4.25px; padding: 6px 14px; transition: background-color .2s ease; }
+button:hover { background: var(--accent-soft); }
+button.primary { background: var(--slate); color: #fff; }
+button.primary:hover { background: var(--gold-bright); border-color: var(--gold-bright); color: var(--ink); }
+#status { color: var(--muted); font-size: 14px; margin: 8px 0 20px; min-height: 20px; }
+.layout { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
+.layout.solo { grid-template-columns: 1fr; }
+.layout.solo #cands { display: none; }
+.layout > * { min-width: 0; }
+@media (max-width: 820px) { .layout { grid-template-columns: 1fr; } }
+/* left column styled like the site's table of contents */
+.candidates { font-size: 15px; }
+.candidates h3 { margin: 0 0 6px; font-size: 13.6px; font-weight: 400; text-transform: uppercase; }
+.cand { padding: 5px 10px; cursor: pointer; border-radius: 4px; }
+.cand:hover { background: var(--accent-soft); }
+.cand.active { background: var(--slate); color: #fff; }
+.cand.active .meta { color: #dfe6e9; }
+.cand .nm { font-weight: 700; }
+.cand .meta { color: var(--muted); font-size: 13px; }
+.person { margin-bottom: 18px; }
+.person h2 { font-weight: 600; margin: 0 0 6px; font-size: 31.7px; line-height: 1.2; }
+.kv { font-size: 15px; margin: 2px 0; }
+.kv .lab { font-size: 13.6px; text-transform: uppercase; margin-right: 6px; }
+.note { background: var(--warn-soft); border-left: 4px solid var(--gold); padding: 8px 12px; font-size: 15px; margin-top: 10px; }
+.actions { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+.essay { margin-bottom: 26px; }
+.essay > .hd { padding: 0 0 6px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; margin-bottom: 4px; }
+.essay .title { font-size: 22px; font-weight: 600; }
+.essay .title a { color: var(--ink); }
+.essay .title a:hover { color: var(--gold); text-decoration: none; }
+details.tbl summary { padding: 8px 0; cursor: pointer; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+details.tbl summary .lbl { font-weight: 700; }
+details.tbl summary .cnt, .cnt { color: var(--muted); font-size: 14px; font-weight: 400; }
+details.tbl summary .sp { flex: 1; }
+.scroll { overflow-x: auto; max-height: 460px; overflow-y: auto; border: 1px solid var(--line); }
+table { border-collapse: collapse; font-size: 14px; width: max-content; min-width: 100%; }
+th, td { padding: 5px 9px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; max-width: 320px; overflow-wrap: anywhere; }
+th { position: sticky; top: 0; background: var(--slate); color: #fff; font-weight: 700; z-index: 1; }
+td.hl { font-weight: 700; }
+tr:hover td { background: var(--soft); }
+.trunc { color: var(--muted); font-size: 14px; padding: 8px 0; }
+.empty { color: var(--muted); padding: 30px 0; }
+h3.sec { font-size: 26.8px; font-weight: 600; border-bottom: 1px solid var(--line); padding-bottom: 4px; margin: 28px 0 12px; }
+.top { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px; }
+.top .cand { border: 1px solid var(--line); }
+.prose { font-size: 18px; line-height: 1.65; margin: 14px 0 6px; max-width: 80ch; }
+.tabs { display: flex; gap: 4px; margin: 6px 0 16px; border-bottom: 1px solid var(--line); }
+.tabs button { border: 0; border-bottom: 3px solid transparent; border-radius: 0; background: none; padding: 8px 12px; color: var(--muted); font-size: 16px; }
+.tabs button.on { color: var(--ink); border-bottom-color: var(--slate); font-weight: 700; }
+details.work { border-top: 1px solid var(--line); }
+details.work:first-child { border-top: 0; }
+details.work summary { display: grid; grid-template-columns: 56px 1fr; gap: 10px; padding: 10px 4px; cursor: pointer; list-style: none; }
+details.work summary::-webkit-details-marker { display: none; }
+details.work summary:hover { background: var(--soft); }
+.wy { font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 700; padding-top: 1px; }
+.wtitle { font-size: 18px; font-weight: 700; color: var(--ink); }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+.chip { font-size: 13px; padding: 2px 8px; border-radius: 4px; background: var(--soft); border: 1px solid var(--line); }
+.chip b { font-weight: 700; margin-right: 2px; }
+.chip a { color: inherit; text-decoration: underline; text-decoration-color: var(--line); }
+.chip.prize { background: var(--warn-soft); border-color: #f3dfae; }
+.chip.list { background: var(--ok-soft); border-color: #cfe3d3; }
+.chip.mag { background: var(--accent-soft); border-color: #d5dfe2; }
+.wd { padding: 0 4px 12px 70px; overflow-x: auto; }
+@media (max-width: 600px) { .wd { padding-left: 4px; } details.work summary { grid-template-columns: 44px 1fr; } }
+.rz { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; margin-bottom: 8px; }
+.rz .actions { margin-bottom: 16px; }
+.rz-main { min-width: 0; }
+@media (max-width: 1000px) { .rz { grid-template-columns: 1fr; } }
+.infobox { border: 1px solid var(--line); background: var(--soft); padding: 12px; font-size: 14px; }
+.infobox figure { margin: 0 0 10px; text-align: center; }
+.infobox img { max-width: 100%; max-height: 360px; display: block; margin: 0 auto; }
+#cover-fig img { box-shadow: 0 2px 8px rgba(0,0,0,.18); }
+.infobox figcaption { font-size: 12px; margin-top: 4px; }
+.ib-sec { background: var(--slate); color: #fff; font-size: 12.5px; text-transform: uppercase; letter-spacing: .03em; padding: 3px 8px; margin: 10px -12px 8px; }
+.ib-sec:first-child { margin-top: -12px; }
+.infobox dl { display: grid; grid-template-columns: 92px 1fr; gap: 4px 10px; margin: 0; }
+.infobox dt { font-weight: 700; }
+.infobox dd { margin: 0; overflow-wrap: anywhere; }
+.ib-links { margin-top: 10px; font-size: 13px; }
+a.wtitle:hover { color: var(--gold); text-decoration: none; }
+.lead { font-size: 18px; margin: 12px 0 14px; }
+.props { border: 1px solid var(--line); border-radius: 4px; margin: 0 0 14px; }
+.props-hd { background: var(--soft); border-bottom: 1px solid var(--line); padding: 8px 14px; font-weight: 700; }
+.prow { display: grid; grid-template-columns: 170px 1fr; gap: 14px; padding: 9px 14px; border-top: 1px solid var(--line); }
+.props-hd + .prow { border-top: 0; }
+.plab { color: var(--slate); font-weight: 700; }
+.pval { position: relative; padding: 3px 64px 3px 0; border-top: 1px dotted var(--line); }
+.pval:first-child { border-top: 0; }
+.pval.more { display: none; }
+.pval.hit { background: #fdf3dc; border-left: 3px solid var(--gold); padding-left: 8px; margin-left: -11px; }
+.badge.ok { border-color: #8a5a00; color: #8a5a00; }
+.pvals.open .pval.more { display: block; }
+.pmain { font-size: 16.5px; }
+.pmain a, .psub a { color: var(--gold); }
+.psub { color: var(--muted); font-size: 14.5px; }
+.psrc { position: absolute; right: 0; top: 4px; font-size: 12.5px; }
+.pmore { margin-top: 4px; font-size: 13px; padding: 2px 10px; }
+@media (max-width: 600px) { .prow { grid-template-columns: 1fr; gap: 2px; } .pval { padding-right: 0; } .psrc { position: static; margin-left: 6px; } }
+details.asprose { margin: 0 0 18px; }
+details.wdmore { margin: 4px 0 18px; }
+details.wdmore > summary { cursor: pointer; font-weight: 700; padding: 8px 14px; border: 1px solid var(--line); border-radius: 4px; background: var(--soft); }
+details.wdmore[open] > summary { margin-bottom: 14px; }
+/* source styling: Post45 boxes = slate; Wikidata boxes = pale blue-gray */
+.props.p45 { border-color: #b9c6cb; position: relative; }
+.props.p45:hover, .props.p45:focus-within { z-index: 30; }
+.props.p45 .props-hd { position: relative; z-index: 3; background: var(--slate); color: #fff; border-bottom-color: var(--slate); }
+.props.wdsrc { border-color: #c9d6e6; background: #fbfcfe; }
+.props.wdsrc .props-hd { background: #e8eef6; color: #2b4a6f; border-bottom-color: #c9d6e6; }
+.props.wdsrc .plab { color: #2b4a6f; }
+.props-hd { display: flex; align-items: baseline; gap: 10px; }
+.src-tag { margin-left: auto; font-size: 11px; font-weight: 400; text-transform: uppercase; letter-spacing: .04em; opacity: .85; }
+/* info hover button */
+.info { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 50%;
+  border: 1.5px solid currentColor; font: italic 700 11px/1 Georgia, serif; cursor: help; flex: none; z-index: 20; }
+.info .tip { visibility: hidden; opacity: 0; position: absolute; right: 0; top: 24px; width: 290px; z-index: 10; background: #fff; color: var(--ink);
+  border: 1px solid var(--line); box-shadow: 0 4px 14px rgba(0,0,0,.12); border-radius: 4px; padding: 8px 10px;
+  font: 400 13.5px/1.45 Lato, sans-serif; text-transform: none; letter-spacing: 0; transition: opacity .12s; }
+.info:hover .tip, .info:focus .tip { visibility: visible; opacity: 1; }
+.info .tip { width: 360px; }
+.tip-cov { display: block; margin-top: 8px; padding-top: 6px; border-top: 1px solid var(--line); font-size: 12.5px; }
+p.scope { font-size: 14px; color: var(--muted); margin: 4px 0 10px; border-left: 4px solid var(--slate); padding: 2px 10px; }
+details.wdmore > summary { background: #e8eef6 !important; border-color: #c9d6e6 !important; color: #2b4a6f; }
+.badge.ok { font-size: 10px; padding: 0 5px; vertical-align: 2px; }
+details.asprose summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+.tl .props-hd { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.tl-toggle { margin-left: auto; font-size: 13px; padding: 2px 10px; }
+.tl-legend { display: flex; gap: 12px; flex-wrap: wrap; font-weight: 400; font-size: 13px; color: var(--muted); }
+.tl-legend i, .tl-ev i { display: inline-block; width: 7px; height: 14px; border-radius: 4px; margin-right: 5px; vertical-align: -2px; }
+.tl-body { padding: 8px 14px 10px; }
+.tl-chart { position: relative; overflow: hidden; }
+.tl-axis { position: relative; height: 26px; border-bottom: 1px solid #ced4da; }
+.tl-tick { position: absolute; top: 0; border-left: 1px solid var(--line); padding-left: 3px; font-size: 13px; color: var(--muted); pointer-events: none; }
+.tl-tick a { color: var(--muted); pointer-events: auto; }
+.tl-evs { position: relative; margin-top: 6px; }
+.tl-ev { font-size: 13.5px; white-space: nowrap; }
+.tl-abs { position: absolute; background: rgba(255,255,255,.88); padding-right: 4px; }
+.tl-ev a { color: var(--ink); }
+.tl-ev a:hover { color: var(--gold); }
+.tl-bar { position: absolute; left: 0; top: 17px; height: 4px; border-radius: 2px; opacity: .7; }
+.tl-abs:has(.tl-bar) i { display: none; }
+.tl-list { display: grid; grid-template-columns: 56px 1fr; gap: 4px 12px; font-size: 14px; }
+.tl-ly { font-weight: 700; }
+.tl-list .tl-ev { display: inline-block; margin-right: 14px; }
+.yearnav { display: flex; gap: 8px; align-items: center; margin: 0 0 6px; }
+.yearnav h2 { margin: 0 12px 0 0 !important; }
+.ytoc { font-size: 14px; margin: 4px 0 6px; }
+.inv { font-size: 15px; }
+footer.site { background: var(--slate); color: #fff; text-align: center; padding: 18px 16px; font-size: 15px; }
+footer.site a { color: #fff; text-decoration: underline; }
+.spinner { display:inline-block; width: 12px; height: 12px; border: 2px solid var(--line); border-top-color: var(--slate);
+  border-radius: 50%; animation: spin .8s linear infinite; vertical-align: -2px; margin-right: 6px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="navbar"><div class="in">
+  <a class="brand" href="https://data.post45.org/">Post45 Data Collective</a>
+  <nav>
+    <a href="https://data.post45.org/our-data.html">Data</a>
+    <a href="https://data.post45.org/our-tools.html">Tools</a>
+    <a href="https://data.post45.org/style-guide.html">Style Guide</a>
+    <a href="https://data.post45.org/about.html">About</a>
+    <a class="cur" href="#">Search</a>
+  </nav>
+</div></div>
+<header class="page">
+  <h1>Search the Collective</h1>
+  <div class="tags"><span class="tag">experimental</span><span class="tag">people</span><span class="tag">titles</span><span class="tag">years</span><span class="tag">dataset</span></div>
+  <p class="sub">Search a person, a title, or a year across all fourteen Post45 Data Collective datasets.
+  People are linked by shared identifiers (VIAF, Wikidata, LCCN, ISFDB, and dataset-internal IDs) and by normalized names,
+  so name-only matches can merge different people who share a name. Check the badges.</p>
+  <div class="searchbar">
+    <select id="mode" aria-label="Search for">
+      <option value="people">People</option><option value="titles">Titles</option><option value="year">Year</option>
+    </select>
+    <div class="acwrap"><input id="q" type="search" placeholder="Try “Kurt Vonnegut”, “Beloved”, or “1969”" autocomplete="off" disabled
+      role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ac"><ul id="ac" role="listbox" hidden></ul></div>
+    <button id="go" class="primary" disabled>Search</button>
+  </div>
+  <div id="status"><span class="spinner"></span>Loading DuckDB-WASM and the people index…</div>
+</header>
+<main>
+  <div class="layout" id="layout" hidden>
+    <div class="candidates" id="cands"></div>
+    <div id="detail"></div>
+  </div>
+  <section id="landing" hidden>
+    <h3 class="sec">People who appear in the most datasets</h3>
+    <div class="top" id="top"></div>
+    <h3 class="sec">Datasets in this index</h3>
+    <div class="inv" id="inv"></div>
+  </section>
+</main>
+<footer class="site">Experimental prototype of the <a href="https://data.post45.org/">Post45 Data Collective</a> · data from each dataset's published CSV · runs entirely in your browser with DuckDB-WASM</footer>
+<script type="module">
+import * as duckdb from 'https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm';
+
+const SITE = 'https://data.post45.org/posts/';
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const status = (html) => { $('#status').innerHTML = html; };
+const MAX_ROWS_SHOWN = 300;
+
+let conn, manifest, tablesByName = {};
+const loaded = new Set();
+
+function toRows(res) {
+  return res.toArray().map(r => {
+    const o = r.toJSON();
+    for (const k in o) if (typeof o[k] === 'bigint') o[k] = Number(o[k]);
+    return o;
+  });
+}
+const q = async (sql, ...params) => {
+  if (!params.length) return toRows(await conn.query(sql));
+  const st = await conn.prepare(sql);
+  try { return toRows(await st.query(...params)); } finally { await st.close(); }
+};
+
+async function loadParquet(db, name) {
+  if (loaded.has(name)) return;
+  const buf = new Uint8Array(await (await fetch(`data/${name}.parquet`, { cache: 'no-cache' })).arrayBuffer());
+  await db.registerFileBuffer(`${name}.parquet`, buf);
+  await conn.query(`CREATE TABLE "${name}" AS SELECT * FROM read_parquet('${name}.parquet')`);
+  loaded.add(name);
+}
+
+function normQuery(s) {
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+    .replace(/[øØ]/g, 'o').replace(/[æÆ]/g, 'ae').replace(/ß/g, 'ss')
+    .replace(/['’`]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+let db;
+async function init() {
+  const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
+  const workerUrl = URL.createObjectURL(new Blob([`importScripts("${bundle.mainWorker}");`], {type: 'text/javascript'}));
+  db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(duckdb.LogLevel.WARNING), new Worker(workerUrl));
+  await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+  conn = await db.connect();
+  manifest = await (await fetch('data/manifest.json', { cache: 'no-cache' })).json();
+  for (const t of manifest.tables) tablesByName[t.table] = t;
+  await Promise.all([loadParquet(db, 'persons'), loadParquet(db, 'mentions')]);
+  const r = manifest.report;
+  status(`Ready: ${r.persons.toLocaleString()} people from ${r.mentions.toLocaleString()} name mentions across ${manifest.tables.length} tables · ${r.persons_in_2plus_essays.toLocaleString()} people appear in 2+ datasets.`);
+  $('#q').disabled = false; $('#go').disabled = false; $('#q').focus();
+  renderLanding();
+  route();
+}
+
+async function renderLanding() {
+  const top = await q(`SELECT person_id, name, n_essays, n_mentions FROM persons ORDER BY n_essays DESC, n_mentions DESC LIMIT 40`);
+  $('#top').innerHTML = top.map(p => `<div class="cand" data-pid="${p.person_id}"><div class="nm">${esc(p.name)}</div>
+    <div class="meta">${p.n_essays} datasets · ${p.n_mentions.toLocaleString()} rows</div></div>`).join('');
+  $('#top').querySelectorAll('.cand').forEach(el => el.onclick = () => { location.hash = 'person=' + el.dataset.pid; });
+  const bySlug = {};
+  for (const t of manifest.tables) (bySlug[t.essay] ||= []).push(t);
+  $('#inv').innerHTML = `<table><thead><tr><th>Data essay</th><th>Table</th><th>Rows</th><th>Source CSV</th></tr></thead><tbody>` +
+    Object.entries(bySlug).map(([slug, ts]) => ts.map((t, i) => `<tr>
+      <td>${i === 0 ? `<a href="${SITE}${slug}/" target="_blank" rel="noopener">${esc(manifest.essays[slug])}</a>` : ''}</td>
+      <td>${esc(t.label)} <code>${t.table}</code></td><td>${t.rows.toLocaleString()}</td>
+      <td><a href="${esc(t.source_url)}" target="_blank" rel="noopener">csv</a></td></tr>`).join('')).join('') + `</tbody></table>`;
+}
+
+function route() {
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (h.get('person')) { setMode('people'); showPerson(+h.get('person'), h.get('q')); }
+  else if (h.get('work')) { setMode('titles'); showWork(+h.get('work'), h.get('t')); }
+  else if (h.get('year')) { setMode('year'); $('#q').value = h.get('year'); showYear(+h.get('year')); }
+  else if (h.get('t')) { setMode('titles'); $('#q').value = h.get('t'); searchTitles(h.get('t')); }
+  else if (h.get('q')) { setMode('people'); $('#q').value = h.get('q'); search(h.get('q')); }
+  else { $('#layout').hidden = true; $('#landing').hidden = false; }
+  window.scrollTo(0, 0);
+}
+function setMode(m) { $('#mode').value = m; }
+window.addEventListener('hashchange', route);
+$('#go').onclick = () => {
+  const v = $('#q').value.trim(), m = $('#mode').value;
+  if (/^(1[6-9]\d\d|20[0-2]\d)$/.test(v)) location.hash = 'year=' + v;
+  else if (m === 'titles') location.hash = 't=' + encodeURIComponent(v);
+  else if (m === 'year') status(`Enter a four-digit year, e.g. 1969.`);
+  else location.hash = 'q=' + encodeURIComponent(v);
+};
+// ---- Autocomplete: suggestions while typing --------------------------------------
+let acItems = [], acSel = -1, acTimer = null, acSeq = 0;
+function acClose() { $('#ac').hidden = true; $('#q').setAttribute('aria-expanded', 'false'); acItems = []; acSel = -1; }
+function acRender() {
+  const ul = $('#ac');
+  if (!acItems.length) return acClose();
+  ul.innerHTML = acItems.map((it, i) => `<li role="option" id="ac-${i}" class="${i === acSel ? 'sel' : ''}" data-i="${i}">
+    <span class="ac-main">${it.main}</span><span class="ac-sub">${it.sub || ''}</span></li>`).join('');
+  ul.hidden = false; $('#q').setAttribute('aria-expanded', 'true');
+  $('#q').setAttribute('aria-activedescendant', acSel >= 0 ? `ac-${acSel}` : '');
+  ul.querySelectorAll('li').forEach(li => li.onmousedown = e => { e.preventDefault(); acGo(acItems[+li.dataset.i]); });
+}
+function acGo(it) { acClose(); $('#q').value = it.value; location.hash = it.hash; }
+const acBold = (text, toks) => { let h = esc(text); for (const t of toks) h = h.replace(new RegExp(`(^|[\\s\\-'’(“])(${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'i'), '$1<b>$2</b>'); return h; };
+async function acUpdate() {
+  const raw = $('#q').value.trim(), mode = $('#mode').value, seq = ++acSeq;
+  if (raw.length < 2) return acClose();
+  const items = [];
+  if (/^\d{3,4}$/.test(raw) && +raw >= 1600 && +raw <= 2029) items.push({ main: `Go to the year <b>${raw}</b>`, sub: 'everything dated that year', hash: 'year=' + raw, value: raw });
+  const toks = normQuery(raw).split(' ').filter(Boolean);
+  if (toks.length && !/^\d+$/.test(raw)) {
+    const where = toks.map(() => `(' ' || search || ' ') LIKE ?`).join(' AND ');
+    const params = toks.map(t => `% ${t}%`);
+    if (mode === 'titles') {
+      await loadParquet(db, 'works');
+      const rs = await q(`SELECT work_id, title, person_name, first_year, n_essays FROM works WHERE ${where} ORDER BY n_essays DESC, n_rows DESC LIMIT 8`, ...params);
+      rs.forEach(r => items.push({ main: `<i>${acBold(r.title, toks)}</i>`, sub: `${esc(r.person_name)}${r.first_year ? ', ' + r.first_year : ''} · ${plural(r.n_essays, 'dataset')}`, hash: `work=${r.work_id}`, value: r.title }));
+    } else {
+      const rs = await q(`SELECT person_id, name, n_essays, n_mentions FROM persons WHERE ${where} ORDER BY n_essays DESC, n_mentions DESC LIMIT 8`, ...params);
+      rs.forEach(r => items.push({ main: acBold(r.name, toks), sub: `${plural(r.n_essays, 'dataset')} · ${r.n_mentions.toLocaleString()} rows`, hash: `person=${r.person_id}`, value: r.name }));
+    }
+  }
+  if (seq !== acSeq) return;  // a newer keystroke already ran
+  acItems = items; acSel = -1; acRender();
+}
+$('#q').addEventListener('input', () => { clearTimeout(acTimer); acTimer = setTimeout(acUpdate, 120); });
+$('#q').addEventListener('blur', () => setTimeout(acClose, 100));
+$('#q').addEventListener('keydown', e => {
+  const open = !$('#ac').hidden && acItems.length;
+  if (e.key === 'ArrowDown' && open) { e.preventDefault(); acSel = (acSel + 1) % acItems.length; acRender(); }
+  else if (e.key === 'ArrowUp' && open) { e.preventDefault(); acSel = (acSel - 1 + acItems.length) % acItems.length; acRender(); }
+  else if (e.key === 'Escape') acClose();
+  else if (e.key === 'Enter') { if (open && acSel >= 0) { e.preventDefault(); acGo(acItems[acSel]); } else { acClose(); $('#go').click(); } }
+});
+$('#mode').onchange = () => { acUpdate(); $('#q').placeholder = { people: 'Try “Kurt Vonnegut”, “Le Guin”, “Jo Nesbø”', titles: 'Try “Beloved”, “Slaughterhouse”, “Dune herbert”', year: 'Try “1969”' }[$('#mode').value]; $('#q').focus(); };
+
+let lastCands = [], lastQ = null, lastKind = 'people';
+async function search(text, selectFirst = true) {
+  const toks = normQuery(text).split(' ').filter(Boolean);
+  if (!toks.length) return;
+  const where = toks.map(() => `(' ' || search || ' ') LIKE ?`).join(' AND ');
+  const params = toks.map(t => `% ${t}%`);
+  lastCands = await q(`SELECT person_id, name, n_essays, n_mentions, has_id, variants FROM persons
+    WHERE ${where} ORDER BY n_essays DESC, n_mentions DESC LIMIT 60`, ...params);
+  lastQ = text; lastKind = 'people';
+  $('#landing').hidden = true; $('#layout').hidden = false;
+  renderCands(null);
+  if (!lastCands.length) { $('#detail').innerHTML = `<div class="empty">No people match “${esc(text)}”.</div>`; return; }
+  if (selectFirst) showPerson(lastCands[0].person_id, text, true);
+}
+async function searchTitles(text, selectFirst = true) {
+  const toks = normQuery(text).split(' ').filter(Boolean);
+  if (!toks.length) return;
+  $('#landing').hidden = true; $('#layout').hidden = false;
+  $('#detail').innerHTML = `<div class="empty"><span class="spinner"></span>Loading the titles index…</div>`;
+  await loadParquet(db, 'works');
+  const where = toks.map(() => `(' ' || search || ' ') LIKE ?`).join(' AND ');
+  lastCands = await q(`SELECT work_id, title, person_name, first_year, n_essays, n_rows FROM works
+    WHERE ${where} ORDER BY n_essays DESC, n_rows DESC LIMIT 60`, ...toks.map(t => `% ${t}%`));
+  lastQ = text; lastKind = 'titles';
+  renderCands(null);
+  if (!lastCands.length) { $('#detail').innerHTML = `<div class="empty">No titles match “${esc(text)}”.</div>`; return; }
+  if (selectFirst) showWork(lastCands[0].work_id, text, true);
+}
+
+function renderCands(activeId) {
+  const isT = lastKind === 'titles';
+  setSolo(lastCands.length <= 1);
+  $('#cands').innerHTML = `<h3>${lastCands.length}${lastCands.length === 60 ? '+' : ''} matching ${isT ? 'titles' : 'people'}</h3>` +
+    lastCands.map(c => {
+      const id = isT ? c.work_id : c.person_id;
+      return `<div class="cand ${id === activeId ? 'active' : ''}" data-id="${id}">
+      <div class="nm">${esc(isT ? c.title : c.name)}</div>
+      <div class="meta">${isT ? `${esc(c.person_name)}${c.first_year ? ', ' + c.first_year : ''} · ` : ''}${c.n_essays} dataset${c.n_essays > 1 ? 's' : ''}${isT ? '' : ` · ${c.n_mentions.toLocaleString()} rows${c.has_id ? '' : ' · no IDs'}`}</div></div>`; }).join('');
+  $('#cands').querySelectorAll('.cand').forEach(el => el.onclick = () => {
+    location.hash = isT ? `work=${el.dataset.id}` + (lastQ ? `&t=${encodeURIComponent(lastQ)}` : '')
+                        : `person=${el.dataset.id}` + (lastQ ? `&q=${encodeURIComponent(lastQ)}` : '');
+  });
+}
+function sideBack() { $('#cands').innerHTML = ''; $('#layout').classList.add('solo'); }
+function setSolo(on) { $('#layout').classList.toggle('solo', on); }
+
+// Load rows of one dataset table together with who is named in them.
+async function rowsWithPeople(table, whereSQL, params = [], limit = null) {
+  return q(`WITH d AS (SELECT * FROM "${table}" WHERE ${whereSQL}),
+    mm AS (SELECT m._rowid, string_agg(DISTINCT m.role, '; ') AS _role,
+             string_agg(DISTINCT m.name_as_written, '; ') AS _name_as_written,
+             arg_max(p.person_id, (m.role NOT IN ('scholar', 'judge', 'advisor', 'translator'))::INT * 1e9 + p.n_essays * 100000 + p.n_mentions) AS _pid,
+             arg_max(p.name, (m.role NOT IN ('scholar', 'judge', 'advisor', 'translator'))::INT * 1e9 + p.n_essays * 100000 + p.n_mentions) AS _pname,
+             max(p.n_essays) AS _pess
+           FROM mentions m JOIN persons p USING (person_id)
+           WHERE m."table" = '${table}' AND m.role <> 'alias' AND m._rowid IN (SELECT _rowid FROM d) GROUP BY 1)
+    SELECT mm._role, mm._name_as_written, mm._pid, mm._pname, mm._pess, false AS _id_linked, d.* FROM d LEFT JOIN mm USING (_rowid)
+    ORDER BY _rowid ${limit ? 'LIMIT ' + limit : ''}`, ...params);
+}
+async function ensureTables(names, el) {
+  const big = names.filter(t => !loaded.has(t) && (tablesByName[t]?.bytes || 0) > 3e6);
+  if (big.length && el) el.innerHTML = `<div class="empty"><span class="spinner"></span>Fetching ${big.map(t => tablesByName[t].label).join(', ')} (${(big.reduce((a, t) => a + tablesByName[t].bytes, 0) / 1e6).toFixed(0)} MB, first time only)…</div>`;
+  await Promise.all(names.map(t => loadParquet(db, t)));
+}
+
+// ---- Work pages -----------------------------------------------------------
+async function showWork(wid, ttext, fromSearch = false) {
+  if (ttext && (ttext !== lastQ || lastKind !== 'titles') && !fromSearch) { $('#q').value = ttext; await searchTitles(ttext, false); }
+  $('#landing').hidden = true; $('#layout').hidden = false;
+  if (lastKind === 'titles' && lastCands.length && ttext) renderCands(wid); else sideBack();
+  $('#detail').innerHTML = `<div class="empty"><span class="spinner"></span>Loading…</div>`;
+  await Promise.all([loadParquet(db, 'works'), loadParquet(db, 'work_rows')]);
+  const [w] = await q(`SELECT * FROM works WHERE work_id = ?`, wid);
+  if (!w) { $('#detail').innerHTML = `<div class="empty">Unknown title.</div>`; return; }
+  const refs = await q(`SELECT "table", list(_rowid) AS ids FROM work_rows WHERE work_id = ? GROUP BY 1`, wid);
+  await ensureTables(refs.map(r => r.table), $('#detail'));
+  const groups = [];
+  for (const t of manifest.tables) {
+    const ref = refs.find(r => r.table === t.table); if (!ref) continue;
+    const ids = [...ref.ids].map(Number);
+    const rows = await rowsWithPeople(t.table, `_rowid IN (${ids.join(',')})`);
+    groups.push({ table: t.table, meta: t, rows });
+  }
+  const items = groups.flatMap(g => g.rows.map(row => ({ table: g.table, row })));
+  current = { kind: 'work', work: w, groups, label: `${w.title} (${w.person_name})`, view: 'rows' };
+  const [person] = await q(`SELECT * FROM persons WHERE person_id = ?`, w.person_id);
+  const essays = uniq(groups.map(g => g.meta.essay));
+  const authorQid = (person?.wikidata || '').split(', ')[0];
+  const maybeWd = w.wikidata_qid || authorQid;
+  $('#detail').innerHTML = `
+    <div class="person rz"><div class="rz-main">
+      <h2>${ital(w.title)}</h2>
+      <div class="kv" id="wd-desc"></div>
+      <div class="kv"><span class="lab">Author</span><a href="#person=${w.person_id}">${esc(w.person_name)}</a>
+        ${w.first_year ? `<span class="lab" style="margin-left:18px">Earliest year</span><a href="#year=${w.first_year}">${w.first_year}</a>` : ''}
+        ${w.isfdb_work_id ? `<span class="lab" style="margin-left:18px">ISFDB</span><a href="https://www.isfdb.org/cgi-bin/title.cgi?${w.isfdb_work_id}" target="_blank" rel="noopener">${w.isfdb_work_id}</a>` : ''}</div>
+      <p class="prose">${workSentences(w, groups, person).join(' ')}</p>
+      <div class="chips">${chipsFor(items).map(chipHTML).join('')}</div>
+      <div class="actions"><button class="primary" id="dl-all">Download all rows (CSV)</button></div>
+      <details class="wdmore" id="wdmore" hidden><summary>More from Wikidata <span class="cnt">crowd-sourced; may disagree with the Post45 data</span></summary><div id="wd-more"><div class="cnt"><span class="spinner"></span>Loading…</div></div></details>
+    </div>
+    <aside class="infobox" id="wwd-aside" ${maybeWd ? '' : 'hidden'}><figure id="cover-fig" hidden></figure><div id="wd-box">${maybeWd ? '<div class="cnt"><span class="spinner"></span>Looking up Wikidata…</div>' : ''}</div></aside>
+    </div>` + essays.map(slug => {
+      const gs = groups.filter(g => g.meta.essay === slug);
+      const n = gs.reduce((a, g) => a + g.rows.length, 0);
+      return `<section class="essay"><div class="hd"><span class="title"><a href="${SITE}${slug}/" target="_blank" rel="noopener">${esc(manifest.essays[slug])}</a></span>
+        <span class="badge">${n.toLocaleString()} row${n > 1 ? 's' : ''}</span></div>
+        ${gs.map((g, i) => tableBlock(g, i === 0 && g.rows.length < 50)).join('')}</section>`; }).join('');
+  bindDownloads();
+  if (maybeWd) fillWorkWikidata(w, authorQid);
+  showCover(w, groups);
+}
+
+// ---- Covers from Open Library (by ISBN, then OCLC number) ---------------------------
+function coverCandidates(groups) {
+  const T = {}; for (const g of groups) T[g.table] = g.rows;
+  const isbns = [], oclcs = [];
+  const addI = v => String(v || '').split(/[|,;\s\[\]']+/).map(x => x.replace(/[^0-9Xx]/g, '').toUpperCase()).filter(x => x.length === 10 || x.length === 13).forEach(x => isbns.push(x));
+  const addO = v => String(v || '').split(/[|,;\s\[\]']+/).map(x => x.replace(/\.0$/, '').replace(/\D/g, '')).filter(x => x.length >= 4).forEach(x => oclcs.push(x));
+  (T.nyt_bestsellers_titles || []).forEach(r => addI(r.oclc_isbn));
+  (T.small_press_distribution_bestsellers || []).forEach(r => addI(r.isbn_number));
+  (T.speculative_fiction_novels || []).forEach(r => addI(r.isbns_repaired || r.isbns));
+  for (const t of ['nyt_bestsellers_hathitrust', 'iowa_hathitrust']) (T[t] || []).forEach(r => addI(r.isbn));
+  (T.hathitrust_post45_fiction || []).forEach(r => addI(r.isbns));
+  for (const t of ['nyt_bestsellers_titles', 'hathitrust_post45_fiction', 'nyt_bestsellers_hathitrust', 'major_prizes_hathitrust', 'iowa_hathitrust', 'small_press_distribution_bestsellers'])
+    (T[t] || []).forEach(r => addO(r.oclc || r.oclc_number));
+  return [...uniq(isbns).slice(0, 6).map(v => ['isbn', v]), ...uniq(oclcs).slice(0, 3).map(v => ['oclc', v])];
+}
+async function showCover(w, groups) {
+  const fig = $('#cover-fig'); if (!fig) return;
+  for (const [kind, v] of coverCandidates(groups)) {
+    // default=false makes Open Library return 404 instead of a blank placeholder
+    const src = `https://covers.openlibrary.org/b/${kind}/${v}-M.jpg?default=false`;
+    const ok = await new Promise(res => { const im = new Image(); im.onload = () => res(im.naturalWidth > 20); im.onerror = () => res(false); im.src = src; });
+    if (!(current?.kind === 'work' && current.work.work_id === w.work_id)) return;
+    if (ok) {
+      fig.innerHTML = `<img src="${src}" alt="Cover of ${esc(w.title)}"><figcaption><a href="https://openlibrary.org/${kind}/${v}" target="_blank" rel="noopener">Cover: Open Library</a> · ${kind.toUpperCase()} ${v}</figcaption>`;
+      fig.hidden = false; $('#wwd-aside').hidden = false;
+      return;
+    }
+  }
+}
+
+// ---- Wikidata for titles ------------------------------------------------------
+const WD_WORK_GROUPS = [
+  ['Story', ['P921', 'P840', 'P2408', 'P674', 'P136', 'P7937', 'P1433']],
+  ['Publication', ['P577', 'P50', 'P110', 'P655', 'P407', 'P123', 'P291', 'P179', 'P155', 'P156', 'P1104']],
+  ['Reception', ['P166', 'P1411']],
+];
+const shortKey = t => normQuery(String(t || '').split(/\s*(?::|;|\(|\s\/\s|,\s*or\b|\s+or\s+)/i)[0]).replace(/^(the|a|an) /, '');
+async function sparql(query) {
+  const r = await fetch('https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query), { headers: { Accept: 'application/sparql-results+json' } });
+  return (await r.json()).results.bindings;
+}
+const wdWorkCache = new Map();
+async function resolveWorkQid(w, authorQid) {
+  if (wdWorkCache.has(w.work_id)) return wdWorkCache.get(w.work_id);
+  let qid = w.wikidata_qid, how = qid ? 'source' : null;
+  if (!qid && authorQid) {
+    // match by author: Wikidata works whose author (P50) is this person, same short title, unique
+    const rows = await sparql(`SELECT ?w ?l WHERE { ?w wdt:P50 wd:${authorQid} . ?w rdfs:label ?l . FILTER(LANG(?l) IN ("en", "mul"))
+      FILTER NOT EXISTS { ?w wdt:P31 wd:Q3331189 } } LIMIT 3000`);
+    const k = shortKey(w.title);
+    const hits = uniq(rows.filter(b => shortKey(b.l.value) === k).map(b => b.w.value.split('/').pop()));
+    if (hits.length === 1) { qid = hits[0]; how = 'author'; }
+  }
+  let e = null;
+  if (qid) {
+    e = (await wdEntities([qid], 'labels|descriptions|claims|sitelinks'))[qid];
+    // an edition/translation item -> step up to the work it is an edition of (P629)
+    const up = claimVals(e, 'P629')[0]?.id;
+    if (up && claimVals(e, 'P31').some(v => v.id === 'Q3331189')) {
+      qid = up; e = (await wdEntities([qid], 'labels|descriptions|claims|sitelinks'))[qid]; how += '+edition';
+    }
+  }
+  const res = { qid, how, e };
+  wdWorkCache.set(w.work_id, res);
+  return res;
+}
+async function fillWorkWikidata(w, authorQid) {
+  const isCur = () => current?.kind === 'work' && current.work.work_id === w.work_id;
+  const box = $('#wd-box');
+  try {
+    const { qid, how, e } = await resolveWorkQid(w, authorQid);
+    if (!isCur()) return;
+    if (!qid || !e) { $('#wwd-aside').hidden = true; return; }
+    if (!wdCache.has(qid)) wdCache.set(qid, { e, label: () => null });
+    const refProps = ['P136', 'P7937', 'P921', 'P840', 'P2408', 'P674', 'P179', 'P166', 'P1411', 'P407', 'P123'];
+    const refIds = uniq(refProps.flatMap(pp => claimVals(e, pp).map(v => v.id))).slice(0, 150);
+    const [labels, adapt] = await Promise.all([
+      refIds.length ? wdEntities(refIds, 'labels') : {},
+      sparql(`SELECT ?a ?aLabel (SAMPLE(?tl) AS ?type) (MIN(YEAR(?d)) AS ?y) WHERE { ?a wdt:P144 wd:${qid} .
+        OPTIONAL { ?a wdt:P31 ?t . ?t rdfs:label ?tl . FILTER(LANG(?tl) = "en") } OPTIONAL { ?a wdt:P577 ?d }
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "en,mul". } } GROUP BY ?a ?aLabel ORDER BY ?y LIMIT 40`).catch(() => []),
+    ]);
+    if (!isCur()) return;
+    const label = id => labels[id]?.labels?.en?.value || labels[id]?.labels?.mul?.value || null;
+    const names = (pp, n = 5) => { const xs = uniq(claimVals(e, pp).map(v => label(v.id))); return xs.length ? esc(xs.slice(0, n).join(', ')) + (xs.length > n ? `, and ${xs.length - n} more` : '') : ''; };
+    const pub = uniq(claimVals(e, 'P577').map(v => wdDate(v))).sort()[0] || '';
+    const img = claimVals(e, 'P18')[0];
+    const wiki = e.sitelinks?.enwiki?.title, desc = e.descriptions?.en?.value;
+    if (desc) $('#wd-desc').innerHTML = `<i>${esc(desc)}</i>`;
+    const ad = adapt.map(b => `${esc(b.aLabel?.value || '')}${b.y ? ` (${b.y.value})` : ''}${b.type ? ` · ${esc(b.type.value)}` : ''}`);
+    const rows = [
+      ['Published', esc(pub)], ['Form', names('P7937', 3)], ['Genre', names('P136', 4)], ['Subject', names('P921', 5)],
+      ['Set in', names('P840', 4)], ['Period', names('P2408', 3)], ['Characters', names('P674', 6)], ['Series', names('P179', 2)],
+      ['Language', names('P407', 2)], ['Publisher', names('P123', 2)], ['Awards', names('P166', 5)], ['Nominated', names('P1411', 5)],
+      ['Adaptations', ad.length ? ad.slice(0, 6).join('<br>') + (ad.length > 6 ? `<br>and ${ad.length - 6} more` : '') : ''],
+    ].filter(r => r[1]);
+    const prov = how === 'author' ? 'matched on Wikidata by author and title' : how?.includes('edition') ? 'from the source data (edition item, resolved to the work)' : 'ID from the source data';
+    box.innerHTML = `${img ? `<figure><img src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(img)}?width=360" alt="" loading="lazy">
+        <figcaption><a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(img.replace(/ /g, '_'))}" target="_blank" rel="noopener">Image: Wikimedia Commons</a></figcaption></figure>` : ''}
+      <div class="ib-sec">From Wikidata</div>
+      ${rows.length ? `<dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>` : '<div class="cnt">This Wikidata item has little information yet.</div>'}
+      <div class="ib-links"><a href="https://www.wikidata.org/wiki/${qid}" target="_blank" rel="noopener">Wikidata ${qid}</a>${wiki ? ` · <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(wiki.replace(/ /g, '_'))}" target="_blank" rel="noopener">Wikipedia</a>` : ''}
+        · <a href="https://reasonator.toolforge.org/?q=${qid}" target="_blank" rel="noopener">Reasonator</a></div>
+      <div class="cnt" style="margin-top:6px;font-size:12px">${prov}</div>`;
+    const wm = $('#wdmore'); wm.hidden = false;
+    wm.addEventListener('toggle', () => { if (wm.open && !wm.dataset.loaded) { wm.dataset.loaded = 1; fillWikidataMore(qid, isCur, WD_WORK_GROUPS); } });
+  } catch (err) {
+    console.warn('Wikidata (work) failed', err);
+    if (isCur() && box) box.innerHTML = `<div class="cnt">Couldn't reach Wikidata.</div>`;
+  }
+}
+function workSentences(w, groups, person) {
+  const T = {}; for (const g of groups) T[g.table] = g.rows;
+  const it = `${ital(w.title)}`, out = [];
+  out.push(`${it}${w.first_year ? ` (${w.first_year})` : ''} by <a href="#person=${w.person_id}">${esc(w.person_name)}</a> appears in ${plural(uniq(groups.map(g => g.meta.essay)).length, 'Post45 dataset')}.`);
+  if (T.speculative_fiction_novels) { const r = T.speculative_fiction_novels[0]; out.push(`${essayLink('speculative-fiction-novels')} lists it as a ${num(r.year)} novel${r.series ? ` in the ${esc(r.series)} series` : ''}.`); }
+  if (T.futuristic_fiction) { const r = T.futuristic_fiction[0]; out.push(`${essayLink('futuristic-fiction')} records it as set in ${num(r.year_set)}${r.years_distant ? `, ${num(r.years_distant)} years after its ${r.released} release` : ''}.`); }
+  if (T.nyt_bestsellers_titles) T.nyt_bestsellers_titles.forEach(r => out.push(`It debuted on the ${essayLink('nyt_hardcover_fiction_bestsellers')} list on ${r.first_week} and stayed ${plural(+r.total_weeks, 'week')}, peaking at #${num(r.best_rank)}.`));
+  (T.major_prizes_winners_judges || []).forEach(r => out.push(`It won the ${esc(r.prize_name)} in ${r.prize_year} (${essayLink('the-index-of-major-literary-prizes-in-the-us')}).`));
+  (T.british_literary_prizes || []).forEach(r => out.push(`It was ${r.person_role === 'winner' ? 'the winner of' : r.person_role + ' for'} the ${esc(r.prize_name)} in ${r.prize_year} (${essayLink('british-literary-prizes')}).`));
+  if (T.playboy_fiction_index) out.push(`It appeared in <i>Playboy</i> ${list(T.playboy_fiction_index.map(r => r.publication_date))} (${essayLink('playboy-fiction-index')}).`);
+  if (T.international_bestsellers) { const rs = T.international_bestsellers; out.push(`It was an ${essayLink('international-bestsellers')} title in ${list(uniq(rs.map(r => r.country)))}, appearing on ${plural(rs.length, 'monthly list')} ${between(rs.map(r => r.date))}.`); }
+  if (T.nordic_noir_translations) { const rs = T.nordic_noir_translations; out.push(`${essayLink('the-nordic-noir-in-translation-database-2000-2020')} records ${plural(rs.length, 'translation')} into ${plural(uniq(rs.map(r => r.translated_language)).length, 'language')}, ${between(rs.map(r => r.translated_publication_year))}.`); }
+  if (T.small_press_distribution_bestsellers) { const rs = T.small_press_distribution_bestsellers; out.push(`It appeared on ${plural(rs.length, 'small press monthly bestseller list')} ${between(rs.map(r => r.date_sortable))}, peaking at #${Math.min(...rs.map(r => +r.ranking || 99))}.`); }
+  if (T.asian_american_canon) { const rs = T.asian_american_canon; out.push(`It is the subject of ${plural(rs.length, 'scholarly study', 'scholarly studies')} in ${essayLink('asian-american-literature')} (${yrs(rs.map(r => r.scholarship_year))}).`); }
+  if (T.iowa_graduations) T.iowa_graduations.forEach(r => out.push(`It was ${r.degree === 'MFA' ? 'an' : 'a'} ${esc(r.degree || '')} thesis at the ${essayLink('iowa_writers_workshop')} in ${r.year}.`));
+  const vols = uniq(groups.filter(g => HATHI[g.table]).flatMap(g => g.rows.map(r => r[HATHI[g.table]])));
+  if (vols.length) out.push(`HathiTrust holds ${plural(vols.length, 'volume')} of it.`);
+  return out;
+}
+let current = null;  // {person, groups: [{table, meta, rows}]}
+async function showPerson(pid, qtext, fromSearch = false) {
+  if (qtext && (qtext !== lastQ || lastKind !== 'people') && !fromSearch) { $('#q').value = qtext; await search(qtext, false); }
+  $('#landing').hidden = true; $('#layout').hidden = false;
+  if (qtext && lastKind === 'people' && lastCands.length) renderCands(pid); else sideBack();
+  $('#detail').innerHTML = `<div class="empty"><span class="spinner"></span>Loading rows…</div>`;
+  const [person] = await q(`SELECT * FROM persons WHERE person_id = ?`, pid);
+  if (!person) { $('#detail').innerHTML = `<div class="empty">Unknown person.</div>`; return; }
+  const ms = await q(`SELECT "table", count(*)::INT AS n FROM mentions WHERE person_id = ? AND role <> 'alias' GROUP BY 1`, pid);
+  const needed = ms.map(m => m.table);
+  const big = needed.filter(t => !loaded.has(t) && tablesByName[t].bytes > 3e6);
+  if (big.length) $('#detail').innerHTML = `<div class="empty"><span class="spinner"></span>Fetching ${big.map(t => tablesByName[t].label).join(', ')} (${(big.reduce((a, t) => a + tablesByName[t].bytes, 0) / 1e6).toFixed(0)} MB, first time only)…</div>`;
+  await Promise.all(needed.map(t => loadParquet(db, t)));
+  const groups = [];
+  for (const t of manifest.tables) {
+    if (!needed.includes(t.table)) continue;
+    const rows = await q(`WITH mm AS (
+        SELECT _rowid, string_agg(DISTINCT role, '; ') AS _role,
+               string_agg(DISTINCT name_as_written, '; ') AS _name_as_written,
+               bool_or(cross_id) AS _id_linked
+        FROM mentions WHERE person_id = ? AND "table" = '${t.table}' AND role <> 'alias' GROUP BY _rowid)
+      SELECT mm._role, mm._name_as_written, mm._id_linked, d.* FROM mm JOIN "${t.table}" d USING (_rowid) ORDER BY _rowid`, pid);
+    groups.push({ table: t.table, meta: t, rows });
+  }
+  await Promise.all([loadParquet(db, 'works'), loadParquet(db, 'work_rows')]);
+  const wr = await q(`SELECT w.work_id, w.title, w.first_year, w.isfdb_work_id, r."table", r._rowid, r.title_as_written
+    FROM works w JOIN work_rows r USING (work_id) WHERE w.person_id = ? ORDER BY w.first_year NULLS LAST, w.title`, pid);
+  const rowIndex = new Map();
+  for (const g of groups) for (const r of g.rows) rowIndex.set(g.table + ':' + r._rowid, r);
+  const works = new Map(), used = new Set();
+  for (const x of wr) {
+    if (!works.has(x.work_id)) works.set(x.work_id, { work_id: x.work_id, title: x.title, first_year: x.first_year, isfdb: x.isfdb_work_id, rows: [] });
+    const row = rowIndex.get(x.table + ':' + x._rowid);
+    if (row) { works.get(x.work_id).rows.push({ table: x.table, row }); used.add(x.table + ':' + x._rowid); }
+  }
+  const other = [];
+  for (const g of groups) for (const r of g.rows) if (!used.has(g.table + ':' + r._rowid)) other.push({ table: g.table, row: r });
+  const ig = groups.find(g => g.table === 'iowa_graduations');
+  const iowaLinks = new Map();
+  if (ig) for (const x of await q(`SELECT m._rowid, m.person_id, m.role, p.name FROM mentions m JOIN persons p USING (person_id)
+      WHERE m."table" = 'iowa_graduations' AND m._rowid IN (${ig.rows.map(r => r._rowid).join(',')}) AND m.person_id <> ? AND m.role <> 'alias'`, pid))
+    iowaLinks.set(x._rowid + ':' + x.role, x);
+  current = { kind: 'person', wdEvents: [], iowaLinks, label: person.name, person, groups, works: [...works.values()], other, view: current?.person?.person_id === pid ? current.view : 'works' };
+  renderPerson();
+}
+
+// ---- Year pages -----------------------------------------------------------
+async function showYear(Y) {
+  lastKind = 'year';
+  $('#landing').hidden = true; $('#layout').hidden = false;
+  sideBack();
+  const tabs = manifest.tables.filter(t => t.year_col);
+  await ensureTables(tabs.map(t => t.table), $('#detail'));
+  if (!loaded.has('work_rows')) await loadParquet(db, 'work_rows');
+  $('#detail').innerHTML = `<div class="empty"><span class="spinner"></span>Collecting ${Y}…</div>`;
+  const groups = [];
+  for (const t of tabs) {
+    const where = `left(CAST("${t.year_col}" AS VARCHAR), 4) = '${Y}'`;
+    const rows = await rowsWithPeople(t.table, where);
+    if (!rows.length) continue;
+    const wmap = new Map((await q(`SELECT _rowid, min(work_id) AS w FROM work_rows WHERE "table" = '${t.table}'
+      AND _rowid IN (SELECT _rowid FROM "${t.table}" WHERE ${where}) GROUP BY 1`)).map(x => [x._rowid, x.w]));
+    rows.forEach(r => r._wid = wmap.get(r._rowid));
+    groups.push({ table: t.table, meta: t, rows });
+  }
+  current = { kind: 'year', year: Y, groups, label: String(Y) };
+  if (!groups.length) { $('#detail').innerHTML = `<div class="empty">Nothing in the Post45 datasets is dated ${Y}.</div>`; return; }
+  const essays = uniq(groups.map(g => g.meta.essay));
+  const total = groups.reduce((a, g) => a + g.rows.length, 0);
+  $('#detail').innerHTML = `<div class="person"><div class="yearnav"><h2>${Y}</h2><button id="yprev">← ${Y - 1}</button><button id="ynext">${Y + 1} →</button></div>
+      <div class="ytoc">Jump to: ${essays.map(slug => `<a href="#" data-jump="${slug}">${esc(manifest.essays[slug].replace(/\s*\(.*\)$/, '').replace(/^The /, ''))}</a>`).join(' · ')}</div>
+      <div class="kv">${total.toLocaleString()} rows dated ${Y} across ${plural(essays.length, 'dataset')}</div>
+      ${yearPropsHTML(Y, groups)}
+      <div class="actions"><button class="primary" id="dl-all">Download all rows for ${Y} (CSV)</button></div></div>` +
+    essays.map(slug => {
+      const gs = groups.filter(g => g.meta.essay === slug);
+      const n = gs.reduce((a, g) => a + g.rows.length, 0);
+      return `<section class="essay" id="sec-${slug}"><div class="hd"><span class="title"><a href="${SITE}${slug}/" target="_blank" rel="noopener">${esc(manifest.essays[slug])}</a></span>
+        <span class="badge">${n.toLocaleString()} row${n > 1 ? 's' : ''}</span></div>
+        ${gs.map(g => tableBlock(g, false)).join('')}</section>`; }).join('');
+  $('#detail').querySelectorAll('.pmore').forEach(b => b.onclick = () => { b.parentElement.classList.add('open'); b.remove(); });
+  $('#yprev').onclick = () => location.hash = 'year=' + (Y - 1);
+  $('#ynext').onclick = () => location.hash = 'year=' + (Y + 1);
+  $('#detail').querySelectorAll('[data-jump]').forEach(a => a.onclick = e => { e.preventDefault(); document.getElementById('sec-' + a.dataset.jump)?.scrollIntoView({ behavior: 'smooth' }); });
+  bindDownloads();
+}
+const pl = r => r._pid ? `<a href="#person=${r._pid}">${esc(r._pname)}</a>` : esc(r._name_as_written || '');
+const wl = (r, title) => r._wid ? `<a href="#work=${r._wid}">${ital(title)}</a>` : ital(title);
+const byFame = rs => [...rs].sort((a, b) => (b._pess || 0) - (a._pess || 0));
+const PRIORITY_PRIZES = ['Pulitzer Prize', 'National Book Award', 'National Book Critics Circle Award', 'PEN/Faulkner Award', 'Booker Prize', 'Bollingen Prize'];
+// Year page as relation boxes: "debuted on the NYT list" → titles, "won" → people, …
+function yearPropsHTML(Y, groups) {
+  const T = {}; for (const g of groups) T[g.table] = g.rows;
+  const P = [];
+  const add = (group, label, slug, items) => { if (items.length) P.push({ group, label, slug, items }); };
+  const by = r => r._pid || r._name_as_written ? ` by ${pl(r)}` : '';
+  const countBy = (rows, key) => { const m = new Map(); for (const r of rows) { const k = key(r); if (!m.has(k)) m.set(k, []); m.get(k).push(r); } return [...m.values()].sort((a, b) => b.length - a.length); };
+  // bestseller lists
+  if (T.nyt_bestsellers_titles) {
+    const rs = [...T.nyt_bestsellers_titles].sort((a, b) => (+b.total_weeks) - (+a.total_weeks));
+    add('Bestseller lists', 'reached #1 on the NYT list', 'nyt_hardcover_fiction_bestsellers', rs.filter(r => +r.best_rank === 1).map(r => ({ main: `${wl(r, tc(r.title))}${by(r)}`, sub: `debuted ${esc(r.first_week)} · ${plural(+r.total_weeks, 'week')}` })));
+    add('Bestseller lists', 'debuted on the NYT list', 'nyt_hardcover_fiction_bestsellers', rs.map(r => ({ main: `${wl(r, tc(r.title))}${by(r)}`, sub: `${plural(+r.total_weeks, 'week')} · peak #${num(r.best_rank)} · debuted ${esc(r.first_week)}` })));
+  }
+  if (T.nyt_bestsellers_lists) {
+    const ones = countBy(T.nyt_bestsellers_lists.filter(r => +r.rank === 1), r => r.title);
+    add('Bestseller lists', 'weeks at #1 (NYT)', 'nyt_hardcover_fiction_bestsellers', ones.map(g => ({ main: `${wl(g[0], tc(g[0].title))}${by(g[0])}`, sub: plural(g.length, 'week') })));
+  }
+  for (const [t, slug, lab] of [['international_bestsellers', 'international-bestsellers', 'international bestseller'], ['small_press_distribution_bestsellers', 'small-press-distribution-bestsellers', 'small press bestseller']]) {
+    if (!T[t]) continue;
+    add('Bestseller lists', lab, slug, countBy(T[t], r => r.title).map(g => ({ main: `${wl(g[0], g[0].title)}${by(g[0])}`,
+      sub: `${plural(g.length, 'list entry', 'list entries')}${t === 'international_bestsellers' ? ' · ' + esc(uniq(g.map(r => r.country)).join(', ')) : ''} · best #${Math.min(...g.map(r => +(r.rank || r.ranking) || 99))}` })));
+  }
+  // prizes & fellowships
+  const wins = (T.major_prizes_winners_judges || []).filter(r => /winner/.test(r._role || '')), judges = (T.major_prizes_winners_judges || []).filter(r => /judge/.test(r._role || ''));
+  const pri = r => { const i = PRIORITY_PRIZES.findIndex(p => (r.prize_name || '').startsWith(p)); return i < 0 ? 99 : i; };
+  add('Prizes & fellowships', 'won a US prize', 'the-index-of-major-literary-prizes-in-the-us', [...wins].sort((a, b) => pri(a) - pri(b) || (b._pess || 0) - (a._pess || 0)).map(r => ({
+    main: pl(r), sub: `${esc(r.prize_name)}${r.prize_genre && r.prize_genre !== 'no genre' ? ' · ' + esc(r.prize_genre) : ''}${r.title_of_winning_book ? ' · ' + wl(r, r.title_of_winning_book) : ''}` })));
+  { const bw = (T.british_literary_prizes || []).filter(r => r.person_role === 'winner'), bs = (T.british_literary_prizes || []).filter(r => r.person_role !== 'winner');
+    add('Prizes & fellowships', 'won a UK prize', 'british-literary-prizes', bw.map(r => ({ main: pl(r), sub: `${esc(r.prize_name)} · ${wl(r, r.book_title)}` })));
+    add('Prizes & fellowships', 'shortlisted (UK)', 'british-literary-prizes', bs.map(r => ({ main: pl(r), sub: `${esc(r.prize_name)} · ${wl(r, r.book_title)}` }))); }
+  add('Prizes & fellowships', 'NEA fellowship', 'nea-creative-writing-fellowships', byFame(T.nea_fellowships || []).map(r => ({ main: pl(r), sub: [r.us_state, r.gender].filter(Boolean).map(esc).join(' · ') })));
+  add('Prizes & fellowships', 'judged a US prize', 'the-index-of-major-literary-prizes-in-the-us', countBy(judges, r => r.prize_name).map(g => ({ main: esc(g[0].prize_name), sub: g.map(pl).join(', ') })));
+  // education
+  add('Education', 'completed an Iowa thesis', 'iowa_writers_workshop', byFame(T.iowa_graduations || []).filter(r => /graduate/.test(r._role || '') || !r._role).map(r => ({
+    main: r._pid ? `<a href="#person=${r._pid}">${esc(flip(r.graduate_name))}</a>` : esc(flip(r.graduate_name)), sub: [esc(r.degree || ''), r.genre && esc(r.genre.toLowerCase()), r.thesis_title && ital(r.thesis_title.replace(/\.$/, '')), r.advisor_name && 'adv. ' + esc(flip(r.advisor_name))].filter(Boolean).join(' · ') })));
+  // publications
+  add('Publications', 'SF novel first published', 'speculative-fiction-novels', byFame(T.speculative_fiction_novels || []).map(r => ({ main: `${wl(r, r.title)}${by(r)}`, sub: r.series ? esc(r.series) : '' })));
+  add('Publications', 'futuristic fiction released', 'futuristic-fiction', byFame(T.futuristic_fiction || []).map(r => ({ main: `${wl(r, r.title)}${by(r)}`, sub: `set in ${num(r.year_set)}${r.years_distant ? ` (${num(r.years_distant)} years ahead)` : ''}${r.medium ? ' · ' + esc(r.medium) : ''}` })));
+  add('Publications', 'published in Playboy', 'playboy-fiction-index', byFame(T.playboy_fiction_index || []).map(r => ({ main: `“${esc(r.title)}”${by(r)}`, sub: [esc(r.publication_date), r.section && esc(r.section)].filter(Boolean).join(' · ') })));
+  add('Publications', 'Asian American canon text', 'asian-american-literature', countBy(T.asian_american_canon || [], r => r.title).map(g => ({ main: `${wl(g[0], g[0].title)}${by(g[0])}`, sub: [g[0].genre && esc(g[0].genre), plural(g.length, 'scholarly study', 'scholarly studies')].filter(Boolean).join(' · ') })));
+  if (T.nordic_noir_translations) add('Publications', 'Nordic noir translated', 'the-nordic-noir-in-translation-database-2000-2020', countBy(T.nordic_noir_translations, r => r.original_title).map(g => ({ main: `${wl(g[0], g[0].original_title)}${g[0].author ? ' by ' + esc(flip(g[0].author)) : ''}`, sub: `${plural(g.length, 'translation')}: ${esc(uniq(g.map(r => r.translated_language)).join(', '))}` })));
+  if (T.feminist_bookstore_news_articles) add('Publications', 'Feminist Bookstore News articles', 'feminist-bookstore-news', T.feminist_bookstore_news_articles.slice(0, 200).map(r => ({ main: `“${esc(r.article_title || 'untitled')}”${r._name_as_written ? ' by ' + esc(r._name_as_written) : ''}`, sub: [r.month, r.category].filter(Boolean).map(esc).join(' · ') })));
+  if (T.hathitrust_post45_fiction) add('Publications', 'HathiTrust volumes', 'hathitrust_post45_fiction', [{ main: plural(T.hathitrust_post45_fiction.length, 'volume'), sub: `listed in full in the HathiTrust section below` }]);
+  const groupsOrder = ['Bestseller lists', 'Prizes & fellowships', 'Education', 'Publications'];
+  return groupsOrder.map(gname => { const ps = P.filter(p => p.group === gname); return ps.length ? propsHTML(ps, gname, 6, 'p45', 'Post45 Data Collective') : ''; }).join('');
+}
+function yearSentences(Y, groups) {
+  const T = {}; for (const g of groups) T[g.table] = g.rows;
+  const out = [];
+  if (T.nyt_bestsellers_titles) {
+    const rs = T.nyt_bestsellers_titles, ones = rs.filter(r => +r.best_rank === 1);
+    const longest = rs.reduce((a, r) => (+r.total_weeks > +a.total_weeks ? r : a), rs[0]);
+    out.push(`${plural(rs.length, 'title')} first reached the ${essayLink('nyt_hardcover_fiction_bestsellers')} list in ${Y}; the longest-running was ${wl(longest, longest.title)} by ${pl(longest)} (${plural(+longest.total_weeks, 'week')})${ones.length ? `, and ${list(ones.slice(0, 5).map(r => `${wl(r, r.title)} by ${pl(r)}`))}${ones.length > 5 ? ` and ${ones.length - 5} others` : ''} reached #1` : ''}.`);
+  }
+  if (T.nyt_bestsellers_lists) {
+    const c = new Map(); for (const r of T.nyt_bestsellers_lists.filter(r => +r.rank === 1)) { const k = r.title; c.set(k, [(c.get(k)?.[0] || 0) + 1, r]); }
+    const top = [...c.values()].sort((a, b) => b[0] - a[0])[0];
+    if (top) out.push(`${wl(top[1], top[1].title)} spent the most weeks at #1 that year (${top[0]}).`);
+  }
+  const wins = (T.major_prizes_winners_judges || []).filter(r => /winner/.test(r._role || r.role || ''));
+  const judges = (T.major_prizes_winners_judges || []).filter(r => /judge/.test(r._role || r.role || ''));
+  if (wins.length) {
+    const pri = wins.filter(r => PRIORITY_PRIZES.some(p => (r.prize_name || '').startsWith(p)));
+    const show = (pri.length ? pri : byFame(wins)).slice(0, 5);
+    out.push(`${essayLink('the-index-of-major-literary-prizes-in-the-us')} records ${plural(wins.length, 'winner')}${judges.length ? ` and ${plural(judges.length, 'judge')}` : ''} for ${Y}, including ${list(show.map(r => `${pl(r)} (${esc(r.prize_name)}${r.prize_genre && r.prize_genre !== 'no genre' ? ', ' + esc(r.prize_genre) : ''}${r.title_of_winning_book ? ', ' + wl(r, r.title_of_winning_book) : ''})`))}.`);
+  }
+  if (T.british_literary_prizes) {
+    const w = T.british_literary_prizes.filter(r => r.person_role === 'winner');
+    if (w.length) out.push(`In ${essayLink('british-literary-prizes')}, ${list(w.map(r => `${pl(r)} won the ${esc(r.prize_name)} for ${wl(r, r.book_title)}`))}.`);
+  }
+  if (T.nea_fellowships) out.push(`${plural(T.nea_fellowships.length, 'writer')} received ${essayLink('nea-creative-writing-fellowships')}, including ${list(byFame(T.nea_fellowships).slice(0, 4).map(pl))}.`);
+  if (T.iowa_graduations) out.push(`${plural(T.iowa_graduations.length, 'thesis', 'theses')} were completed at the ${essayLink('iowa_writers_workshop')}, including by ${list(byFame(T.iowa_graduations).slice(0, 4).map(r => r._pid ? `<a href="#person=${r._pid}">${esc(flip(r.graduate_name))}</a>` : esc(flip(r.graduate_name))))}.`);
+  if (T.speculative_fiction_novels) out.push(`${plural(T.speculative_fiction_novels.length, 'novel')} in ${essayLink('speculative-fiction-novels')} were first published, among them ${list(byFame(T.speculative_fiction_novels).slice(0, 4).map(r => `${wl(r, r.title)} by ${pl(r)}`))}.`);
+  if (T.futuristic_fiction) out.push(`${list(byFame(T.futuristic_fiction).slice(0, 4).map(r => `${wl(r, r.title)} (set in ${num(r.year_set)})`))}${T.futuristic_fiction.length > 4 ? ` and ${T.futuristic_fiction.length - 4} more` : ''} appear in ${essayLink('futuristic-fiction')}.`);
+  if (T.playboy_fiction_index) out.push(`<i>Playboy</i> published ${plural(T.playboy_fiction_index.length, 'piece')} indexed in ${essayLink('playboy-fiction-index')}, including ${list(byFame(T.playboy_fiction_index).slice(0, 3).map(r => `“${esc(r.title)}” by ${pl(r)}`))}.`);
+  for (const [t, slug, lab] of [['international_bestsellers', 'international-bestsellers', 'international bestseller'], ['small_press_distribution_bestsellers', 'small-press-distribution-bestsellers', 'small press bestseller']]) {
+    if (!T[t]) continue;
+    const c = new Map(); for (const r of T[t]) c.set(r.title, [(c.get(r.title)?.[0] || 0) + 1, r]);
+    const top = [...c.values()].sort((a, b) => b[0] - a[0])[0];
+    out.push(`${essayLink(slug)} has ${plural(T[t].length, lab + ' entry', lab + ' entries')}${t === 'international_bestsellers' ? ` from ${plural(uniq(T[t].map(r => r.country)).length, 'country', 'countries')}` : ''}; the most frequent was ${wl(top[1], top[1].title)} by ${pl(top[1])} (${top[0]}).`);
+  }
+  if (T.nordic_noir_translations) out.push(`${plural(T.nordic_noir_translations.length, 'translation')} of Nordic noir into ${plural(uniq(T.nordic_noir_translations.map(r => r.translated_language)).length, 'language')} were published (${essayLink('the-nordic-noir-in-translation-database-2000-2020')}).`);
+  if (T.asian_american_canon) { const ts = uniq(T.asian_american_canon.map(r => r.title)); out.push(`${plural(ts.length, 'text')} in ${essayLink('asian-american-literature')} date from ${Y}, including ${list(byFame(T.asian_american_canon).filter((r, i, a) => a.findIndex(x => x.title === r.title) === i).slice(0, 3).map(r => `${wl(r, r.title)} by ${pl(r)}`))}.`); }
+  if (T.feminist_bookstore_news_articles) out.push(`${essayLink('feminist-bookstore-news')} published ${plural(T.feminist_bookstore_news_articles.length, 'article')}.`);
+  if (T.hathitrust_post45_fiction) out.push(`${essayLink('hathitrust_post45_fiction')} holds ${plural(T.hathitrust_post45_fiction.length, 'volume')} dated ${Y}.`);
+  return out;
+}
+
+// ---- Works view -----------------------------------------------------------
+const HATHI = { hathitrust_post45_fiction: 'docid', nyt_bestsellers_hathitrust: 'htid', major_prizes_hathitrust: 'hathi_id', iowa_hathitrust: 'htid' };
+const num = v => (v === null || v === undefined || v === '') ? '' : String(v).replace(/\.0$/, '');
+const span = ys => { ys = ys.filter(Boolean).map(String).sort(); return !ys.length ? '' : ys[0] === ys.at(-1) ? ys[0] : `${ys[0]}–${ys.at(-1)}`; };
+const uniq = a => [...new Set(a.filter(Boolean))];
+// Each summariser takes the rows of one table for one work and returns chips [{label, text, href, kind}]
+const SUMMARY = {
+  speculative_fiction_novels: rs => rs.map(r => ({ label: 'ISFDB', kind: 'src', href: `https://www.isfdb.org/cgi-bin/title.cgi?${r.work_id}`,
+    text: `novel ${num(r.year)}${r.series ? ` · ${r.series}${r.series_no ? ' #' + num(r.series_no) : ''}` : ''}${r.orig_lang && r.orig_lang !== 'eng' ? ` · orig. ${r.orig_lang}` : ''}` })),
+  nyt_bestsellers_titles: rs => rs.map(r => ({ label: 'NYT bestseller', kind: 'list',
+    text: `debuted ${r.first_week} · ${num(r.total_weeks)} weeks · peak #${num(r.best_rank)}` })),
+  nyt_bestsellers_lists: rs => [{ label: 'NYT weekly lists', kind: 'list', text: `${rs.length} list appearances, ${span(rs.map(r => r.week))}` }],
+  major_prizes_winners_judges: rs => rs.map(r => ({ label: 'Prize', kind: 'prize', text: `${r.prize_name} ${r.prize_year} · ${r._role}${r.prize_genre ? ' (' + r.prize_genre + ')' : ''}` })),
+  british_literary_prizes: rs => rs.map(r => ({ label: 'UK prize', kind: 'prize', text: `${r.prize_name} ${r.prize_year} · ${r.person_role}` })),
+  playboy_fiction_index: rs => rs.map(r => ({ label: 'Playboy', kind: 'mag', text: `${r.publication_date}${r.section ? ' · ' + r.section : ''}` })),
+  futuristic_fiction: rs => rs.map(r => ({ label: 'Futuristic fiction', kind: 'src', href: r.wikipedia_pg,
+    text: `released ${r.released}, set in ${num(r.year_set)}${r.years_distant ? ` (${num(r.years_distant)} yrs ahead)` : ''}` })),
+  international_bestsellers: rs => [{ label: 'Intl bestseller', kind: 'list', text: `${uniq(rs.map(r => r.country)).join(', ')} · ${rs.length} list-months, ${span(rs.map(r => r.date?.slice(0, 7)))} · best #${Math.min(...rs.map(r => +r.rank || 99))}` }],
+  nordic_noir_translations: rs => [{ label: 'Translations', kind: 'src', text: `${rs.length} into ${uniq(rs.map(r => r.translated_language)).length} languages, ${span(rs.map(r => r.translated_publication_year))}` }],
+  small_press_distribution_bestsellers: rs => [{ label: 'Small press bestseller', kind: 'list', text: `${rs.length} monthly list${rs.length > 1 ? 's' : ''}, ${span(rs.map(r => r.date_sortable))} · best #${Math.min(...rs.map(r => +r.ranking || 99))}` }],
+  asian_american_canon: rs => {
+    const studied = rs.filter(r => (r._role || '').includes('author')), wrote = rs.filter(r => (r._role || '').includes('scholar'));
+    return [...(studied.length ? [{ label: 'Asian Am. canon', kind: 'src', text: `studied in ${studied.length} scholarly work${studied.length > 1 ? 's' : ''}` }] : []),
+            ...wrote.map(r => ({ label: 'Scholarship', kind: 'src', text: `${r.scholarship_venue || ''} ${num(r.scholarship_year)}`.trim() }))];
+  },
+  asian_american_texts: rs => rs.map(r => ({ label: 'Asian Am. texts', kind: 'src', text: [r.genre, r.publisher, r.text_awards && r.text_awards !== 'None' ? 'awards: ' + r.text_awards : ''].filter(Boolean).join(' · ') })),
+  iowa_graduations: rs => rs.map(r => ({ label: 'Iowa thesis', kind: 'src', text: `${r.degree || ''} ${r.year || ''}${r.genre ? ' · ' + r.genre : ''}${r.advisor_name ? ' · adv. ' + r.advisor_name : ''}` })),
+  feminist_bookstore_news_articles: rs => rs.map(r => ({ label: 'FBN', kind: 'src', text: `vol. ${r.vol}.${r.no}, ${r.month || ''} ${r.year}${r.category ? ' · ' + r.category : ''}` })),
+  nea_fellowships: rs => rs.map(r => ({ label: 'NEA fellowship', kind: 'prize', text: `${r.nea_grant_year}${r.us_state ? ' · ' + r.us_state : ''}` })),
+  iowa_people: rs => rs.map(r => ({ label: 'Iowa person record', kind: 'src', text: [r.gender, r.country].filter(Boolean).join(' · ') })),
+  asian_american_authors: rs => rs.map(r => ({ label: 'Asian Am. author record', kind: 'src', text: [r.birth_year && 'b. ' + r.birth_year, r.ethnicity_national_origin_group, r.degree_institution].filter(Boolean).join(' · ') })),
+};
+function hathiChip(rs) {
+  const vols = new Map();
+  for (const { table, row } of rs) { const id = row[HATHI[table]]; if (id && !vols.has(id)) vols.set(id, row); }
+  if (!vols.size) return [];
+  const rows = [...vols.values()];
+  const hold = Math.max(...rows.map(r => +r.oclc_holdings || 0));
+  const first = [...vols.keys()][0];
+  return [{ label: 'HathiTrust', kind: 'src', href: `https://babel.hathitrust.org/cgi/pt?id=${first}`,
+    text: `${vols.size} vol${vols.size > 1 ? 's' : ''}, ${span(rows.map(r => r.inferreddate || r.imprintdate || r.date || r.year).map(v => String(v ?? '').slice(0, 4)))}${hold ? ` · up to ${hold.toLocaleString()} OCLC holdings` : ''}` }];
+}
+function chipsFor(items) {
+  const byT = {};
+  for (const it of items) (byT[it.table] ||= []).push(it);
+  const out = [];
+  const order = ['speculative_fiction_novels', 'futuristic_fiction', 'major_prizes_winners_judges', 'british_literary_prizes', 'nea_fellowships',
+    'nyt_bestsellers_titles', 'nyt_bestsellers_lists', 'international_bestsellers', 'small_press_distribution_bestsellers', 'playboy_fiction_index',
+    'nordic_noir_translations', 'asian_american_texts', 'asian_american_canon', 'iowa_graduations', 'feminist_bookstore_news_articles', 'iowa_people', 'asian_american_authors'];
+  for (const t of order) if (byT[t] && SUMMARY[t]) {
+    if (t === 'nyt_bestsellers_lists' && byT.nyt_bestsellers_titles) continue;  // titles row already summarises the run
+    out.push(...SUMMARY[t](byT[t].map(x => x.row)));
+  }
+  out.push(...hathiChip(items.filter(x => HATHI[x.table])));
+  for (const t in byT) if (!SUMMARY[t] && !HATHI[t]) out.push({ label: tablesByName[t].label, kind: 'src', text: `${byT[t].length} row(s)` });
+  return out;
+}
+const chipHTML = c => `<span class="chip ${c.kind || ''}"><b>${esc(c.label)}</b> ${c.href ? `<a href="${esc(c.href)}" target="_blank" rel="noopener">${esc(c.text)}</a>` : esc(c.text)}</span>`;
+
+// ---- Prose summary ----------------------------------------------------------
+// Template sentences per dataset, built from the rows already loaded. Uses the
+// surname rather than pronouns (the data doesn't record pronouns).
+const SMALL = new Set(['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'in', 'of', 'on', 'or', 'the', 'to', 'with']);
+const tc = t => (t && /[A-Z]/.test(t) && t === t.toUpperCase()) ? t.toLowerCase().split(' ').map((w, i) => i && SMALL.has(w) ? w : w.replace(/(^|[\-(“"])([a-z])/g, (m, a, b) => a + b.toUpperCase())).join(' ') : t;
+const flip = n => n && n.includes(',') ? n.split(',').slice(1).join(' ').trim() + ' ' + n.split(',')[0].trim() : n;
+const between = a => { const y = yrs(a); return y.includes('–') ? `between ${y.replace('–', ' and ')}` : `in ${y}`; };
+const times = n => n === 1 ? 'once' : n === 2 ? 'twice' : `${n.toLocaleString()} times`;
+const groupPrizes = (rs, f) => { const m = new Map(); for (const r of rs) { const k = r.prize_name; if (!m.has(k)) m.set(k, []); m.get(k).push(r); }
+  return [...m.entries()].map(([k, g]) => f(k, g)); };
+const ital = t => `<i>${esc(tc(t))}</i>`;
+const yrs = a => span(a.map(v => String(v ?? '').slice(0, 4)).filter(v => /^\d{4}$/.test(v)));
+const list = a => a.length <= 1 ? (a[0] || '') : a.length === 2 ? `${a[0]} and ${a[1]}` : `${a.slice(0, -1).join(', ')}, and ${a.at(-1)}`;
+const some = (a, n = 3) => a.length <= n ? list(a) : `${a.slice(0, n).join(', ')}, and ${a.length - n} more`;
+const essayLink = slug => `<a href="${SITE}${slug}/" target="_blank" rel="noopener">${esc(manifest.essays[slug])}</a>`;
+const plural = (n, w, pl) => `${n.toLocaleString()} ${n === 1 ? w : (pl || w + 's')}`;
+function workTitleFor(table, row) {
+  const w = current.works.find(w => w.rows.some(x => x.table === table && x.row === row));
+  return w ? w.title : tc(row[tablesByName[table].title_col] || '');
+}
+function summarySentences() {
+  const p = current.person, S = esc(p.name.split(' ').filter(t => !/^(jr|sr|ii|iii)\.?$/i.test(t)).at(-1));
+  const T = {}; for (const g of current.groups) T[g.table] = g.rows;
+  const has = t => T[t] && T[t].length;
+  const byRole = (t, re) => (T[t] || []).filter(r => re.test(r._role || ''));
+  const out = [];
+  if (has('speculative_fiction_novels')) {
+    const rs = [...T.speculative_fiction_novels].sort((a, b) => (+a.year || 0) - (+b.year || 0));
+    out.push(rs.length === 1
+      ? `${ital(rs[0].title)} (${num(rs[0].year)}) is in ${essayLink('speculative-fiction-novels')}.`
+      : `${essayLink('speculative-fiction-novels')} lists ${plural(rs.length, 'novel')} by ${S}, from ${ital(rs[0].title)} (${num(rs[0].year)}) to ${ital(rs.at(-1).title)} (${num(rs.at(-1).year)}).`);
+  }
+  if (has('futuristic_fiction')) {
+    const rs = T.futuristic_fiction;
+    out.push(`${list(rs.map(r => `${ital(r.title)} (${r.released}, set in ${num(r.year_set)})`))} ${rs.length > 1 ? 'appear' : 'appears'} in ${essayLink('futuristic-fiction')}.`);
+  }
+  if (has('nyt_bestsellers_titles')) {
+    const rs = [...T.nyt_bestsellers_titles].sort((a, b) => (+a.year) - (+b.year));
+    const ones = rs.filter(r => +r.best_rank === 1).map(r => ital(r.title));
+    const weeks = rs.reduce((a, r) => a + (+r.total_weeks || 0), 0);
+    const best = rs.reduce((a, r) => (+r.best_rank < +a.best_rank ? r : a), rs[0]);
+    out.push(`${rs.length === 1 ? `${ital(rs[0].title)} was` : `${plural(rs.length, 'book')} by ${S} were`} on the ${essayLink('nyt_hardcover_fiction_bestsellers')} list ${between(rs.map(r => r.year))}, for ${plural(weeks, 'week')} in all` +
+      (ones.length ? `; ${list(ones)} reached #1.` : `, peaking at #${num(best.best_rank)}${rs.length > 1 ? ` with ${ital(best.title)}` : ''}.`));
+  }
+  if (has('international_bestsellers')) {
+    const rs = T.international_bestsellers, titles = uniq(rs.map(r => r.title));
+    out.push(`${S} appears ${times(rs.length)} on ${essayLink('international-bestsellers')} lists in ${list(uniq(rs.map(r => r.country)))} (${yrs(rs.map(r => r.date))}), with ${some(titles.map(t => ital(t)))}.`);
+  }
+  if (has('small_press_distribution_bestsellers')) {
+    const rs = T.small_press_distribution_bestsellers, titles = uniq(rs.map(r => r.title));
+    out.push(`${some(titles.map(t => ital(t)))} appeared on ${plural(rs.length, 'monthly list')} in ${essayLink('small-press-distribution-bestsellers')} (${yrs(rs.map(r => r.date_sortable))}).`);
+  }
+  if (has('playboy_fiction_index')) {
+    const rs = [...T.playboy_fiction_index].sort((a, b) => (+a.year) - (+b.year));
+    const ts = some(rs.map(r => `“${esc(r.title)}”`));
+    out.push(rs.length > 1
+      ? `${S} published ${plural(rs.length, 'piece')} in <i>Playboy</i> ${between(rs.map(r => r.year))}, including ${ts} (${essayLink('playboy-fiction-index')}).`
+      : `${S} published ${ts} in <i>Playboy</i> in ${rs[0].year} (${essayLink('playboy-fiction-index')}).`);
+  }
+  const usWins = byRole('major_prizes_winners_judges', /winner/), usJudge = byRole('major_prizes_winners_judges', /judge/);
+  if (usWins.length) out.push(`In ${essayLink('the-index-of-major-literary-prizes-in-the-us')}, ${S} won ${list(groupPrizes(usWins, (k, g) => `the ${esc(k)} (${g.map(r => `${r.prize_year}${r.title_of_winning_book ? ', for ' + ital(r.title_of_winning_book) : ''}`).sort().join('; ')})`))}.`);
+  if (usJudge.length) out.push(`${S} ${usWins.length ? 'also ' : ''}judged ${list(uniq(usJudge.map(r => esc(r.prize_name))).map(n => `the ${n} (${yrs(usJudge.filter(r => esc(r.prize_name) === n).map(r => r.prize_year))})`))}${usWins.length ? '' : ` in ${essayLink('the-index-of-major-literary-prizes-in-the-us')}`}.`);
+  if (has('british_literary_prizes')) {
+    const rs = T.british_literary_prizes;
+    const won = rs.filter(r => r.person_role === 'winner'), sl = rs.filter(r => r.person_role !== 'winner');
+    const f = r => `the ${esc(r.prize_name)} (${r.prize_year}${r.book_title ? ', ' + ital(r.book_title) : ''})`;
+    out.push(`In ${essayLink('british-literary-prizes')}, ${S} ${won.length ? `won ${list(won.map(f))}` : ''}${won.length && sl.length ? ' and was ' : sl.length ? 'was ' : ''}${sl.length ? `shortlisted for ${list(sl.map(f))}` : ''}.`);
+  }
+  if (has('nea_fellowships')) out.push(`${S} received ${T.nea_fellowships.length > 1 ? 'National Endowment for the Arts creative writing fellowships' : 'a National Endowment for the Arts creative writing fellowship'} in ${list(uniq(T.nea_fellowships.map(r => r.nea_grant_year)).sort())} (${essayLink('nea-creative-writing-fellowships')}).`);
+  const grad = byRole('iowa_graduations', /graduate/), adv = byRole('iowa_graduations', /advisor/);
+  if (grad.length) out.push(`${S} completed ${list(grad.map(r => `${r.degree === 'MFA' ? 'an' : 'a'} ${esc(r.degree || 'degree')} at the ${essayLink('iowa_writers_workshop')} in ${r.year}${r.thesis_title ? ` with the thesis ${ital(r.thesis_title.replace(/\.$/, ''))}` : ''}${r.advisor_name ? ` (advisor: ${esc(flip(r.advisor_name))})` : ''}`))}.`);
+  if (adv.length) out.push(`${S} advised ${plural(adv.length, 'Iowa thesis', 'Iowa theses')} (${yrs(adv.map(r => r.year))}).`);
+  else if (!grad.length && has('iowa_people')) out.push(`${S} is in the ${essayLink('iowa_writers_workshop')} people records.`);
+  if (has('nordic_noir_translations')) {
+    const a = byRole('nordic_noir_translations', /author/), t = byRole('nordic_noir_translations', /translator/);
+    if (a.length) out.push(`${essayLink('the-nordic-noir-in-translation-database-2000-2020')} records ${plural(a.length, 'translation')} of ${plural(uniq(a.map(r => r.original_title)).length, 'title')} by ${S} into ${plural(uniq(a.map(r => r.translated_language)).length, 'language')} (${yrs(a.map(r => r.translated_publication_year))}).`);
+    if (t.length) out.push(`${S} translated ${plural(t.length, 'Nordic noir title')} into ${list(uniq(t.map(r => r.translated_language)))} (${yrs(t.map(r => r.translated_publication_year))}).`);
+  }
+  const aaWorks = byRole('asian_american_canon', /author/), aaSchol = byRole('asian_american_canon', /scholar/);
+  if (aaWorks.length) out.push(`In ${essayLink('asian-american-literature')}, ${some(uniq(aaWorks.map(r => r.title)).map(t => ital(t)))} ${uniq(aaWorks.map(r => r.title)).length > 1 ? 'are' : 'is'} the subject of ${plural(aaWorks.length, 'scholarly study', 'scholarly studies')} (${yrs(aaWorks.map(r => r.scholarship_year))}).`);
+  if (aaSchol.length) out.push(`${S} wrote ${plural(aaSchol.length, 'study', 'studies')} counted in ${essayLink('asian-american-literature')} (${yrs(aaSchol.map(r => r.scholarship_year))}).`);
+  if (has('feminist_bookstore_news_articles')) out.push(`${S} wrote ${plural(T.feminist_bookstore_news_articles.length, 'piece')} for ${essayLink('feminist-bookstore-news')} (${yrs(T.feminist_bookstore_news_articles.map(r => r.year))}).`);
+  if (has('hathitrust_post45_fiction')) out.push(`${essayLink('hathitrust_post45_fiction')} holds ${plural(T.hathitrust_post45_fiction.length, 'volume')} of ${S}'s fiction (${yrs(T.hathitrust_post45_fiction.map(r => r.inferreddate))}).`);
+  return out;
+}
+
+// ---- Property table (Wikidata/Reasonator-style "Other properties") -----------
+function compressYears(ys) {
+  const v = uniq(ys.map(y => +String(y ?? '').slice(0, 4)).filter(Boolean)).sort((a, b) => a - b);
+  const out = []; let a = null, b = null;
+  for (const y of v) { if (a === null) { a = b = y; } else if (y === b + 1) b = y; else { out.push(a === b ? `${a}` : `${a}–${b}`); a = b = y; } }
+  if (a !== null) out.push(a === b ? `${a}` : `${a}–${b}`);
+  return out.join(', ');
+}
+const workLink = (table, row, title) => {
+  const w = current.works?.find(w => w.rows.some(x => x.table === table && x.row === row));
+  return w ? `<a href="#work=${w.work_id}">${ital(title || w.title)}</a>` : ital(title);
+};
+const yearLink = y => y ? `<a href="#year=${String(y).slice(0, 4)}">${esc(y)}</a>` : '';
+function personProps() {
+  const T = {}; for (const g of current.groups) T[g.table] = g.rows;
+  const byRole = (t, re) => (T[t] || []).filter(r => re.test(r._role || ''));
+  const P = [];
+  const add = (label, slug, items) => { if (items.length) P.push({ label, slug, items }); };
+  const prizeItems = (rs, withTitle) => groupPrizes(rs, (k, g) => ({
+    main: esc(k), sub: `${compressYears(g.map(r => r.prize_year))}${withTitle ? g.filter(r => r.title_of_winning_book || r.book_title).map(r => ' · ' + workLink(r.title_of_winning_book ? 'major_prizes_winners_judges' : 'british_literary_prizes', r, r.title_of_winning_book || r.book_title)).join('') : ''}${g[0].prize_genre && g[0].prize_genre !== 'no genre' ? ' · ' + esc(g[0].prize_genre) : ''}` }));
+  // honors
+  add('award received', 'the-index-of-major-literary-prizes-in-the-us', prizeItems(byRole('major_prizes_winners_judges', /winner/), true));
+  add('award received (UK)', 'british-literary-prizes', prizeItems((T.british_literary_prizes || []).filter(r => r.person_role === 'winner'), true));
+  add('shortlisted for', 'british-literary-prizes', prizeItems((T.british_literary_prizes || []).filter(r => r.person_role !== 'winner'), true));
+  add('fellowship', 'nea-creative-writing-fellowships', T.nea_fellowships ? [{ main: 'NEA Creative Writing Fellowship', sub: T.nea_fellowships.map(r => yearLink(r.nea_grant_year)).join(', ') }] : []);
+  add('judged', 'the-index-of-major-literary-prizes-in-the-us', prizeItems(byRole('major_prizes_winners_judges', /judge/), false));
+  // education / teaching
+  const L = current.iowaLinks || new Map();
+  const pLink = x => x ? `<a href="#person=${x.person_id}">${esc(x.name)}</a>` : '';
+  add('educated at', 'iowa_writers_workshop', byRole('iowa_graduations', /graduate/).map(r => ({ main: `Iowa Writers' Workshop`,
+    sub: [`${esc(r.degree || '')} ${yearLink(r.year)}`.trim(), r.genre && esc(r.genre.toLowerCase()), r.thesis_title && `thesis: ${ital(r.thesis_title.replace(/\.$/, ''))}`,
+          (L.get(r._rowid + ':advisor') ? `advisor: ${pLink(L.get(r._rowid + ':advisor'))}` : r.advisor_name ? `advisor: ${esc(flip(r.advisor_name))}` : '')].filter(Boolean).join(' · ') })));
+  add('advised (Iowa)', 'iowa_writers_workshop', byRole('iowa_graduations', /advisor/).sort((a, b) => (+a.year) - (+b.year)).map(r => ({
+    main: L.get(r._rowid + ':graduate') ? pLink(L.get(r._rowid + ':graduate')) : esc(flip(r.graduate_name)),
+    sub: [`${esc(r.degree || '')} ${yearLink(r.year)}`.trim(), r.thesis_title && ital(r.thesis_title.replace(/\.$/, ''))].filter(Boolean).join(' · ') })));
+  // works and lists
+  add('SF novels (Internet Speculative Fiction Database)', 'speculative-fiction-novels', [...(T.speculative_fiction_novels || [])].sort((a, b) => (+a.year) - (+b.year)).map(r => ({
+    main: workLink('speculative_fiction_novels', r, r.title), sub: [yearLink(num(r.year)), r.series && `${esc(r.series)}${r.series_no ? ' #' + num(r.series_no) : ''}`].filter(Boolean).join(' · ') })));
+  add('futuristic fiction', 'futuristic-fiction', (T.futuristic_fiction || []).map(r => ({ main: workLink('futuristic_fiction', r, r.title),
+    sub: `released ${yearLink(r.released)} · set in ${num(r.year_set)}${r.years_distant ? ` (${num(r.years_distant)} years ahead)` : ''}${r.medium ? ' · ' + esc(r.medium) : ''}` })));
+  add('NYT bestseller', 'nyt_hardcover_fiction_bestsellers', [...(T.nyt_bestsellers_titles || [])].sort((a, b) => (a.first_week || '').localeCompare(b.first_week || '')).map(r => ({
+    main: workLink('nyt_bestsellers_titles', r, tc(r.title)), sub: `debuted ${esc(r.first_week)} · ${plural(+r.total_weeks, 'week')} · peak #${num(r.best_rank)}` })));
+  if (T.international_bestsellers) { const m = new Map(); for (const r of T.international_bestsellers) (m.get(r.title) || m.set(r.title, []).get(r.title)).push(r);
+    add('international bestseller', 'international-bestsellers', [...m.values()].map(g => ({ main: workLink('international_bestsellers', g[0], g[0].title),
+      sub: `${list(uniq(g.map(r => r.country)))} · ${plural(g.length, 'list-month')}, ${yrs(g.map(r => r.date))} · best #${Math.min(...g.map(r => +r.rank || 99))}` }))); }
+  if (T.small_press_distribution_bestsellers) { const m = new Map(); for (const r of T.small_press_distribution_bestsellers) (m.get(r.title) || m.set(r.title, []).get(r.title)).push(r);
+    add('Small press bestseller', 'small-press-distribution-bestsellers', [...m.values()].map(g => ({ main: workLink('small_press_distribution_bestsellers', g[0], g[0].title),
+      sub: `${plural(g.length, 'monthly list')}, ${yrs(g.map(r => r.date_sortable))} · best #${Math.min(...g.map(r => +r.ranking || 99))}${g[0].publisher ? ' · ' + esc(g[0].publisher) : ''}` }))); }
+  add('published in Playboy', 'playboy-fiction-index', [...(T.playboy_fiction_index || [])].sort((a, b) => (+a.year) - (+b.year)).map(r => ({
+    main: workLink('playboy_fiction_index', r, r.title).replace(/^<a([^>]*)><i>(.*)<\/i><\/a>$/, '<a$1>“$2”</a>').replace(/^<i>(.*)<\/i>$/, '“$1”'), sub: `${esc(r.publication_date)}${r.section ? ' · ' + esc(r.section) : ''}` })));
+  { const a = byRole('nordic_noir_translations', /author/); if (a.length) { const m = new Map(); for (const r of a) (m.get(r.original_title) || m.set(r.original_title, []).get(r.original_title)).push(r);
+    add('translated into', 'the-nordic-noir-in-translation-database-2000-2020', [...m.values()].sort((x, y) => y.length - x.length).map(g => ({ main: workLink('nordic_noir_translations', g[0], g[0].original_title),
+      sub: `${plural(g.length, 'translation')}: ${esc(uniq(g.map(r => r.translated_language)).join(', '))}` }))); } }
+  { const t = byRole('nordic_noir_translations', /translator/);
+    add('translator of', 'the-nordic-noir-in-translation-database-2000-2020', t.map(r => ({ main: ital(r.translated_title), sub: `${esc(r.author)} · ${esc(r.translated_language)} ${yearLink(r.translated_publication_year)}` }))); }
+  { const a = byRole('asian_american_canon', /author/); const m = new Map(); for (const r of a) (m.get(r.title) || m.set(r.title, []).get(r.title)).push(r);
+    add('studied in', 'asian-american-literature', [...m.values()].map(g => ({ main: workLink('asian_american_canon', g[0], g[0].title), sub: `${plural(g.length, 'scholarly study', 'scholarly studies')}, ${yrs(g.map(r => r.scholarship_year))}` }))); }
+  add('wrote scholarship on', 'asian-american-literature', byRole('asian_american_canon', /scholar/).map(r => ({ main: ital(r.title), sub: [r.scholarship_title && `“${esc(r.scholarship_title)}”`, r.scholarship_venue && esc(r.scholarship_venue), yearLink(r.scholarship_year)].filter(Boolean).join(' · ') })));
+  add('wrote for', 'feminist-bookstore-news', T.feminist_bookstore_news_articles ? [{ main: '<i>Feminist Bookstore News</i>',
+    sub: `${plural(T.feminist_bookstore_news_articles.length, 'article')}, ${compressYears(T.feminist_bookstore_news_articles.map(r => r.year))}` }] : []);
+  { const RIGHTS = { pd: 'full view', pdus: 'full view (US)', 'cc-by': 'full view', 'cc-by-nc': 'full view', ic: 'search only', und: 'search only', 'op': 'search only' };
+    const hv = [...(T.hathitrust_post45_fiction || [])].sort((a, b) => (+a.inferreddate || 0) - (+b.inferreddate || 0));
+    add('in HathiTrust', 'hathitrust_post45_fiction', hv.map(r => {
+      const w = current.works?.find(w => w.rows.some(x => x.table === 'hathitrust_post45_fiction' && x.row === r));
+      const title = String(r.shorttitle || r.title || 'untitled').replace(/[\s.:/;,\-]+$/, '');
+      return { main: `<a href="https://babel.hathitrust.org/cgi/pt?id=${encodeURIComponent(r.docid)}" target="_blank" rel="noopener"><i>${esc(title)}</i></a>`,
+        sub: [yearLink(r.inferreddate), r.hathi_rights && esc(RIGHTS[r.hathi_rights] || r.hathi_rights), r.oclc_holdings && `${(+r.oclc_holdings).toLocaleString()} OCLC holdings`,
+              w && `<a href="#work=${w.work_id}">Post45 title page</a>`].filter(Boolean).join(' · ') };
+    })); }
+  return P;
+}
+const PROP_GROUPS = [
+  ['Honors', ['award received', 'award received (UK)', 'shortlisted for', 'fellowship', 'judged']],
+  ['Education & teaching', ['educated at', 'advised (Iowa)']],
+  ['Works & lists', null],  // everything else
+];
+function propGroupsHTML(P) {
+  const used = new Set();
+  const html = PROP_GROUPS.map(([title, labels]) => {
+    const ps = P.filter(p => labels ? labels.includes(p.label) : !used.has(p.label));
+    ps.forEach(p => used.add(p.label));
+    return ps.length ? propsHTML(ps, title, 8, 'p45', 'Post45 Data Collective') : '';
+  }).join('');
+  return html;
+}
+const P45_SCOPE = "Only what the Post45 Data Collective's datasets record. Not a complete record: each dataset covers particular prizes, lists, programs, and years.";
+const infoBtn = (text, extraHtml = '') => `<span class="info" tabindex="0" role="button" aria-label="${esc(text)}">i<span class="tip" role="tooltip">${esc(text)}${extraHtml}</span></span>`;
+// What each dataset covers (from the essays), shown in the box tooltips
+const COVERAGE = {
+  'the-index-of-major-literary-prizes-in-the-us': 'US prizes worth $10,000+ for fiction and poetry, 1918–2020. Excludes nonfiction, drama, translation, and children’s prizes (e.g. National Book Awards for nonfiction).',
+  'british-literary-prizes': 'Winners and shortlists of selected British prizes, 1990–2022.',
+  'nea-creative-writing-fellowships': 'NEA Creative Writing Fellowships, 1965–2024.',
+  'iowa_writers_workshop': 'Iowa Writers’ Workshop graduates (with theses) and thesis advisors; faculty who advised no thesis are not listed.',
+  'speculative-fiction-novels': 'English-language SF novels, 1800–2025, from ISFDB; novels only, no short fiction.',
+  'futuristic-fiction': 'Works set in the future, mainly from Wikipedia and Wikidata lists.',
+  'nyt_hardcover_fiction_bestsellers': 'NYT hardcover fiction list, 1931–2020; no paperback or nonfiction lists.',
+  'international-bestsellers': 'Monthly fiction bestseller lists from several countries, 2013–2022.',
+  'small-press-distribution-bestsellers': 'Small Press Distribution monthly bestseller lists, 2006–2023.',
+  'playboy-fiction-index': 'Fiction published in Playboy.',
+  'the-nordic-noir-in-translation-database-2000-2020': 'Translations of Nordic crime fiction, 2000–2020.',
+  'asian-american-literature': 'Asian American literary texts studied in scholarship (MLA-indexed), with their authors.',
+  'feminist-bookstore-news': 'Articles in Feminist Bookstore News, 1976–2000.',
+  'hathitrust_post45_fiction': 'Fiction volumes in HathiTrust, 1945–2013 (a sample of library holdings, not every edition).',
+};
+function propsHTML(P, title = 'In the Post45 datasets', fold = 8, cls = '', tag = '') {
+  const slugs = uniq(P.map(p => p.slug));
+  const cov = cls === 'p45' && slugs.length ? `<span class="tip-cov">${slugs.map(sl => `<b>${esc(manifest.essays[sl].replace(/\s*\(.*\)$/, ''))}:</b> ${esc(COVERAGE[sl] || '')}`).join('<br>')}</span>` : '';
+  return `<div class="props ${cls}"><div class="props-hd">${title}${tag ? `<span class="src-tag">${tag}</span>` : ''}${cls === 'p45' ? infoBtn(P45_SCOPE, cov) : ''}</div>${P.map(p => `
+    <div class="prow"><div class="plab">${esc(p.label)}</div><div class="pvals">
+      ${p.items.map((it, i) => `<div class="pval${i >= fold ? ' more' : ''}${it.hit ? ' hit' : ''}"><span class="pmain">${it.main}</span> <span class="psub">${it.sub || ''}</span>${i === 0 ? (p.slug ? `<a class="psrc" href="${SITE}${p.slug}/" target="_blank" rel="noopener" title="${esc(manifest.essays[p.slug])}">[source]</a>` : p.href ? `<a class="psrc" href="${p.href}" target="_blank" rel="noopener">[property]</a>` : '') : ''}</div>`).join('')}
+      ${p.items.length > fold ? `<button class="pmore" type="button">show all ${p.items.length}</button>` : ''}
+    </div></div>`).join('')}</div>`;
+}
+
+// ---- Timeline (Reasonator-style) ---------------------------------------------
+const TL_CATS = { life: ['#8e6bbf', 'life'], honor: ['#dea202', 'prizes & fellowships'], judge: ['#c98a00', 'judging'],
+  edu: ['#3f7fbf', 'education & teaching'], pub: ['#455B64', 'publications'], list: ['#3d8a4f', 'bestseller lists'] };
+function timelineEvents() {
+  const T = {}; for (const g of current.groups) T[g.table] = g.rows;
+  const byRole = (t, re) => (T[t] || []).filter(r => re.test(r._role || ''));
+  const ev = [], y4 = v => { const m = String(v ?? '').match(/(1[5-9]\d\d|20\d\d)/); return m ? +m[1] : null; };
+  const push = (y, cat, label, href, w) => { y = y4(y); if (y) ev.push({ y, cat, label, href, w }); };
+  for (const e of current.wdEvents || []) push(e.y, 'life', e.label);
+  byRole('major_prizes_winners_judges', /winner/).forEach(r => push(r.prize_year, 'honor', r.prize_name));
+  (T.british_literary_prizes || []).forEach(r => push(r.prize_year, 'honor', `${r.prize_name}${r.person_role !== 'winner' ? ' (shortlist)' : ''}`));
+  (T.nea_fellowships || []).forEach(r => push(r.nea_grant_year, 'honor', 'NEA fellowship'));
+  const judged = byRole('major_prizes_winners_judges', /judge/);
+  byRole('iowa_graduations', /graduate/).forEach(r => push(r.year, 'edu', `Iowa ${r.degree || 'degree'}`));
+  const advised = byRole('iowa_graduations', /advisor/);
+  const workOf = (t, r) => current.works?.find(w => w.rows.some(x => x.table === t && x.row === r));
+  const wh = (t, r) => { const w = workOf(t, r); return w ? `#work=${w.work_id}` : null; };
+  const wid = (t, r) => workOf(t, r)?.work_id;
+  (T.speculative_fiction_novels || []).forEach(r => push(r.year, 'pub', tc(r.title).replace(/\s+or\s+.*$|:.*$/i, ''), wh('speculative_fiction_novels', r), wid('speculative_fiction_novels', r)));
+  (T.playboy_fiction_index || []).forEach(r => push(r.year, 'pub', `“${r.title}” in Playboy`, wh('playboy_fiction_index', r), wid('playboy_fiction_index', r)));
+  (T.futuristic_fiction || []).filter(r => !T.speculative_fiction_novels?.some(x => workOf('speculative_fiction_novels', x) && workOf('speculative_fiction_novels', x) === workOf('futuristic_fiction', r)))
+    .forEach(r => push(r.released, 'pub', r.title, wh('futuristic_fiction', r), wid('futuristic_fiction', r)));
+  (T.nyt_bestsellers_titles || []).forEach(r => push(r.first_week, 'list', `${tc(r.title)} (NYT #${num(r.best_rank)})`, wh('nyt_bestsellers_titles', r), wid('nyt_bestsellers_titles', r)));
+  for (const [t, col, lab] of [['international_bestsellers', 'date', 'intl. bestseller'], ['small_press_distribution_bestsellers', 'date_sortable', 'Small press bestseller']]) {
+    const first = new Map(); for (const r of T[t] || []) { const k = r.title, y = y4(r[col]); if (!first.has(k) || y < first.get(k)[0]) first.set(k, [y, r]); }
+    for (const [k, [y, r]] of first) push(y, 'list', `${k} (${lab})`, wh(t, r), wid(t, r));
+  }
+  // aggregate busy categories per year (judging, advising, FBN, and anything crowded)
+  // runs of consecutive years become one span event: "judged prizes, 2009–2020 (76)"
+  const agg = (rows, col, cat, one, many) => {
+    const m = new Map(); for (const r of rows) { const y = y4(r[col]); if (y) m.set(y, (m.get(y) || 0) + 1); }
+    const ys = [...m.keys()].sort((a, b) => a - b); let i = 0;
+    while (i < ys.length) { let j = i; while (j + 1 < ys.length && ys[j + 1] <= ys[j] + 2) j++;
+      const n = ys.slice(i, j + 1).reduce((a, y) => a + m.get(y), 0);
+      if (i === j) push(ys[i], cat, n === 1 ? one : `${many} (${n})`, `#year=${ys[i]}`);
+      else ev.push({ y: ys[i], y2: ys[j], cat, label: `${many}, ${ys[i]}–${ys[j]} (${n})` });
+      i = j + 1; }
+  };
+  agg(judged, 'prize_year', 'judge', 'judged a prize', 'judged prizes');
+  agg(advised, 'year', 'edu', 'advised an Iowa thesis', 'advised Iowa theses');
+  agg(T.feminist_bookstore_news_articles || [], 'year', 'pub', 'FBN article', 'FBN articles');
+  // fold a list entry into the publication of the same work when they're within a year:
+  // "Breakfast of Champions · NYT #1" instead of two markers
+  for (const e of ev.filter(e => e.cat === 'list' && e.w)) {
+    const pub = ev.find(p => p.cat === 'pub' && p.w === e.w && Math.abs(p.y - e.y) <= 1 && !p.label.includes('in Playboy'));
+    if (pub) { pub.label += ' · ' + e.label.replace(/^.*\(([^)]*)\)$/, '$1'); pub.listed = true; e.drop = true; }
+  }
+  for (let i = ev.length - 1; i >= 0; i--) if (ev[i].drop) ev.splice(i, 1);
+  // if still crowded, collapse publications/lists per year
+  if (ev.length > 45) {
+    const keep = ev.filter(e => !['pub', 'list'].includes(e.cat)), m = new Map();
+    for (const e of ev.filter(e => ['pub', 'list'].includes(e.cat))) { const k = e.y + e.cat; m.set(k, [...(m.get(k) || []), e]); }
+    for (const g of m.values()) keep.push(g.length === 1 ? g[0] : { y: g[0].y, cat: g[0].cat, label: `${g.length} ${g[0].cat === 'pub' ? 'publications' : 'list entries'}`, href: `#year=${g[0].y}` });
+    return keep.sort((a, b) => a.y - b.y);
+  }
+  return ev.sort((a, b) => a.y - b.y || a.cat.localeCompare(b.cat));
+}
+function timelineHTML() {
+  return `<div class="props tl"><div class="props-hd">Timeline <span class="tl-legend"></span>
+    <button class="tl-toggle" type="button">List</button></div><div class="tl-body"></div></div>`;
+}
+function renderTimeline() {
+  const box = $('#detail .tl'); if (!box) return;
+  const ev = timelineEvents(), body = box.querySelector('.tl-body');
+  const cats = uniq([...ev.map(e => e.cat), ...(ev.some(e => e.listed) ? ['list'] : [])]);
+  box.querySelector('.tl-legend').innerHTML = cats.map(c => `<span><i style="background:${TL_CATS[c][0]}"></i>${TL_CATS[c][1]}</span>`).join('');
+  box.querySelector('.tl-toggle').onclick = () => { current.tlList = !(current.tlList ?? box.clientWidth < 560); box.querySelector('.tl-toggle').textContent = current.tlList ? 'Chart' : 'List'; renderTimeline(); };
+  box.querySelector('.tl-toggle').textContent = (current.tlList ?? box.clientWidth < 560) ? 'Chart' : 'List';
+  if (!ev.length) { body.innerHTML = `<div class="cnt" style="padding:10px 14px">No dated events.</div>`; return; }
+  const lab = e => `<i style="background:${e.listed ? `linear-gradient(${TL_CATS.pub[0]} 50%, ${TL_CATS.list[0]} 50%)` : TL_CATS[e.cat][0]}"></i>${e.href ? `<a href="${e.href}">${esc(e.label)}</a>` : esc(e.label)}`;
+  if (current.tlList || (current.tlList === undefined && box.clientWidth < 560)) {
+    const by = new Map(); for (const e of ev) by.set(e.y, [...(by.get(e.y) || []), e]);  // spans listed at their start year
+    body.innerHTML = `<div class="tl-list">${[...by].map(([y, es]) => `<div class="tl-ly"><a href="#year=${y}">${y}</a></div><div>${es.map(e => `<span class="tl-ev">${lab(e)}</span>`).join('')}</div>`).join('')}</div>`;
+    return;
+  }
+  const y0 = Math.min(...ev.map(e => e.y)), y1 = Math.max(...ev.map(e => e.y2 || e.y));
+  const span = Math.max(y1 - y0, 4), step = span > 60 ? 10 : span > 25 ? 5 : span > 10 ? 2 : 1;
+  const a = Math.floor(y0 / step) * step, b = Math.ceil((y1 + 1) / step) * step;
+  body.innerHTML = `<div class="tl-chart"><div class="tl-axis"></div><div class="tl-evs"></div></div>`;
+  const chart = body.querySelector('.tl-chart'), W = chart.clientWidth - 8;
+  const x = y => 4 + (y - a) / (b - a) * W;
+  const axis = body.querySelector('.tl-axis');
+  for (let y = a; y <= b; y += step) axis.insertAdjacentHTML('beforeend', `<div class="tl-tick" style="left:${x(y)}px"><a href="#year=${y}">${y}</a></div>`);
+  const evs = body.querySelector('.tl-evs');
+  evs.innerHTML = ev.map((e, i) => `<div class="tl-ev tl-abs" data-i="${i}" title="${e.y}: ${esc(e.label)}">${lab(e)}</div>`).join('');
+  const lanes = [];  // right edge (px) per lane
+  evs.querySelectorAll('.tl-abs').forEach(el => {
+    const e = ev[+el.dataset.i];
+    let left = x(e.y + 0.5) - 5, w = el.offsetWidth + 8;
+    if (e.y2) {  // span: bar from start to end year, label after the bar's start
+      const bw = Math.max(x(e.y2 + 1) - x(e.y), 8);
+      el.insertAdjacentHTML('afterbegin', `<span class="tl-bar" style="width:${bw}px;background:${TL_CATS[e.cat][0]}"></span>`);
+      left = x(e.y); w = Math.max(bw, el.offsetWidth) + 8;
+    }
+    if (left + w > W + 4) left = Math.max(0, W + 4 - w);
+    let lane = lanes.findIndex(r => r <= left); if (lane < 0) { lane = lanes.length; lanes.push(0); }
+    lanes[lane] = left + w;
+    el.style.left = left + 'px'; el.style.top = (lane * 26) + 'px';
+  });
+  evs.style.height = (lanes.length * 26 + 6) + 'px';
+  chart.querySelectorAll('.tl-tick').forEach(t => t.style.height = (lanes.length * 26 + 34) + 'px');
+}
+let tlResize; window.addEventListener('resize', () => { clearTimeout(tlResize); tlResize = setTimeout(() => current?.kind === 'person' && !current.tlList && renderTimeline(), 150); });
+
+function worksView() {
+  const { works, other } = current;
+  const multi = works.filter(w => uniq(w.rows.map(r => tablesByName[r.table].essay)).length > 1).length;
+  const filt = current.multiOnly ? works.filter(w => uniq(w.rows.map(r => tablesByName[r.table].essay)).length > 1) : works;
+  const otherChips = chipsFor(other);
+  return `<section class="essay works">
+    <div class="hd"><span class="title">Works</span>
+      <span class="cnt">${works.length} titles · ${multi} in 2+ datasets
+      ${works.length > 15 ? `<label style="margin-left:10px"><input type="checkbox" id="multiOnly" ${current.multiOnly ? 'checked' : ''}> only titles in 2+ datasets</label>` : ''}</span></div>
+    <div class="wl">${filt.map(w => {
+      const essays = uniq(w.rows.map(r => tablesByName[r.table].essay));
+      return `<details class="work"><summary>
+        <span class="wy">${w.first_year ? `<a href="#year=${w.first_year}">${w.first_year}</a>` : '—'}</span>
+        <span class="wt"><a class="wtitle" href="#work=${w.work_id}">${esc(w.title)}</a> <span class="cnt">${essays.length} dataset${essays.length > 1 ? 's' : ''}</span>
+          <span class="chips">${chipsFor(w.rows).map(chipHTML).join('')}</span></span></summary>
+        <div class="wd"><table><thead><tr><th>dataset</th><th>table</th><th>title as written</th><th>year</th></tr></thead><tbody>
+        ${w.rows.filter(x => x.table !== 'nyt_bestsellers_lists').map(x => { const m = tablesByName[x.table];
+          return `<tr><td><a href="${SITE}${m.essay}/" target="_blank" rel="noopener">${esc(manifest.essays[m.essay])}</a></td><td>${esc(m.label)}</td>
+          <td>${esc(x.row[m.title_col])}</td><td>${esc(x.row[m.year_col])}</td></tr>`; }).join('')}
+        ${w.rows.some(x => x.table === 'nyt_bestsellers_lists') ? `<tr><td colspan="4" class="cnt">+ ${w.rows.filter(x => x.table === 'nyt_bestsellers_lists').length} NYT weekly list rows (see "All rows by dataset")</td></tr>` : ''}
+        </tbody></table></div></details>`; }).join('')}</div>
+  </section>
+  ${otherChips.length ? `<section class="essay works"><div class="hd"><span class="title">Other records about this person</span>
+    <span class="cnt">grants, judging, advising, translating, prizes without a title</span></div>
+    <div class="wl" style="padding:10px 16px">${otherRecords(other)}</div></section>` : ''}`;
+}
+function otherRecords(other) {
+  const byT = {};
+  for (const it of other) (byT[it.table] ||= []).push(it.row);
+  const lines = [];
+  for (const [t, rs] of Object.entries(byT)) {
+    const m = tablesByName[t];
+    if (t === 'iowa_graduations') rs.forEach(r => lines.push(`<b>Iowa:</b> ${esc(r._role)} for ${esc(r.graduate_name)}, “${esc(r.thesis_title)}” (${esc(r.year)})`));
+    else if (t === 'major_prizes_winners_judges') rs.forEach(r => lines.push(`<b>${esc(r.prize_name)}</b> ${esc(r.prize_year)} · ${esc(r._role)}${r.prize_genre ? ' (' + esc(r.prize_genre) + ')' : ''}${r.title_of_winning_book && r._role === 'judge' ? ` · winner: ${esc(r.title_of_winning_book)}` : ''}`));
+    else if (t === 'nordic_noir_translations') lines.push(`<b>Translator:</b> ${rs.length} Nordic noir translation${rs.length > 1 ? 's' : ''} (${uniq(rs.map(r => r.translated_language)).join(', ')}), ${span(rs.map(r => r.translated_publication_year))}`);
+    else if (SUMMARY[t]) SUMMARY[t](rs).forEach(c => lines.push(`<b>${esc(c.label)}:</b> ${esc(c.text)}`));
+    else lines.push(`<b>${esc(m.label)}:</b> ${rs.length} row(s)`);
+  }
+  return lines.map(l => `<div class="kv" style="color:var(--ink)">${l}</div>`).join('');
+}
+function downloadWorks() {
+  const out = current.works.map(w => {
+    const chips = chipsFor(w.rows);
+    return [current.person.person_id, current.person.name, w.title, w.first_year, w.isfdb ?? '',
+      uniq(w.rows.map(r => manifest.essays[tablesByName[r.table].essay])).join('; '),
+      ...['ISFDB', 'NYT bestseller', 'NYT weekly lists', 'HathiTrust', 'Prize', 'UK prize', 'Playboy', 'Futuristic fiction', 'Intl bestseller', 'Translations', 'Small press bestseller']
+        .map(l => chips.filter(c => c.label === l).map(c => c.text).join('; '))];
+  });
+  save(`${slugName(current.person.name)}__works.csv`, toCSV(['person_id', 'person', 'work_title', 'first_year', 'isfdb_work_id', 'datasets',
+    'isfdb', 'nyt_bestseller', 'nyt_weekly_lists', 'hathitrust', 'us_prize', 'uk_prize', 'playboy', 'futuristic_fiction', 'intl_bestseller', 'nordic_translations', 'spd_bestseller'], out));
+}
+
+const idLinks = (kind, vals) => !vals ? '' : vals.split(', ').map(v => {
+  const href = { viaf: `https://viaf.org/viaf/${v}`, wikidata: `https://www.wikidata.org/wiki/${v}`,
+    lccn: `https://id.loc.gov/authorities/names/${v}.html`, isfdb: `https://www.isfdb.org/cgi-bin/ea.cgi?${v}` }[kind];
+  return `<a href="${href}" target="_blank" rel="noopener">${esc(v)}</a>`;
+}).join(', ');
+
+function renderPerson() {
+  const { person: p, groups } = current;
+  const byEssay = {};
+  for (const g of groups) (byEssay[g.meta.essay] ||= []).push(g);
+  const notes = [];
+  if (p.multi_qid || p.multi_viaf) notes.push(`This record carries ${p.multi_qid ? 'more than one Wikidata ID' : 'more than one VIAF ID'}. That is either a duplicate authority record (harmless) or a <b>false merge</b> of two people. Check the IDs.`);
+  const qid = (p.wikidata || '').split(', ')[0];
+  $('#detail').innerHTML = `
+  <div class="person rz">
+    <div class="rz-main">
+      <h2>${esc(p.name)}</h2>
+      <div class="kv" id="wd-desc"></div>
+      <p class="lead">${esc(p.name)} appears in ${plural(p.n_essays, 'Post45 dataset')}: ${list(Object.keys(byEssay).map(s => essayLink(s).replace(/\s*\(\d{4}[–-]\d{4}\)/, '')))}.</p>
+      ${notes.map(n => `<div class="note">${n}</div>`).join('')}
+      <div class="actions">
+        <button class="primary" id="dl-works" title="One row per title, with a summary column per dataset">Download works (CSV)</button>
+        <button id="dl-all">Download all rows (CSV)</button>
+        <button id="dl-zip" title="One CSV per table, original columns">Download each table separately</button>
+      </div>
+      ${propGroupsHTML(personProps())}
+      ${qid ? `<details class="wdmore" id="wdmore"><summary>More from Wikidata <span class="cnt">crowd-sourced; may disagree with the Post45 data</span></summary><div id="wd-more"><div class="cnt"><span class="spinner"></span>Loading…</div></div></details>` : ''}
+    </div>
+    <aside class="infobox">
+      <div id="wd-box">${qid ? '<div class="cnt"><span class="spinner"></span>Fetching Wikidata…</div>' : ''}</div>
+      <div class="ib-sec">In the Post45 index</div>
+      <dl>
+        <dt>Rows</dt><dd>${p.n_mentions.toLocaleString()} in ${plural(p.n_essays, 'dataset')}</dd>
+        <dt>Name forms</dt><dd>${esc(p.variants)}</dd>
+        ${p.wikidata ? `<dt>Wikidata</dt><dd>${idLinks('wikidata', p.wikidata)}${p.wikidata_via && p.wikidata_via !== 'source' ? `<div class="cnt" style="font-size:12px">found via ${({ viaf: 'VIAF', lccn: 'LCCN', isfdb: 'ISFDB' })[p.wikidata_via] || p.wikidata_via} ID</div>` : ''}</dd>` : ''}
+        ${p.viaf ? `<dt>VIAF</dt><dd>${idLinks('viaf', p.viaf)}</dd>` : ''}
+        ${p.lccn ? `<dt>LCCN</dt><dd>${idLinks('lccn', p.lccn)}</dd>` : ''}
+        ${p.isfdb_author_id ? `<dt>ISFDB</dt><dd>${idLinks('isfdb', p.isfdb_author_id)}</dd>` : ''}
+        <dt>Permalink</dt><dd><a href="#person=${p.person_id}">person #${p.person_id}</a></dd>
+      </dl>
+    </aside>
+  </div>
+  ${timelineHTML()}
+  <details class="asprose"><summary>Read as a paragraph</summary><p class="prose">${summarySentences().join(' ')}</p></details>
+  <div class="tabs"><button data-view="works" class="${current.view === 'works' ? 'on' : ''}">Works &amp; timeline</button><button data-view="rows" class="${current.view === 'rows' ? 'on' : ''}">All rows by dataset</button></div>` +
+  (current.view === 'works' ? worksView() : Object.entries(byEssay).map(([slug, gs]) => {
+    const linked = gs.some(g => g.rows.some(r => r._id_linked));
+    const n = gs.reduce((a, g) => a + g.rows.length, 0);
+    return `<section class="essay">
+      <div class="hd"><span class="title"><a href="${SITE}${slug}/" target="_blank" rel="noopener">${esc(manifest.essays[slug])}</a></span>
+        <span>${linked ? '<span class="badge ok" title="At least one row carries a VIAF, Wikidata, or LCCN identifier shared with the rest of this person record">linked by ID</span>' : '<span class="badge warn" title="No row here carries a cross-dataset identifier; it joined this person by normalised name">name match only</span>'}
+        <span class="badge">${n.toLocaleString()} row${n > 1 ? 's' : ''}</span></span></div>
+      ${gs.map((g, i) => tableBlock(g, i === 0 && gs.length <= 3)).join('')}
+    </section>`;
+  }).join(''));
+  $('#detail').querySelectorAll('.tabs button').forEach(b => b.onclick = () => { current.view = b.dataset.view; renderPerson(); });
+  const mo = $('#multiOnly'); if (mo) mo.onchange = () => { current.multiOnly = mo.checked; renderPerson(); };
+  $('#dl-works').onclick = downloadWorks;
+  renderTimeline();
+  $('#detail').querySelectorAll('.pmore').forEach(b => b.onclick = () => { b.parentElement.classList.add('open'); b.remove(); });
+  bindDownloads();
+  if (qid) fillWikidata(qid, p.person_id);
+  const wm = $('#wdmore'); if (wm) wm.addEventListener('toggle', () => { if (wm.open && !wm.dataset.loaded) { wm.dataset.loaded = 1; fillWikidataMore(qid, () => current?.person?.person_id === p.person_id); } });
+}
+
+// ---- "More from Wikidata": Reasonator-style Main / Person / Other boxes --------
+const WD_GROUPS = [
+  ['Work & style', ['P136', 'P135', 'P800']],
+  ['Person', ['P1412', 'P21', 'P569', 'P19', 'P570', 'P20', 'P509', 'P119', 'P27', 'P172', 'P140', 'P102', 'P26', 'P451', 'P22', 'P25', 'P3373', 'P40', 'P1038']],
+  ['Education & career', ['P69', 'P512', 'P184', 'P185', 'P1066', 'P802', 'P108', 'P463', 'P39', 'P1416']],
+  ['Influences & honors', ['P737', 'P1830', 'P166', 'P1411', 'P2650']],
+  // no catch-all "Other" box: unlisted properties (different from, maintained by WikiProject, …) are not shown
+];
+// hidden: images/categories/name parts, plus trivia (hair/eye color, height, handedness, facial hair, IPA, Commons creator page, copyright status, pronoun, number of children)
+const WD_SKIP = new Set(['P31', 'P106', 'P101', 'P1884', 'P1340', 'P2048', 'P552', 'P8852', 'P898', 'P1472', 'P7763', 'P6553', 'P1971', 'P18', 'P373', 'P910', 'P1343', 'P735', 'P734', 'P1559', 'P1477', 'P2031', 'P2032', 'P109', 'P856', 'P1442', 'P94', 'P158', 'P6886', 'P1449', 'P742', 'P5008', 'P1424', 'P3919', 'P460', 'P8687']);
+// Names of things the Post45 rows on this page mention (prizes, programs), for highlighting Wikidata values
+function p45Terms() {
+  const T = {}; for (const g of current.groups || []) T[g.table] = g.rows;
+  const t = new Set();
+  for (const r of [...(T.major_prizes_winners_judges || []), ...(T.british_literary_prizes || [])]) if (r.prize_name) t.add(normQuery(r.prize_name));
+  if (T.nea_fellowships) { t.add('national endowment for the arts'); t.add('nea literature fellowship'); }
+  if (T.iowa_graduations || T.iowa_people || T.iowa_hathitrust) { t.add('university of iowa'); t.add('iowa writers workshop'); }
+  if (T.playboy_fiction_index) t.add('playboy');
+  return [...t].filter(x => x.length >= 6);
+}
+const termHit = (label, terms) => { const l = normQuery(label || ''); if (/\b(nonfiction|non fiction|translat\w*|young people|children|juvenile|drama|criticism|biography)\b/.test(l)) return false; return l.length >= 6 && terms.some(t => l === t || l.startsWith(t + ' ') || t.startsWith(l + ' ') || l.includes(' ' + t) ); };
+async function fillWikidataMore(qid, isCurrent, groups = WD_GROUPS) {
+  const box = $('#wd-more');
+  try {
+    const { e } = wdCache.get(qid) || { e: (await wdEntities([qid], 'labels|descriptions|claims'))[qid] };
+    const claims = Object.entries(e.claims || {}).filter(([pp, cs]) => !WD_SKIP.has(pp) && cs.length &&
+      !['external-id', 'commonsMedia', 'url', 'monolingualtext', 'geo-shape', 'tabular-data'].includes(cs[0].mainsnak?.datatype));
+    const valIds = uniq(claims.flatMap(([, cs]) => cs.map(c => c.mainsnak?.datavalue?.value?.id).filter(Boolean)));
+    const qualIds = uniq(claims.flatMap(([, cs]) => cs.flatMap(c => Object.values(c.qualifiers || {}).flat().map(q => q.datavalue?.value?.id).filter(id => id && /^Q/.test(id)))));
+    const [vals, props] = await Promise.all([wdEntities(uniq([...valIds, ...qualIds]).slice(0, 400), 'labels|descriptions'), wdEntities(claims.map(([pp]) => pp), 'labels')]);
+    // values that are people in the Post45 index link back to their Post45 page
+    const qs = valIds.filter(id => /^Q\d+$/.test(id));
+    const inIndex = new Map(qs.length ? (await q(`SELECT q, any_value(person_id) AS pid FROM (SELECT person_id, unnest(string_split(wikidata, ', ')) AS q FROM persons WHERE wikidata IS NOT NULL)
+      WHERE q IN (${qs.map(x => `'${x}'`).join(',')}) GROUP BY q`)).map(r => [r.q, r.pid]) : []);
+    // values that are titles in the index link to their Post45 title page
+    const inWorks = new Map(qs.length ? (await q(`SELECT wikidata_qid AS q, any_value(work_id) AS wid FROM works
+      WHERE wikidata_qid IN (${qs.map(x => `'${x}'`).join(',')}) GROUP BY 1`)).map(r => [r.q, r.wid]) : []);
+    if (!isCurrent()) return;
+    const terms = p45Terms();
+    const lab = id => vals[id]?.labels?.en?.value || vals[id]?.labels?.mul?.value || id;
+    const qualTxt = c => {
+      const Q = c.qualifiers || {}, t = k => (Q[k] || []).map(x => wdDate(x.datavalue?.value)).filter(Boolean)[0];
+      const bits = [];
+      if (t('P585')) bits.push(t('P585'));
+      if (t('P580') || t('P582')) bits.push(`${t('P580') || ''}–${t('P582') || ''}`);
+      for (const k of ['P1686', 'P642', 'P812', 'P512']) (Q[k] || []).forEach(x => x.datavalue?.value?.id && bits.push(esc(lab(x.datavalue.value.id))));
+      return bits.join(', ');
+    };
+    const item = c => {
+      const v = c.mainsnak?.datavalue?.value, dt = c.mainsnak?.datatype;
+      if (c.mainsnak?.snaktype !== 'value' || v == null) return null;
+      let main, sub = '';
+      if (v.id) {
+        const pidx = inIndex.get(v.id), widx = inWorks.get(v.id);
+        main = pidx ? `<a href="#person=${pidx}">${esc(lab(v.id))}</a> <span class="badge ok" title="Also in the Post45 index">in Post45</span>`
+             : widx ? `<a href="#work=${widx}">${esc(lab(v.id))}</a> <span class="badge ok" title="Also in the Post45 index">in Post45</span>`
+                    : `<a href="https://www.wikidata.org/wiki/${v.id}" target="_blank" rel="noopener">${esc(lab(v.id))}</a>`;
+        sub = esc(vals[v.id]?.descriptions?.en?.value || '');
+      } else if (dt === 'time') main = esc(wdDate(v));
+      else if (dt === 'quantity') main = esc(String(+v.amount));
+      else main = esc(typeof v === 'string' ? v : JSON.stringify(v));
+      const qt = qualTxt(c);
+      if (qt) sub = sub ? `${sub} (${qt})` : `(${qt})`;
+      const hit = v.id && (inIndex.has(v.id) || inWorks.has(v.id) || termHit(lab(v.id), terms));
+      if (hit && !main.includes('badge ok')) main += ` <span class="badge ok" title="Also recorded in the Post45 datasets">in Post45</span>`;
+      return { main, sub, rank: c.rank, hit };
+    };
+    const P = claims.map(([pp, cs]) => ({ pp, label: props[pp]?.labels?.en?.value || pp,
+      items: cs.filter(c => c.rank !== 'deprecated').sort((a, b) => (b.rank === 'preferred') - (a.rank === 'preferred')).map(item).filter(Boolean) }))
+      .filter(p => p.items.length);
+    const used = new Set();
+    box.innerHTML = groups.map(([title, pps]) => {
+      const ps = pps ? pps.map(pp => P.find(p => p.pp === pp)).filter(Boolean) : P.filter(p => !used.has(p.pp));
+      ps.forEach(p => used.add(p.pp));
+      return ps.length ? propsHTML(ps.map(p => ({ ...p, href: `https://www.wikidata.org/wiki/Property:${p.pp}` })), title, 8, 'wdsrc', 'Wikidata · crowd-sourced') : '';
+    }).join('') + `<div class="cnt">From <a href="https://www.wikidata.org/wiki/${qid}" target="_blank" rel="noopener">Wikidata ${qid}</a> (CC0). Identifiers and other-language sitelinks are omitted.
+      Highlighted values with <span class="badge ok">in Post45</span> also appear in the Post45 data: people and titles in this index, or prizes and programs named in this page's rows.</div>`;
+    box.querySelectorAll('.pmore').forEach(b => b.onclick = () => { b.parentElement.classList.add('open'); b.remove(); });
+  } catch (err) {
+    console.warn(err);
+    box.innerHTML = `<div class="cnt">Couldn't load more from Wikidata.</div>`;
+  }
+}
+
+// ---- Wikidata infobox (Reasonator-style), fetched live from wikidata.org ----
+const wdCache = new Map();
+async function wdEntities(ids, props) {
+  const out = {};
+  for (let i = 0; i < ids.length; i += 50) {
+    const u = `https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&origin=*&languages=en|mul&sitefilter=enwiki&props=${props}&ids=${ids.slice(i, i + 50).join('|')}`;
+    Object.assign(out, (await (await fetch(u)).json()).entities || {});
+  }
+  return out;
+}
+const claimVals = (e, pid) => (e.claims?.[pid] || []).filter(c => c.rank !== 'deprecated').map(c => c.mainsnak?.datavalue?.value).filter(Boolean);
+function wdDate(v) {
+  if (!v?.time) return '';
+  const m = v.time.match(/^([+-])(\d+)-(\d\d)-(\d\d)/); if (!m) return '';
+  const y = +m[2] * (m[1] === '-' ? -1 : 1);
+  if (v.precision >= 11 && m[3] !== '00') return new Date(Date.UTC(y, +m[3] - 1, +m[4])).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+  return String(y);
+}
+async function fillWikidata(qid, pid) {
+  const box = $('#wd-box');
+  try {
+    let d = wdCache.get(qid);
+    if (!d) {
+      const e = (await wdEntities([qid], 'labels|descriptions|claims|sitelinks'))[qid];
+      const refProps = ['P19', 'P20', 'P27', 'P106', 'P69', 'P166', 'P800', 'P135'];
+      const refIds = uniq(refProps.flatMap(pp => claimVals(e, pp).map(v => v.id))).slice(0, 150);
+      const labels = refIds.length ? await wdEntities(refIds, 'labels') : {};
+      d = { e, label: id => labels[id]?.labels?.en?.value || labels[id]?.labels?.mul?.value || null };
+      wdCache.set(qid, d);
+    }
+    if (current?.person?.person_id !== pid) return;  // user navigated away
+    const { e, label } = d;
+    const bY = claimVals(e, 'P569')[0]?.time?.slice(1, 5), dY = claimVals(e, 'P570')[0]?.time?.slice(1, 5);
+    current.wdEvents = [bY && { y: bY, label: 'born' }, dY && { y: dY, label: 'died' }].filter(Boolean);
+    renderTimeline();
+    const img = claimVals(e, 'P18')[0];
+    const names = (pp, n = 6) => { const xs = uniq(claimVals(e, pp).map(v => label(v.id))); return xs.length ? esc(xs.slice(0, n).join(', ')) + (xs.length > n ? `, and ${xs.length - n} more` : '') : ''; };
+    const born = wdDate(claimVals(e, 'P569')[0]), died = wdDate(claimVals(e, 'P570')[0]);
+    const first = pp => esc(uniq(claimVals(e, pp).map(v => label(v.id)))[0] || ''); const bp = first('P19'), dp = first('P20');
+    const wiki = e.sitelinks?.enwiki?.title;
+    const desc = e.descriptions?.en?.value;
+    if (desc) $('#wd-desc').innerHTML = `<i>${esc(desc)}</i>`;
+    const rows = [
+      ['Born', [born, bp].filter(Boolean).join(', ')], ['Died', [died, dp].filter(Boolean).join(', ')],
+      ['Citizenship', names('P27', 3)], ['Occupation', names('P106', 5)], ['Movement', names('P135', 4)],
+      ['Education', names('P69', 4)], ['Notable works', names('P800', 6)], ['Awards', names('P166', 6)],
+    ].filter(r => r[1]);
+    box.innerHTML = `${img ? `<figure><img src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(img)}?width=360" alt="${esc(e.labels?.en?.value || '')}" loading="lazy">
+        <figcaption><a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(img.replace(/ /g, '_'))}" target="_blank" rel="noopener">Image: Wikimedia Commons</a></figcaption></figure>` : ''}
+      <div class="ib-sec">From Wikidata</div>
+      <dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+      <div class="ib-links"><a href="https://www.wikidata.org/wiki/${qid}" target="_blank" rel="noopener">Wikidata ${qid}</a>${wiki ? ` · <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(wiki.replace(/ /g, '_'))}" target="_blank" rel="noopener">Wikipedia</a>` : ''}
+        · <a href="https://reasonator.toolforge.org/?q=${qid}" target="_blank" rel="noopener">Reasonator</a></div>`;
+  } catch (err) {
+    console.warn('Wikidata fetch failed', err);
+    if (box) box.innerHTML = `<div class="cnt">Couldn't reach Wikidata.</div>`;
+  }
+}
+
+function tableBlock(g, open) {
+  const cols = orderedCols(g.meta);
+  const roles = [...new Set(g.rows.flatMap(r => (r._role || '').split('; ')))].filter(Boolean);
+  const shown = g.rows.slice(0, MAX_ROWS_SHOWN);
+  const hl = new Set([g.meta.title_col, g.meta.year_col]);
+  return `<details class="tbl" ${open ? 'open' : ''}>
+    <summary><span class="lbl">${esc(g.meta.label)}</span><span class="cnt">${g.rows.length.toLocaleString()} rows · ${roles.map(r => `<span class="badge">${esc(r)}</span>`).join('')}</span>
+      <span class="sp"></span><button data-dl="${g.table}">CSV</button></summary>
+    <div class="scroll"><table><thead><tr><th>role</th><th>name as written</th>${cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead>
+    <tbody>${shown.map(r => `<tr><td>${esc(r._role)}</td><td>${r._pid && current.kind !== 'person' ? `<a href="#person=${r._pid}">${esc(r._name_as_written)}</a>` : esc(r._name_as_written)}</td>${cols.map(c => `<td class="${hl.has(c) ? 'hl' : ''}">${cellHTML(r[c])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+    ${g.rows.length > MAX_ROWS_SHOWN ? `<div class="trunc">Showing first ${MAX_ROWS_SHOWN} of ${g.rows.length.toLocaleString()} rows. The CSV has all of them.</div>` : ''}
+  </details>`;
+}
+
+// table cell: URLs become short links; everything else is escaped text
+function cellHTML(v) {
+  if (v === null || v === undefined) return '';
+  const t = String(v);
+  if (/^https?:\/\/\S+$/.test(t)) {
+    let label = t;
+    try { const u = new URL(t); const path = decodeURIComponent(u.pathname).replace(/\/$/, ''); label = u.hostname.replace(/^www\./, '') + (path.length > 28 ? path.slice(0, 26) + '…' : path); } catch (e) {}
+    return `<a href="${esc(t)}" target="_blank" rel="noopener" title="${esc(t)}">${esc(label)}</a>`;
+  }
+  return esc(t);
+}
+function orderedCols(meta) {
+  const first = [meta.title_col, meta.year_col].filter(Boolean);
+  return [...first, ...meta.columns.filter(c => !first.includes(c))];
+}
+function csvCell(v) {
+  if (v === null || v === undefined) return '';
+  const s = String(v);
+  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+function toCSV(header, rows) { return [header.map(csvCell).join(','), ...rows.map(r => r.map(csvCell).join(','))].join('\r\n'); }
+function save(name, text) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['﻿' + text], {type: 'text/csv;charset=utf-8'}));
+  a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+const slugName = s => normQuery(s).replace(/ /g, '-') || 'person';
+
+function ctxCols() {
+  if (current.kind === 'person' || !current.kind) return [['matched_person_id', 'matched_person'], () => [current.person.person_id, current.person.name]];
+  if (current.kind === 'work') return [['work_id', 'work_title', 'work_author'], () => [current.work.work_id, current.work.title, current.work.person_name]];
+  return [['year'], () => [current.year]];
+}
+function downloadTable(table) {
+  const g = current.groups.find(x => x.table === table);
+  const cols = g.meta.columns, [h, f] = ctxCols();
+  save(`${slugName(current.label)}__${table}.csv`,
+    toCSV([...h, 'role', 'name_as_written', ...cols], g.rows.map(r => [...f(), r._role, r._name_as_written, ...cols.map(c => r[c])])));
+}
+function downloadAll() {
+  // Long format: one row per source row, shared summary columns + full record as JSON.
+  const [h, f] = ctxCols(), out = [];
+  for (const g of current.groups) for (const r of g.rows) {
+    const rec = {}; for (const c of g.meta.columns) if (r[c] !== null && r[c] !== undefined) rec[c] = r[c];
+    out.push([...f(), manifest.essays[g.meta.essay], `${SITE}${g.meta.essay}/`, g.table, r._role, r._name_as_written,
+      g.meta.title_col ? r[g.meta.title_col] : '', g.meta.year_col ? r[g.meta.year_col] : '', JSON.stringify(rec)]);
+  }
+  save(`${slugName(current.label)}__all-post45-datasets.csv`,
+    toCSV([...h, 'dataset', 'essay_url', 'table', 'role', 'name_as_written', 'title', 'year', 'record_json'], out));
+}
+function bindDownloads() {
+  const a = $('#dl-all'); if (a) a.onclick = downloadAll;
+  const z = $('#dl-zip'); if (z) z.onclick = () => current.groups.forEach((g, i) => setTimeout(() => downloadTable(g.table), i * 250));
+  $('#detail').querySelectorAll('[data-dl]').forEach(b => b.onclick = (e) => { e.preventDefault(); e.stopPropagation(); downloadTable(b.dataset.dl); });
+}
+
+init().catch(e => { console.error(e); status(`<span style="color:var(--accent)">Failed to start: ${esc(e.message)}. Serve this folder over http (run ./run.sh); file:// URLs will not work.</span>`); });
+</script>
+</body>
+</html>
