@@ -294,6 +294,7 @@ async function init() {
   await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
   conn = await db.connect();
   manifest = await (await fetch('data/manifest.json', { cache: 'no-cache' })).json();
+  try { redirects = await (await fetch('data/id_redirects.json', { cache: 'no-cache' })).json(); } catch (e) {}
   for (const t of manifest.tables) tablesByName[t.table] = t;
   await Promise.all([loadParquet(db, 'persons'), loadParquet(db, 'mentions')]);
   const r = manifest.report;
@@ -319,14 +320,26 @@ async function renderLanding() {
 
 function route() {
   const h = new URLSearchParams(location.hash.slice(1));
-  if (h.get('person')) { setMode('people'); showPerson(+h.get('person'), h.get('q')); }
-  else if (h.get('work')) { setMode('titles'); showWork(+h.get('work'), h.get('t')); }
+  if (h.get('person')) { setMode('people'); showPerson(stableId('person', h.get('person')), h.get('q')); }
+  else if (h.get('work')) { setMode('titles'); showWork(stableId('work', h.get('work')), h.get('t')); }
   else if (h.get('year')) { setMode('year'); $('#q').value = h.get('year'); showYear(+h.get('year')); }
   else if (h.get('t')) { setMode('titles'); $('#q').value = h.get('t'); searchTitles(h.get('t')); }
   else if (h.get('q')) { setMode('people'); $('#q').value = h.get('q'); search(h.get('q')); }
   else { $('#layout').hidden = true; $('#landing').hidden = false; }
   window.scrollTo(0, 0);
 }
+// Post45 IDs are stable across rebuilds (scripts/ledger.py). Links may use "p45p004140"
+// or "4140"; IDs merged into another person/title redirect to it.
+let redirects = { person: { merged: {}, retired: [] }, work: { merged: {}, retired: [] } };
+const P45 = { person: 'p45p', work: 'p45w' };
+const p45id = (kind, n) => P45[kind] + String(n).padStart(6, '0');
+function stableId(kind, v) {
+  let n = +String(v).replace(/^p45[pw]/i, '');
+  for (let i = 0; i < 10 && redirects[kind]?.merged?.[n]; i++) n = redirects[kind].merged[n];
+  return n;
+}
+const retiredMsg = (kind, n) => redirects[kind]?.retired?.includes(n)
+  ? `${p45id(kind, n)} is no longer in the index: the rows it described were removed or changed in a later version of the data.` : null;
 function setMode(m) { $('#mode').value = m; }
 window.addEventListener('hashchange', route);
 $('#go').onclick = () => {
@@ -455,7 +468,7 @@ async function showWork(wid, ttext, fromSearch = false) {
   $('#detail').innerHTML = `<div class="empty"><span class="spinner"></span>Loading…</div>`;
   await Promise.all([loadParquet(db, 'works'), loadParquet(db, 'work_rows')]);
   const [w] = await q(`SELECT * FROM works WHERE work_id = ?`, wid);
-  if (!w) { $('#detail').innerHTML = `<div class="empty">Unknown title.</div>`; return; }
+  if (!w) { $('#detail').innerHTML = `<div class="empty">${esc(retiredMsg('work', wid) || 'Unknown title.')}</div>`; return; }
   const refs = await q(`SELECT "table", list(_rowid) AS ids FROM work_rows WHERE work_id = ? GROUP BY 1`, wid);
   await ensureTables(refs.map(r => r.table), $('#detail'));
   const groups = [];
@@ -477,6 +490,7 @@ async function showWork(wid, ttext, fromSearch = false) {
       <div class="kv" id="wd-desc"></div>
       <div class="kv"><span class="lab">Author</span><a href="#person=${w.person_id}">${esc(w.person_name)}</a>
         ${w.first_year ? `<span class="lab" style="margin-left:18px">Earliest year</span><a href="#year=${w.first_year}">${w.first_year}</a>` : ''}
+        <span class="lab" style="margin-left:18px">Post45 ID</span><a href="#work=${p45id('work', w.work_id)}" title="Stable across updates to the data">${p45id('work', w.work_id)}</a>
         ${w.isfdb_work_id ? `<span class="lab" style="margin-left:18px">ISFDB</span><a href="https://www.isfdb.org/cgi-bin/title.cgi?${w.isfdb_work_id}" target="_blank" rel="noopener">${w.isfdb_work_id}</a>` : ''}</div>
       <p class="prose">${workSentences(w, groups, person).join(' ')}</p>
       <div class="chips">${chipsFor(items).map(chipHTML).join('')}</div>
@@ -632,7 +646,7 @@ async function showPerson(pid, qtext, fromSearch = false) {
   if (qtext && lastKind === 'people' && lastCands.length) renderCands(pid); else sideBack();
   $('#detail').innerHTML = `<div class="empty"><span class="spinner"></span>Loading rows…</div>`;
   const [person] = await q(`SELECT * FROM persons WHERE person_id = ?`, pid);
-  if (!person) { $('#detail').innerHTML = `<div class="empty">Unknown person.</div>`; return; }
+  if (!person) { $('#detail').innerHTML = `<div class="empty">${esc(retiredMsg('person', pid) || 'Unknown person.')}</div>`; return; }
   const ms = await q(`SELECT "table", count(*)::INT AS n FROM mentions WHERE person_id = ? AND role <> 'alias' GROUP BY 1`, pid);
   const needed = ms.map(m => m.table);
   const big = needed.filter(t => !loaded.has(t) && tablesByName[t].bytes > 3e6);
@@ -1256,7 +1270,7 @@ function renderPerson() {
         ${p.viaf ? `<dt>VIAF</dt><dd>${idLinks('viaf', p.viaf)}</dd>` : ''}
         ${p.lccn ? `<dt>LCCN</dt><dd>${idLinks('lccn', p.lccn)}</dd>` : ''}
         ${p.isfdb_author_id ? `<dt>ISFDB</dt><dd>${idLinks('isfdb', p.isfdb_author_id)}</dd>` : ''}
-        <dt>Permalink</dt><dd><a href="#person=${p.person_id}">person #${p.person_id}</a></dd>
+        <dt>Post45 ID</dt><dd><a href="#person=${p45id('person', p.person_id)}" title="Stable across updates to the data">${p45id('person', p.person_id)}</a></dd>
       </dl>
     </aside>
   </div>
