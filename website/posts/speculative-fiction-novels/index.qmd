@@ -457,6 +457,10 @@ generateTabulatorTableFromCSV(
     }
   };
   const applyLinks = async () => {
+    // updating a column replaces it, and Tabulator's sort list would keep the old one and
+    // crash on every filter; so clear the sort first and put it back afterwards
+    const sorts = table.getSorters().map((x) => ({ column: x.field, dir: x.dir }));
+    table.clearSort();
     await keepTextYears();
     for (const [field, formatter] of Object.entries(formatters)) {
       await table.updateColumnDefinition(field, { formatter, formatterPrint: "plaintext" });
@@ -465,6 +469,7 @@ generateTabulatorTableFromCSV(
     for (const field of Object.keys(yearFields)) {
       document.querySelector(`${selector} .tabulator-col[tabulator-field="${field}"]`)?.setAttribute("data-rangeslider", "1");
     }
+    table.setSort(sorts);
   };
   if (table.initialized) applyLinks();
   else table.on("tableBuilt", applyLinks);
