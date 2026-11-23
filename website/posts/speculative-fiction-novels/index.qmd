@@ -9,9 +9,9 @@
   #- name: More Authors
  abstract: "The Speculative Fiction Novels in English dataset provides metadata for over 160,000 SF English-language novels published between 1800 and 2025, drawing on the crowd-sourced [Internet Speculative Fiction Database (ISFDB)](https://www.isfdb.org/). Authors include Octavia E. Butler, Ursula K. Le Guin, Isaac Asimov, Kurt Vonnegut Jr., R.L. Stine, Stephen King, Samuel R. Delany, L. Ron Hubbard, and many more."
 # Add keywords/categories — should always include "dataset"
- categories: [fiction, speculative fiction, genre fiction, literature, publishing, dataset, draft]
+ categories: [fiction, speculative fiction, genre fiction, literature, publishing, dataset]
 # Provide link to an image that will show up in "Our Datasets" aggregation
- image: "https://isfdb.org/IsfdbBanner3.jpg"
+ image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpRVk-3umNYflH_7UCKwZH1CafXu4GPyMSHKSmY7yB49JKEvHyVRFlHXo&s=10"
 # Insert DOI for this data essay
  doi: "10.18737/657712"
 # date of publication
@@ -188,9 +188,9 @@ init_df = pl.read_csv(DATA_URL, infer_schema=False, schema_overrides={"work_id":
 novels_df = (
     init_df.with_columns(
         pl.col("authors").str.split(" + ").alias("author_list"),
-        pl.when(pl.col("year") == "unpublished")
+        pl.when(pl.col("publication_year") == "unpublished")
         .then(pl.lit("9999"))
-        .otherwise(pl.col("year"))
+        .otherwise(pl.col("publication_year"))
         .alias("year_str"),
     )
     .with_columns(
@@ -370,7 +370,7 @@ generateTabulatorTableFromCSV(
   "#table-container-specfic",
   "https://raw.githubusercontent.com/Post45-Data-Collective/data/refs/heads/main/speculative_fiction_novels/speculative-fiction-novels-dataset-CSV.csv",
   {
-    displayedColumns: ["work_id", "title", "authors", "author_ids", "year", "translation_year",  "orig_lang", "series", "series_no", "isbns"],
+    displayedColumns: ["work_id", "title", "authors", "author_ids", "publication_year", "translation_year",  "orig_lang", "series", "series_no", "isbns"],
     columnPopups: [
       "Unique identifier for this work from ISFDB—also known as “Title Record”",
       "Title of the work",
@@ -383,11 +383,11 @@ generateTabulatorTableFromCSV(
       "Work’s number within its series",
       "Comma-separated list of associated ISBNs"
     ],
-    columnWidths: { "work_id": 140, "title": 200, "authors": 150, "author_ids": 140, "year": 100, "translation_year": 100, "orig_lang": 140, "series": 220, "series_no": 100, "isbns": 300 },
+    columnWidths: { "work_id": 140, "title": 200, "authors": 150, "author_ids": 140, "publication_year": 120, "translation_year": 100, "orig_lang": 140, "series": 220, "series_no": 100, "isbns": 300 },
     categoryColumns: ["orig_lang"],
     // work_id, author_ids, and isbns get custom link formatters below
-    rangeSliderColumns: ["year", "translation_year"],
-    sortColumns: ["work_id", "title", "authors", "year", "translation_year", "series"],
+    rangeSliderColumns: ["publication_year", "translation_year"],
+    sortColumns: ["work_id", "title", "authors", "publication_year", "translation_year", "series"],
     sortOrders: ["desc", "asc"],
     buttonContainerId: "#button-container-specfic",
     rawButtonId: "#download-raw-specfic",
@@ -399,7 +399,7 @@ generateTabulatorTableFromCSV(
 ```{ojs}
 //| echo: false
 //| output: false
-// Turn work_id, author_ids, and isbns into links. These columns can hold
+// Turn work_id, author_ids, and isbns into links, and keep text years (see below). These columns can hold
 // comma-separated lists, which the shared viewer's link formatter doesn't handle.
 {
   const link = (url, text) =>
@@ -409,7 +409,18 @@ generateTabulatorTableFromCSV(
     if (v === undefined || v === null || v === "") return "";
     return String(v).split(/,\s*/).filter(Boolean).map(toLink).join(", ");
   };
+  // publication_year and translation_year hold text too ("unpublished", blank). The shared viewer turns
+  // those into NaN, shows "NaN", and its range filter drops them for good. Show them as
+  // text, and keep them whenever the slider spans the full range, so dragging it back
+  // restores the whole table.
+  const textYear = (missing) => (cell) => {
+    const v = cell.getValue();
+    return v === undefined || v === null || v === "" || Number.isNaN(v) ? missing : v;
+  };
+  const yearFields = { publication_year: "unpublished", translation_year: "" };
   const formatters = {
+    publication_year: textYear(yearFields.publication_year),
+    translation_year: textYear(yearFields.translation_year),
     work_id: listFormatter((id) => link(`https://www.isfdb.org/cgi-bin/title.cgi?${id}`, id)),
     author_ids: listFormatter((id) => link(`https://www.isfdb.org/cgi-bin/ea.cgi?${id}`, id)),
     isbns: listFormatter((isbn) => {
@@ -425,9 +436,34 @@ generateTabulatorTableFromCSV(
   while (!(table = Tabulator.findTable(selector)[0])) {
     await new Promise((resolve) => setTimeout(resolve, 200));
   }
-  const applyLinks = () => {
+  const keepTextYears = async () => {
+    const data = table.getData();
+    for (const field of Object.keys(yearFields)) {
+      let lo = Infinity, hi = -Infinity;   // (Math.min(...160k values) overflows the stack)
+      for (const r of data) {
+        const v = parseFloat(r[field]);
+        if (v < lo) lo = v;
+        if (v > hi) hi = v;
+      }
+      lo = Math.floor(lo); hi = Math.ceil(hi);
+      await table.updateColumnDefinition(field, {
+        headerFilterFunc: (hv, value) => {
+          if (!hv) return true;
+          const v = parseFloat(value);
+          if (Number.isNaN(v)) return hv.min <= lo && hv.max >= hi;   // non-numeric: only when unfiltered
+          return v >= hv.min && v <= hv.max;
+        },
+      });
+    }
+  };
+  const applyLinks = async () => {
+    await keepTextYears();
     for (const [field, formatter] of Object.entries(formatters)) {
-      table.updateColumnDefinition(field, { formatter, formatterPrint: "plaintext" });
+      await table.updateColumnDefinition(field, { formatter, formatterPrint: "plaintext" });
+    }
+    // updating a column rebuilds its header; restore the viewer's slider styling hook
+    for (const field of Object.keys(yearFields)) {
+      document.querySelector(`${selector} .tabulator-col[tabulator-field="${field}"]`)?.setAttribute("data-rangeslider", "1");
     }
   };
   if (table.initialized) applyLinks();
@@ -511,13 +547,13 @@ While ISFDB indexes publicly available bibliographic data, it also includes info
 
 ISFDB builds on a long tradition of SF bibliographies and indices that focus not only on works contemporaneous with the modern formations of SF but also project backwards to novels of fantastic voyages, utopias and dystopias, and gothic romance. ISFDB was launched in 1995 by Al von Ruff and Ahasuerus; its immediate predecessors were the author bibliographies posted to the USENET newsgroup rec.arts.sf.written.[^2] It began as a closed database restricted to a small set of editors, and editing was opened to the general public at the end of 2006.
 
-[^2]: Many of these bibliographies are preserved in the Linköping Science Fiction & Fantasy Archive: https://www.lysator.liu.se/sf_archive/sf-texts/authors/
+[^2]: Many of these bibliographies are preserved in the Linköping Science Fiction & Fantasy Archive: <https://www.lysator.liu.se/sf_archive/sf-texts/authors/>
 
 While ISFDB has focused on recording data from primary sources, it also relies on the rich space of printed and digital SF bibliographies and indices. Although each resource has its own focus, different from ISFDB’s, they provide a means of verifying the accuracy and coverage of ISFDB.[^3] ISFDB also tracks secondary verifications for its publication records using eleven major genre-focused references including *The Checklist of Science-Fiction and Supernatural Fiction* by Everett F. Bleiler, *The Encyclopedia of Science Fiction* edited by John Clute and Peter Nicholls, *The Encyclopedia of Fantasy* edited by John Clute and John Grant, *The Locus Index to Science Fiction*,[^4] and the *Science Fiction, Fantasy, & Weird Fiction Magazine Index* compiled by Stephen T. Miller and William G. Contento.
 
 [^3]: See @isfdb2010overview for more on ISFDB’s bibliographic sources.
 
-[^4]: https://www.locusmag.com/index/
+[^4]: <https://www.locusmag.com/index/>
 
 Overall, ISFDB has seven core record types: title (work-level), author, publication (printing-level), book series (e.g., *Earthsea Cycle*), publication series (e.g., *Ace Double*), publisher, and award. Titles are the most frequent record type (2.5M records) because they include novels, collections, short stories, reviews, and more. Of these records, around 29% are short fiction whereas novels account for 11%. While ISFDB predominantly covers English works (1.9M titles), around a quarter are in another language with German and French being the most prevalent (278K and 112K titles, respectively). Although the majority of English titles were originally written in English, ISFDB includes over 30,000 English translations.
 
@@ -658,7 +694,7 @@ Then, with this working set of title records, work records are formed by groupin
 
 ### Limitations
 
-This dataset is wholly derived from ISFDB content. ISFDB is not comprehensive and so neither is this dataset. Similarly, ISFDB’s coverage is far from neutral: works are counted only if the contributors—predominantly fans—know them and care enough to add them. Much of ISFDB’s coverage reflects the popular: Anglophone novels primarily by white, male authors.
+This dataset is wholly derived from ISFDB content. ISFDB is far from complete and so neither is this dataset. Similarly, ISFDB’s coverage is far from neutral: works are counted only if the contributors—predominantly fans—know them and care enough to add them. Much of ISFDB’s coverage reflects the popular: Anglophone novels primarily by white, male authors.
 
 Any errors in ISFDB records will be inherited by this dataset. Inevitably, this dataset will include novels that are not SF. Similarly, first publication dates may be wrong and translations may not be properly identified since this requires ISFDB to contain a record of the original work and be properly linked to its translation. While ISFDB has a vast number of publication records, it is far from complete and many ISBNs associated with a novel may be missing.
 
@@ -680,7 +716,7 @@ The “canonical” author(s) of the work. These are the authors of the canonica
 **author_ids**\
 The unique identifier(s) for the “canonical” author(s). When there are multiple authors, the IDs are separated by commas and in the same order as the **authors** column. ISFDB requires author names to be unique, so distinct authors with the same name may include parentheticals for differentiation. These IDs are the ISFDB author record IDs for these authors. An author record may be viewed at https://www.isfdb.org/cgi-bin/ea.cgi?\[author_id\]
 
-**year**\
+**publication_year**\
 Year of first known publication of the work. This corresponds to the publication date of the canonical title record. In cases where a work is only published in translation, this field will be marked “unpublished”.
 
 **translation_year**\
