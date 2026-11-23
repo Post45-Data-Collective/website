@@ -1,6 +1,8 @@
 ---
 title: "Workshop for Graduate Students—April 2027 (Deadline: December 11, 2026)"
 date: "2026-11-19"
+aliases:
+  - grad-workshop-2026.html
 author: 
     - name: Melanie Walsh
 abstract: "We're excited to host our second virtual workshop where graduate students can present work-in-progress that engages with data from the Post45 Data Collective."
